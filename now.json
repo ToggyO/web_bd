@@ -1,0 +1,10 @@
+{
+  "name": "build",
+  "type": "static",
+  "static": {
+    "public": "build"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

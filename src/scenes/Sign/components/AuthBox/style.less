@@ -1,0 +1,62 @@
+.auth-box {
+  margin: 0 auto;
+  display: flex;
+  height: 586px;
+  width: 692px;
+  border-radius: 6px;
+  background-color: @component-background;
+  box-shadow: @box-shadow-base;
+  overflow: hidden;
+  &__logo {
+    padding-top: 21px;
+    // fix when designer finishes logo
+    padding-left: 53px;
+    font-size: 16px;
+    color: #fff;
+  }
+  &__aside {
+    background-color: @primary-color;
+    width: 196px;
+    position: relative;
+  }
+  &__main {
+    padding: 72px 64px 0 64px;
+    width: 496px;
+  }
+  &__header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  &__bubble {
+    position: absolute;
+    width: 272px;
+    height: 272px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    left: 34px;
+    top: 37px;
+    &::before {
+      position: absolute;
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: inherit;
+      top: 292px;
+      left: -11px;
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      display: block;
+      width: 157px;
+      height: 157px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: inherit;
+      top: 313px;
+      left: -5px;
+    }
+  }
+}

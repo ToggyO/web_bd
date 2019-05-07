@@ -1,0 +1,40 @@
+// here we have to override styles which cannot be overriden by className in components...
+*,
+*::before,
+*::after {
+  line-height: @line-height-base;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  line-height: 24px;
+}
+
+.container {
+  max-width: 1172px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.ant-row.ant-form-item {
+  margin-bottom: 16px;
+}
+
+.ant-form-explain {
+  line-height: 18px;
+  min-height: auto !important;
+}
+
+.edit-form .ant-form-item-label {
+  line-height: inherit;
+  label {
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
