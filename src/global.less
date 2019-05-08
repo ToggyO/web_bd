@@ -1,8 +1,12 @@
 // here we have to override styles which cannot be overriden by className in components...
-*,
-*::before,
-*::after {
+* {
   line-height: @line-height-base;
+}
+
+body {
+  font-family: -apple-system, 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 h1 {
@@ -18,9 +22,20 @@ p {
 }
 
 .container {
-  max-width: 1172px;
+  max-width: 1192px;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.paper {
+  max-width: 1172px;
+  margin: 8px auto 0;
+  border-radius: 6px;
+  box-shadow: @box-shadow-base;
+  background: @component-background;
+  @media screen and (max-width: 992px) {
+    padding: 10px 30px;
+  }
 }
 
 .ant-row.ant-form-item {

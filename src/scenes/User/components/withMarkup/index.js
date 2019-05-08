@@ -3,14 +3,16 @@ import { Header } from '../../../../components/Header';
 import { Footer } from '../../../../components/Footer';
 
 export default Component => {
-  const withFooter = props => {
+  const withMarkup = props => {
     return (
       <React.Fragment>
         <Header />
-        <Component {...props} />
+        <div className="paper">
+          <Component {...props} />
+        </div>
         <Footer />
       </React.Fragment>
     );
   };
-  return withFooter;
+  return withMarkup;
 };
