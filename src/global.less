@@ -45,6 +45,10 @@ p {
 .ant-form-explain {
   line-height: 18px;
   min-height: auto !important;
+  font-size: 13px;
+  & > div {
+    line-height: inherit;
+  }
 }
 
 .edit-form .ant-form-item-label {
@@ -52,4 +56,13 @@ p {
   label {
     color: rgba(0, 0, 0, 0.65);
   }
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 10px 14px;
+}
+
+.ant-select-selection-selected-value {
+  line-height: 38px;
 }

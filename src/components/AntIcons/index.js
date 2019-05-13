@@ -13,3 +13,10 @@ export { default as SearchOutline } from '@ant-design/icons/lib/outline/SearchOu
 export { default as BellOutline } from '@ant-design/icons/lib/outline/BellOutline';
 export { default as UploadOutline } from '@ant-design/icons/lib/outline/UploadOutline';
 export { default as LogoutOutline } from '@ant-design/icons/lib/outline/LogoutOutline';
+export {
+  default as DashboardOutline,
+} from '@ant-design/icons/lib/outline/DashboardOutline';
+export { default as CaretUpFill } from '@ant-design/icons/lib/fill/CaretUpFill';
+export { default as CaretDownFill } from '@ant-design/icons/lib/fill/CaretDownFill';
+export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutline';
+export { default as RightOutline } from '@ant-design/icons/lib/outline/RightOutline';

@@ -1,17 +1,20 @@
 import '@babel/polyfill';
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { PATH } from 'router-paths';
 import { RegisteredUserRoute } from './routes/RegisteredUserRoute';
 import { ConfirmedUserRoute } from './routes/ConfirmedUserRoute';
 import { ProtectedUserRoute } from './routes/ProtectedUserRoute';
 import Main from './scenes';
-import { Login } from './scenes/Sign/Login';
-import { Success } from './scenes/Sign/Success';
-import { Confirmation } from './scenes/Sign/Confirmation';
-import { ResetPassword } from './scenes/Sign/ResetPassword';
-import { TwoFactor } from './scenes/Sign/TwoFactor';
-import { UserProfile } from './scenes/User/UserProfile';
+import { Login } from './scenes/Sign/scenes/Login';
+import { Success } from './scenes/Sign/scenes/Success';
+import { Confirmation } from './scenes/Sign/scenes/Confirmation';
+import { ResetPassword } from './scenes/Sign/scenes/ResetPassword';
+import { TwoFactor } from './scenes/Sign/scenes/TwoFactor';
+import { Settings } from './scenes/User/scenes/Settings';
+import { Dashboard } from './scenes/User/scenes/Dashboard';
+import { EditTrade } from './scenes/User/scenes/EditTrade';
 import './global.less';
 
 // guest
@@ -22,13 +25,15 @@ import './global.less';
 ReactDOM.render(
   <Router>
     <Route exact path="/" component={Main} />
-    <Route path="/sign" component={Login} />
-    <Route path="/success" component={Success} />
+    <Route path={PATH.sign} component={Login} />
+    <Route path={PATH.success} component={Success} />
 
-    <RegisteredUserRoute path="/confirmation" component={Confirmation} />
-    <RegisteredUserRoute path="/reset" component={ResetPassword} />
-    <ConfirmedUserRoute path="/twofactorauth" component={TwoFactor} />
-    <ProtectedUserRoute path="/user" component={UserProfile} />
+    <RegisteredUserRoute path={PATH.confirmation} component={Confirmation} />
+    <RegisteredUserRoute path={PATH.resetPassword} component={ResetPassword} />
+    <ConfirmedUserRoute path={PATH.twoFactorAuth} component={TwoFactor} />
+    <ProtectedUserRoute path={PATH.settings} component={Settings} />
+    <ProtectedUserRoute path={PATH.dashboard} component={Dashboard} />
+    <ProtectedUserRoute path={`${PATH.editTrade}/:id`} component={EditTrade} />
   </Router>,
   document.getElementById('root'),
 );

@@ -29,7 +29,7 @@
     &::before {
       width: 157px;
       height: 157px;
-      right: 800px;
+      right: 820px;
       bottom: 192px;
     }
     &::after {
@@ -72,9 +72,9 @@
   height: 48px;
   background: @primary-color;
   display: flex;
+  align-items: center;
   border: none;
   border-radius: 0;
-  line-height: 24px;
   color: #fff;
   &:hover,
   &:focus,
@@ -88,4 +88,8 @@
 }
 .user-avatar {
   margin-right: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  &.ant-avatar-sm.ant-avatar-icon {
+    font-size: 12px;
+  }
 }

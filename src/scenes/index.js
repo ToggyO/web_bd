@@ -1,9 +1,9 @@
 import React from 'react';
-import { UserProfile } from './User/UserProfile';
-import { Login } from './Sign/Login';
+import { Dashboard } from './User/scenes/Dashboard';
+import { Login } from './Sign/scenes/Login';
 
-const ok = false;
+const ok = true;
 
-const Main = () => <div>{ok ? <div>User</div> : <Login />}</div>;
+const Main = () => (ok ? <Dashboard /> : <Login />);
 
 export default Main;

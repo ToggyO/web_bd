@@ -1,13 +1,15 @@
 /* eslint-disable no-useless-escape */
+import React from 'react';
+
 export const email = [
-  { required: true, message: 'Please input your E-Mail' },
+  { required: true, message: <div>Please input your email!</div> },
   {
     max: 45,
-    message: 'Please check email format',
+    message: <div>Please check email format!</div>,
   },
   {
     pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
-    message: 'Please check email format',
+    message: <div>Please check email format!</div>,
   },
 ];
 
@@ -15,48 +17,61 @@ export const phone = [
   {
     required: true,
     pattern: /^[0-9]+$/,
-    message: 'Please your phone number',
+    message: <div>Please your phone number!</div>,
   },
 ];
 
 export const username = [
   {
     required: true,
-    message: 'Please input your username',
+    message: <div>Please input your username!</div>,
   },
   {
     min: 2,
     max: 20,
-    message: 'Username should include from 2 to 20 characters',
+    message: <div>Username should include from 2 to 20 characters!</div>,
   },
   {
     pattern: /^[a-zA-Z0-9_.]+$/,
-    message: 'Username should contain only following characters: A-Z, a-z, 0-9, ., _,',
+    message: (
+      <div>Username should contain only following characters: A-Z, a-z, 0-9, ., _,</div>
+    ),
   },
 ];
 
 export const realname = [
-  { required: true, message: 'Please input your real name' },
-  { max: 70, message: 'Full name can not exceed 70 characters limit' },
+  { required: true, message: <div>Please input your real name!</div> },
+  { max: 70, message: <div>Full name can not exceed 70 characters limit!</div> },
   {
     pattern: /^[a-zA-Z0-9-' ]+$/,
-    message: 'Please input your real name',
+    message: <div>Please input your real name!</div>,
   },
 ];
 
 export const password = [
-  { required: true, message: 'Please input your password!' },
+  { required: true, message: <div>Please input your password!</div> },
+  {
+    pattern: /^(?=.*[a-z])/,
+    message: <div>Password should contain at least one lowercase letter (a-z)</div>,
+  },
+  {
+    pattern: /^(?=.*[A-Z])/,
+    message: <div>Password should contain at least one uppercase letter (A-Z)</div>,
+  },
+  {
+    pattern: /^(?=.*[0-9])/,
+    message: <div>Password should contain at least one digit (0-9)</div>,
+  },
   {
     min: 8,
     max: 30,
-    message: 'Password should include from 8 to 30 characters',
-  },
-  {
-    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\~\`\!\@\#\$\%\^\&\*\(\)\+\=\_\-\{\}\[\]\ \.\,])/,
-    message:
-      'Password should contain uppercase (A-Z), lowercase (a-z) letters, digit (0-9), special character ~`!@#$%^&*()+=_-{}[] .,',
+    message: <div>Password should be 8-30 characters</div>,
   },
 ];
 export const smscode = [
-  { required: true, pattern: /^[0-9]+$/, message: 'Please enter code from SMS' },
+  {
+    required: true,
+    pattern: /^[0-9]+$/,
+    message: <div>Please enter code from SMS!</div>,
+  },
 ];

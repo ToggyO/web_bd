@@ -1,24 +1,26 @@
 import React from 'react';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
+import { Link } from 'react-router-dom';
+import { PATH } from 'router-paths';
 
 import './style.less';
 
 const menu = (
   <Menu>
     <Menu.Item>
-      <a rel="noopener noreferrer" href="#">
+      <Link rel="noopener noreferrer" to={PATH.settings}>
         <Icon type="user" /> Profile settings
-      </a>
+      </Link>
     </Menu.Item>
     <Menu.Item>
-      <a rel="noopener noreferrer" href="#">
-        <Icon type="user" /> Dashboard
-      </a>
+      <Link rel="noopener noreferrer" to={PATH.dashboard}>
+        <Icon type="dashboard" /> Dashboard
+      </Link>
     </Menu.Item>
     <Menu.Item>
-      <a rel="noopener noreferrer" href="#">
+      <Link rel="noopener noreferrer" to={PATH.sign}>
         <Icon type="logout" /> Logout
-      </a>
+      </Link>
     </Menu.Item>
   </Menu>
 );
@@ -50,7 +52,7 @@ const Header = () => (
         <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
           <Button className="user-button">
             <Avatar size="small" icon="user" className="user-avatar" />
-            John Riley
+            <span>John Riley</span>
           </Button>
         </Dropdown>
       </div>

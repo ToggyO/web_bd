@@ -64,4 +64,15 @@ module.exports = {
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['validation-rules', './src/services/validation-rules.js'],
+          ['router-paths', './src/routes/paths.js'],
+        ],
+        extensions: ['.js'],
+      },
+    },
+  },
 };

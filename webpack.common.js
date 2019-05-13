@@ -1,16 +1,17 @@
 const path = require('path');
 
 const antColors = {
+  white: '#fff',
+  black: '#000',
   'primary-color': '#2EAC82;',
+  'heading-color': 'fade(@black, 85%)',
   'component-background': '#fff',
-  'heading-1-size': '24px',
   'body-background': '#F0F4F3',
   'line-height-base': '28px',
   'input-height-base': '40px',
   'form-item-margin-bottom': '16px',
   'btn-height-base': '40px',
   'btn-primary-color': 'rgba(255,255,255,0.8)',
-
   'border-color-base': 'rgba(0,0,0,0.25)',
   'border-color-split': 'hsv(0, 0, 91%)',
   'box-shadow-base': '0 0 10px 0 rgba(0, 0, 0, 0.1)',
@@ -19,7 +20,6 @@ const antColors = {
 exports.antColors = antColors;
 
 exports.webpackCommon = {
-  entry: './src',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
@@ -95,6 +95,8 @@ exports.webpackCommon = {
         __dirname,
         './src/components/AntIcons/index.js',
       ),
+      'validation-rules': path.resolve(__dirname, 'src/services/validation-rules.js'),
+      'router-paths': path.resolve(__dirname, 'src/routes/paths.js'),
     },
     extensions: ['.js', '.jsx', 'less'],
   },
