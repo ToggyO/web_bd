@@ -1,5 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -7,13 +8,32 @@ import { Form, Icon, Input, Button } from 'antd';
 import { PATH } from 'router-paths';
 import './style.less';
 
+class Recaptcha extends React.PureComponent {
+  doCaptcha = result => {
+    this.props.onChange(result);
+  };
+
+  render() {
+    return (
+      <ReCAPTCHA
+        // set real sitekey
+        sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+        onChange={this.doCaptcha}
+      />
+    );
+  }
+}
+
 class SignInForm extends React.Component {
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', {
+          username: values.username,
+          password: values.password,
+        });
       }
     });
   };
@@ -44,9 +64,12 @@ class SignInForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <div className="signin__captcha">
-          <ReCAPTCHA sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ" />
-        </div>
+        <Form.Item>
+          {getFieldDecorator('captcha', {
+            rules: [{ required: true, message: 'Please verify you are human!' }],
+          })(<Recaptcha />)}
+        </Form.Item>
+
         <div className="signin__forgot">
           Forgot password?
           <Link to={PATH.resetPassword}> Reset</Link>
