@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { PATH } from 'router-paths';
@@ -7,8 +8,9 @@ import './style.less';
 const columns = [
   { title: '#', dataIndex: 'id', key: 'id' },
   {
+    // using render instead of dataIndex to format viewable data and persist actual timestamp
     title: 'Created at',
-    dataIndex: 'createdAt',
+    render: (text, record) => moment(record.createdAt).format('DD.MM.YY'),
     key: 'createdAt',
     sorter: (a, b) => a.createdAt - b.createdAt,
     sortDirections: ['descend', 'ascend'],
@@ -49,10 +51,10 @@ const initialData = [
   {
     key: 1,
     id: 378274,
-    createdAt: 111,
+    createdAt: 1557803154072,
     type: 'Buy',
     paymentMethod: 'PayPal',
-    transactionLimits: '1100 - 1200 USD',
+    transactionLimits: '1000 - 1200 USD',
     status: true,
     details: {
       location: 'Moscow, Russian Federation',
@@ -64,7 +66,7 @@ const initialData = [
   {
     key: 2,
     id: 378275,
-    createdAt: 112,
+    createdAt: 1557501114052,
     type: 'Sell',
     paymentMethod: 'PayPal',
     transactionLimits: '1100 - 1200 USD',
@@ -79,7 +81,7 @@ const initialData = [
   {
     key: 3,
     id: 378276,
-    createdAt: 113,
+    createdAt: 1557301114052,
     type: 'Buy',
     paymentMethod: 'PayPal',
     transactionLimits: '1100 - 1200 USD',
@@ -94,7 +96,7 @@ const initialData = [
   {
     key: 4,
     id: 378277,
-    createdAt: 114,
+    createdAt: 1557101114052,
     type: 'Buy',
     paymentMethod: 'Cash deposite',
     transactionLimits: '1100 - 1200 USD',
@@ -109,7 +111,7 @@ const initialData = [
   {
     key: 5,
     id: 378278,
-    createdAt: 115,
+    createdAt: 1559101114053,
     type: 'Sell',
     paymentMethod: 'Cash deposite',
     transactionLimits: '1100 - 1200 USD',
@@ -124,7 +126,7 @@ const initialData = [
   {
     key: 6,
     id: 378279,
-    createdAt: 117,
+    createdAt: 1559101114052,
     type: 'Buy',
     paymentMethod: 'PayPal',
     transactionLimits: '1100 - 1200 USD',
@@ -146,6 +148,12 @@ class CreatedTrades extends React.Component {
 
   componentDidMount() {
     this.setState({ data: initialData });
+    // this.setState({
+    //   data: initialData.map(record => ({
+    //     ...record,
+    //     createdAtDate: moment(record.createdAt).format('DD.MM.YY'),
+    //   })),
+    // });
   }
 
   handleExpand = (expanded, record) => {
