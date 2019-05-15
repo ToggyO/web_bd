@@ -20,3 +20,8 @@ export { default as CaretUpFill } from '@ant-design/icons/lib/fill/CaretUpFill';
 export { default as CaretDownFill } from '@ant-design/icons/lib/fill/CaretDownFill';
 export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutline';
 export { default as RightOutline } from '@ant-design/icons/lib/outline/RightOutline';
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline';
+export { default as EyeOutline } from '@ant-design/icons/lib/outline/EyeOutline';
+export {
+  default as EyeInvisibleOutline,
+} from '@ant-design/icons/lib/outline/EyeInvisibleOutline';
