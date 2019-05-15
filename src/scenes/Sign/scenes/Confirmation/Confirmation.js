@@ -1,5 +1,5 @@
 import React from 'react';
-import { PATH } from 'router-paths';
+import { PATH } from 'paths';
 import AuthBox from '../../components/AuthBox';
 import ToSignIn from '../../components/ToSignIn';
 import withFooter from '../../components/withFooter';

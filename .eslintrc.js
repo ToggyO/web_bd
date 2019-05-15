@@ -69,7 +69,9 @@ module.exports = {
       alias: {
         map: [
           ['validation-rules', './src/services/validation-rules.js'],
-          ['router-paths', './src/routes/paths.js'],
+          ['paths', './src/routes/paths.js'],
+          ['services', './src/services/'],
+          ['data', './src/data/'],
         ],
         extensions: ['.js'],
       },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { PATH } from 'router-paths';
+import { PATH } from 'paths';
 
 // registeredUser = just created account
 const condition = true;

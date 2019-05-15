@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
-import { PATH } from 'router-paths';
+import { PATH } from 'paths';
 
 import './style.less';
 
