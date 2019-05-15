@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Table } from 'antd';
-import { PATH } from 'router-paths';
+import { PATH } from 'paths';
 import './style.less';
 
 const columns = [
-  { title: '#', dataIndex: 'id', key: 'id' },
+  { title: 'ID', dataIndex: 'id', key: 'id' },
   {
     title: 'Created at',
     dataIndex: 'createdAt',
@@ -137,7 +138,7 @@ const initialData = [
   },
 ];
 
-class ActiveTrades extends React.Component {
+class CreatedTrades extends React.Component {
   state = {
     data: [],
     expandedRowKeys: [],
@@ -175,9 +176,9 @@ class ActiveTrades extends React.Component {
     const ExtraRow = record => (
       <div className="extra-row">
         <div className="extra-row__head">
-          <a href="#" className="extra-row__edit">
+          <Link className="extra-row__edit" to={`${PATH.editTrade}/${record.id}`}>
             Edit
-          </a>
+          </Link>
           <a href="#" className="extra-row__delete" onClick={this.handleDelete}>
             Delete
           </a>
@@ -203,7 +204,7 @@ class ActiveTrades extends React.Component {
 
     return (
       <>
-        <h2 className="dashboard__header">Active trades</h2>
+        <h2 className="dashboard__header">Created trades</h2>
         <Table
           columns={columns}
           dataSource={this.state.data}
@@ -220,4 +221,4 @@ class ActiveTrades extends React.Component {
   }
 }
 
-export default ActiveTrades;
+export default CreatedTrades;

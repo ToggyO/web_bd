@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
-import { PATH } from 'router-paths';
+import { PATH } from 'paths';
 import './style.less';
 
 const columns = [
