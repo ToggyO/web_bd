@@ -25,3 +25,4 @@ export { default as EyeOutline } from '@ant-design/icons/lib/outline/EyeOutline'
 export {
   default as EyeInvisibleOutline,
 } from '@ant-design/icons/lib/outline/EyeInvisibleOutline';
+export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill';

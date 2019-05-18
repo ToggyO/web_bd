@@ -71,7 +71,7 @@ export const password = [
 export const smscode = [
   {
     required: true,
-    pattern: /^[0-9]+$/,
+    pattern: /^[a-zA-Z0-9]+$/,
     message: <div>Please enter code from SMS!</div>,
   },
 ];

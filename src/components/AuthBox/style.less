@@ -1,26 +1,31 @@
 .auth-box {
   margin: 0 auto;
   display: flex;
-  height: 586px;
+  // height: 586px;
+  // line-height: 28px;
   width: 692px;
   border-radius: 6px;
   background-color: @component-background;
   box-shadow: @box-shadow-base;
   overflow: hidden;
   &__logo {
-    padding-top: 21px;
-    // fix when designer finishes logo
-    padding-left: 53px;
     font-size: 16px;
+    padding-top: 27px;
+    padding-left: 23px;
+    display: flex;
     color: #fff;
+    img {
+      margin-right: 6px;
+    }
   }
   &__aside {
     background-color: @primary-color;
     width: 196px;
     position: relative;
+    min-height: 586px;
   }
   &__main {
-    padding: 72px 64px 0 64px;
+    padding: 72px 64px 30px 64px;
     width: 496px;
   }
   &__header {
@@ -35,7 +40,7 @@
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     left: 34px;
-    top: 37px;
+    top: 38px;
     &::before {
       position: absolute;
       content: '';

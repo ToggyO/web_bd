@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.less';
-import { Footer } from '../../../../components/Footer';
+import { Footer } from 'src/components/Footer';
 
 export default Component => {
   const withFooter = props => (

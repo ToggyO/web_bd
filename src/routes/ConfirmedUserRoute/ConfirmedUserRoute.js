@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { PATH } from 'paths';
 
 // confirmedUser = created account + confirmed email
-const condition = true;
 
 const ConfirmedUserRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      condition ? <Component {...props} /> : <Redirect to={PATH.confirmation} />
+      localStorage.bdToken ? <Component {...props} /> : <Redirect to="/" />
     }
   />
 );

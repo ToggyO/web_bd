@@ -1,1 +1,2 @@
-export { default as TwoFactorForm } from './TwoFactorForm';
+export { default as TwoFactorFormDisplay } from './TwoFactorFormDisplay';
+export { default as TwoFactorFormContainer } from './TwoFactorFormContainer';

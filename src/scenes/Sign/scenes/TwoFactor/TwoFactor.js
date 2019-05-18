@@ -1,7 +1,7 @@
 import React from 'react';
-import AuthBox from '../../components/AuthBox';
-import withFooter from '../../components/withFooter';
-import { TwoFactorForm } from './components/TwoFactorForm';
+import AuthBox from 'src/components/AuthBox';
+import withFooter from 'src/components/withFooter';
+import { TwoFactorFormContainer } from './components/TwoFactorForm';
 
 const TwoFactor = () => (
   <AuthBox header="Welcome to Bitcoins Direct!">
@@ -13,7 +13,7 @@ const TwoFactor = () => (
       Enter phone number and get full access to website's functionality by setting 2
       factor authentication now.
     </p>
-    <TwoFactorForm />
+    <TwoFactorFormContainer />
   </AuthBox>
 );
 

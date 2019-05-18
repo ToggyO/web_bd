@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dashboard } from './User/scenes/Dashboard';
-import { Login } from './Sign/scenes/Login';
+import { LoginContainer } from './Sign/scenes/Login';
 
-const ok = true;
+const ok = false;
 
-const Main = () => (ok ? <Dashboard /> : <Login />);
+const Main = () => (ok ? <Dashboard /> : <LoginContainer />);
 
 export default Main;

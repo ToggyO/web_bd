@@ -1,18 +1,18 @@
 import React from 'react';
 import { PATH } from 'paths';
-import AuthBox from '../../components/AuthBox';
-import ToSignIn from '../../components/ToSignIn';
-import withFooter from '../../components/withFooter';
-import { ResetPasswordForm } from './components/ResetPasswordForm';
+import AuthBox from 'src/components/AuthBox';
+import ToSignIn from 'src/components/ToSignIn';
+import withFooter from 'src/components/withFooter';
+import { ResetPasswordFormDisplay } from './components/ResetPasswordForm';
 
 const ResetPassword = () => (
-  <AuthBox header="Forgot password">
+  <AuthBox header="Reset password">
     <p>
-      Enter your email and we will send your a link to reset your password. You may need
-      to check your spam folder.
+      Choose a new password for this user account. The password will replace the old one,
+      everything else about the user account will remain unchanged.
     </p>
-    <ResetPasswordForm />
-    <ToSignIn text="Back to Sign in" leftArrow goTo={PATH.sign} />
+    <ResetPasswordFormDisplay />
+    <ToSignIn text="Back to Sign in" leftArrow goTo={PATH.HOME} />
   </AuthBox>
 );
 export default withFooter(ResetPassword);

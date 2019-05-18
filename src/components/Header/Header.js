@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { PATH } from 'paths';
+import logo from 'assets/logo.svg';
 
 import './style.less';
 
@@ -12,11 +13,13 @@ const menu = (
         <Icon type="user" /> Profile settings
       </Link>
     </Menu.Item>
+    <Menu.Divider />
     <Menu.Item>
       <Link rel="noopener noreferrer" to={PATH.dashboard}>
         <Icon type="dashboard" /> Dashboard
       </Link>
     </Menu.Item>
+    <Menu.Divider />
     <Menu.Item>
       <Link rel="noopener noreferrer" to={PATH.sign}>
         <Icon type="logout" /> Logout
@@ -27,9 +30,12 @@ const menu = (
 
 const Header = () => (
   <header className="header">
-    <div className="header__bubble" />
     <nav className="container nav">
-      <h1 className="header__logo">Bitcoins Direct</h1>
+      <div className="nav__bubble" />
+      <Link to="/" className="header__logo">
+        <img src={logo} aria-label="logo" alt="Bitcoins direct" />
+      </Link>
+
       <a href="#" className="nav__link">
         Buy bitcoins
       </a>
@@ -42,17 +48,15 @@ const Header = () => (
       <a href="#" className="nav__link">
         Help
       </a>
+
       <div className="right-nav">
-        <a href="#" className="nav__link right-nav__link">
-          <Icon type="search" />
-        </a>
         <a href="#" className="nav__link right-nav__link">
           <Icon type="bell" />
         </a>
         <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
           <Button className="user-button">
             <Avatar size="small" icon="user" className="user-avatar" />
-            <span>John Riley</span>
+            <span className="user-name">John Riley</span>
           </Button>
         </Dropdown>
       </div>

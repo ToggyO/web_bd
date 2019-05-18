@@ -2,7 +2,7 @@ import React from 'react';
 import './style.less';
 
 const Footer = () => (
-  <div className="footer">
+  <footer className="footer">
     <div className="footer__links">
       <a href="#" className="footer__link">
         Privacy
@@ -12,7 +12,7 @@ const Footer = () => (
       </a>
     </div>
     <span className="footer__copyright">Copyright © 2019 All Rights Reserved.</span>
-  </div>
+  </footer>
 );
 
 export default Footer;

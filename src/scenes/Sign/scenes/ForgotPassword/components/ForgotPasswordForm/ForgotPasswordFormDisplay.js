@@ -2,36 +2,33 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Icon, Input, Button } from 'antd';
+import * as validations from 'validation-rules';
 import './style.less';
 
-class NormalLoginForm extends React.Component {
+class ForgotPasswordForm extends React.Component {
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();
 
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.forgotPasswordRequest(values);
+        // console.log('Received values of form: ', values);
       }
     });
   };
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { loading } = this.props;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item style={{ width: '100%' }}>
           {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Please input your email!' }],
+            rules: validations.email,
           })(
             <Input
-              prefix={
-                <Icon
-                  className="ant-icon-translate"
-                  type="mail"
-                  style={{ color: 'rgba(0,0,0,.25)' }}
-                />
-              }
+              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Email"
             />,
           )}
@@ -43,8 +40,9 @@ class NormalLoginForm extends React.Component {
             htmlType="submit"
             block
             className="reset-password__button"
+            loading={loading}
           >
-            Sign in
+            Send
           </Button>
         </Form.Item>
       </Form>
@@ -52,4 +50,4 @@ class NormalLoginForm extends React.Component {
   }
 }
 
-export default Form.create({ name: 'normal_login' })(NormalLoginForm);
+export default Form.create()(ForgotPasswordForm);

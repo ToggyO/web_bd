@@ -138,6 +138,126 @@ const initialData = [
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
     },
   },
+  {
+    key: 7,
+    id: 378280,
+    createdAt: 1559101113052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '1100 - 1200 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 8,
+    id: 378281,
+    createdAt: 1553101113052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 9,
+    id: 378282,
+    createdAt: 1553101183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 10,
+    id: 378283,
+    createdAt: 1553801183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 11,
+    id: 378284,
+    createdAt: 1453801183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 12,
+    id: 378285,
+    createdAt: 1453801183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 13,
+    id: 378286,
+    createdAt: 1453801183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
+  {
+    key: 14,
+    id: 378287,
+    createdAt: 1453801183052,
+    type: 'Buy',
+    paymentMethod: 'PayPal',
+    transactionLimits: '11200 - 12020 USD',
+    status: false,
+    details: {
+      location: 'Omsk, Russian Federation',
+      currency: 'RUB / BTC',
+      terms:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus reprehenderit iste assumenda a delectus in mollitia, commodi dolores tempora necessitatibus laborum esse et laudantium quam deleniti, sed blanditiis rerum ratione.',
+    },
+  },
 ];
 
 class CreatedTrades extends React.Component {
@@ -216,7 +336,7 @@ class CreatedTrades extends React.Component {
         <Table
           columns={columns}
           dataSource={this.state.data}
-          pagination={{ pageSize: 4 }}
+          pagination={false}
           expandedRowKeys={this.state.expandedRowKeys}
           onExpand={this.handleExpand}
           expandedRowRender={record => ExtraRow(record)}
