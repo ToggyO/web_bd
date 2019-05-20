@@ -26,3 +26,4 @@ export {
   default as EyeInvisibleOutline,
 } from '@ant-design/icons/lib/outline/EyeInvisibleOutline';
 export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill';
+export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill';

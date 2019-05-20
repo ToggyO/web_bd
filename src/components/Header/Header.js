@@ -9,19 +9,19 @@ import './style.less';
 const menu = (
   <Menu>
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.settings}>
+      <Link rel="noopener noreferrer" to={PATH.USER_SETTINGS}>
         <Icon type="user" /> Profile settings
       </Link>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.dashboard}>
+      <Link rel="noopener noreferrer" to={PATH.USER_DASHBOARD}>
         <Icon type="dashboard" /> Dashboard
       </Link>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.sign}>
+      <Link rel="noopener noreferrer" to={PATH.SIGN}>
         <Icon type="logout" /> Logout
       </Link>
     </Menu.Item>

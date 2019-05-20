@@ -5,6 +5,7 @@ const antColors = {
   black: '#000',
   'primary-color': '#2EAC82;',
   'text-color': 'fade(@black, 65%)',
+  'input-placeholder-color': 'hsv(0, 0, 75%)',
   'text-color-secondary': 'fade(@black, 45%)',
   'heading-color': 'fade(@black, 85%)',
   'component-background': '#fff',

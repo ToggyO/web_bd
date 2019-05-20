@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import data from './data/reducer';
-import scenes from './scenes/reducer';
+import sign from './scenes/Sign/reducer';
 
-export default combineReducers({ data, scenes });
+export default combineReducers({ sign });

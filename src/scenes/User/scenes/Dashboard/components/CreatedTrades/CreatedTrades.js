@@ -304,7 +304,7 @@ class CreatedTrades extends React.Component {
     const ExtraRow = record => (
       <div className="extra-row">
         <div className="extra-row__head">
-          <Link className="extra-row__edit" to={`${PATH.editTrade}/${record.id}`}>
+          <Link className="extra-row__edit" to={`${PATH.EDIT_TRADE}/${record.id}`}>
             Edit
           </Link>
           <a href="#" className="extra-row__delete" onClick={this.handleDelete}>

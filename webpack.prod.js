@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common.webpackCommon, {
@@ -75,5 +76,6 @@ module.exports = merge(common.webpackCommon, {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
+    new BundleAnalyzerPlugin(),
   ],
 });

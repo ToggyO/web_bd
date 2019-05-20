@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dashboard } from './User/scenes/Dashboard';
-import { LoginContainer } from './Sign/scenes/Login';
+import { LoginContainer } from './Sign/Login';
 
 const ok = false;
 

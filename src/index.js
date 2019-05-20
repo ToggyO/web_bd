@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -11,11 +10,11 @@ import { RegisteredUserRoute } from './routes/RegisteredUserRoute';
 import { ConfirmedUserRoute } from './routes/ConfirmedUserRoute';
 import { ProtectedUserRoute } from './routes/ProtectedUserRoute';
 import Main from './scenes';
-import { LoginContainer } from './scenes/Sign/scenes/Login';
-import { Success } from './scenes/Sign/scenes/Success';
-import { ForgotPassword } from './scenes/Sign/scenes/ForgotPassword';
-import { ResetPassword } from './scenes/Sign/scenes/ResetPassword';
-import { TwoFactor } from './scenes/Sign/scenes/TwoFactor';
+import { LoginContainer } from './scenes/Sign/Login';
+import { Success } from './scenes/Sign/Success';
+import { ForgotPassword } from './scenes/Sign/ForgotPassword';
+import { ResetPassword } from './scenes/Sign/ResetPassword';
+import { TwoFactor } from './scenes/Sign/TwoFactor';
 import { Settings } from './scenes/User/scenes/Settings';
 import { Dashboard } from './scenes/User/scenes/Dashboard';
 import { EditTrade } from './scenes/User/scenes/EditTrade';
@@ -32,18 +31,18 @@ if (localStorage.bdToken) setAuthHeaders(localStorage.bdToken);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route exact path="/" component={Main} />
+      <Route exact path={PATH.HOME} component={Main} />
       <Route path={PATH.SIGN} component={LoginContainer} />
-      <Route path={PATH.success} component={Success} />
+      <Route path={PATH.SUCCESS} component={Success} />
 
-      <RegisteredUserRoute path={PATH.forgotPassword} component={ForgotPassword} />
-      <RegisteredUserRoute path={PATH.resetPassword} component={ResetPassword} />
+      <RegisteredUserRoute path={PATH.FORGOT_PASSWORD} component={ForgotPassword} />
+      <RegisteredUserRoute path={PATH.RESET_PASSWORD} component={ResetPassword} />
 
-      <ConfirmedUserRoute path={PATH.getTwoFactorAuth} component={TwoFactor} />
+      <ConfirmedUserRoute path={PATH.SET_2FA} component={TwoFactor} />
 
-      <ProtectedUserRoute path={PATH.settings} component={Settings} />
-      <ProtectedUserRoute path={PATH.dashboard} component={Dashboard} />
-      <ProtectedUserRoute path={`${PATH.editTrade}/:id`} component={EditTrade} />
+      <ProtectedUserRoute path={PATH.USER_SETTINGS} component={Settings} />
+      <ProtectedUserRoute path={PATH.USER_DASHBOARD} component={Dashboard} />
+      <ProtectedUserRoute path={`${PATH.EDIT_TRADE}/:id`} component={EditTrade} />
     </Router>
   </Provider>,
   document.getElementById('root'),
