@@ -2,7 +2,6 @@ import React from 'react';
 import { PATH } from 'paths';
 import AuthBox from 'src/components/AuthBox';
 import ToSignIn from 'src/components/ToSignIn';
-import withFooter from 'src/components/withFooter';
 
 const Success = () => (
   <AuthBox header="Congratulations">
@@ -12,4 +11,4 @@ const Success = () => (
   </AuthBox>
 );
 
-export default withFooter(Success);
+export default Success;

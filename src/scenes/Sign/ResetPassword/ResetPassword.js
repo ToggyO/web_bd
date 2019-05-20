@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { PATH } from 'paths';
 import AuthBox from 'src/components/AuthBox';
 import ToSignIn from 'src/components/ToSignIn';
-import withFooter from 'src/components/withFooter';
 import { ResetPasswordFormContainer } from './components/ResetPasswordForm';
 
 const ResetPassword = ({ location: { search } }) => (
@@ -22,4 +21,4 @@ ResetPassword.propTypes = {
     search: PropTypes.string,
   }).isRequired,
 };
-export default withFooter(ResetPassword);
+export default ResetPassword;

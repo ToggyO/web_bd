@@ -43,7 +43,7 @@ function* login(action) {
 
     /* if user has confirmed his email, then redirect him to set 2fa page */
     if (user.authInfo.profile.emailConfirmed) {
-      yield history.push(PATH.SET_2FA);
+      yield history.push(`/auth${PATH.SET_2FA}`);
     } else {
       /* if not, dispatch signup action which will show him alternate view
           from LoginDisplay page with his email address */

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 import AuthBox from 'src/components/AuthBox';
-import withFooter from 'src/components/withFooter';
 import { SignInFormContainer } from './components/SignInForm';
 import { SignUpFormContainer } from './components/SignUpForm';
 import './style.less';
@@ -32,11 +31,10 @@ const LoginDisplay = ({ email }) =>
 
 LoginDisplay.propTypes = {
   email: PropTypes.string,
-  resetUser: PropTypes.func,
 };
 
 LoginDisplay.defaultProps = {
   email: null,
 };
 
-export default withFooter(LoginDisplay);
+export default LoginDisplay;

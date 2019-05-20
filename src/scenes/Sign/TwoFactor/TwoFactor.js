@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthBox from 'src/components/AuthBox';
-import withFooter from 'src/components/withFooter';
 import { TwoFactorFormContainer } from './components/TwoFactorForm';
 
 const TwoFactor = () => (
@@ -17,4 +16,4 @@ const TwoFactor = () => (
   </AuthBox>
 );
 
-export default withFooter(TwoFactor);
+export default TwoFactor;
