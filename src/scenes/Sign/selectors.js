@@ -5,9 +5,19 @@ export const signSceneLoadingSelector = createSelector(
   isLoading => isLoading,
 );
 
-export const registeredUserEmailSelector = createSelector(
-  state => state.sign.data.email,
-  email => email,
+export const registeredStatusSelector = createSelector(
+  state => state.sign.data.authInfo && state.sign.data.authInfo.profile.email,
+  isRegistered => isRegistered,
+);
+
+export const emailConfirmedStatusSelector = createSelector(
+  state => state.sign.data.authInfo && state.sign.data.authInfo.profile.emailConfirmed,
+  isEmailConfirmed => isEmailConfirmed,
+);
+export const phoneNumberConfirmedStatusSelector = createSelector(
+  state =>
+    state.sign.data.authInfo && state.sign.data.authInfo.profile.phoneNumberConfirmed,
+  isPhoneNumberConfirmed => isPhoneNumberConfirmed,
 );
 
 export const signStageErrorsSelector = createSelector(

@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { PATH } from 'paths';
-import logo from 'assets/logo.svg';
+import logo from 'src/assets/logo.svg';
 
 import './style.less';
 

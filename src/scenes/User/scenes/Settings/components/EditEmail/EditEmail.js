@@ -20,7 +20,7 @@ class EditEmail extends React.Component {
           <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile
           settings
         </a>
-        <h2 className="change-setting__header">Change Bound email</h2>
+        <h2 className="change-setting__header">Change email</h2>
         <p>
           Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris
           interesset. Eum te odio zril facilisi, quo singulis torquatos in, sea in duis

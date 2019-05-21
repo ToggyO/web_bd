@@ -1,29 +1,10 @@
 import { message } from 'antd';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { PATH } from 'paths';
+import { ROOTPATH, PATH } from 'paths';
 import history from 'services/history';
 import setAuthHeaders from 'services/setAuthHeaders';
 import userAPI from 'src/services/api';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_ERROR,
-  SMS_CODE_REQUEST,
-  SMS_CODE_REQUEST_SUCCESS,
-  SMS_CODE_REQUEST_ERROR,
-  twoFactorAuthSuccess,
-  twoFactorAuthError,
-  TWO_FACTOR_AUTH_REQUEST,
-  FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_ERROR,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR,
-} from './actions';
+import * as actions from './actions';
 
 /*
 worker saga
@@ -35,30 +16,31 @@ watcher saga
 function* login(action) {
   try {
     const user = yield call(userAPI.login, action.payload);
-    yield put({ type: LOGIN_SUCCESS, payload: user });
+    yield put({ type: actions.LOGIN_SUCCESS, payload: user });
 
     /* keep token in LocalStorage and set Authorization header */
     localStorage.bdToken = user.accessToken;
     setAuthHeaders(user.accessToken);
 
     /* if user has confirmed his email, then redirect him to set 2fa page */
-    if (user.authInfo.profile.emailConfirmed) {
-      yield history.push(`/auth${PATH.SET_2FA}`);
-    } else {
-      /* if not, dispatch signup action which will show him alternate view
-          from LoginDisplay page with his email address */
-      yield put({
-        type: SIGNUP_SUCCESS,
-        payload: { email: user.authInfo.profile.email },
-      });
-    }
+    // if (user.authInfo.profile.emailConfirmed) {
+    //   yield history.push(`${ROOTPATH.AUTH}/${PATH.SET_2FA}`);
+    // } else {
+    //   /* if not, dispatch signup action which will show him alternate view
+    //       from LoginDisplay page with his email address */
+    //   yield put({
+    //     type: actions.SIGNUP_SUCCESS,
+    //     payload: { email: user.authInfo.profile.email },
+    //   });
+    // }
   } catch (error) {
-    yield put({ type: LOGIN_ERROR, payload: error.response.data.errors });
+    console.log(error);
+    yield put({ type: actions.LOGIN_ERROR, payload: error.response.data.errors });
   }
 }
 
 export function* loginSaga() {
-  yield takeLatest(LOGIN_REQUEST, login);
+  yield takeLatest(actions.LOGIN_REQUEST, login);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -66,14 +48,15 @@ export function* loginSaga() {
 function* signup(action) {
   try {
     const data = yield call(userAPI.signup, action.payload);
-    yield put({ type: SIGNUP_SUCCESS, payload: data });
+    yield put({ type: actions.SIGNUP_SUCCESS, payload: data });
+    yield history.push(`${ROOTPATH.AUTH}/${PATH.CONFIRM_EMAIL}`);
   } catch (error) {
-    yield put({ type: SIGNUP_ERROR, payload: error.response.data.errors });
+    yield put({ type: actions.SIGNUP_ERROR, payload: error.response.data.errors });
   }
 }
 
 export function* signupSaga() {
-  yield takeLatest(SIGNUP_REQUEST, signup);
+  yield takeLatest(actions.SIGNUP_REQUEST, signup);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -81,15 +64,18 @@ export function* signupSaga() {
 function* smsCodeRequest(action) {
   try {
     const data = yield call(userAPI.smsCodeRequest, action.payload);
-    yield put({ type: SMS_CODE_REQUEST_SUCCESS, payload: data });
+    yield put({ type: actions.SMS_CODE_REQUEST_SUCCESS, payload: data });
     yield message.success('The verification code has been sent to your phone!', 8);
   } catch (error) {
-    yield put({ type: SMS_CODE_REQUEST_ERROR, payload: error.response.data.errors });
+    yield put({
+      type: actions.SMS_CODE_REQUEST_ERROR,
+      payload: error.response.data.errors,
+    });
   }
 }
 
 export function* smsCodeRequestSaga() {
-  yield takeLatest(SMS_CODE_REQUEST, smsCodeRequest);
+  yield takeLatest(actions.SMS_CODE_REQUEST, smsCodeRequest);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -97,14 +83,16 @@ export function* smsCodeRequestSaga() {
 function* twoFactorAuth(action) {
   try {
     const data = yield call(userAPI.twoFactorAuth, action.payload);
-    yield put(twoFactorAuthSuccess(data));
+    yield put({ type: actions.TWO_FACTOR_AUTH_SUCCESS, data });
+    yield history.push('/user/dashboard');
+    message.success('Success! Two-factor authentication activated');
   } catch (error) {
-    yield put(twoFactorAuthError(error));
+    yield put({ type: actions.TWO_FACTOR_AUTH_ERROR, error });
   }
 }
 
 export function* twoFactorAuthSaga() {
-  yield takeLatest(TWO_FACTOR_AUTH_REQUEST, twoFactorAuth);
+  yield takeLatest(actions.TWO_FACTOR_AUTH_REQUEST, twoFactorAuth);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -112,18 +100,21 @@ export function* twoFactorAuthSaga() {
 function* forgotPassword(action) {
   try {
     const data = yield call(userAPI.forgotPassword, action.payload);
-    yield put({ type: FORGOT_PASSWORD_SUCCESS, payload: data });
+    yield put({ type: actions.FORGOT_PASSWORD_SUCCESS, payload: data });
     yield message.success(
       `Thanks! Please check ${action.payload.email} for a link to reset your password.`,
       8,
     );
   } catch (error) {
-    yield put({ type: FORGOT_PASSWORD_ERROR, payload: error.response.data.errors });
+    yield put({
+      type: actions.FORGOT_PASSWORD_ERROR,
+      payload: error.response.data.errors,
+    });
   }
 }
 
 export function* forgotPasswordSaga() {
-  yield takeLatest(FORGOT_PASSWORD_REQUEST, forgotPassword);
+  yield takeLatest(actions.FORGOT_PASSWORD_REQUEST, forgotPassword);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -131,18 +122,21 @@ export function* forgotPasswordSaga() {
 function* resetPassword(action) {
   try {
     const data = yield call(userAPI.resetPassword, action.payload);
-    yield put({ type: RESET_PASSWORD_SUCCESS, payload: data });
+    yield put({ type: actions.RESET_PASSWORD_SUCCESS, payload: data });
     message.success(
       `Password for ${data.data.userName} has been successfully changed`,
       6,
     );
-    history.push(PATH.HOME);
+    history.push(`${ROOTPATH.AUTH}/${PATH.SIGN}`);
   } catch (error) {
-    yield put({ type: RESET_PASSWORD_ERROR, payload: error.response.data.errors });
+    yield put({
+      type: actions.RESET_PASSWORD_ERROR,
+      payload: error.response.data.errors,
+    });
     message.error('Looks like the link you have followed has expired', 8);
   }
 }
 
 export function* resetPasswordSaga() {
-  yield takeLatest(RESET_PASSWORD_REQUEST, resetPassword);
+  yield takeLatest(actions.RESET_PASSWORD_REQUEST, resetPassword);
 }

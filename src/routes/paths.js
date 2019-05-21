@@ -1,12 +1,17 @@
+export const ROOTPATH = {
+  HOME: '/',
+  AUTH: '/auth',
+  USER: '/user',
+};
 export const PATH = {
   HOME: '/',
   SIGN: 'sign',
+  CONFIRM_EMAIL: 'confirm-email',
   SUCCESS: 'success',
   FORGOT_PASSWORD: 'forgot-password',
   RESET_PASSWORD: 'reset-password',
   SET_2FA: 'set-2fa',
-  USER_SETTINGS: '/user/settings',
-  USER_DASHBOARD: 'user/dashboard',
+  USER_SETTINGS: 'settings',
+  USER_DASHBOARD: 'dashboard',
   EDIT_TRADE: '/user/trade/228/edit',
 };
-

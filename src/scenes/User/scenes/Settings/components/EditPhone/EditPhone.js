@@ -21,7 +21,7 @@ class EditPhone extends React.Component {
           <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile
           settings
         </a>
-        <h2 className="change-setting__header">Change Bound Phone Number</h2>
+        <h2 className="change-setting__header">Change Phone Number</h2>
         {isConfirmed ? (
           <>
             <p>

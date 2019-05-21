@@ -16,8 +16,10 @@ class Recaptcha extends React.Component {
   render() {
     return (
       <ReCAPTCHA
-        // set real sitekey
-        sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+        // dev
+        // sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+        // prod
+        sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
         onChange={this.doCaptcha}
       />
     );
@@ -28,7 +30,7 @@ class SignInFormDisplay extends React.Component {
   componentDidUpdate(prevProps) {
     const { errors } = this.props;
     if (errors !== prevProps.errors) {
-      if (errors[0]) message.error('Your login or password was incorrect', 8);
+      if (errors[0]) message.error('Your login or password was incorrect', 4);
     }
   }
 

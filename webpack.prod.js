@@ -7,6 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common.webpackCommon, {
@@ -59,13 +60,13 @@ module.exports = merge(common.webpackCommon, {
       },
       inject: true,
     }),
-
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+    //
+    //     new CompressionPlugin({
+    //       algorithm: 'gzip',
+    //       test: /\.js$|\.css$|\.html$/,
+    //       threshold: 10240,
+    //       minRatio: 0.8,
+    //     }),
 
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
@@ -76,6 +77,6 @@ module.exports = merge(common.webpackCommon, {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
-    new BundleAnalyzerPlugin(),
+    new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
   ],
 });

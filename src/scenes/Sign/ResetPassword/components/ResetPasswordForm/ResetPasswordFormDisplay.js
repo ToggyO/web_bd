@@ -36,13 +36,7 @@ class ResetPasswordForm extends React.Component {
         <Form.Item>
           {getFieldDecorator('password', {
             rules: validations.password,
-          })(
-            <Input.Password
-              type="password"
-              placeholder="Password"
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            />,
-          )}
+          })(<Input.Password type="password" placeholder="Password" />)}
         </Form.Item>
 
         <Form.Item>
@@ -56,13 +50,7 @@ class ResetPasswordForm extends React.Component {
                 validator: this.compareToFirstPassword,
               },
             ],
-          })(
-            <Input.Password
-              type="password"
-              placeholder="Confirm password"
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            />,
-          )}
+          })(<Input.Password type="password" placeholder="Confirm password" />)}
         </Form.Item>
 
         <Form.Item>

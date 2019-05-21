@@ -2,13 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
+import { ROOTPATH, PATH } from 'paths';
 import { EditTradeForm } from './components/EditTradeForm';
 import './style.less';
 
 const EditTrade = ({ match }) => (
   <div className="paper">
     <div className="edit-trade">
-      <Link to="/dashboard" className="back-to-dashboard__link">
+      <Link
+        to={`${ROOTPATH.USER}/${PATH.USER_DASHBOARD}`}
+        className="back-to-dashboard__link"
+      >
         <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
       </Link>
       <h2 className="edit-trade__header">Edit the post trade #{match.params.id}</h2>
