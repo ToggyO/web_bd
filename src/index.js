@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { message } from 'antd';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from 'services/history';
 import setAuthHeaders from 'services/setAuthHeaders';
@@ -29,6 +30,9 @@ import { Footer } from './components/Footer';
 // confirmedUser = created account + confirmed email
 // protectedUser = created account + confirmed email + 2 factored
 const store = getStore();
+message.config({
+  top: 60,
+});
 
 if (localStorage.bdToken) setAuthHeaders(localStorage.bdToken);
 

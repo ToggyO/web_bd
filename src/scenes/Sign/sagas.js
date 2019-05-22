@@ -88,6 +88,7 @@ function* twoFactorAuth(action) {
     message.success('Success! Two-factor authentication activated');
   } catch (error) {
     yield put({ type: actions.TWO_FACTOR_AUTH_ERROR, error });
+    message.error('Security code is not valid. Request a new one', 6);
   }
 }
 
@@ -102,7 +103,7 @@ function* forgotPassword(action) {
     const data = yield call(userAPI.forgotPassword, action.payload);
     yield put({ type: actions.FORGOT_PASSWORD_SUCCESS, payload: data });
     yield message.success(
-      `Thanks! Please check ${action.payload.email} for a link to reset your password.`,
+      `Thanks! Please check ${action.payload.email} for a link to reset your password`,
       8,
     );
   } catch (error) {
