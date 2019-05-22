@@ -10,6 +10,7 @@ export const PATH = {
   SUCCESS: 'success',
   FORGOT_PASSWORD: 'forgot-password',
   RESET_PASSWORD: 'reset-password',
+  SETUP_ACCOUNT: 'setup-account',
   SET_2FA: 'set-2fa',
   USER_SETTINGS: 'settings',
   USER_DASHBOARD: 'dashboard',

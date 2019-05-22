@@ -1,0 +1,36 @@
+.wizard {
+  margin: 0 auto;
+  width: 692px;
+  min-height: 583px;
+  border-radius: 6px;
+  background-color: @component-background;
+  box-shadow: @box-shadow-base;
+  padding: 73px 0;
+  &__stepper {
+    padding-left: 30px;
+    margin-bottom: 32px;
+
+    .ant-steps-item-title {
+      font-size: 14px;
+    }
+
+    .ant-steps-item:first-child {
+      text-align: center;
+    }
+    .ant-steps-item:last-child {
+      flex: 1;
+    }
+  }
+  &__content {
+    padding: 0 73px;
+  }
+  &__title {
+    margin-bottom: 18px;
+  }
+  &__description {
+    margin-bottom: 30px;
+  }
+  &__form-wrapper {
+    max-width: 368px;
+  }
+}

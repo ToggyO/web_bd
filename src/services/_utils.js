@@ -6,3 +6,5 @@ export const getQueries = url => {
     code: decodeURIComponent(code.replace('code=', '')),
   };
 };
+
+export const notUndefinedObjectProps = obj => !Object.values(obj).includes(undefined);

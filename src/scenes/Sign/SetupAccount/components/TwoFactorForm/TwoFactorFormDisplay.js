@@ -1,18 +1,32 @@
 // prop-types disabled for ant forms
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Form, Input, Button, Select, Statistic } from 'antd';
 import * as validations from 'validation-rules';
+import { notUndefinedObjectProps } from 'src/services/_utils';
 import './style.less';
 
 const { Option } = Select;
 const { Countdown } = Statistic;
 
-class NormalLoginForm extends React.Component {
+class TwoFactorForm extends React.Component {
   state = {
+    submitDisabled: true,
     deadline: null,
     isGetCodeDisabled: false,
   };
+
+  componentDidUpdate() {
+    const { submitDisabled } = this.state;
+    if (submitDisabled) {
+      const { form } = this.props;
+      const values = form.getFieldsValue();
+      if (notUndefinedObjectProps(values)) {
+        this.setState({ submitDisabled: false });
+      }
+    }
+  }
 
   // method for switching back <button>Get Code</button> state
   onFinish = () => {
@@ -103,6 +117,7 @@ class NormalLoginForm extends React.Component {
             block
             className="signup__button"
             loading={isLoading}
+            disabled={this.state.submitDisabled}
           >
             Get 2 Factor Authentification
           </Button>
@@ -112,4 +127,4 @@ class NormalLoginForm extends React.Component {
   }
 }
 
-export default Form.create()(NormalLoginForm);
+export default Form.create()(TwoFactorForm);

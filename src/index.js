@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
+import { message } from 'antd';
 import history from 'services/history';
 import setAuthHeaders from 'services/setAuthHeaders';
 import { ROOTPATH, PATH } from 'paths';
 import { getStore } from './store';
-
 import { RegisteredUserRoute } from './routes/RegisteredUserRoute';
 import { ConfirmedUserRoute } from './routes/ConfirmedUserRoute';
 import { ProtectedUserRoute } from './routes/ProtectedUserRoute';
@@ -15,14 +15,18 @@ import { ConfirmEmailContainer } from './scenes/Sign/ConfirmEmail';
 import { Success } from './scenes/Sign/Success';
 import { ForgotPassword } from './scenes/Sign/ForgotPassword';
 import { ResetPassword } from './scenes/Sign/ResetPassword';
+import { SetupAccountDisplay } from './scenes/Sign/SetupAccount';
 import { TwoFactor } from './scenes/Sign/TwoFactor';
 import { Settings } from './scenes/User/scenes/Settings';
 import { Dashboard } from './scenes/User/scenes/Dashboard';
 import { EditTrade } from './scenes/User/scenes/EditTrade';
 import './global.less';
-
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+
+message.config({
+  top: 60,
+});
 
 // guest
 // registeredUser = just created account
@@ -41,7 +45,7 @@ const Home = ({ match }) => (
 );
 
 const Auth = ({ match }) => (
-  <div style={{ paddingTop: 80 }}>
+  <div style={{ paddingTop: 56 }}>
     <Switch>
       <Route path={`${match.url}/${PATH.SIGN}`} exact component={LoginContainer} />
       <Route
@@ -64,6 +68,11 @@ const Auth = ({ match }) => (
         path={`${match.url}/${PATH.SET_2FA}`}
         exact
         component={TwoFactor}
+      />
+      <Route
+        path={`${match.url}/${PATH.SETUP_ACCOUNT}`}
+        exact
+        component={SetupAccountDisplay}
       />
     </Switch>
     <Footer />

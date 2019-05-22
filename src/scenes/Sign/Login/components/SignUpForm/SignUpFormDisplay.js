@@ -1,13 +1,26 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
 import * as validations from 'validation-rules';
+import { notUndefinedObjectProps } from 'src/services/_utils';
 import './style.less';
 
 class SignUpFormDisplay extends React.Component {
+  state = {
+    submitDisabled: true,
+  };
+
   componentDidUpdate(prevProps) {
-    const { errors } = this.props;
+    const { submitDisabled } = this.state;
+    const { errors, form } = this.props;
+
+    if (submitDisabled) {
+      const values = form.getFieldsValue();
+      if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
+    }
+
     if (errors !== prevProps.errors) {
       if (errors.DuplicateEmail) message.error(errors.DuplicateEmail, 8);
       if (errors.DuplicateUserName) message.error(errors.DuplicateUserName, 8);
@@ -15,11 +28,11 @@ class SignUpFormDisplay extends React.Component {
   }
 
   handleSubmit = e => {
-    const { form } = this.props;
+    const { signupRequest, form } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        this.props.signupRequest({ ...values, repeatPassword: values.password });
+        signupRequest({ ...values, repeatPassword: values.password });
       }
     });
   };
@@ -61,6 +74,7 @@ class SignUpFormDisplay extends React.Component {
             block
             className="signup__button"
             loading={isLoading}
+            disabled={this.state.submitDisabled}
           >
             Sign up
           </Button>

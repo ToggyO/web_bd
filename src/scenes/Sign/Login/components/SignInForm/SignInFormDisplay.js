@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-multi-comp */
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -11,15 +12,16 @@ import './style.less';
 class Recaptcha extends React.Component {
   doCaptcha = result => {
     this.props.onChange(result);
+    this.props.doCaptcha(result);
   };
 
   render() {
     return (
       <ReCAPTCHA
         // dev
-        // sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+        sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
         // prod
-        sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
+        // sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
         onChange={this.doCaptcha}
       />
     );
@@ -27,20 +29,39 @@ class Recaptcha extends React.Component {
 }
 
 class SignInFormDisplay extends React.Component {
+  state = {
+    captcha: undefined,
+    submitDisabled: true,
+  };
+
   componentDidUpdate(prevProps) {
-    const { errors } = this.props;
+    const { captcha, submitDisabled } = this.state;
+    const { errors, form } = this.props;
+    /*
+      we want to enable Submit button when all form fields are filled
+      because of Captcha's ref, we're doing all that stuff below
+    */
+    if (captcha && submitDisabled) {
+      const { userName, password } = form.getFieldsValue();
+      if (userName && password) this.setState({ submitDisabled: false });
+    }
+
     if (errors !== prevProps.errors) {
       if (errors[0]) message.error('Your login or password was incorrect', 4);
     }
   }
 
+  doCaptcha = result => {
+    this.setState({ captcha: result });
+  };
+
   handleSubmit = e => {
-    const { form } = this.props;
+    const { loginRequest, form } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
         const { captcha, ...credentials } = values;
-        this.props.loginRequest(credentials);
+        loginRequest(credentials);
       }
     });
   };
@@ -77,7 +98,7 @@ class SignInFormDisplay extends React.Component {
           <Form.Item className="captcha">
             {getFieldDecorator('captcha', {
               rules: [{ required: true, message: 'Please verify you are human!' }],
-            })(<Recaptcha />)}
+            })(<Recaptcha doCaptcha={this.doCaptcha} />)}
           </Form.Item>
 
           <div className="signin__forgot">
@@ -85,7 +106,13 @@ class SignInFormDisplay extends React.Component {
             <Link to={PATH.FORGOT_PASSWORD}> Reset</Link>
           </div>
           <Form.Item>
-            <Button type="primary" htmlType="submit" block loading={isLoading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={isLoading}
+              disabled={this.state.submitDisabled}
+            >
               Sign in
             </Button>
           </Form.Item>
