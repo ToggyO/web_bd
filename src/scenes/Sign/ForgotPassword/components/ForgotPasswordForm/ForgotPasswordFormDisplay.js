@@ -1,18 +1,11 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Icon, Input, Button, message } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import * as validations from 'validation-rules';
 import './style.less';
 
 class ForgotPasswordForm extends React.Component {
-  componentDidUpdate(prevProps) {
-    const { errors } = this.props;
-    if (errors !== prevProps.errors) {
-      if (errors[0]) message.error('No users found', 8);
-    }
-  }
-
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();

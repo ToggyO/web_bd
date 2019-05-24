@@ -1,16 +1,11 @@
 import { connect } from 'react-redux';
-import {
-  registeredStatusSelector,
-  emailConfirmedStatusSelector,
-  phoneNumberConfirmedStatusSelector,
-} from '../selectors';
+
 import LoginDisplay from './LoginDisplay';
 
 function mapStateToProps(state) {
   return {
-    isRegistered: !!registeredStatusSelector(state),
-    isEmailConfirmed: emailConfirmedStatusSelector(state),
-    isPhoneNumberConfirmed: phoneNumberConfirmedStatusSelector(state),
+    emailConfirmed: state.sign.data.emailConfirmed,
+    phoneNumberConfirmed: state.sign.data.phoneNumberConfirmed,
   };
 }
 

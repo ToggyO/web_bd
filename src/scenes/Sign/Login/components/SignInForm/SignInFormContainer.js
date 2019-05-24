@@ -1,19 +1,18 @@
 import { connect } from 'react-redux';
-import { loginRequest } from '../../../actions';
-import { signSceneLoadingSelector, signStageErrorsSelector } from '../../../selectors';
+import { signInRequest } from '../../../actions';
 import SignInFormDisplay from './SignInFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    isLoading: signSceneLoadingSelector(state),
-    errors: signStageErrorsSelector(state),
+    loading: state.sign.loading,
+    errors: state.sign.errors,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginRequest(credentials) {
-      dispatch(loginRequest(credentials));
+    signInRequest(credentials) {
+      dispatch(signInRequest(credentials));
     },
   };
 }

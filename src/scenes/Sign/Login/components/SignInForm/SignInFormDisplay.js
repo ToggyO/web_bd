@@ -56,18 +56,18 @@ class SignInFormDisplay extends React.Component {
   };
 
   handleSubmit = e => {
-    const { loginRequest, form } = this.props;
+    const { signInRequest, form } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
         const { captcha, ...credentials } = values;
-        loginRequest(credentials);
+        signInRequest(credentials);
       }
     });
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
 
     return (
@@ -110,7 +110,7 @@ class SignInFormDisplay extends React.Component {
               type="primary"
               htmlType="submit"
               block
-              loading={isLoading}
+              loading={loading}
               disabled={this.state.submitDisabled}
             >
               Sign in

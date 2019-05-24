@@ -38,11 +38,11 @@ class TwoFactorForm extends React.Component {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        const phoneAndCode = {
+        const twoFactorCredentials = {
           phone: values.prefix + values.phone,
           twoFactorCode: values.smscode,
         };
-        this.props.twoFactorAuthRequest(phoneAndCode);
+        this.props.twoFactorAuthRequest(twoFactorCredentials);
       }
     });
   };
@@ -52,8 +52,7 @@ class TwoFactorForm extends React.Component {
     e.preventDefault();
     form.validateFields(['prefix', 'phone'], (err, values) => {
       if (!err) {
-        const phone = values.prefix + values.phone;
-        this.props.smsCodeRequest(phone);
+        this.props.smsCodeRequest({ phone: values.prefix + values.phone });
 
         // disable button for 60 seconds
         this.setState({ deadline: Date.now() + 60000, isGetCodeDisabled: true });
@@ -63,7 +62,7 @@ class TwoFactorForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoading } = this.props;
+    const { loading } = this.props;
     const { deadline, isGetCodeDisabled } = this.state;
 
     const prefixSelector = getFieldDecorator('prefix', {
@@ -116,7 +115,7 @@ class TwoFactorForm extends React.Component {
             htmlType="submit"
             block
             className="signup__button"
-            loading={isLoading}
+            loading={loading}
             disabled={this.state.submitDisabled}
           >
             Get 2 Factor Authentification

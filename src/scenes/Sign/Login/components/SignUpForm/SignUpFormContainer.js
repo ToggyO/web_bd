@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import { signupRequest } from '../../../actions';
-import { signSceneLoadingSelector, signStageErrorsSelector } from '../../../selectors';
 import SignUpFormDisplay from './SignUpFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    isLoading: signSceneLoadingSelector(state),
-    errors: signStageErrorsSelector(state),
+    loading: state.sign.loading,
+    errors: state.sign.errors,
   };
 }
 

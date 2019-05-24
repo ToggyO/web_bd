@@ -34,3 +34,48 @@
     max-width: 368px;
   }
 }
+
+.seed-form {
+  &__header {
+    position: relative;
+  }
+
+  &__generate {
+    position: absolute;
+    right: 0;
+    bottom: 7px;
+    color: inherit;
+  }
+  &__icon {
+    color: @primary-color;
+  }
+
+  &__fake-input {
+    border: 1px solid @border-color-base;
+    height: 82px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+  }
+  &__button-group {
+    display: flex;
+  }
+  &__btn {
+    &--back {
+      width: 130px;
+      margin-right: 50px;
+    }
+    &--submit {
+      width: 100%;
+    }
+  }
+}
+
+.wizard textarea.ant-input {
+  padding: 5px 16px;
+  line-height: 24px;
+}
+
+.wizard .ant-divider-horizontal {
+  margin: 35px 0 10px;
+}

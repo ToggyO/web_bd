@@ -13,50 +13,38 @@ watcher saga
 
 /*---------------------------------------------------------------------------*/
 
-function* login(action) {
+function* signUp(action) {
   try {
-    const user = yield call(userAPI.login, action.payload);
-    yield put({ type: actions.LOGIN_SUCCESS, payload: user });
-
-    /* keep token in LocalStorage and set Authorization header */
-    localStorage.bdToken = user.accessToken;
-    setAuthHeaders(user.accessToken);
-
-    /* if user has confirmed his email, then redirect him to set 2fa page */
-    // if (user.authInfo.profile.emailConfirmed) {
-    //   yield history.push(`${ROOTPATH.AUTH}/${PATH.SET_2FA}`);
-    // } else {
-    //   /* if not, dispatch signup action which will show him alternate view
-    //       from LoginDisplay page with his email address */
-    //   yield put({
-    //     type: actions.SIGNUP_SUCCESS,
-    //     payload: { email: user.authInfo.profile.email },
-    //   });
-    // }
+    const data = yield call(userAPI.signUp, action.payload);
+    yield put({ type: actions.SIGNUP_SUCCESS, payload: data });
+    history.push(`${ROOTPATH.AUTH}/${PATH.CONFIRM_EMAIL}`);
   } catch (error) {
-    console.log(error);
-    yield put({ type: actions.LOGIN_ERROR, payload: error.response.data.errors });
+    const { errors } = error.response.data;
+    yield put({ type: actions.SIGNUP_ERROR, payload: errors });
   }
 }
 
-export function* loginSaga() {
-  yield takeLatest(actions.LOGIN_REQUEST, login);
+export function* signUpSaga() {
+  yield takeLatest(actions.SIGNUP_REQUEST, signUp);
 }
 
 /*---------------------------------------------------------------------------*/
 
-function* signup(action) {
+function* signIn(action) {
   try {
-    const data = yield call(userAPI.signup, action.payload);
-    yield put({ type: actions.SIGNUP_SUCCESS, payload: data });
-    yield history.push(`${ROOTPATH.AUTH}/${PATH.CONFIRM_EMAIL}`);
+    const data = yield call(userAPI.signIn, action.payload);
+    yield put({ type: actions.SIGNIN_SUCCESS, payload: data });
+    localStorage.setItem('bdt', data.data.accessToken);
+    setAuthHeaders(data.data.accessToken);
   } catch (error) {
-    yield put({ type: actions.SIGNUP_ERROR, payload: error.response.data.errors });
+    const { errors } = error.response.data;
+    yield put({ type: actions.SIGNIN_ERROR, payload: errors });
+    message.error('Your login or password was incorrect', 4);
   }
 }
 
-export function* signupSaga() {
-  yield takeLatest(actions.SIGNUP_REQUEST, signup);
+export function* signInSaga() {
+  yield takeLatest(actions.SIGNIN_REQUEST, signIn);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -65,7 +53,7 @@ function* smsCodeRequest(action) {
   try {
     const data = yield call(userAPI.smsCodeRequest, action.payload);
     yield put({ type: actions.SMS_CODE_REQUEST_SUCCESS, payload: data });
-    yield message.success('The verification code has been sent to your phone!', 8);
+    message.success('The verification code has been sent to your phone!', 8);
   } catch (error) {
     yield put({
       type: actions.SMS_CODE_REQUEST_ERROR,
@@ -83,11 +71,14 @@ export function* smsCodeRequestSaga() {
 function* twoFactorAuth(action) {
   try {
     const data = yield call(userAPI.twoFactorAuth, action.payload);
-    yield put({ type: actions.TWO_FACTOR_AUTH_SUCCESS, data });
-    yield history.push('/user/dashboard');
-    message.success('Success! Two-factor authentication activated');
+    yield put({ type: actions.TWO_FACTOR_AUTH_SUCCESS, payload: data });
+    message.success('Success! Two-factor authentication activated for your account');
+    yield put({ type: actions.WIZARD_STEP_1 });
   } catch (error) {
-    yield put({ type: actions.TWO_FACTOR_AUTH_ERROR, error });
+    yield put({
+      type: actions.TWO_FACTOR_AUTH_ERROR,
+      payload: error.response.data.errors,
+    });
   }
 }
 
@@ -101,7 +92,7 @@ function* forgotPassword(action) {
   try {
     const data = yield call(userAPI.forgotPassword, action.payload);
     yield put({ type: actions.FORGOT_PASSWORD_SUCCESS, payload: data });
-    yield message.success(
+    message.success(
       `Thanks! Please check ${action.payload.email} for a link to reset your password.`,
       8,
     );
@@ -110,6 +101,7 @@ function* forgotPassword(action) {
       type: actions.FORGOT_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
+    message.error('No users found', 8);
   }
 }
 

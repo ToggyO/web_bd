@@ -28,3 +28,4 @@ export {
 export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill';
 export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill';
 export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline';
+export { default as SyncOutline } from '@ant-design/icons/lib/outline/SyncOutline';

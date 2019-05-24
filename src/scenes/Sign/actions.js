@@ -1,5 +1,3 @@
-import history from 'src/services/history';
-import { ROOTPATH, PATH } from 'paths';
 /* SIGN UP */
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -12,12 +10,12 @@ export function signupRequest(credentials) {
 }
 
 /* LOGIN */
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export function loginRequest(credentials) {
+export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
+export const SIGNIN_ERROR = 'SIGNIN_ERROR';
+export const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
+export function signInRequest(credentials) {
   return {
-    type: LOGIN_REQUEST,
+    type: SIGNIN_REQUEST,
     payload: credentials,
   };
 }
@@ -33,16 +31,17 @@ export function smsCodeRequest(phone) {
   };
 }
 
-// ------------------------------------------ 2 FACTOR AUTH -----------------------------------
+/* REQUEST 2FA */
+export const TWO_FACTOR_AUTH_ERROR = 'TWO_FACTOR_AUTH_ERROR';
+export const TWO_FACTOR_AUTH_SUCCESS = 'TWO_FACTOR_AUTH_SUCCESS';
 export const TWO_FACTOR_AUTH_REQUEST = 'TWO_FACTOR_AUTH_REQUEST';
-export function twoFactorAuthRequest(data) {
+export function twoFactorAuthRequest(twoFactorCredentials) {
   return {
     type: TWO_FACTOR_AUTH_REQUEST,
-    payload: data,
+    payload: twoFactorCredentials,
   };
 }
 
-export const TWO_FACTOR_AUTH_SUCCESS = 'TWO_FACTOR_AUTH_SUCCESS';
 export function twoFactorAuthSuccess(user) {
   return {
     type: TWO_FACTOR_AUTH_SUCCESS,
@@ -50,7 +49,6 @@ export function twoFactorAuthSuccess(user) {
   };
 }
 
-export const TWO_FACTOR_AUTH_ERROR = 'TWO_FACTOR_AUTH_ERROR';
 export function twoFactorAuthError(error) {
   return {
     type: TWO_FACTOR_AUTH_ERROR,
@@ -58,7 +56,7 @@ export function twoFactorAuthError(error) {
   };
 }
 
-// ------------------------------------------ FORGOT PASS -----------------------------------
+/* FORGOT PASSWORD */
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
@@ -69,7 +67,7 @@ export function forgotPasswordRequest(email) {
   };
 }
 
-// ------------------------------------------ RESET PASS -----------------------------------
+/* RESET PASSWORD */
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
 export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
@@ -79,3 +77,7 @@ export function resetPasswordRequest(data) {
     payload: data,
   };
 }
+
+/* SETUP ACCOUNT WIZARD */
+export const WIZARD_STEP_1 = 'WIZARD_STEP_1';
+export const WIZARD_STEP_2 = 'WIZARD_STEP_2';

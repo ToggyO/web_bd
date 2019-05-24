@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,16 +8,13 @@ import history from 'services/history';
 import setAuthHeaders from 'services/setAuthHeaders';
 import { ROOTPATH, PATH } from 'paths';
 import { getStore } from './store';
-import { RegisteredUserRoute } from './routes/RegisteredUserRoute';
-import { ConfirmedUserRoute } from './routes/ConfirmedUserRoute';
 import { ProtectedUserRoute } from './routes/ProtectedUserRoute';
 import { LoginContainer } from './scenes/Sign/Login';
 import { ConfirmEmailContainer } from './scenes/Sign/ConfirmEmail';
 import { Success } from './scenes/Sign/Success';
 import { ForgotPassword } from './scenes/Sign/ForgotPassword';
 import { ResetPassword } from './scenes/Sign/ResetPassword';
-import { SetupAccountDisplay } from './scenes/Sign/SetupAccount';
-import { TwoFactor } from './scenes/Sign/TwoFactor';
+import { SetupAccountContainer } from './scenes/Sign/SetupAccount';
 import { Settings } from './scenes/User/scenes/Settings';
 import { Dashboard } from './scenes/User/scenes/Dashboard';
 import { EditTrade } from './scenes/User/scenes/EditTrade';
@@ -28,13 +26,9 @@ message.config({
   top: 60,
 });
 
-// guest
-// registeredUser = just created account
-// confirmedUser = created account + confirmed email
-// protectedUser = created account + confirmed email + 2 factored
 const store = getStore();
 
-if (localStorage.bdToken) setAuthHeaders(localStorage.bdToken);
+if (localStorage.bdt) setAuthHeaders(localStorage.bdt);
 
 const Home = ({ match }) => (
   <>
@@ -64,15 +58,10 @@ const Auth = ({ match }) => (
         exact
         component={ResetPassword}
       />
-      <ConfirmedUserRoute
-        path={`${match.url}/${PATH.SET_2FA}`}
-        exact
-        component={TwoFactor}
-      />
       <Route
         path={`${match.url}/${PATH.SETUP_ACCOUNT}`}
         exact
-        component={SetupAccountDisplay}
+        component={SetupAccountContainer}
       />
     </Switch>
     <Footer />
@@ -91,7 +80,6 @@ const User = ({ match }) => (
         path={`${match.url}/${PATH.USER_SETTINGS}`}
         component={Settings}
       />
-
       <ProtectedUserRoute path={`${PATH.EDIT_TRADE}/:id`} component={EditTrade} />
     </Switch>
     <Footer />

@@ -1,1 +1,1 @@
-export { default as ActiveTrades } from './ActiveTrades.js';
+export { default as ActiveTrades } from './ActiveTrades';

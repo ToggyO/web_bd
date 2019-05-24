@@ -161,15 +161,15 @@ class CreatedTrades extends React.Component {
   };
 
   toggleStatus = (e, record) => {
-    console.log(e);
-    if (e.target.dataset.status) {
-      // gonna be moved to redux
-      this.setState({
-        data: this.state.data.map(el =>
-          el.key === record.key ? { ...el, status: !el.status } : el,
-        ),
-      });
-    }
+    // console.log(e);
+    // if (e.target.dataset.status) {
+    //
+    //   this.setState({
+    //     data: this.state.data.map(el =>
+    //       el.key === record.key ? { ...el, status: !el.status } : el,
+    //     ),
+    //   });
+    // }
   };
 
   render() {

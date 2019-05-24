@@ -1,36 +1,18 @@
 import React from 'react';
-import { List, Avatar as UserAvatar, message, Upload, Button, Icon } from 'antd';
+import { List } from 'antd';
 import { EditRealName } from './components/EditRealName';
 import { EditEmail } from './components/EditEmail';
 import { EditPhone } from './components/EditPhone';
 import './style.less';
 
-const uploadProps = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
 class Settings extends React.Component {
   state = {
-    user: {
-      realname: '',
-      phone: '',
-      email: '',
-      isConfirmed: true,
-    },
+    // user: {
+    //   realname: '',
+    //   phone: '',
+    //   email: '',
+    //   isConfirmed: true,
+    // },
     edit: {
       realname: false,
       phone: false,

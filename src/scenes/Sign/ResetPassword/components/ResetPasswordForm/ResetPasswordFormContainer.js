@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 import { resetPasswordRequest } from '../../../actions';
-import { signSceneLoadingSelector, signStageErrorsSelector } from '../../../selectors';
 import ResetPasswordFormDisplay from './ResetPasswordFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    isLoading: signSceneLoadingSelector(state),
-    errors: signStageErrorsSelector(state),
+    loading: state.sign.loading,
+    errors: state.sign.errors,
   };
 }
 

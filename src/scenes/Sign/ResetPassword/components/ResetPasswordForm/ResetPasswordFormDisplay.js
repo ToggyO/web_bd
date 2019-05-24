@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import * as validations from 'validation-rules';
 import { getQueries } from 'src/services/_utils';
 import './style.less';
@@ -30,7 +30,7 @@ class ResetPasswordForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { isLoading } = this.props;
+    const { loading } = this.props;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item>
@@ -59,7 +59,7 @@ class ResetPasswordForm extends React.Component {
             htmlType="submit"
             block
             className="reset-password__button"
-            loading={isLoading}
+            loading={loading}
           >
             Change password
           </Button>

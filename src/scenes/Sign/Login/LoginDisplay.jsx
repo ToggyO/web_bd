@@ -12,18 +12,15 @@ const { TabPane } = Tabs;
 
 class LoginDisplay extends React.Component {
   static propTypes = {
-    isRegistered: PropTypes.bool,
-    isEmailConfirmed: PropTypes.bool,
-    isPhoneNumberConfirmed: PropTypes.bool,
+    emailConfirmed: PropTypes.bool,
+    phoneNumberConfirmed: PropTypes.bool,
   };
 
   componentDidUpdate() {
-    const { isRegistered, isEmailConfirmed, isPhoneNumberConfirmed } = this.props;
-    if (isRegistered && !isEmailConfirmed)
-      history.push(`${ROOTPATH.AUTH}/${PATH.CONFIRM_EMAIL}`);
-    if (isRegistered && isEmailConfirmed)
-      history.push(`${ROOTPATH.AUTH}/${PATH.SET_2FA}`);
-    if (isRegistered && isEmailConfirmed && isPhoneNumberConfirmed)
+    const { emailConfirmed, phoneNumberConfirmed } = this.props;
+    if (!emailConfirmed) history.push(`${ROOTPATH.AUTH}/${PATH.CONFIRM_EMAIL}`);
+    if (emailConfirmed) history.push(`${ROOTPATH.AUTH}/${PATH.SETUP_ACCOUNT}`);
+    if (emailConfirmed && phoneNumberConfirmed)
       history.push(`${ROOTPATH.USER}/${PATH.USER_DASHBOARD}`);
   }
 

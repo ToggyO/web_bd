@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
-import { signSceneLoadingSelector } from '../../../selectors';
 import { smsCodeRequest, twoFactorAuthRequest } from '../../../actions';
 import TwoFactorFormDisplay from './TwoFactorFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    isLoading: signSceneLoadingSelector(state),
+    loading: state.sign.loading,
   };
 }
 
@@ -14,8 +13,8 @@ function mapDispatchToProps(dispatch) {
     smsCodeRequest(phone) {
       dispatch(smsCodeRequest(phone));
     },
-    twoFactorAuthRequest(data) {
-      dispatch(twoFactorAuthRequest(data));
+    twoFactorAuthRequest(twoFactorCredentials) {
+      dispatch(twoFactorAuthRequest(twoFactorCredentials));
     },
   };
 }

@@ -38,7 +38,7 @@ class SignUpFormDisplay extends React.Component {
   };
 
   render() {
-    const { isLoading } = this.props;
+    const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
 
     return (
@@ -73,7 +73,7 @@ class SignUpFormDisplay extends React.Component {
             htmlType="submit"
             block
             className="signup__button"
-            loading={isLoading}
+            loading={loading}
             disabled={this.state.submitDisabled}
           >
             Sign up
