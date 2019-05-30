@@ -51,6 +51,8 @@ module.exports = {
     'no-console': 1,
     'no-use-before-define': 0,
     'prefer-template': 2,
+    'react/destructuring-assignment': 0,
+    'react/no-did-update-set-state': 0,
     'react/jsx-closing-tag-location': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-first-prop-new-line': [2, 'multiline'],
