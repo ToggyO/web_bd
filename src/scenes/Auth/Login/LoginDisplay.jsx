@@ -25,10 +25,11 @@ class LoginDisplay extends React.Component {
   }
 
   render() {
+    // const tab = this.props.location.state.tab ;
     return (
       <SignWrapper>
         <AuthBox header="Sign in to Bitcoins Direct">
-          <Tabs defaultActiveKey="1" className="login__tabs">
+          <Tabs defaultActiveKey="1" className="bd-tabs">
             <TabPane tab="Sign In" key="1">
               <SignInFormContainer />
             </TabPane>

@@ -1,6 +1,4 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
 import * as validations from 'src/services/validations';
