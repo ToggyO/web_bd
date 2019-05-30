@@ -4,8 +4,8 @@ import ResetPasswordFormDisplay from './ResetPasswordFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.sign.loading,
-    errors: state.sign.errors,
+    loading: state.auth.loading,
+    errors: state.auth.errors,
   };
 }
 

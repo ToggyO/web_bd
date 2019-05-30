@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button } from 'antd';
@@ -17,9 +16,10 @@ class ResetPasswordForm extends React.Component {
   };
 
   handleSubmit = e => {
+    e.preventDefault();
+
     const { form, location } = this.props;
     const queries = getQueries(location);
-    e.preventDefault();
 
     form.validateFields((err, values) => {
       if (!err) {
@@ -31,6 +31,7 @@ class ResetPasswordForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { loading } = this.props;
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item>
