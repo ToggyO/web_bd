@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button } from 'antd';
-import * as validations from 'validation-rules';
+import * as validations from 'src/services/validations';
 
 class EditPhoneForm extends React.Component {
   handleSubmit = e => {

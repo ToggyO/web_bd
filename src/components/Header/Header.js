@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
-import { PATH } from 'paths';
+import ROUTES from 'src/routes';
 import logo from 'src/assets/logo.svg';
 
 import './style.less';
@@ -9,19 +9,19 @@ import './style.less';
 const menu = (
   <Menu>
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.USER_SETTINGS}>
+      <Link rel="noopener noreferrer" to={ROUTES.USER_SETTINGS}>
         <Icon type="user" /> Profile settings
       </Link>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.USER_DASHBOARD}>
+      <Link rel="noopener noreferrer" to={ROUTES.USER_DASHBOARD}>
         <Icon type="dashboard" /> Dashboard
       </Link>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={PATH.SIGN}>
+      <Link rel="noopener noreferrer" to={ROUTES.AUTH}>
         <Icon type="logout" /> Logout
       </Link>
     </Menu.Item>

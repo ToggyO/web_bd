@@ -93,17 +93,10 @@ exports.webpackCommon = {
   },
   resolve: {
     alias: {
-      '@ant-design/icons/lib/dist$': path.resolve(
-        __dirname,
-        './src/components/AntIcons/index.js',
-      ),
+      '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/components/AntIcons/index.js'),
       assets: path.resolve(__dirname, 'assets/'),
       src: path.resolve(__dirname, 'src/'),
       components: path.resolve(__dirname, 'src/components'),
-      data: path.resolve(__dirname, 'src/data'),
-      services: path.resolve(__dirname, 'src/services/'),
-      paths: path.resolve(__dirname, 'src/routes/paths.js'),
-      'validation-rules': path.resolve(__dirname, 'src/services/validation-rules.js'),
     },
     extensions: ['.js', '.jsx', 'less'],
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
-import { PATH } from 'paths';
+import ROUTES from 'src/routes';
 import './style.less';
 
 const columns = [
@@ -176,7 +176,7 @@ class CreatedTrades extends React.Component {
     const ExtraRow = record => (
       <div className="extra-row">
         <div className="extra-row__head">
-          <Link className="extra-row__edit" to={`${PATH.EDIT_TRADE}/${record.id}`}>
+          <Link className="extra-row__edit" to={`${ROUTES.EDIT_TRADE}/${record.id}`}>
             Edit
           </Link>
           <a href="#" className="extra-row__delete" onClick={this.handleDelete}>

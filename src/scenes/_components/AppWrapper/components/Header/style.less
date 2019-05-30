@@ -1,0 +1,94 @@
+.header {
+  background: @primary-color;
+  line-height: 28px;
+
+  &__logo {
+    margin: 0 27px 0 0;
+    line-height: 47px;
+    z-index: 10;
+  }
+}
+
+.nav {
+  display: flex;
+  position: relative;
+
+  &__link {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: white;
+    z-index: 10;
+    &:hover,
+    &:focus,
+    &:active {
+      background: lighten(@primary-color, 2%);
+      color: #fff;
+    }
+  }
+
+  &__bubble {
+    width: 272px;
+    height: 272px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    position: absolute;
+    right: 210px;
+    top: -43px;
+    &::before,
+    &::after {
+      display: block;
+      content: '';
+      background-color: inherit;
+      border-radius: inherit;
+      position: absolute;
+    }
+    &::before {
+      width: 157px;
+      height: 157px;
+      right: 820px;
+      bottom: 192px;
+    }
+    &::after {
+      width: 32px;
+      height: 32px;
+      right: 1045px;
+      top: 50px;
+    }
+  }
+}
+
+.right-nav {
+  margin-left: auto;
+  display: flex;
+  &__link {
+    font-size: 16px;
+    padding: 10px 10px;
+  }
+}
+
+.user-button {
+  height: 48px;
+  background: @primary-color;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background: lighten(@primary-color, 2%);
+    color: #fff;
+  }
+}
+.user-button.ant-dropdown-open {
+  background: tint(@primary-color, 15%);
+}
+.user-avatar {
+  margin-right: 8px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.user-avatar.ant-avatar-sm.ant-avatar-icon {
+  font-size: 12px;
+}

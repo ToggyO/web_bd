@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-import { phone } from 'validation-rules';
+import { phone } from 'src/services/validations';
 const { Option } = Select;
 
 class EditPhoneForm extends React.Component {
@@ -24,7 +24,7 @@ class EditPhoneForm extends React.Component {
       <Select style={{ width: 86 }} className="prefix-select">
         <Option value="0752">0752</Option>
         <Option value="0753">0753</Option>
-      </Select>,
+      </Select>
     );
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form">
@@ -32,11 +32,7 @@ class EditPhoneForm extends React.Component {
           {getFieldDecorator('phone', {
             rules: phone,
           })(
-            <Input
-              addonBefore={prefixSelector}
-              style={{ width: 368 }}
-              placeholder="Phone number"
-            />,
+            <Input addonBefore={prefixSelector} style={{ width: 368 }} placeholder="Phone number" />
           )}
         </Form.Item>
 

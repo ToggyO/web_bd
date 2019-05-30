@@ -15,10 +15,7 @@ export default {
   smsCodeRequest: async phone => axios.post(`${API_URL}/auth/twofactorphone`, phone),
 
   twoFactorAuth: async twoFactorCredentials => {
-    const response = await axios.post(
-      `${API_URL}/auth/twofactorcode`,
-      twoFactorCredentials,
-    );
+    const response = await axios.post(`${API_URL}/auth/twofactorcode`, twoFactorCredentials);
     return response.data;
   },
 

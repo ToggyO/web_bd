@@ -1,19 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { PATH } from 'paths';
+import ROUTES from 'src/routes';
+import authService from 'src/services/auth';
 
-const condition = true;
+const isLoggedIn = authService.checkTokens();
 
 const DefaultRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => (condition ? <Component {...props} /> : <Redirect to={PATH.sign} />)}
+    render={props => (isLoggedIn ? <Redirect to={ROUTES.HOME} /> : <Component {...props} />)}
   />
 );
-
-DefaultRoute.propTypes = {
-  component: PropTypes.element,
-};
 
 export default DefaultRoute;
