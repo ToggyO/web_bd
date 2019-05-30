@@ -81,8 +81,30 @@ p {
   }
 }
 
-// .ant-alert-icon {
-//   position: absolute;
-//   left: 16px;
-//   top: 10px;
-// }
+/* Tabs */
+.ant-tabs-bar {
+  width: 272px;
+  margin: 0 auto 24px;
+  border-color: fade(@primary-color, 20%);
+  text-align: center;
+}
+
+.bd-tabs .ant-tabs-tab {
+  min-width: 136px;
+  margin-right: 0;
+  padding-bottom: 8px;
+  padding-top: 20px;
+  &.ant-tabs-tab-active {
+    color: @primary-color;
+  }
+}
+
+.bd-tabs .ant-tabs-tab-active {
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: normal;
+}
+
+/* Inline form */
+.ant-form-inline .ant-form-item {
+  margin-right: 11px;
+}

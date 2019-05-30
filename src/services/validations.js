@@ -21,6 +21,14 @@ export const phone = [
   },
 ];
 
+export const amount = [
+  {
+    required: true,
+    pattern: /^[0-9]+$/,
+    message: <div>Please input amount!</div>,
+  },
+];
+
 export const username = [
   {
     required: true,
@@ -33,9 +41,7 @@ export const username = [
   },
   {
     pattern: /^[a-zA-Z0-9_.]+$/,
-    message: (
-      <div>Username should contain only following characters: A-Z, a-z, 0-9, ., _,</div>
-    ),
+    message: <div>Username should contain only following characters: A-Z, a-z, 0-9, ., _,</div>,
   },
 ];
 

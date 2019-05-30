@@ -15,9 +15,10 @@ import { ConfirmEmailContainer } from './scenes/Auth/ConfirmEmail';
 import { Success } from './scenes/Auth/Success';
 import { ForgotPassword } from './scenes/Auth/ForgotPassword';
 import { ResetPassword } from './scenes/Auth/ResetPassword';
-import { SetupAccountContainer } from './scenes/Auth/SetupAccount';
+import { SetTwoFactor } from './scenes/Auth/SetTwoFactor';
 import { Settings } from './scenes/User/scenes/Settings';
 import { Dashboard } from './scenes/User/scenes/Dashboard';
+import { HomePageDisplay } from './scenes/HomePage';
 
 import './global.less';
 
@@ -35,16 +36,21 @@ ReactDOM.render(
         <Route
           path={ROUTES.HOME}
           exact
-          render={props =>
-            authService.checkTokens() ? <Dashboard {...props} /> : <LoginContainer {...props} />
-          }
+          // render={props =>
+          //   authService.checkTokens() ? (
+          //     <HomePageDisplay {...props} />
+          //   ) : (
+          //     <LoginContainer {...props} />
+          //   )
+          // }
+          render={props => <HomePageDisplay {...props} />}
         />
         <DefaultRoute path={ROUTES.AUTH} exact component={LoginContainer} />
         <DefaultRoute path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
         <DefaultRoute path={ROUTES.SUCCESS} exact component={Success} />
         <DefaultRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
         <DefaultRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
-        <DefaultRoute path={ROUTES.SETUP_ACCOUNT} exact component={SetupAccountContainer} />
+        <DefaultRoute path={ROUTES.SET_2FA} exact component={SetTwoFactor} />
         <AuthorizedUserRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
         <AuthorizedUserRoute path={ROUTES.USER_SETTINGS} exact component={Settings} />
       </Switch>
