@@ -16,7 +16,5 @@ export const saveTokens = store => next => action => {
   return next(action);
 };
 
-export const catchErrors = store => next => action => {
-  console.log('something to catch');
-  return next(action);
-};
+// eslint-disable-next-line no-unused-vars
+export const catchErrors = store => next => action => next(action);
