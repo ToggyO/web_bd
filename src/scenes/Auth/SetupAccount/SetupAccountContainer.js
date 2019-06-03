@@ -4,7 +4,7 @@ import SetupAccountDisplay from './SetupAccountDisplay';
 function mapStateToProps(state) {
   return {
     // phoneConfirmed: state.sign.user.wizardStep,
-    wizardStep: state.sign.wizardStep,
+    wizardStep: state.auth.wizardStep,
   };
 }
 

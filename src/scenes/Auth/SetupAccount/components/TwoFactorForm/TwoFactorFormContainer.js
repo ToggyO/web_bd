@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
+import { authActions, authSelectors } from 'src/ducks/auth';
 import TwoFactorFormDisplay from './TwoFactorFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.sign.loading,
+    loading: authSelectors.loadingSelector(state),
   };
 }
 

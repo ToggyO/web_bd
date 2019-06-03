@@ -6,12 +6,6 @@ body {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
-button[disabled] {
-  background-color: rgba(@primary-color, 0.5) !important;
-  border-color: transparent !important;
-  color: @btn-primary-color !important;
-}
-
 h1 {
   font-size: 24px;
 }
@@ -36,6 +30,12 @@ p {
   border-radius: 6px;
   box-shadow: @box-shadow-base;
   background: @component-background;
+}
+
+.primary-btn[disabled] {
+  background-color: rgba(@primary-color, 0.5) !important;
+  border-color: transparent !important;
+  color: @btn-primary-color !important;
 }
 
 .ant-row.ant-form-item {
@@ -105,6 +105,37 @@ p {
 }
 
 /* Inline form */
+
 .ant-form-inline .ant-form-item {
   margin-right: 11px;
+}
+
+/* Custom tabs */
+.custom-tabs {
+  & .ant-tabs-content {
+    min-height: 67vh;
+  }
+
+  & .ant-tabs.ant-tabs-left.ant-tabs-vertical.ant-tabs-small.ant-tabs-line {
+    height: 100%;
+  }
+
+  & .ant-tabs-bar {
+    width: 224px;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-tab {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-tab.ant-tabs-tab-active {
+    transition: background-color 0.2s ease-in;
+    background-color: #ebf7f3;
+    font-weight: 400;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-ink-bar {
+    width: 3px;
+  }
 }

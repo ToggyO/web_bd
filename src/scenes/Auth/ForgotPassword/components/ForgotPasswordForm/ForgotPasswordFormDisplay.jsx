@@ -39,7 +39,7 @@ class ForgotPasswordForm extends React.Component {
             type="primary"
             htmlType="submit"
             block
-            className="reset-password__button"
+            className="reset-password__button primary-btn"
             loading={loading}
           >
             Send

@@ -70,7 +70,7 @@ class SignUpFormDisplay extends React.Component {
             type="primary"
             htmlType="submit"
             block
-            className="signup__button"
+            className="signup__button primary-btn"
             loading={loading}
             disabled={this.state.submitDisabled}
           >

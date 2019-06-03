@@ -32,29 +32,30 @@ export default function auth(state = initialState, action) {
   switch (action.type) {
     case types.SIGNUP_REQUEST:
     case types.SIGNIN_REQUEST:
-    case types.SMS_CODE_REQUEST:
     case types.TWO_FACTOR_AUTH_REQUEST:
     case types.FORGOT_PASSWORD_REQUEST:
     case types.RESET_PASSWORD_REQUEST:
       return { ...state, loading: true, code: null };
 
-    case types.SIGNUP_SUCCESS: {
+    case types.SMS_CODE_REQUEST:
+      return { ...state, code: null };
+
+    case types.SIGNUP_SUCCESS:
+    case types.SIGNIN_SUCCESS: {
       const { data, code } = action.payload;
       return { ...state, data, loading: false, code };
     }
 
-    case types.SIGNIN_SUCCESS: {
-      const { data, code } = action.payload;
-      const { authInfo, ...tokens } = data;
-      return { ...state, data: authInfo.profile, loading: false, code, tokens };
-    }
-
     case types.SMS_CODE_REQUEST_SUCCESS: {
-      const { data } = action.payload;
-      return { ...state, loading: false, code: data.code };
+      const { code } = action.payload;
+      return { ...state, loading: false, code };
     }
 
-    case types.TWO_FACTOR_AUTH_SUCCESS:
+    case types.TWO_FACTOR_AUTH_SUCCESS: {
+      const { data, code } = action.payload;
+      return { ...state, tokens: data, loading: false, code };
+    }
+
     case types.RESET_PASSWORD_SUCCESS: {
       const { data, code } = action.payload;
       return { ...state, data, loading: false, code };

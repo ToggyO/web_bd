@@ -21,7 +21,7 @@ const menu = (
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
-      <Link rel="noopener noreferrer" to={ROUTES.AUTH}>
+      <Link rel="noopener noreferrer" to={ROUTES.LOGIN}>
         <Icon type="logout" /> Logout
       </Link>
     </Menu.Item>
@@ -50,7 +50,9 @@ const Header = () => (
       </a>
 
       <div className="right-nav">
-        <a href="#" className="nav__link right-nav__link">
+        <Link to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }}>Sign up for free</Link>
+        <Link to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }}>Sign in</Link>
+        {/* <a href="#" className="nav__link right-nav__link">
           <Icon type="bell" />
         </a>
         <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
@@ -58,7 +60,7 @@ const Header = () => (
             <Avatar size="small" icon="user" className="user-avatar" />
             <span className="user-name">John Riley</span>
           </Button>
-        </Dropdown>
+        </Dropdown> */}
       </div>
     </nav>
   </header>

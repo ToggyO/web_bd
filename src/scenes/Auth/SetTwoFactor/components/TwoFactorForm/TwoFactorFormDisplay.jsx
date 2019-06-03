@@ -31,27 +31,24 @@ class TwoFactorForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const { form } = this.props;
+    const { userName, form } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        const phoneAndCode = {
-          phone: values.prefix + values.phone,
-          twoFactorCode: values.smscode,
-        };
-        this.props.twoFactorAuthRequest(phoneAndCode);
+        const twoFactorCode = values.smscode;
+        this.props.twoFactorAuthRequest({ userName, twoFactorCode });
       }
     });
   };
 
   handleGetCode = e => {
-    const { form } = this.props;
+    const { userName, form } = this.props;
     e.preventDefault();
     form.validateFields(['prefix', 'phone'], (err, values) => {
       if (!err) {
         const phone = values.prefix + values.phone;
-        this.props.smsCodeRequest(phone);
-
+        this.props.smsCodeRequest({ userName, phone });
+        this.codeInput.focus();
         // disable button for 60 seconds
         this.setState({ deadline: Date.now() + 60000, isGetCodeDisabled: true });
       }
@@ -90,9 +87,16 @@ class TwoFactorForm extends React.Component {
           <div className="verification-code">
             {getFieldDecorator('smscode', {
               rules: validations.smscode,
-            })(<Input placeholder="Verification code" />)}
+            })(
+              <Input
+                placeholder="Verification code"
+                ref={input => {
+                  this.codeInput = input;
+                }}
+              />
+            )}
 
-            <Button onClick={this.handleGetCode} disabled={isGetCodeDisabled}>
+            <Button onClick={this.handleGetCode} disabled={isGetCodeDisabled} className="timer-btn">
               {isGetCodeDisabled ? (
                 <Countdown value={deadline} suffix="s" format="ss" onFinish={this.onFinish} />
               ) : (
@@ -107,7 +111,7 @@ class TwoFactorForm extends React.Component {
             type="primary"
             htmlType="submit"
             block
-            className="signup__button"
+            className="signup__button primary-btn"
             loading={loading}
             disabled={this.state.submitDisabled}
           >

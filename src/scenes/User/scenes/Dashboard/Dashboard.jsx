@@ -11,7 +11,7 @@ const Dashboard = props =>
   console.log(props) || (
     <AppWrapperContainer>
       <div className="paper">
-        <div className="dashboard">
+        <div className="dashboard custom-tabs">
           <Tabs defaultActiveKey="1" tabPosition="left" size="small">
             <TabPane tab="Created trades" key="1">
               <CreatedTrades />

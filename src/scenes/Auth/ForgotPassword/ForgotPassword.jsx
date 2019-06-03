@@ -13,7 +13,7 @@ const ForgotPassword = () => (
         your spam folder.
       </p>
       <ForgotPasswordFormContainer />
-      <ToSignIn text="Back to Sign in" leftArrow goTo={ROUTES.AUTH} />
+      <ToSignIn text="Back to Sign in" leftArrow goTo={ROUTES.LOGIN} />
     </AuthBox>
   </SignWrapper>
 );

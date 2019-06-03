@@ -2,8 +2,9 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { message } from 'antd';
 import ROUTES from 'src/routes';
 import historyService from 'src/services/history';
-import userAPI from 'src/services/api';
+import authAPI from 'src/services/api/auth';
 import * as types from './types';
+import * as userProfileTypes from '../user/types';
 
 /*
 	function* workerSaga
@@ -15,7 +16,7 @@ import * as types from './types';
 
 function* signUp(action) {
   try {
-    const data = yield call(userAPI.signUp, action.payload);
+    const data = yield call(authAPI.signUp, action.payload);
     yield put({ type: types.SIGNUP_SUCCESS, payload: data });
     historyService.push(ROUTES.CONFIRM_EMAIL);
   } catch (error) {
@@ -33,9 +34,9 @@ export function* signUpSaga() {
 
 function* signIn(action) {
   try {
-    const data = yield call(userAPI.signIn, action.payload);
+    const data = yield call(authAPI.signIn, action.payload);
     yield put({ type: types.SIGNIN_SUCCESS, payload: data });
-    historyService.push(ROUTES.USER_DASHBOARD);
+    historyService.push(ROUTES.WELCOME_BACK);
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: types.SIGNIN_ERROR, payload: errors });
@@ -52,7 +53,7 @@ export function* signInSaga() {
 
 function* smsCodeRequest(action) {
   try {
-    const data = yield call(userAPI.smsCodeRequest, action.payload);
+    const data = yield call(authAPI.smsCodeRequest, action.payload);
     yield put({ type: types.SMS_CODE_REQUEST_SUCCESS, payload: data });
     message.success('The verification code has been sent to your phone!');
   } catch (error) {
@@ -68,14 +69,18 @@ export function* smsCodeRequestSaga() {
 }
 
 /*---------------------------------------------------------------------------*/
+// Getting tokens here                                                       //
 /*---------------------------------------------------------------------------*/
 
 function* twoFactorAuth(action) {
   try {
-    const data = yield call(userAPI.twoFactorAuth, action.payload);
+    const data = yield call(authAPI.twoFactorAuth, action.payload);
     yield put({ type: types.TWO_FACTOR_AUTH_SUCCESS, payload: data });
-    message.success('Success! Two-factor authentication activated for your account');
-    yield put({ type: types.WIZARD_STEP_1 });
+
+    // after successfull authentication it's time to get user profile data
+    yield put({ type: userProfileTypes.GET_USER_PROFILE_REQUEST });
+
+    historyService.push(ROUTES.HOME);
   } catch (error) {
     yield put({
       type: types.TWO_FACTOR_AUTH_ERROR,
@@ -93,7 +98,7 @@ export function* twoFactorAuthSaga() {
 
 function* forgotPassword(action) {
   try {
-    const data = yield call(userAPI.forgotPassword, action.payload);
+    const data = yield call(authAPI.forgotPassword, action.payload);
     yield put({ type: types.FORGOT_PASSWORD_SUCCESS, payload: data });
     message.success(
       `Thanks! Please check ${action.payload.email} for a link to reset your password.`
@@ -116,10 +121,10 @@ export function* forgotPasswordSaga() {
 
 function* resetPassword(action) {
   try {
-    const data = yield call(userAPI.resetPassword, action.payload);
+    const data = yield call(authAPI.resetPassword, action.payload);
     yield put({ type: types.RESET_PASSWORD_SUCCESS, payload: data });
     message.success(`Password for ${data.data.userName} has been successfully changed`);
-    historyService.push(ROUTES.AUTH);
+    historyService.push(ROUTES.LOGIN);
   } catch (error) {
     yield put({
       type: types.RESET_PASSWORD_ERROR,

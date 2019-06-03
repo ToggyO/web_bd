@@ -12,10 +12,11 @@ export default {
     return response.data;
   },
 
-  smsCodeRequest: async phone => axios.post(`${API_URL}/auth/twofactorphone`, phone),
+  smsCodeRequest: async userNameAndPhone =>
+    axios.post(`${API_URL}/auth/twofactorphone`, userNameAndPhone),
 
-  twoFactorAuth: async twoFactorCredentials => {
-    const response = await axios.post(`${API_URL}/auth/twofactorcode`, twoFactorCredentials);
+  twoFactorAuth: async userNameAndTwoFactorCode => {
+    const response = await axios.post(`${API_URL}/auth/twofactorcode`, userNameAndTwoFactorCode);
     return response.data;
   },
 

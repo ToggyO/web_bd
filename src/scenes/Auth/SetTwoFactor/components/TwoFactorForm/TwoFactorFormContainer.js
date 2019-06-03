@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
+import { authActions, authSelectors } from 'src/ducks/auth';
 import TwoFactorFormDisplay from './TwoFactorFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.auth.loading,
-    errors: state.auth.errors,
+    userName: authSelectors.userNameSelector(state),
+    loading: authSelectors.loadingSelector(state),
+    errors: authSelectors.errorsSelector(state),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    smsCodeRequest(phone) {
-      dispatch(authActions.smsCodeRequest(phone));
+    smsCodeRequest(userNameAndPhone) {
+      dispatch(authActions.smsCodeRequest(userNameAndPhone));
     },
     twoFactorAuthRequest(data) {
       dispatch(authActions.twoFactorAuthRequest(data));

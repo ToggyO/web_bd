@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
+import { authActions, authSelectors } from 'src/ducks/auth';
 import ForgotPasswordFormDisplay from './ForgotPasswordFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.sign.loading,
+    loading: authSelectors.loadingSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
+import { authActions, authSelectors } from 'src/ducks/auth';
 import SignUpFormDisplay from './SignUpFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.auth.loading,
-    errors: state.auth.errors,
+    loading: authSelectors.loadingSelector(state),
+    errors: authSelectors.errorsSelector(state),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     signupRequest(credentials) {
-      dispatch(authActions.signupRequest(credentials));
+      dispatch(authActions.signUpRequest(credentials));
     },
   };
 }

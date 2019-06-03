@@ -4,21 +4,21 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { message } from 'antd';
-import historyService from 'src/services/history';
-import authService from 'src/services/auth';
+import history from 'src/services/history';
 import ROUTES from './routes';
 import { getStore } from './store';
-import { AuthorizedUserRoute } from './routes/AuthorizedUserRoute';
-import { DefaultRoute } from './routes/DefaultRoute';
+import { AuthRoute } from './routes/AuthRoute';
+import { UnAuthRoute } from './routes/UnAuthRoute';
 import { LoginContainer } from './scenes/Auth/Login';
 import { ConfirmEmailContainer } from './scenes/Auth/ConfirmEmail';
-import { Success } from './scenes/Auth/Success';
+import { SuccessDisplay } from './scenes/Auth/Success';
+import { WelcomeBackContainer } from './scenes/Auth/WelcomeBack';
 import { ForgotPassword } from './scenes/Auth/ForgotPassword';
 import { ResetPassword } from './scenes/Auth/ResetPassword';
-import { SetTwoFactor } from './scenes/Auth/SetTwoFactor';
+import { SetTwoFactorContainer } from './scenes/Auth/SetTwoFactor';
 import { Settings } from './scenes/User/scenes/Settings';
 import { Dashboard } from './scenes/User/scenes/Dashboard';
-import { HomePageDisplay } from './scenes/HomePage';
+import { HomePageContainer } from './scenes/HomePage';
 
 import './global.less';
 
@@ -27,32 +27,37 @@ message.config({
   duration: 8,
 });
 
+// HOME: '/',
+// AUTH: '/auth',
+// CONFIRM_EMAIL: '/confirm-email',
+// SUCCESS: '/success',
+// FORGOT_PASSWORD: '/forgot-password',
+// RESET_PASSWORD: '/reset-password',
+// SET_2FA: '/set-2fa',
+// USER_SETTINGS: '/user/settings',
+// USER_DASHBOARD: '/user/dashboard',
+// EDIT_TRADE: '/trade/228/edit',
+
 const store = getStore();
+// if (!checkTokens()) logout();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={historyService}>
+    <Router history={history}>
       <Switch>
-        <Route
-          path={ROUTES.HOME}
-          exact
-          // render={props =>
-          //   authService.checkTokens() ? (
-          //     <HomePageDisplay {...props} />
-          //   ) : (
-          //     <LoginContainer {...props} />
-          //   )
-          // }
-          render={props => <HomePageDisplay {...props} />}
-        />
-        <DefaultRoute path={ROUTES.AUTH} exact component={LoginContainer} />
-        <DefaultRoute path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
-        <DefaultRoute path={ROUTES.SUCCESS} exact component={Success} />
-        <DefaultRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
-        <DefaultRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
-        <DefaultRoute path={ROUTES.SET_2FA} exact component={SetTwoFactor} />
-        <AuthorizedUserRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
-        <AuthorizedUserRoute path={ROUTES.USER_SETTINGS} exact component={Settings} />
+        <Route path={ROUTES.HOME} exact component={HomePageContainer} />
+
+        <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
+        <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
+        <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
+
+        <UnAuthRoute path={ROUTES.LOGIN} exact component={LoginContainer} />
+        <UnAuthRoute path={ROUTES.SUCCESS} exact component={SuccessDisplay} />
+        <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
+        <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
+
+        <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
+        <AuthRoute path={ROUTES.USER_SETTINGS} exact component={Settings} />
       </Switch>
     </Router>
   </Provider>,

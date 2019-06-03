@@ -4,29 +4,29 @@
 /* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { Form, Icon, Input, Button, message } from 'antd';
+// import ReCAPTCHA from 'react-google-recaptcha';
+import { Form, Icon, Input, Button } from 'antd';
 import ROUTES from 'src/routes';
 import './style.less';
 
-class Recaptcha extends React.Component {
-  doCaptcha = result => {
-    this.props.onChange(result);
-    this.props.doCaptcha(result);
-  };
+// class Recaptcha extends React.Component {
+//   doCaptcha = result => {
+//     this.props.onChange(result);
+//     this.props.doCaptcha(result);
+//   };
 
-  render() {
-    return (
-      <ReCAPTCHA
-        // dev
-        sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
-        // prod
-        // sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
-        onChange={this.doCaptcha}
-      />
-    );
-  }
-}
+//   render() {
+//     return (
+//       <ReCAPTCHA
+//         // dev
+//         sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+//         // prod
+//         // sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
+//         onChange={this.doCaptcha}
+//       />
+//     );
+//   }
+// }
 
 class SignInFormDisplay extends React.Component {
   state = {
@@ -34,9 +34,9 @@ class SignInFormDisplay extends React.Component {
     submitDisabled: true,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { captcha, submitDisabled } = this.state;
-    const { errors, form } = this.props;
+    const { form } = this.props;
     /*
       we want to enable Submit button when all form fields are filled
       because of Captcha's ref, we're doing all that stuff below
@@ -44,10 +44,6 @@ class SignInFormDisplay extends React.Component {
     if (captcha && submitDisabled) {
       const { userName, password } = form.getFieldsValue();
       if (userName && password) this.setState({ submitDisabled: false });
-    }
-
-    if (errors !== prevProps.errors) {
-      if (errors[0]) message.error('Your login or password was incorrect', 4);
     }
   }
 
@@ -109,6 +105,7 @@ class SignInFormDisplay extends React.Component {
             <Button
               type="primary"
               htmlType="submit"
+              className="primary-btn"
               block
               loading={loading}
               disabled={this.state.submitDisabled}

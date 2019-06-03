@@ -1,1 +1,1 @@
-export { default as Success } from './Success';
+export { default as SuccessDisplay } from './SuccessDisplay';
