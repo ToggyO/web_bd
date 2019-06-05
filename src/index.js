@@ -1,107 +1,84 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { message } from 'antd';
 import { Router, Route, Switch } from 'react-router-dom';
-import history from 'services/history';
-import setAuthHeaders from 'services/setAuthHeaders';
-import { ROOTPATH, PATH } from 'paths';
+import { message } from 'antd';
+import history from 'src/services/history';
+import ROUTES from './routes';
 import { getStore } from './store';
+import { AuthRoute } from './routes/AuthRoute';
+import { UnAuthRoute } from './routes/UnAuthRoute';
+import { LoginContainer } from './scenes/Auth/Login';
+import { ConfirmEmailContainer } from './scenes/Auth/ConfirmEmail';
+import { SuccessDisplay } from './scenes/Auth/Success';
+import { WelcomeBackContainer } from './scenes/Auth/WelcomeBack';
+import { ForgotPassword } from './scenes/Auth/ForgotPassword';
+import { ResetPassword } from './scenes/Auth/ResetPassword';
+import { SetTwoFactorContainer } from './scenes/Auth/SetTwoFactor';
+import { SettingsContainer } from './scenes/User/Profile/Settings';
+import { EditEmailDisplay } from './scenes/User/Profile/EditEmail';
+import { EditFullNameDisplay } from './scenes/User/Profile/EditFullName';
+import { EditPhoneNumberDisplay } from './scenes/User/Profile/EditPhoneNumber';
+import { EditPasswordDisplay } from './scenes/User/Profile/EditPassword';
+import { RequestVerificationDisplay } from './scenes/User/Profile/RequestVerification';
+import { Dashboard } from './scenes/User/Dashboard';
+import { HomePageContainer } from './scenes/HomePage';
 
-import { RegisteredUserRoute } from './routes/RegisteredUserRoute';
-import { ConfirmedUserRoute } from './routes/ConfirmedUserRoute';
-import { ProtectedUserRoute } from './routes/ProtectedUserRoute';
-import { LoginContainer } from './scenes/Sign/Login';
-import { ConfirmEmailContainer } from './scenes/Sign/ConfirmEmail';
-import { Success } from './scenes/Sign/Success';
-import { ForgotPassword } from './scenes/Sign/ForgotPassword';
-import { ResetPassword } from './scenes/Sign/ResetPassword';
-import { TwoFactor } from './scenes/Sign/TwoFactor';
-import { Settings } from './scenes/User/scenes/Settings';
-import { Dashboard } from './scenes/User/scenes/Dashboard';
-import { EditTrade } from './scenes/User/scenes/EditTrade';
 import './global.less';
 
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-
-// guest
-// registeredUser = just created account
-// confirmedUser = created account + confirmed email
-// protectedUser = created account + confirmed email + 2 factored
-const store = getStore();
 message.config({
   top: 60,
+  duration: 8,
 });
 
-if (localStorage.bdToken) setAuthHeaders(localStorage.bdToken);
+// HOME: '/',
+// AUTH: '/auth',
+// CONFIRM_EMAIL: '/confirm-email',
+// SUCCESS: '/success',
+// FORGOT_PASSWORD: '/forgot-password',
+// RESET_PASSWORD: '/reset-password',
+// SET_2FA: '/set-2fa',
+// PROFILE_SETTINGS: '/user/settings',
+// USER_DASHBOARD: '/user/dashboard',
+// EDIT_TRADE: '/trade/228/edit',
 
-const Home = ({ match }) => (
-  <>
-    <Header />
-    <Route path={match.url} exact component={Dashboard} />
-    <Footer />
-  </>
-);
-
-const Auth = ({ match }) => (
-  <div style={{ paddingTop: 80 }}>
-    <Switch>
-      <Route path={`${match.url}/${PATH.SIGN}`} exact component={LoginContainer} />
-      <Route
-        path={`${match.url}/${PATH.CONFIRM_EMAIL}`}
-        exact
-        component={ConfirmEmailContainer}
-      />
-      <Route path={`${match.url}/${PATH.SUCCESS}`} exact component={Success} />
-      <Route
-        path={`${match.url}/${PATH.FORGOT_PASSWORD}`}
-        exact
-        component={ForgotPassword}
-      />
-      <Route
-        path={`${match.url}/${PATH.RESET_PASSWORD}`}
-        exact
-        component={ResetPassword}
-      />
-      <ConfirmedUserRoute
-        path={`${match.url}/${PATH.SET_2FA}`}
-        exact
-        component={TwoFactor}
-      />
-    </Switch>
-    <Footer />
-  </div>
-);
-
-const User = ({ match }) => (
-  <>
-    <Header />
-    <Switch>
-      <ProtectedUserRoute
-        path={`${match.url}/${PATH.USER_DASHBOARD}`}
-        component={Dashboard}
-      />
-      <ProtectedUserRoute
-        path={`${match.url}/${PATH.USER_SETTINGS}`}
-        component={Settings}
-      />
-
-      <ProtectedUserRoute path={`${PATH.EDIT_TRADE}/:id`} component={EditTrade} />
-    </Switch>
-    <Footer />
-  </>
-);
+const store = getStore();
+// if (!checkTokens()) logout();
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Switch>
-        <ProtectedUserRoute path={ROOTPATH.HOME} exact component={Home} />
-        <Route path={ROOTPATH.AUTH} component={Auth} />
-        <Route path={ROOTPATH.USER} component={User} />
+        <Route path={ROUTES.HOME} exact component={HomePageContainer} />
+
+        <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
+        <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
+        <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
+
+        <UnAuthRoute path={ROUTES.LOGIN} exact component={LoginContainer} />
+        <UnAuthRoute path={ROUTES.SUCCESS} exact component={SuccessDisplay} />
+        <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
+        <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
+
+        <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
+        <AuthRoute path={ROUTES.PROFILE.SETTINGS} exact component={SettingsContainer} />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_EMAIL} exact component={EditEmailDisplay} />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
+        <AuthRoute
+          path={ROUTES.PROFILE.EDIT_PHONENUMBER}
+          exact
+          component={EditPhoneNumberDisplay}
+        />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
+        <AuthRoute
+          path={ROUTES.PROFILE.REQUEST_VERIFICATION}
+          exact
+          component={RequestVerificationDisplay}
+        />
       </Switch>
     </Router>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

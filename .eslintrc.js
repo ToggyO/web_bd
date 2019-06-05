@@ -51,6 +51,8 @@ module.exports = {
     'no-console': 1,
     'no-use-before-define': 0,
     'prefer-template': 2,
+    'react/destructuring-assignment': 0,
+    'react/no-did-update-set-state': 0,
     'react/jsx-closing-tag-location': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-first-prop-new-line': [2, 'multiline'],
@@ -67,15 +69,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        map: [
-          ['assets', './assets/'],
-          ['src', './src/'],
-          ['components', './src/components'],
-          ['data', './src/data/'],
-          ['services', './src/services/'],
-          ['paths', './src/routes/paths.js'],
-          ['validation-rules', './src/services/validation-rules.js'],
-        ],
+        map: [['assets', './assets/'], ['src', './src/'], ['components', './src/components']],
         extensions: ['.js'],
       },
     },

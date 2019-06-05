@@ -64,6 +64,8 @@
         "axios": "^0.18.0",
         "core-js": "^2.6.5",
         "history": "^4.9.0",
+        "js-cookie": "^2.2.0",
+        "jwt-decode": "^2.2.0",
         "moment": "^2.24.0",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
@@ -73,6 +75,7 @@
         "react-router-dom": "^5.0.0",
         "redux": "^4.0.1",
         "redux-saga": "^1.0.2",
+        "reqwest": "^2.0.5",
         "reselect": "^4.0.0"
     }
 }
