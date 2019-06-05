@@ -34,7 +34,7 @@ class RequestVerificationFormDisplay extends React.Component {
           fileList: [],
           uploading: false,
         });
-        message.success('upload successfully.');
+        message.success('Uploaded successfully.');
       })
       .catch(() => {
         // this.setState({
@@ -45,7 +45,7 @@ class RequestVerificationFormDisplay extends React.Component {
           fileList: [],
           uploading: false,
         });
-        message.success('upload successfully.');
+        message.success('Uploaded successfully.');
       });
 
     // reqwest({

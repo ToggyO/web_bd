@@ -9,7 +9,7 @@ const SuccessDisplay = () => (
     <AuthBox header="Congratulations">
       <p>You have successfully signed up.</p>
       <p>Please sign in to your account to proceed to the website.</p>
-      <ToSignIn text="Go to Sign in" goTo={ROUTES.HOME} />
+      <ToSignIn text="Go to Sign in" goTo={ROUTES.LOGIN} />
     </AuthBox>
   </SignWrapper>
 );
