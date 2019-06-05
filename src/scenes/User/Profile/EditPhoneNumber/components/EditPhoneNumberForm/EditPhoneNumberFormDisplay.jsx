@@ -37,7 +37,6 @@ class EditPhoneNumberFormDisplay extends React.Component {
       if (!err) {
         const phone = { phone: values.prefix + values.phone };
         this.props.editPhoneNumberRequest(phone);
-        console.log(phone);
       }
     });
   };
