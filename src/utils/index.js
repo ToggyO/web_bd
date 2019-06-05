@@ -8,3 +8,5 @@ export const getQueries = url => {
 };
 
 export const notUndefinedObjectProps = obj => !Object.values(obj).includes(undefined);
+
+export const secretize = str => `${str.substring(0, 2)}****${str.substring(6)}`;

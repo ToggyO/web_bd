@@ -1,19 +1,19 @@
 /* eslint-disable no-prototype-builtins */
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { checkTokens } from 'src/services/auth';
 import { HeaderContainer } from './components/Header';
 
 const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
-  useLayoutEffect(() => {
-    if (checkTokens()) {
+  useEffect(() => {
+    if (checkTokens() && userName !== localStorage.getItem('userName')) {
       getUserProfileRequest();
-      // localStorage.setItem('userName', userName);
     }
   }, []);
+
   return (
     <>
-      <HeaderContainer userName={userName} />
+      <HeaderContainer />
       {children}
     </>
   );

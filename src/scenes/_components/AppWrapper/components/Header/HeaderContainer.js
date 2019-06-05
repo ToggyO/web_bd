@@ -7,6 +7,7 @@ import HeaderDisplay from './HeaderDisplay';
 function mapStateToProps(state) {
   return {
     userName: userProfileSelectors.userNameSelector(state),
+    loading: userProfileSelectors.loadingSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {

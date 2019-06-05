@@ -22,3 +22,5 @@ export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCirc
 export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline';
 export { default as SyncOutline } from '@ant-design/icons/lib/outline/SyncOutline';
 export { default as UserAddOutline } from '@ant-design/icons/lib/outline/UserAddOutline';
+export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/PaperClipOutline';
+export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline';

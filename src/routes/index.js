@@ -7,7 +7,14 @@ export default {
   WELCOME_BACK: '/welcome-back',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
-  USER_SETTINGS: '/profile',
+  PROFILE: {
+    SETTINGS: '/profile',
+    EDIT_FULLNAME: '/profile/edit-fullname',
+    EDIT_EMAIL: '/profile/edit-email',
+    EDIT_PHONENUMBER: '/profile/edit-phonenumber',
+    EDIT_PASSWORD: '/profile/edit-password',
+    REQUEST_VERIFICATION: '/profile/request-verification',
+  },
   USER_DASHBOARD: '/dashboard',
   EDIT_TRADE: '/trade/228/edit',
 };

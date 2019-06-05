@@ -16,8 +16,13 @@ import { WelcomeBackContainer } from './scenes/Auth/WelcomeBack';
 import { ForgotPassword } from './scenes/Auth/ForgotPassword';
 import { ResetPassword } from './scenes/Auth/ResetPassword';
 import { SetTwoFactorContainer } from './scenes/Auth/SetTwoFactor';
-import { Settings } from './scenes/User/scenes/Settings';
-import { Dashboard } from './scenes/User/scenes/Dashboard';
+import { SettingsContainer } from './scenes/User/Profile/Settings';
+import { EditEmailDisplay } from './scenes/User/Profile/EditEmail';
+import { EditFullNameDisplay } from './scenes/User/Profile/EditFullName';
+import { EditPhoneNumberDisplay } from './scenes/User/Profile/EditPhoneNumber';
+import { EditPasswordDisplay } from './scenes/User/Profile/EditPassword';
+import { RequestVerificationDisplay } from './scenes/User/Profile/RequestVerification';
+import { Dashboard } from './scenes/User/Dashboard';
 import { HomePageContainer } from './scenes/HomePage';
 
 import './global.less';
@@ -34,7 +39,7 @@ message.config({
 // FORGOT_PASSWORD: '/forgot-password',
 // RESET_PASSWORD: '/reset-password',
 // SET_2FA: '/set-2fa',
-// USER_SETTINGS: '/user/settings',
+// PROFILE_SETTINGS: '/user/settings',
 // USER_DASHBOARD: '/user/dashboard',
 // EDIT_TRADE: '/trade/228/edit',
 
@@ -57,7 +62,20 @@ ReactDOM.render(
         <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
         <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
-        <AuthRoute path={ROUTES.USER_SETTINGS} exact component={Settings} />
+        <AuthRoute path={ROUTES.PROFILE.SETTINGS} exact component={SettingsContainer} />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_EMAIL} exact component={EditEmailDisplay} />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
+        <AuthRoute
+          path={ROUTES.PROFILE.EDIT_PHONENUMBER}
+          exact
+          component={EditPhoneNumberDisplay}
+        />
+        <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
+        <AuthRoute
+          path={ROUTES.PROFILE.REQUEST_VERIFICATION}
+          exact
+          component={RequestVerificationDisplay}
+        />
       </Switch>
     </Router>
   </Provider>,

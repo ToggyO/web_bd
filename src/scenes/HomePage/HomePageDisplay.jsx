@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Divider } from 'antd';
-import { Spinner } from './components/Spinner';
+import { Spinner } from 'src/components/Spinner';
 import { AppWrapperContainer } from '../_components/AppWrapper';
 import { EasyWayDisplay } from './components/EasyWay';
 import { QuickFiltersDisplay } from './components/QuickFilters';
@@ -11,7 +11,7 @@ import './style.less';
 const HomePageDisplay = ({ verificationStatus, loading }) => (
   <AppWrapperContainer>
     <div className="paper home-page">
-      {loading && <Spinner />}
+      {loading && <Spinner global fontSize={30} />}
       {!loading && !verificationStatus ? (
         <>
           <EasyWayDisplay />

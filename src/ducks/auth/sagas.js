@@ -1,7 +1,7 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { message } from 'antd';
 import ROUTES from 'src/routes';
-import historyService from 'src/services/history';
+import history from 'src/services/history';
 import authAPI from 'src/services/api/auth';
 import * as types from './types';
 import * as userProfileTypes from '../user/types';
@@ -18,7 +18,7 @@ function* signUp(action) {
   try {
     const data = yield call(authAPI.signUp, action.payload);
     yield put({ type: types.SIGNUP_SUCCESS, payload: data });
-    historyService.push(ROUTES.CONFIRM_EMAIL);
+    history.push(ROUTES.CONFIRM_EMAIL);
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: types.SIGNUP_ERROR, payload: errors });
@@ -36,7 +36,7 @@ function* signIn(action) {
   try {
     const data = yield call(authAPI.signIn, action.payload);
     yield put({ type: types.SIGNIN_SUCCESS, payload: data });
-    historyService.push(ROUTES.WELCOME_BACK);
+    history.push(ROUTES.WELCOME_BACK);
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: types.SIGNIN_ERROR, payload: errors });
@@ -80,7 +80,7 @@ function* twoFactorAuth(action) {
     // after successfull authentication it's time to get user profile data
     yield put({ type: userProfileTypes.GET_USER_PROFILE_REQUEST });
 
-    historyService.push(ROUTES.HOME);
+    history.push(ROUTES.HOME);
   } catch (error) {
     yield put({
       type: types.TWO_FACTOR_AUTH_ERROR,
@@ -124,7 +124,7 @@ function* resetPassword(action) {
     const data = yield call(authAPI.resetPassword, action.payload);
     yield put({ type: types.RESET_PASSWORD_SUCCESS, payload: data });
     message.success(`Password for ${data.data.userName} has been successfully changed`);
-    historyService.push(ROUTES.LOGIN);
+    history.push(ROUTES.LOGIN);
   } catch (error) {
     yield put({
       type: types.RESET_PASSWORD_ERROR,

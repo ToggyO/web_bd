@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, Statistic } from 'antd';
+import { Form, Input, Button, Statistic, message } from 'antd';
 import * as validations from 'src/services/validations';
 import { notUndefinedObjectProps } from 'src/utils';
 
@@ -13,13 +13,17 @@ class WelcomeBackForm extends React.Component {
     isGetCodeDisabled: false,
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { submitDisabled } = this.state;
-    const { form } = this.props;
+    const { form, errors } = this.props;
 
     if (submitDisabled) {
       const values = form.getFieldsValue();
       if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
+    }
+    if (errors !== prevProps.errors) {
+      if (Array.isArray(errors))
+        message.error('Invalid or expired code, check your input or request a new code ', 8);
     }
   }
 

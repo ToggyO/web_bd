@@ -72,13 +72,18 @@ class BuyFormDisplay extends React.Component {
           })(
             <Select placeholder="All currencies" style={{ width: 220 }}>
               <Select.Option value="usd">USD</Select.Option>
-              <Select.Option value="rub">Rub</Select.Option>
+              <Select.Option value="rub">RUB</Select.Option>
             </Select>
           )}
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="primary-btn"
+            disabled={hasErrors(getFieldsError())}
+          >
             Search
           </Button>
         </Form.Item>

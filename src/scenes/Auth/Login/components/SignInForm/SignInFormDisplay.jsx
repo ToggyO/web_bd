@@ -4,29 +4,29 @@
 /* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import ReCAPTCHA from 'react-google-recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Form, Icon, Input, Button } from 'antd';
 import ROUTES from 'src/routes';
 import './style.less';
 
-// class Recaptcha extends React.Component {
-//   doCaptcha = result => {
-//     this.props.onChange(result);
-//     this.props.doCaptcha(result);
-//   };
+class Recaptcha extends React.Component {
+  doCaptcha = result => {
+    this.props.onChange(result);
+    this.props.doCaptcha(result);
+  };
 
-//   render() {
-//     return (
-//       <ReCAPTCHA
-//         // dev
-//         sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
-//         // prod
-//         // sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
-//         onChange={this.doCaptcha}
-//       />
-//     );
-//   }
-// }
+  render() {
+    return (
+      <ReCAPTCHA
+        // dev
+        // sitekey="6LfFtqEUAAAAAD7I_-zjtYgRn45xiK7WpCiMI0cQ"
+        // prod
+        sitekey="6LcOpKQUAAAAAJRDZiTq5zISgnS4pGGTak7Uc6vY"
+        onChange={this.doCaptcha}
+      />
+    );
+  }
+}
 
 class SignInFormDisplay extends React.Component {
   state = {
@@ -91,11 +91,11 @@ class SignInFormDisplay extends React.Component {
               />
             )}
           </Form.Item>
-          {/* <Form.Item className="captcha">
+          <Form.Item className="captcha">
             {getFieldDecorator('captcha', {
               rules: [{ required: true, message: 'Please verify you are human!' }],
             })(<Recaptcha doCaptcha={this.doCaptcha} />)}
-          </Form.Item> */}
+          </Form.Item>
 
           <div className="signin__forgot">
             Forgot password?

@@ -6,11 +6,11 @@ import ROUTES from 'src/routes';
 import logo from 'src/assets/logo.svg';
 import './style.less';
 
-const HeaderDisplay = ({ logoutRequest, userName }) => {
+const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link rel="noopener noreferrer" to={ROUTES.USER_SETTINGS}>
+        <Link rel="noopener noreferrer" to={ROUTES.PROFILE.SETTINGS}>
           <Icon type="user" /> Profile settings
         </Link>
       </Menu.Item>
@@ -42,36 +42,38 @@ const HeaderDisplay = ({ logoutRequest, userName }) => {
         <a className="nav__link">Post a trade</a>
         <a className="nav__link">Help</a>
 
-        <div className="right-nav">
-          {userName ? (
-            <>
-              <a href="#" className="nav__link right-nav__bell">
-                <Icon type="bell" />
-              </a>
-              <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-                <Button className="user-button">
-                  <Avatar size="small" icon="user" className="user-avatar" />
-                  <span className="user-name">{userName}</span>
-                </Button>
-              </Dropdown>
-            </>
-          ) : (
-            <>
-              <Link
-                to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }}
-                className="nav__link"
-              >
-                <Icon type="user-add" /> Sign up for free
-              </Link>
-              <Link
-                to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }}
-                className="nav__link"
-              >
-                <Icon type="lock" /> Sign in
-              </Link>
-            </>
-          )}
-        </div>
+        {!loading && (
+          <div className="right-nav">
+            {userName ? (
+              <>
+                <a href="#" className="nav__link right-nav__bell">
+                  <Icon type="bell" />
+                </a>
+                <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
+                  <Button className="user-button">
+                    <Avatar size="small" icon="user" className="user-avatar" />
+                    <span className="user-name">{userName}</span>
+                  </Button>
+                </Dropdown>
+              </>
+            ) : (
+              <>
+                <Link
+                  to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }}
+                  className="nav__link"
+                >
+                  <Icon type="user-add" /> Sign up for free
+                </Link>
+                <Link
+                  to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }}
+                  className="nav__link"
+                >
+                  <Icon type="lock" /> Sign in
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </nav>
     </header>
   );
@@ -80,6 +82,7 @@ const HeaderDisplay = ({ logoutRequest, userName }) => {
 HeaderDisplay.propTypes = {
   userName: PropTypes.string,
   logoutRequest: PropTypes.func,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default HeaderDisplay;
