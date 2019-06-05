@@ -61,11 +61,11 @@ class TwoFactorForm extends React.Component {
     const { deadline, isGetCodeDisabled } = this.state;
 
     const prefixSelector = getFieldDecorator('prefix', {
-      initialValue: '7',
+      initialValue: '1',
     })(
       <Select style={{ width: 86 }} className="prefix-select">
+        <Option value="1">1</Option>
         <Option value="7">7</Option>
-        <Option value="0753">0753</Option>
       </Select>
     );
 
