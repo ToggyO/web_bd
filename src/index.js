@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
-import { message } from 'antd';
 import history from 'src/services/history';
 import ROUTES from './routes';
 import { getStore } from './store';
