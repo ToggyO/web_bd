@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Upload, Form, Button, message } from 'antd';
 import { API_URL } from 'src/services/api/config';
 import VerificationIcon from 'src/assets/verification-icon.svg';
+import { parseBase64 } from 'src/utils';
 
 const { Dragger } = Upload;
 
@@ -16,37 +17,34 @@ class RequestVerificationFormDisplay extends React.Component {
 
   handleUpload = () => {
     const { fileList } = this.state;
-    const formData = new FormData();
-    formData.append('file', fileList[0]);
-
-    this.setState({
-      uploading: true,
-    });
-
-    axios({
-      method: 'post',
-      url: `${API_URL}/profile/resources`,
-      data: formData,
-      config: { headers: { 'Content-Type': 'multipart/form-data' } },
-    })
-      .then(() => {
-        this.setState({
-          fileList: [],
-          uploading: false,
-        });
-        message.success('Uploaded successfully.');
-      })
-      .catch(() => {
-        // this.setState({
-        //   uploading: false,
-        // });
-        // message.error('upload failed.');
-        this.setState({
-          fileList: [],
-          uploading: false,
-        });
-        message.success('Uploaded successfully.');
+    const reader = new FileReader();
+    reader.readAsDataURL(fileList[0]);
+    reader.onload = e => {
+      this.setState({
+        uploading: true,
       });
+      const data = parseBase64(e.target.result);
+
+      axios({
+        method: 'post',
+        url: `${API_URL}/profile/resources`,
+        data,
+        config: { headers: { 'Content-Type': 'text/plain' } },
+      })
+        .then(() => {
+          this.setState({
+            fileList: [],
+            uploading: false,
+          });
+          message.success('Uploaded successfully.');
+        })
+        .catch(() => {
+          this.setState({
+            uploading: false,
+          });
+          message.error('upload failed.');
+        });
+    };
 
     // reqwest({
     //   url:
