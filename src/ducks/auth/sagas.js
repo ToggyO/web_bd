@@ -100,9 +100,7 @@ function* forgotPassword(action) {
   try {
     const data = yield call(authAPI.forgotPassword, action.payload);
     yield put({ type: types.FORGOT_PASSWORD_SUCCESS, payload: data });
-    message.success(
-      `Thanks! Please check ${action.payload.email} for a link to reset your password.`
-    );
+    message.success(`Thanks! Please check ${action.payload.email} for a link to reset your password.`);
   } catch (error) {
     yield put({
       type: types.FORGOT_PASSWORD_ERROR,
