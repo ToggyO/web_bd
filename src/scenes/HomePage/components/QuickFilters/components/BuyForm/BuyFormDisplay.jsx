@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-import * as validations from 'src/services/validations';
+import * as validations from '@services/validations';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);

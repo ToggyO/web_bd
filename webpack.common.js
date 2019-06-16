@@ -94,6 +94,15 @@ exports.webpackCommon = {
   resolve: {
     alias: {
       '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/components/AntIcons/index.js'),
+      '@assets': path.resolve(__dirname, 'src/assets/'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@config': path.resolve(__dirname, 'src/config'),
+      '@ducks': path.resolve(__dirname, 'src/ducks'),
+      '@routes': path.resolve(__dirname, 'src/routes'),
+      '@scenes': path.resolve(__dirname, 'src/scenes'),
+      '@services': path.resolve(__dirname, 'src/services'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      // get rid of
       assets: path.resolve(__dirname, 'assets/'),
       src: path.resolve(__dirname, 'src/'),
       components: path.resolve(__dirname, 'src/components'),

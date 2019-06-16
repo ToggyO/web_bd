@@ -33,3 +33,8 @@ export const resetPasswordRequest = data => ({
 export const logoutRequest = () => ({
   type: types.LOGOUT,
 });
+
+export const refreshingTokenRequest = refreshToken => ({
+  type: types.REFRESHING_TOKEN_REQUEST,
+  payload: refreshToken,
+});

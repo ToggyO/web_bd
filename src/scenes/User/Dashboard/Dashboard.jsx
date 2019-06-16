@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { AppWrapperContainer } from 'src/scenes/_components/AppWrapper';
+import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { CreatedTrades } from './components/CreatedTrades';
 import { ActiveTrades } from './components/ActiveTrades';
 import './style.less';

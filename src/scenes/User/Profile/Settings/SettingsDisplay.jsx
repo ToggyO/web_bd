@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Spin } from 'antd';
 import { Link } from 'react-router-dom';
-import ROUTES from 'src/routes';
-import { Spinner } from 'src/components/Spinner';
-import { secretize } from 'src/utils';
-import { AppWrapperContainer } from 'src/scenes/_components/AppWrapper';
+import { ROUTES } from '@config/constants';
+import { Spinner } from '@components/Spinner';
+import { secretize } from '@utils';
+import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 
 import './style.less';
 
@@ -39,14 +39,8 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta
-                    title="Real Name"
-                    description={loading ? <Spinner /> : fullName}
-                  />
-                  <Link
-                    to={ROUTES.PROFILE.REQUEST_VERIFICATION}
-                    className="user-settings__verification"
-                  >
+                  <List.Item.Meta title="Real Name" description={loading ? <Spinner /> : fullName} />
+                  <Link to={ROUTES.PROFILE.REQUEST_VERIFICATION} className="user-settings__verification">
                     Request Verification
                   </Link>
                 </List.Item>
@@ -62,10 +56,7 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta
-                    title="Phone Number"
-                    description={loading ? <Spinner /> : secretize(phoneNumber)}
-                  />
+                  <List.Item.Meta title="Phone Number" description={loading ? <Spinner /> : secretize(phoneNumber)} />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"
@@ -75,10 +66,7 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta
-                    title="Email"
-                    description={loading ? <Spinner /> : secretize(email)}
-                  />
+                  <List.Item.Meta title="Email" description={loading ? <Spinner /> : secretize(email)} />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"
@@ -88,10 +76,7 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta
-                    title="Account Password"
-                    description={loading ? <Spinner /> : '********'}
-                  />
+                  <List.Item.Meta title="Account Password" description={loading ? <Spinner /> : '********'} />
                 </List.Item>
                 <List.Item className="user-settings__item">
                   <List.Item.Meta title="Confirmed by other users" description="0" />

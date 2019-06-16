@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
-import ROUTES from 'src/routes';
-import logo from 'src/assets/logo.svg';
+import { ROUTES } from '@config/constants';
+import logo from '@assets/logo.svg';
 import './style.less';
 
 const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
@@ -42,38 +42,30 @@ const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
         <a className="nav__link">Post a trade</a>
         <a className="nav__link">Help</a>
 
-        {!loading && (
-          <div className="right-nav">
-            {userName ? (
-              <>
-                <a href="#" className="nav__link right-nav__bell">
-                  <Icon type="bell" />
-                </a>
-                <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-                  <Button className="user-button">
-                    <Avatar size="small" icon="user" className="user-avatar" />
-                    <span className="user-name">{userName}</span>
-                  </Button>
-                </Dropdown>
-              </>
-            ) : (
-              <>
-                <Link
-                  to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }}
-                  className="nav__link"
-                >
-                  <Icon type="user-add" /> Sign up for free
-                </Link>
-                <Link
-                  to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }}
-                  className="nav__link"
-                >
-                  <Icon type="lock" /> Sign in
-                </Link>
-              </>
-            )}
-          </div>
-        )}
+        <div className="right-nav">
+          {userName ? (
+            <>
+              <a href="#" className="nav__link right-nav__bell">
+                <Icon type="bell" />
+              </a>
+              <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
+                <Button className="user-button">
+                  <Avatar size="small" icon="user" className="user-avatar" />
+                  <span className="user-name">{userName}</span>
+                </Button>
+              </Dropdown>
+            </>
+          ) : (
+            <>
+              <Link to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }} className="nav__link">
+                <Icon type="user-add" /> Sign up for free
+              </Link>
+              <Link to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }} className="nav__link">
+                <Icon type="lock" /> Sign in
+              </Link>
+            </>
+          )}
+        </div>
       </nav>
     </header>
   );

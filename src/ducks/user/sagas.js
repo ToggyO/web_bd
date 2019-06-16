@@ -1,11 +1,11 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
-import userProfileAPI from 'src/services/api/user';
+import api from '@services/api';
 import * as types from './types';
 
 function* getUserProfile() {
   try {
-    const data = yield call(userProfileAPI.getUserProfile);
+    const data = yield call(api.userProfile.getUserProfile);
     yield put({ type: types.GET_USER_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     yield put({ type: types.GET_USER_PROFILE_ERROR, payload: error });
@@ -17,7 +17,7 @@ export function* getUserProfileSaga() {
 
 function* getSmsCode() {
   try {
-    const data = yield call(userProfileAPI.getSmsCode);
+    const data = yield call(api.userProfile.getSmsCode);
     yield put({ type: types.GET_SMS_CODE_SUCCESS, payload: data });
     message.success('The verification code has been sent to your phone!');
   } catch (error) {
@@ -30,7 +30,7 @@ export function* getSmsCodeSaga() {
 
 function* editEmail(action) {
   try {
-    const data = yield call(userProfileAPI.editUserEmail, action.payload);
+    const data = yield call(api.userProfile.editUserEmail, action.payload);
     yield put({ type: types.EDIT_EMAIL_SUCCESS, payload: data });
     message.success('Email has been changed');
   } catch (error) {
@@ -43,7 +43,7 @@ export function* editEmailSaga() {
 
 function* editFullName(action) {
   try {
-    const data = yield call(userProfileAPI.editUserFullName, action.payload);
+    const data = yield call(api.userProfile.editUserFullName, action.payload);
     yield put({ type: types.EDIT_FULLNAME_SUCCESS, payload: data });
     message.success('Your real name has been changed');
   } catch (error) {
@@ -56,7 +56,7 @@ export function* editFullNameSaga() {
 
 function* editPhoneNumber(action) {
   try {
-    const data = yield call(userProfileAPI.editUserPhoneNumber, action.payload);
+    const data = yield call(api.userProfile.editUserPhoneNumber, action.payload);
     yield put({ type: types.EDIT_PHONENUMBER_SUCCESS, payload: data });
     message.success('Please check your email to confirm your new phone number');
   } catch (error) {
@@ -69,7 +69,7 @@ export function* editPhoneNumberSaga() {
 
 function* editPassword(action) {
   try {
-    const data = yield call(userProfileAPI.editUserPassword, action.payload);
+    const data = yield call(api.userProfile.editUserPassword, action.payload);
     yield put({ type: types.EDIT_PASSWORD_SUCCESS, payload: data });
     message.success('Your password has been changed');
   } catch (error) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Icon } from 'antd';
-import ROUTES from 'src/routes';
-import history from 'src/services/history';
-import InnovationImg from 'src/assets/innovation.svg';
+import {ROUTES} from '@config/constants';
+import history from '@services/history';
+import InnovationImg from '@assets/innovation.svg';
 import './style.less';
 
 const handleSignUpClick = () => {

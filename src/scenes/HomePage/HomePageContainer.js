@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { userProfileSelectors } from 'src/ducks/user';
+import { userProfileSelectors } from '@ducks/user';
 import HomePageDisplay from './HomePageDisplay';
 
 function mapStateToProps(state) {

@@ -69,7 +69,20 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        map: [['assets', './assets/'], ['src', './src/'], ['components', './src/components']],
+        map: [
+          ['@assets', './src/assets'],
+          ['@components', './src/components'],
+          ['@config', './src/config'],
+          ['@ducks', './src/ducks'],
+          ['@routes', './src/routes'],
+          ['@scenes', './src/scenes'],
+          ['@services', './src/services'],
+          ['@utils', './src/utils'],
+
+          ['assets', './assets/'],
+          ['src', './src/'],
+          ['components', './src/components'],
+        ],
         extensions: ['.js'],
       },
     },

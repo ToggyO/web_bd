@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import reqwest from 'reqwest';
 import axios from 'axios';
 import { Upload, Form, Button, message } from 'antd';
-import { API_URL } from 'src/services/api/config';
-import VerificationIcon from 'src/assets/verification-icon.svg';
-import { parseBase64 } from 'src/utils';
+import { API_URL } from '@config/constants';
+import VerificationIcon from '@assets/verification-icon.svg';
+import { parseBase64 } from '@utils';
 
 const { Dragger } = Upload;
 
@@ -45,27 +44,6 @@ class RequestVerificationFormDisplay extends React.Component {
           message.error('upload failed.');
         });
     };
-
-    // reqwest({
-    //   url:
-    //     'https://4rzmeh95xa.execute-api.eu-west-1.amazonaws.com/stage/api/v0.1/profile/resources',
-    //   method: 'post',
-    //   processData: false,
-    //   data: formData,
-    //   success: () => {
-    //     this.setState({
-    //       fileList: [],
-    //       uploading: false,
-    //     });
-    //     message.success('upload successfully.');
-    //   },
-    //   error: () => {
-    //     this.setState({
-    //       uploading: false,
-    //     });
-    //     message.error('upload failed.');
-    //   },
-    // });
   };
 
   render() {

@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
-import ROUTES from 'src/routes';
-import history from 'src/services/history';
-import AuthBox from 'src/components/AuthBox';
+import{ ROUTES }from '@config/constants';
+import history from '@services/history';
+import AuthBox from '@components/AuthBox';
 import SignWrapper from '../../_components/SignWrapper';
 
 const ConfirmEmailDisplay = ({ email, emailConfirmed }) => {

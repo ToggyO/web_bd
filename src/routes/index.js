@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { AuthRoute } from './AuthRoute';
-import { UnAuthRoute } from './UnAuthRoute';
+import { ROUTES } from '@config/constants';
 import { LoginContainer } from '../scenes/Auth/Login';
 import { ConfirmEmailContainer } from '../scenes/Auth/ConfirmEmail';
 import { SuccessDisplay } from '../scenes/Auth/Success';
@@ -17,29 +16,10 @@ import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
 import { Dashboard } from '../scenes/User/Dashboard';
 import { HomePageContainer } from '../scenes/HomePage';
+import AuthRoute from './AuthRoute';
+import UnAuthRoute from './UnAuthRoute';
 
-const ROUTES = {
-  HOME: '/',
-  LOGIN: '/login',
-  CONFIRM_EMAIL: '/confirm-email',
-  SUCCESS: '/success',
-  SET_2FA: '/set-2fa',
-  WELCOME_BACK: '/welcome-back',
-  FORGOT_PASSWORD: '/forgot-password',
-  RESET_PASSWORD: '/reset-password',
-  PROFILE: {
-    SETTINGS: '/profile',
-    EDIT_FULLNAME: '/profile/edit-fullname',
-    EDIT_EMAIL: '/profile/edit-email',
-    EDIT_PHONENUMBER: '/profile/edit-phonenumber',
-    EDIT_PASSWORD: '/profile/edit-password',
-    REQUEST_VERIFICATION: '/profile/request-verification',
-  },
-  USER_DASHBOARD: '/dashboard',
-  EDIT_TRADE: '/trade/228/edit',
-};
-
-export const BitcoinsDirectRoutes = () => (
+export const Routes = () => (
   <Switch>
     <Route path={ROUTES.HOME} exact component={HomePageContainer} />
 
@@ -61,5 +41,3 @@ export const BitcoinsDirectRoutes = () => (
     <AuthRoute path={ROUTES.PROFILE.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
   </Switch>
 );
-
-export default ROUTES;

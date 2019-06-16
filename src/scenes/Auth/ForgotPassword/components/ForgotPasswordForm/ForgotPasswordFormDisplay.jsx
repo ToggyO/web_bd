@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Icon, Input, Button } from 'antd';
-import * as validations from 'src/services/validations';
+import * as validations from '@services/validations';
 import './style.less';
 
 class ForgotPasswordForm extends React.Component {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from 'src/ducks/auth';
+import { authActions, authSelectors } from '@ducks/auth';
 import SignInFormDisplay from './SignInFormDisplay';
 
 function mapStateToProps(state) {

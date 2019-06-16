@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { userActions, userProfileSelectors } from 'src/ducks/user';
+import { userActions, userProfileSelectors } from '@ducks/user';
 import EditPhoneNumberFormDisplay from './EditPhoneNumberFormDisplay';
 
 function mapStateToProps(state) {

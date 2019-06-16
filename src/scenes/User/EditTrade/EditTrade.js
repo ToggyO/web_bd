@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-import ROUTES from 'src/routes';
-import { AppWrapperContainer } from 'src/scenes/_components/AppWrapper';
+import{ ROUTES }from '@config/constants';
+import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { EditTradeForm } from './components/EditTradeForm';
 import './style.less';
 

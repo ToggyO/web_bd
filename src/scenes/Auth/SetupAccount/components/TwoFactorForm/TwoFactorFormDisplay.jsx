@@ -3,8 +3,8 @@
 /* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Form, Input, Button, Select, Statistic } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 import './style.less';
 
 const { Option } = Select;

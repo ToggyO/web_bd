@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import Cookies from 'js-cookie';
-import { authTypes } from 'src/ducks/auth';
-import { userProfileTypes } from 'src/ducks/user';
-import { setHeaders, userLogout } from 'src/services/auth';
+import { authTypes } from '@ducks/auth';
+import { userProfileTypes } from '@ducks/user';
+import { setHeaders, userLogout } from '@services/auth';
 
 export const saveTokens = store => next => action => {
   if (action.type === authTypes.TWO_FACTOR_AUTH_SUCCESS) {
@@ -10,15 +10,6 @@ export const saveTokens = store => next => action => {
 
     Cookies.set('bdtoken', accessToken);
     Cookies.set('bdrefreshtoken', refreshToken);
-
-    setHeaders(accessToken);
-  }
-  return next(action);
-};
-
-export const logout = store => next => action => {
-  if (action.type === authTypes.LOGOUT) {
-    userLogout();
   }
   return next(action);
 };
@@ -33,6 +24,13 @@ export const saveUserName = store => next => action => {
     const { userName } = action.payload.data.user;
 
     localStorage.setItem('userName', userName);
+  }
+  return next(action);
+};
+
+export const logout = store => next => action => {
+  if (action.type === authTypes.LOGOUT) {
+    userLogout();
   }
   return next(action);
 };

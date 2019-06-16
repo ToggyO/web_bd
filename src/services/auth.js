@@ -44,15 +44,16 @@ export const checkTokens = () => {
 
   try {
     const { exp } = jwtDecode(accessToken);
-    if (exp < Date.now() / 1000) {
+    if (!exp) {
       userLogout();
       return false;
     }
   } catch (e) {
+    userLogout();
     return false;
   }
 
-  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   return true;
 };
 
@@ -63,7 +64,6 @@ export const clearCookies = () => {
 
 export const userLogout = () => {
   clearCookies();
-  setHeaders();
   window.location.reload();
   localStorage.removeItem('userName');
 };

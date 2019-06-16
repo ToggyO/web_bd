@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
-import { userProfileSelectors } from 'src/ducks/user';
-
+import { authActions } from '@ducks/auth';
+import { userProfileSelectors } from '@ducks/user';
 import HeaderDisplay from './HeaderDisplay';
 
 function mapStateToProps(state) {
   return {
-    userName: userProfileSelectors.userNameSelector(state),
+    userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName') && localStorage.getItem('userName'),
     loading: userProfileSelectors.loadingSelector(state),
   };
 }

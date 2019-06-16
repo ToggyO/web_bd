@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, message } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 import './style.less';
 
 class SignUpFormDisplay extends React.Component {

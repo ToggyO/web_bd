@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
-import { ButtonLink } from 'src/components/ButtonLink';
+import { ButtonLink } from '@components/ButtonLink';
 
 import { data } from './data';
 

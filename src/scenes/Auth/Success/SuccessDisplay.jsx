@@ -1,7 +1,7 @@
 import React from 'react';
-import ROUTES from 'src/routes';
-import AuthBox from 'src/components/AuthBox';
-import ToSignIn from 'src/components/ToSignIn';
+import{ ROUTES }from '@config/constants';
+import AuthBox from '@components/AuthBox';
+import ToSignIn from '@components/ToSignIn';
 import SignWrapper from '../../_components/SignWrapper';
 
 const SuccessDisplay = () => (

@@ -30,3 +30,7 @@ export const RESET_PASSWORD_ERROR = 'bitcoins-direct/auth/RESET_PASSWORD_ERROR';
 
 /* Logout */
 export const LOGOUT = 'bitcoins-direct/auth/LOGOUT';
+
+export const REFRESHING_TOKEN_REQUEST = 'bitcoins-direct/auth/REFRESHING_TOKEN_REQUEST';
+export const REFRESHING_TOKEN_SUCCESS = 'bitcoins-direct/auth/REFRESHING_TOKEN_SUCCESS';
+export const REFRESHING_TOKEN_ERROR = 'bitcoins-direct/auth/REFRESHING_TOKEN_ERROR';

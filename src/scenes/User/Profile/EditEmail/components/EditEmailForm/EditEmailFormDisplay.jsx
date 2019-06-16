@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Statistic, message } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 
 const { Countdown } = Statistic;
 
@@ -41,7 +41,6 @@ class EditEmailFormDisplay extends React.Component {
         const code = values.smscode;
         const { email } = values;
         this.props.editEmailRequest({ code, email });
-        // this.props.signInWithCode({ userName, twoFactorCode });
       }
     });
   };
@@ -90,12 +89,7 @@ class EditEmailFormDisplay extends React.Component {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="primary-btn"
-            disabled={this.state.submitDisabled}
-          >
+          <Button type="primary" htmlType="submit" className="primary-btn" disabled={this.state.submitDisabled}>
             Change email
           </Button>
         </Form.Item>
