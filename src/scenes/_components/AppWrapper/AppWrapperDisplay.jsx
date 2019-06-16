@@ -6,7 +6,7 @@ import { HeaderContainer } from './components/Header';
 
 const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
   useEffect(() => {
-    if (!userName) getUserProfileRequest();
+    if (!userName && checkTokens()) getUserProfileRequest();
   }, []);
 
   return (
@@ -21,6 +21,10 @@ AppWrapperDisplay.propTypes = {
   userName: PropTypes.string,
   getUserProfileRequest: PropTypes.func,
   children: PropTypes.element.isRequired,
+};
+
+AppWrapperDisplay.defaultProps = {
+  userName: null,
 };
 
 export default AppWrapperDisplay;

@@ -2,7 +2,8 @@
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-// import { store } from '../store';
+import { API_URL } from '@config/constants';
+import { store } from '../store';
 
 let isAlreadyFetchingAccessToken = false;
 let subscribers = [];
@@ -15,80 +16,60 @@ function addSubscriber(callback) {
   subscribers.push(callback);
 }
 
-let superAxios;
+const superaxios = axios.create({
+  baseURL: API_URL,
+});
 
-class SuperAxios {
-  constructor({ API_URL }) {
-    this.url = API_URL;
+superaxios.interceptors.request.use(config => {
+  const accessToken = Cookies.get('bdtoken');
 
-    const innnerAxios = axios.create({
-      baseURL: this.url,
-    });
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
 
-    innnerAxios.interceptors.request.use(config => {
-      const accessToken = Cookies.get('bdtoken');
-
-      const headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      };
-
-      if (accessToken) {
-        headers.Authorization = config.headers.Authorization || `Bearer ${accessToken}`;
-      }
-      return {
-        ...config,
-        headers,
-      };
-    });
-
-    innnerAxios.interceptors.response.use(
-      response => response,
-      error => {
-        const {
-          config,
-          response: { status },
-        } = error;
-        const originalRequest = config;
-
-        if (status === 401) {
-          if (!isAlreadyFetchingAccessToken) {
-            isAlreadyFetchingAccessToken = true;
-            const oldRefreshToken = Cookies.get('bdrefreshtoken');
-            innnerAxios.put('/token', { refreshToken: oldRefreshToken }).then(response => {
-              const { accessToken, refreshToken } = response.data.data;
-              Cookies.set('bdtoken', accessToken);
-              Cookies.set('bdrefreshtoken', refreshToken);
-              isAlreadyFetchingAccessToken = false;
-              onAccessTokenFetched(accessToken);
-            });
-          }
-
-          const retryOriginalRequest = new Promise(resolve => {
-            addSubscriber(accessToken => {
-              originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-              resolve(innnerAxios(originalRequest));
-            });
-          });
-          return retryOriginalRequest;
-        }
-        return Promise.reject(error);
-      }
-    );
-    this.client = innnerAxios;
+  if (accessToken) {
+    headers.Authorization = config.headers.Authorization || `Bearer ${accessToken}`;
   }
+  return {
+    ...config,
+    headers,
+  };
+});
 
-  getAxios() {
-    return this.client;
+superaxios.interceptors.response.use(
+  response => response,
+  error => {
+    const {
+      config,
+      response: { status },
+    } = error;
+    const originalRequest = config;
+
+    if (status === 401) {
+      if (!isAlreadyFetchingAccessToken) {
+        isAlreadyFetchingAccessToken = true;
+        const oldRefreshToken = Cookies.get('bdrefreshtoken');
+        store.dispatch({ type: 'TEST' });
+        superaxios.put('/token', { refreshToken: oldRefreshToken }).then(response => {
+          const { accessToken, refreshToken } = response.data.data;
+          Cookies.set('bdtoken', accessToken);
+          Cookies.set('bdrefreshtoken', refreshToken);
+          isAlreadyFetchingAccessToken = false;
+          onAccessTokenFetched(accessToken);
+        });
+      }
+
+      const retryOriginalRequest = new Promise(resolve => {
+        addSubscriber(accessToken => {
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          resolve(superaxios(originalRequest));
+        });
+      });
+      return retryOriginalRequest;
+    }
+    return Promise.reject(error);
   }
-}
+);
 
-function initClient(props) {
-  superAxios = new SuperAxios(props);
-}
-
-function getClient() {
-  return superAxios.getAxios();
-}
-
-export { initClient, getClient };
+export default superaxios;
