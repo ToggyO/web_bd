@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, List, Spin } from 'antd';
+import { Tabs, List } from 'antd';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import { Spinner } from '@components/Spinner';
@@ -48,6 +48,7 @@ const SettingsDisplay = ({
                 <List.Item className="user-settings__item">
                   <List.Item.Meta title="Username" description={loading ? <Spinner /> : userName} />
                 </List.Item>
+
                 <List.Item
                   className="user-settings__item"
                   actions={[

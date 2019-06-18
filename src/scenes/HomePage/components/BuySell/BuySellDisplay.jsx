@@ -1,11 +1,12 @@
 import React from 'react';
-import { BuyTradesDisplay } from './components/BuyTrades';
+import { BuyTradesContainer } from './components/BuyTrades';
+import { SellTradesContainer } from './components/SellTrades';
 import './style.less';
 
 const BuySellDisplay = () => (
   <div className="buy-sell">
-    <BuyTradesDisplay />
-    <BuyTradesDisplay />
+    <BuyTradesContainer />
+    <SellTradesContainer />
   </div>
 );
 

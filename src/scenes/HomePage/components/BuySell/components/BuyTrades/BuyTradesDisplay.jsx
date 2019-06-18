@@ -1,24 +1,34 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { ButtonLink } from '@components/ButtonLink';
+import { TenTradesSkeleton } from '@components/TenTradesSkeleton';
+import { TradesTable } from '@components/TradesTable';
 
-import { data } from './data';
+const BuyTradesDisplay = ({ getBuyTradesRequest, buyTradesData, loading }) => {
+  useEffect(() => {
+    getBuyTradesRequest('type[]=buy');
+  }, []);
 
-const { Column } = Table;
+  return (
+    <div className="buy-sell__trades">
+      <h2 className="buy-sell__heading">Buy bitcoins</h2>
+      {loading ? (
+        <TenTradesSkeleton loading={loading} />
+      ) : (
+        <TradesTable data={buyTradesData} classNames="buy-sell__table" loading={loading} />
+      )}
+      <ButtonLink>Show more buy trades</ButtonLink>
+    </div>
+  );
+};
 
-const BuyTradesDisplay = () => (
-  <div className="buy-sell__trades">
-    <h2 className="buy-sell__heading">Buy bitcoins</h2>
-    <Table dataSource={data} pagination={false} className="buy-sell__table">
-      <Column title="Transaction limits" dataIndex="transactionLimits" key="transactionLimits" />
-      <Column title="Payment method" dataIndex="paymentMethod" key="paymentMethod" />
-      <Column title="Seller" dataIndex="seller" key="seller" />
-      <Column title="Location" dataIndex="location" key="location" />
-      <Column title="Price / BTC" dataIndex="priceBtc" key="priceBtc" />
-      <Column title="Action" dataIndex="action" key="action" columnWidth={80} />
-    </Table>
-    <ButtonLink>Show more buy trades</ButtonLink>
-  </div>
-);
+BuyTradesDisplay.propTypes = {
+  loading: PropTypes.bool,
+  getBuyTradesRequest: PropTypes.func,
+  buyTradesData: PropTypes.array,
+};
 
+BuyTradesDisplay.defaultProps = {
+  loading: false,
+};
 export default BuyTradesDisplay;

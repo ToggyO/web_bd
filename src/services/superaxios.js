@@ -3,6 +3,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_URL } from '@config/constants';
+import { globalTypes } from '@ducks/_global';
+import { authTypes } from '@ducks/auth';
 import { store } from '../store';
 
 let isAlreadyFetchingAccessToken = false;
@@ -50,14 +52,21 @@ superaxios.interceptors.response.use(
       if (!isAlreadyFetchingAccessToken) {
         isAlreadyFetchingAccessToken = true;
         const oldRefreshToken = Cookies.get('bdrefreshtoken');
-        store.dispatch({ type: 'TEST' });
-        superaxios.put('/token', { refreshToken: oldRefreshToken }).then(response => {
-          const { accessToken, refreshToken } = response.data.data;
-          Cookies.set('bdtoken', accessToken);
-          Cookies.set('bdrefreshtoken', refreshToken);
-          isAlreadyFetchingAccessToken = false;
-          onAccessTokenFetched(accessToken);
-        });
+        store.dispatch({ type: globalTypes.REFRESHING_TOKEN_REQUEST });
+        superaxios
+          .put('/token', { refreshToken: oldRefreshToken })
+          .then(response => {
+            store.dispatch({ type: globalTypes.REFRESHING_TOKEN_SUCCESS });
+            const { accessToken, refreshToken } = response.data.data;
+            Cookies.set('bdtoken', accessToken);
+            Cookies.set('bdrefreshtoken', refreshToken);
+            isAlreadyFetchingAccessToken = false;
+            onAccessTokenFetched(accessToken);
+          })
+          .catch(() => {
+            store.dispatch({ type: globalTypes.REFRESHING_TOKEN_ERROR });
+            store.dispatch({ type: authTypes.LOGOUT });
+          });
       }
 
       const retryOriginalRequest = new Promise(resolve => {
