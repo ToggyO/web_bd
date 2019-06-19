@@ -41,4 +41,7 @@ export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands =
   );
 };
 
-export const formatCapitals = stringWithCapitalLetters => stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
+export const formatCapitals = stringWithCapitalLetters => {
+  if (stringWithCapitalLetters.toLowerCase() === 'paypal') return stringWithCapitalLetters;
+  return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
+};
