@@ -19,5 +19,28 @@ export const ROUTES = {
     REQUEST_VERIFICATION: '/profile/request-verification',
   },
   USER_DASHBOARD: '/dashboard',
-  EDIT_TRADE: '/trade/228/edit',
+  TRADES: {
+    CREATE: '/trades/create',
+    EDIT_TRADE: '/trades/228/edit',
+    BUY_TRADES: '/buy-trades',
+    SELL_TRADES: '/sell-trades',
+  },
 };
+
+export const currencies = [{ name: 'USD', value: 'USD' }, { name: 'RUB', value: 'RUB' }, { name: 'VEF', value: 'VEF' }];
+export const locations = [
+  { name: 'USA', value: 'USA' },
+  { name: 'Russia', value: 'Russia' },
+  { name: 'Venezuela', value: 'Venezuela' },
+];
+export const paymentMethods = [
+  { name: 'PayPal', value: 'PayPal' },
+  { name: 'Counter deposit', value: 'CounterDeposit' },
+  { name: 'Cash by mail', value: 'CashByMail' },
+  { name: 'Domestic wire transfer', value: 'DomesticWireTransfer' },
+  { name: 'Transfer with specific bank', value: 'TransferWithSpecificBank' },
+  { name: 'International wire transfer', value: 'InternationalWireTransfer' },
+  { name: 'Western Union', value: 'WesternUnion' },
+  { name: 'Moneygram', value: 'Moneygram' },
+  { name: 'QIWI', value: 'QIWI' },
+];

@@ -18,8 +18,11 @@ import { EditFullNameDisplay } from '../scenes/User/Profile/EditFullName';
 import { EditPhoneNumberDisplay } from '../scenes/User/Profile/EditPhoneNumber';
 import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
+import { PostTradeDisplay } from '../scenes/Trades/PostTrade';
 import { Dashboard } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
+import { BuyTradesContainer } from '../scenes/Trades/BuyTrades';
+import { SellTradesContainer } from '../scenes/Trades/SellTrades';
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
 
@@ -44,6 +47,10 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.PROFILE.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.PROFILE.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
+      <AuthRoute path={ROUTES.TRADES.CREATE} exact component={PostTradeDisplay} />
+      {/* <AuthRoute path={ROUTES.TRADES.EDIT_TRADE} exact component={RequestVerificationDisplay} /> */}
+      <AuthRoute path={ROUTES.TRADES.BUY_TRADES} exact component={BuyTradesContainer} />
+      <AuthRoute path={ROUTES.TRADES.SELL_TRADES} exact component={SellTradesContainer} />
     </Switch>
   </Spin>
 );

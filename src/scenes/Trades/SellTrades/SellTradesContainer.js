@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import { sellTradesActions } from '@ducks/trades/sell';
-import { tradesSelector } from '@ducks/trades/selectors';
+import { tradesSelector, tradesLoadingSelector } from '@ducks/trades/selectors';
 import SellTradesDisplay from './SellTradesDisplay';
 
 function mapStateToProps(state) {
   return {
-    loading: state.trades.sell.loading,
     sellTradesData: tradesSelector(state.trades.sell.data),
+    loading: tradesLoadingSelector(state.trades.sell),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getSellTradesRequest(params) {
-      dispatch(sellTradesActions.getSellTradesRequest(params));
+    getSellTradesRequest(query) {
+      dispatch(sellTradesActions.getSellTradesRequest(query));
     },
   };
 }

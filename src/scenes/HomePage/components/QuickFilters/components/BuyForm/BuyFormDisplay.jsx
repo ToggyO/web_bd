@@ -1,19 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, InputNumber, Button, Select, Row, Col } from 'antd';
+import { currencies, locations, paymentMethods } from '@config/constants';
 import * as validations from '@services/validations';
 
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+const { Option } = Select;
 
 class BuyFormDisplay extends React.Component {
-  componentDidMount() {
-    const { form } = this.props;
-    // To disabled submit button at the beginning.
-    form.validateFields();
-  }
-
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();
@@ -25,68 +18,86 @@ class BuyFormDisplay extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
-    // Only show error after a field is touched.
-    const amountError = isFieldTouched('amount') && getFieldError('amount');
-    const paymentMethodError = isFieldTouched('paymentMethod') && getFieldError('paymentMethod');
-    const countryError = isFieldTouched('country') && getFieldError('country');
-    const currencyError = isFieldTouched('country') && getFieldError('country');
+    const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Form.Item validateStatus={amountError ? 'error' : ''} help={amountError || ''}>
-          {getFieldDecorator('amount', {
-            rules: validations.amount,
-          })(<Input placeholder="Amount" style={{ width: 220 }} />)}
-        </Form.Item>
-
-        <Form.Item
-          validateStatus={paymentMethodError ? 'error' : ''}
-          help={paymentMethodError || ''}
-        >
-          {getFieldDecorator('paymentMethod', {
-            rules: [{ required: true, message: 'Please select payment method!' }],
-          })(
-            <Select placeholder="All payment methods" style={{ width: 220 }}>
-              <Select.Option value="cash">Cash</Select.Option>
-              <Select.Option value="paypal">PayPal</Select.Option>
-            </Select>
-          )}
-        </Form.Item>
-
-        <Form.Item validateStatus={countryError ? 'error' : ''} help={countryError || ''}>
-          {getFieldDecorator('country', {
-            rules: [{ required: true, message: 'Please select country!' }],
-          })(
-            <Select placeholder="All countries" style={{ width: 220 }}>
-              <Select.Option value="usa">USA</Select.Option>
-              <Select.Option value="russia">Russia</Select.Option>
-            </Select>
-          )}
-        </Form.Item>
-
-        <Form.Item validateStatus={currencyError ? 'error' : ''} help={currencyError || ''}>
-          {getFieldDecorator('currency', {
-            rules: [{ required: true, message: 'Please select currency!' }],
-          })(
-            <Select placeholder="All currencies" style={{ width: 220 }}>
-              <Select.Option value="usd">USD</Select.Option>
-              <Select.Option value="rub">RUB</Select.Option>
-            </Select>
-          )}
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="primary-btn"
-            disabled={hasErrors(getFieldsError())}
-          >
-            Search
-          </Button>
-        </Form.Item>
+      <Form onSubmit={this.handleSubmit}>
+        <Row gutter={6}>
+          <Col lg={5}>
+            <Form.Item>
+              {getFieldDecorator('amount', {
+                rules: validations.amount,
+              })(
+                <InputNumber
+                  placeholder="Amount"
+                  min={0}
+                  step={10}
+                  parser={string => (parseInt(string, 10) ? string : '')}
+                />
+              )}
+            </Form.Item>
+          </Col>
+          <Col lg={6}>
+            <Form.Item>
+              {getFieldDecorator('paymentMethod', {
+                rules: [{ required: true, message: 'Please select payment method!' }],
+                initialValue: paymentMethods[0].value,
+              })(
+                <Select placeholder="All payment methods">
+                  {paymentMethods.map(paymentMethod => (
+                    <Option key={paymentMethod.name} value={paymentMethod.value}>
+                      {paymentMethod.name}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col lg={6}>
+            <Form.Item>
+              {getFieldDecorator('country', {
+                rules: [{ required: true, message: 'Please select country!' }],
+                initialValue: locations[0].value,
+              })(
+                <Select placeholder="All countries">
+                  {locations.map(location => (
+                    <Option key={location.name} value={location.value}>
+                      {location.name}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col lg={5}>
+            <Form.Item>
+              {getFieldDecorator('currency', {
+                rules: [{ required: true, message: 'Please select currency!' }],
+                initialValue: currencies[0].value,
+              })(
+                <Select placeholder="All currencies">
+                  {currencies.map(currency => (
+                    <Option key={currency.name} value={currency.value}>
+                      {currency.name}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col lg={2}>
+            <Form.Item>
+              <Button
+                type="primary"
+                style={{ width: '100%', padding: '0 10px' }}
+                htmlType="submit"
+                className="primary-btn"
+              >
+                Search
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     );
   }

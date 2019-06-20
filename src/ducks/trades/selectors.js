@@ -10,10 +10,14 @@ export const tradesSelector = createSelector(
         trade.currency
       }`,
       paymentMethod: formatCapitals(trade.paymentMethod),
-      profile: 'username',
-      // profile: trade.profile,
-      location: formatCapitals(trade.location),
+      userName: trade.userName,
+      location: trade.location,
       btcPrice: `${formatMoney(trade.btcPrice)} ${trade.currency}`,
       type: trade.type,
     }))
+);
+
+export const tradesLoadingSelector = createSelector(
+  state => state.loading,
+  loading => loading
 );

@@ -64,7 +64,7 @@ export default {
 
   trades: {
     getTrades: async params => {
-      const response = await superaxios.get(`/trade?${params}`);
+      const response = await superaxios.get(`/trade${params}`);
       return response.data;
     },
   },

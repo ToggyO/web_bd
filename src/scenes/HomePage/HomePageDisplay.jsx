@@ -4,7 +4,7 @@ import { checkTokens } from '@services/auth';
 import { AppWrapperContainer } from '../_components/AppWrapper';
 import { EasyWayDisplay } from './components/EasyWay';
 import { QuickFiltersDisplay } from './components/QuickFilters';
-import { BuySellDisplay } from './components/BuySell';
+import { QuickBuySellDisplay } from './components/QuickBuySell';
 import './style.less';
 
 const HomePageDisplay = () => (
@@ -15,7 +15,7 @@ const HomePageDisplay = () => (
         <>
           <QuickFiltersDisplay />
           <Divider />
-          <BuySellDisplay />
+          <QuickBuySellDisplay />
         </>
       ) : (
         <>
@@ -23,7 +23,7 @@ const HomePageDisplay = () => (
           <Divider />
           <QuickFiltersDisplay />
           <Divider />
-          <BuySellDisplay />
+          <QuickBuySellDisplay />
         </>
       )}
     </div>
