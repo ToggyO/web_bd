@@ -6,7 +6,7 @@ import { ROUTES } from '@config/constants';
 import logo from '@assets/logo.svg';
 import './style.less';
 
-const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
+const HeaderDisplay = ({ logoutRequest, userName }) => {
   const menu = (
     <Menu>
       <Menu.Item>
@@ -37,9 +37,15 @@ const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
           <img src={logo} aria-label="logo" alt="Bitcoins direct" />
         </Link>
 
-        <a className="nav__link">Buy bitcoins</a>
-        <a className="nav__link">Sell bitcoins</a>
-        <a className="nav__link">Post a trade</a>
+        <Link to={ROUTES.TRADES.BUY_TRADES} className="nav__link">
+          Buy bitcoins
+        </Link>
+        <Link to={ROUTES.TRADES.SELL_TRADES} className="nav__link">
+          Sell bitcoins
+        </Link>
+        <Link to={ROUTES.TRADES.CREATE} className="nav__link">
+          Post a trade
+        </Link>
         <a className="nav__link">Help</a>
 
         <div className="right-nav">
@@ -74,7 +80,6 @@ const HeaderDisplay = ({ logoutRequest, userName, loading }) => {
 HeaderDisplay.propTypes = {
   userName: PropTypes.string,
   logoutRequest: PropTypes.func,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default HeaderDisplay;
