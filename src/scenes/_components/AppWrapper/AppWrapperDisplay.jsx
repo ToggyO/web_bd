@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { checkTokens } from '@services/auth';
+import { Footer } from '@components/Footer';
 import { HeaderContainer } from './components/Header';
 
 const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
@@ -13,6 +14,7 @@ const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
     <>
       <HeaderContainer />
       {children}
+      <Footer />
     </>
   );
 };

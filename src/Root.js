@@ -4,18 +4,21 @@ import { Router } from 'react-router-dom';
 import { message } from 'antd';
 import history from '@services/history';
 import Routes from '@routes';
+import { ScrollToTop } from '@components/ScrollToTop';
 import { store } from './store';
 import './global.less';
 
 message.config({
-  top: 60,
-  duration: 8,
+  top: 68,
+  duration: 4,
 });
 
 const Root = () => (
   <Provider store={store}>
-    <Router history={history}>
-      <Routes />
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
+      <ScrollToTop>
+        <Routes />
+      </ScrollToTop>
     </Router>
   </Provider>
 );

@@ -6,7 +6,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import ReCAPTCHA from 'react-google-recaptcha';
 import { Form, Icon, Input, Button } from 'antd';
-import{ ROUTES }from '@config/constants';
+import { ROUTES } from '@config/constants';
 import './style.less';
 
 // class Recaptcha extends React.Component {
@@ -65,7 +65,6 @@ class SignInFormDisplay extends React.Component {
   render() {
     const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
-
     return (
       <>
         <Form onSubmit={this.handleSubmit}>

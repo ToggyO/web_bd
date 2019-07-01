@@ -12,18 +12,8 @@ export const fullNameSelector = createSelector(
 );
 
 export const userNameSelector = createSelector(
-  state => state.auth.data,
-  state => state.user.data,
-  (authState, userState) => {
-    if (userState.user) {
-      return userState.user.userName;
-    }
-
-    if (localStorage.hasOwnProperty('userName')) {
-      return localStorage.getItem('userName');
-    }
-    return undefined;
-  }
+  state => state.user.data.user.userName,
+  userName => userName
 );
 
 export const phoneNumberSelector = createSelector(

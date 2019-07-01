@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+// parsing url callback from backend...
 export const getQueries = url => {
   const startIndex = url.indexOf('userId');
   const [userId, code] = url.slice(startIndex).split('&');
@@ -8,15 +9,30 @@ export const getQueries = url => {
   };
 };
 
+// simple check for values from form
 export const notUndefinedObjectProps = obj => !Object.values(obj).includes(undefined);
 
+// cleans object from falsies
+export const purifyObject = obj => {
+  const cleanObject = {};
+  Object.keys(obj).forEach(property => {
+    if (obj[property]) {
+      cleanObject[property] = obj[property];
+    }
+  });
+  return cleanObject;
+};
+
+// nuff said
 export const secretize = str => `${str.substring(0, 2)}****${str.substring(6)}`;
 
+// spliting base64 on parts to submit image from Request Verification Form
 export const parseBase64 = base64 => {
   const [base64Type, base64Data] = base64.split(';base64,');
   return { base64Image: base64Data, contentType: base64Type.slice(5) };
 };
 
+// casual money-formatting function
 export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands = ',') => {
   let newDecimalCount;
   let newAmount;
@@ -41,7 +57,37 @@ export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands =
   );
 };
 
+// inserts space
 export const formatCapitals = stringWithCapitalLetters => {
   if (stringWithCapitalLetters.toLowerCase() === 'paypal') return stringWithCapitalLetters;
+  if (stringWithCapitalLetters.toLowerCase() === 'qiwi') return stringWithCapitalLetters;
   return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
+};
+
+// creates search string based on form values for GET request
+export const makeQueryStringFromObject = obj => {
+  let queryString = '?';
+  Object.entries(obj).forEach(([key, value]) => {
+    let modifiedKey = `${key}[]`;
+
+    if (key === 'amount' || key === 'page' || key === 'field' || key === 'order') {
+      modifiedKey = key;
+    }
+
+    queryString += `${modifiedKey}=${value}&`;
+  });
+  queryString = queryString.slice(0, -1);
+  return queryString;
+};
+
+export const parseQueryString = queryString => {
+  let str;
+  const obj = {};
+  str = queryString.replace('?', '');
+  str = str.replace(/\[\]/g, '');
+  str.split('&').forEach(keyValue => {
+    const [key, value] = keyValue.split('=');
+    obj[key] = value;
+  });
+  return obj;
 };

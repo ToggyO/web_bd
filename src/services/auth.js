@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import history from '@services/history';
 
 // export default {
 //   setHeaders: token => {
@@ -63,6 +64,7 @@ export const clearCookies = () => {
 };
 
 export const userLogout = () => {
+  history.replace('/');
   clearCookies();
   window.location.reload();
   localStorage.removeItem('userName');

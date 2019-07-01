@@ -63,9 +63,10 @@ superaxios.interceptors.response.use(
             isAlreadyFetchingAccessToken = false;
             onAccessTokenFetched(accessToken);
           })
-          .catch(() => {
+          .catch(e => {
+            console.log(e);
             store.dispatch({ type: globalTypes.REFRESHING_TOKEN_ERROR });
-            store.dispatch({ type: authTypes.LOGOUT });
+            // store.dispatch({ type: authTypes.LOGOUT });
           });
       }
 
@@ -77,6 +78,11 @@ superaxios.interceptors.response.use(
       });
       return retryOriginalRequest;
     }
+
+    if (status === 500) {
+      store.dispatch({ type: authTypes.LOGOUT });
+    }
+
     return Promise.reject(error);
   }
 );

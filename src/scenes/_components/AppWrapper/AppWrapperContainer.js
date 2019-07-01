@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { userActions, userProfileSelectors } from '@ducks/user';
+import { userActions } from '@ducks/user';
+import { authSelectors } from '@ducks/auth';
+
 import AppWrapperDisplay from './AppWrapperDisplay';
 
 function mapStateToProps(state) {
   return {
-    userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName') && localStorage.getItem('userName'),
-    loading: state.user.loading,
+    userName: authSelectors.userNameSelector(state),
   };
 }
 

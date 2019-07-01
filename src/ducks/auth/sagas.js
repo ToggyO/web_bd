@@ -4,7 +4,6 @@ import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
 import * as authTypes from './types';
-import * as userProfileTypes from '../user/types';
 
 /*
 	function* workerSaga
@@ -36,11 +35,11 @@ function* signIn(action) {
   try {
     const data = yield call(api.auth.signIn, action.payload);
     yield put({ type: authTypes.SIGNIN_SUCCESS, payload: data });
-    history.push(ROUTES.WELCOME_BACK);
+    history.push(ROUTES.WELCOME_BACK + action.extra);
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: authTypes.SIGNIN_ERROR, payload: errors });
-    message.error('Your login or password was incorrect');
+    yield call(message.error, 'Your login or password was incorrect');
   }
 }
 
@@ -55,7 +54,7 @@ function* smsCodeRequest(action) {
   try {
     const data = yield call(api.auth.smsCodeRequest, action.payload);
     yield put({ type: authTypes.SMS_CODE_REQUEST_SUCCESS, payload: data });
-    message.success('The verification code has been sent to your phone!');
+    yield call(message.success, 'A text message has been sent to your phone');
   } catch (error) {
     yield put({
       type: authTypes.SMS_CODE_REQUEST_ERROR,
@@ -76,8 +75,11 @@ function* twoFactorAuth(action) {
   try {
     const data = yield call(api.auth.twoFactorAuth, action.payload);
     yield put({ type: authTypes.TWO_FACTOR_AUTH_SUCCESS, payload: data });
-
-    history.push(ROUTES.HOME);
+    if (action.extra) {
+      history.push({ pathname: action.extra, search: '?cached' });
+    } else {
+      history.push(ROUTES.HOME);
+    }
   } catch (error) {
     yield put({
       type: authTypes.TWO_FACTOR_AUTH_ERROR,
@@ -97,13 +99,16 @@ function* forgotPassword(action) {
   try {
     const data = yield call(api.auth.forgotPassword, action.payload);
     yield put({ type: authTypes.FORGOT_PASSWORD_SUCCESS, payload: data });
-    message.success(`Thanks! Please check ${action.payload.email} for a link to reset your password.`);
+    yield call(
+      message.success,
+      `Thanks! Please check ${action.payload.email} for a link to reset your password.`
+    );
   } catch (error) {
     yield put({
       type: authTypes.FORGOT_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
-    message.error('No users found');
+    yield call(message.error, 'No users found');
   }
 }
 
@@ -118,14 +123,14 @@ function* resetPassword(action) {
   try {
     const data = yield call(api.auth.resetPassword, action.payload);
     yield put({ type: authTypes.RESET_PASSWORD_SUCCESS, payload: data });
-    message.success(`Password for ${data.data.userName} has been successfully changed`);
+    yield call(message.success, `Password for ${data.data.userName} has been successfully changed`);
     history.push(ROUTES.LOGIN);
   } catch (error) {
     yield put({
       type: authTypes.RESET_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
-    message.error('Looks like the link you have followed has expired');
+    yield call(message.error, 'Looks like the link you have followed has expired');
   }
 }
 
@@ -134,18 +139,3 @@ export function* resetPasswordSaga() {
 }
 
 /*---------------------------------------------------------------------------*/
-
-function* refreshingToken(action) {
-  try {
-    console.log(action);
-    const data = yield call(api.auth.refreshingToken, action.payload);
-
-    console.log(data);
-  } catch (error) {
-    console.log('error');
-  }
-}
-
-export function* refreshingTokenSaga() {
-  yield takeLatest('bitcoins-direct/auth/REFRESHING_TOKEN_REQUEST', refreshingToken);
-}

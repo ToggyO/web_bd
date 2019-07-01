@@ -80,6 +80,7 @@ class TwoFactorForm extends React.Component {
               style={{ width: '100%' }}
               placeholder="Phone number"
               disabled={isGetCodeDisabled}
+              autoFocus
             />
           )}
         </Form.Item>

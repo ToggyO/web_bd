@@ -18,18 +18,33 @@ import { EditFullNameDisplay } from '../scenes/User/Profile/EditFullName';
 import { EditPhoneNumberDisplay } from '../scenes/User/Profile/EditPhoneNumber';
 import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
-import { PostTradeDisplay } from '../scenes/Trades/PostTrade';
+import { PostTradeContainer } from '../scenes/PostTrade';
 import { Dashboard } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
-import { BuyTradesContainer } from '../scenes/Trades/BuyTrades';
-import { SellTradesContainer } from '../scenes/Trades/SellTrades';
+import { TradesContainer } from '../scenes/Trades';
+import { EditTradeContainer } from '../scenes/EditTrade';
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
 
 const Routes = ({ loading }) => (
-  <Spin spinning={loading} size="large">
+  <Spin
+    spinning={loading}
+    tip="Restoring your session... Please, do not reload this page until it finishes."
+    wrapperClassName="global-loading"
+  >
     <Switch>
       <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
+      <Route path={ROUTES.TRADES.BUY} exact component={props => <TradesContainer {...props} type="buy" />} />
+      <Route
+        path={ROUTES.TRADES.SELL}
+        exact
+        component={props => <TradesContainer {...props} type="sell" />}
+      />
+      <Route
+        path={ROUTES.TRADES.CREATE}
+        exact
+        component={props => <PostTradeContainer {...props} type="trade" />}
+      />
 
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
@@ -47,17 +62,19 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.PROFILE.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.PROFILE.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
-      <AuthRoute path={ROUTES.TRADES.CREATE} exact component={PostTradeDisplay} />
-      {/* <AuthRoute path={ROUTES.TRADES.EDIT_TRADE} exact component={RequestVerificationDisplay} /> */}
-      <AuthRoute path={ROUTES.TRADES.BUY_TRADES} exact component={BuyTradesContainer} />
-      <AuthRoute path={ROUTES.TRADES.SELL_TRADES} exact component={SellTradesContainer} />
+
+      <AuthRoute
+        path={ROUTES.TRADES.EDIT_TRADE}
+        exact
+        component={props => <EditTradeContainer {...props} type="trade" />}
+      />
     </Switch>
   </Spin>
 );
 
 function mapStateToProps(state) {
   return {
-    loading: state._global.loading,
+    loading: state._global.globalLoading,
   };
 }
 

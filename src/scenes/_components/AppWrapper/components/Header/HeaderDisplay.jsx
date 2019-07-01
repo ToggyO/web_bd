@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
+import history from '@services/history';
 import logo from '@assets/logo.svg';
+import miniLogo from '@assets/mini-logo.svg';
 import './style.less';
 
-const HeaderDisplay = ({ logoutRequest, userName }) => {
+const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
+  const handleLinkAction = (e, to) => {
+    e.preventDefault();
+    cleanState();
+    history.push(to);
+  };
   const menu = (
     <Menu>
       <Menu.Item>
@@ -33,19 +40,26 @@ const HeaderDisplay = ({ logoutRequest, userName }) => {
     <header className="header">
       <nav className="container nav">
         <div className="nav__bubble" />
-        <Link to="/" className="header__logo">
-          <img src={logo} aria-label="logo" alt="Bitcoins direct" />
-        </Link>
+        <a href="#" onClick={e => handleLinkAction(e, ROUTES.HOME)} className="header__logo">
+          <img
+            src={window.matchMedia('(max-width: 500px)').matches ? miniLogo : logo}
+            aria-label="logo"
+            alt="Bitcoins direct"
+          />
+        </a>
 
-        <Link to={ROUTES.TRADES.BUY_TRADES} className="nav__link">
-          Buy bitcoins
-        </Link>
-        <Link to={ROUTES.TRADES.SELL_TRADES} className="nav__link">
-          Sell bitcoins
-        </Link>
-        <Link to={ROUTES.TRADES.CREATE} className="nav__link">
-          Post a trade
-        </Link>
+        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.BUY)} className="nav__link">
+          Buy <span>bitcoins</span>
+        </a>
+
+        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.SELL)} className="nav__link">
+          Sell <span>bitcoins</span>
+        </a>
+
+        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.CREATE)} className="nav__link">
+          Post <span>a trade</span>
+        </a>
+
         <a className="nav__link">Help</a>
 
         <div className="right-nav">
@@ -64,10 +78,16 @@ const HeaderDisplay = ({ logoutRequest, userName }) => {
           ) : (
             <>
               <Link to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }} className="nav__link">
-                <Icon type="user-add" /> Sign up for free
+                <>
+                  <span>
+                    <Icon type="user-add" /> Sign up for free
+                  </span>
+                </>
               </Link>
               <Link to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }} className="nav__link">
-                <Icon type="lock" /> Sign in
+                <>
+                  <Icon type="lock" /> <span>Sign in</span>
+                </>
               </Link>
             </>
           )}
@@ -80,6 +100,7 @@ const HeaderDisplay = ({ logoutRequest, userName }) => {
 HeaderDisplay.propTypes = {
   userName: PropTypes.string,
   logoutRequest: PropTypes.func,
+  cleanState: PropTypes.func,
 };
 
 export default HeaderDisplay;

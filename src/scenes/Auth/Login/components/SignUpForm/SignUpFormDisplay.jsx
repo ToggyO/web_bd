@@ -44,7 +44,7 @@ class SignUpFormDisplay extends React.Component {
         <Form.Item style={{ width: '100%' }}>
           {getFieldDecorator('userName', {
             rules: validations.username,
-          })(<Input placeholder="Username" />)}
+          })(<Input placeholder="Username" autoFocus />)}
         </Form.Item>
 
         <Form.Item>

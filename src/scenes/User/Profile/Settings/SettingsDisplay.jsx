@@ -57,7 +57,10 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta title="Phone Number" description={loading ? <Spinner /> : secretize(phoneNumber)} />
+                  <List.Item.Meta
+                    title="Phone Number"
+                    description={loading ? <Spinner /> : secretize(phoneNumber)}
+                  />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"

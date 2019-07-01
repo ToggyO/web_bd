@@ -23,7 +23,6 @@ export const phone = [
 
 export const amount = [
   {
-    required: true,
     pattern: /^[0-9]+$/,
     message: <div>Please input amount!</div>,
   },
@@ -80,4 +79,9 @@ export const smscode = [
     pattern: /^[a-zA-Z0-9]+$/,
     message: <div>Please enter code from SMS!</div>,
   },
+];
+
+export const bank = [
+  { required: true, message: <div>Please input bank name</div> },
+  { max: 60, message: <div>Max 60 characters</div> },
 ];

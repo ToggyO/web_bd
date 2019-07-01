@@ -21,19 +21,23 @@ export const ROUTES = {
   USER_DASHBOARD: '/dashboard',
   TRADES: {
     CREATE: '/trades/create',
-    EDIT_TRADE: '/trades/228/edit',
-    BUY_TRADES: '/buy-trades',
-    SELL_TRADES: '/sell-trades',
+    EDIT_TRADE: '/trades/:id/edit',
+    BUY: '/buy-trades',
+    SELL: '/sell-trades',
   },
 };
 
-export const currencies = [{ name: 'USD', value: 'USD' }, { name: 'RUB', value: 'RUB' }, { name: 'VEF', value: 'VEF' }];
+export const currencies = [
+  { name: 'USD', value: 'USD' },
+  { name: 'RUB', value: 'RUB' },
+  { name: 'VEF', value: 'VEF' },
+];
 export const locations = [
   { name: 'USA', value: 'USA' },
   { name: 'Russia', value: 'Russia' },
   { name: 'Venezuela', value: 'Venezuela' },
 ];
-export const paymentMethods = [
+export const payments = [
   { name: 'PayPal', value: 'PayPal' },
   { name: 'Counter deposit', value: 'CounterDeposit' },
   { name: 'Cash by mail', value: 'CashByMail' },
@@ -44,3 +48,5 @@ export const paymentMethods = [
   { name: 'Moneygram', value: 'Moneygram' },
   { name: 'QIWI', value: 'QIWI' },
 ];
+
+export const pageSize = 25;
