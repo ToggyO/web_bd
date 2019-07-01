@@ -23,11 +23,13 @@ class TransactionLimits extends React.Component {
   }
 
   handleNumberChange = e => {
-    const number = parseInt(e.target.value, 10) || '';
-    if (!('value' in this.props)) {
-      this.setState({ [e.target.name]: number });
+    if (e.target.value.length < 7) {
+      const number = parseInt(e.target.value, 10) || '';
+      if (!('value' in this.props)) {
+        this.setState({ [e.target.name]: number });
+      }
+      this.triggerChange({ [e.target.name]: number });
     }
-    this.triggerChange({ [e.target.name]: number });
   };
 
   triggerChange = changedValue => {

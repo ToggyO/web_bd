@@ -303,7 +303,10 @@ class CreateEditTradeFormDisplay extends React.Component {
             <Col>
               <Form.Item className="create-edit-form__item" label="Terms of trade">
                 {form.getFieldDecorator('terms', {
-                  rules: [{ required: true, message: <div>Please input some terms!</div> }],
+                  rules: [
+                    { required: true, message: <div>Please input some terms!</div> },
+                    { max: 1500, message: <div>Max. 1 500 characters</div> },
+                  ],
                   initialValue: specificTrade.terms,
                 })(
                   <Input.TextArea
