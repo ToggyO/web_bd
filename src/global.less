@@ -6,6 +6,10 @@ body {
     'Segoe UI Symbol';
 }
 
+.mb-20 {
+  margin-bottom: 20px;
+}
+
 h1 {
   font-size: 38px;
 }
@@ -23,9 +27,9 @@ label.ant-form-item-required {
 }
 
 .container {
-  max-width: 1192px;
+  max-width: 1202px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 15px;
 }
 
 .paper {
@@ -40,6 +44,12 @@ label.ant-form-item-required {
   background-color: rgba(@primary-color, 0.5) !important;
   border-color: transparent !important;
   color: @btn-primary-color !important;
+}
+
+.removable {
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 }
 
 .ant-input-number {
@@ -63,6 +73,29 @@ label.ant-form-item-required {
   line-height: inherit;
   label {
     color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.ant-table-wrapper {
+  @media screen and (max-width: 700px) {
+    zoom: 0.8;
+  }
+  @media screen and (max-width: 500px) {
+    zoom: 0.5;
+  }
+  @media screen and (max-width: 380px) {
+    zoom: 0.3;
+  }
+}
+@media screen and (max-width: 380px) {
+  .ant-table-column-title {
+    font-size: 10px;
+  }
+}
+.ant-table-expand-icon-th,
+.ant-table-row-expand-icon-cell {
+  @media screen and (max-width: 500px) {
+    display: none;
   }
 }
 
@@ -155,4 +188,16 @@ label.ant-form-item-required {
 
 .ant-skeleton {
   margin-bottom: 12px;
+}
+
+// Other stuff
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

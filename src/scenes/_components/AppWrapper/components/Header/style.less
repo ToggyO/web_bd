@@ -6,6 +6,9 @@
     margin: 0 27px 0 0;
     line-height: 47px;
     z-index: 10;
+    @media screen and (max-width: 330px) {
+      margin: 0 12px 0 0;
+    }
   }
 }
 
@@ -24,6 +27,15 @@
     &:active {
       background: lighten(@primary-color, 2%);
       color: #fff;
+    }
+    @media screen and (max-width: 500px) {
+      padding: 10px;
+    }
+
+    span {
+      @media screen and (max-width: 840px) {
+        display: none;
+      }
     }
   }
 
@@ -81,6 +93,14 @@
     background: lighten(@primary-color, 2%);
     color: #fff;
   }
+  @media screen and (max-width: 500px) {
+    padding-right: 0;
+  }
+  .user-name {
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
 }
 .user-button.ant-dropdown-open {
   background: tint(@primary-color, 15%);
@@ -88,6 +108,10 @@
 .user-avatar {
   margin-right: 8px;
   background: rgba(255, 255, 255, 0.4);
+
+  @media screen and (max-width: 500px) {
+    margin-right: 0;
+  }
 }
 .user-avatar.ant-avatar-sm.ant-avatar-icon {
   font-size: 12px;

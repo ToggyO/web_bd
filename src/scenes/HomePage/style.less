@@ -1,3 +1,31 @@
 .home-page {
-  padding-top: 50px;
+  padding: 50px 0 80px;
+  @media screen and (max-width: 500px) {
+    padding: 15px 0 50px;
+  }
+}
+
+.quick-buy-sell {
+  padding: 0px 80px;
+  @media screen and (max-width: 700px) {
+    padding: 0 15px;
+  }
+
+  &__trades {
+    @media screen and (max-width: 500px) {
+      text-align: center;
+    }
+  }
+
+  &__trades:not(:last-child) {
+    margin-bottom: 50px;
+  }
+
+  &__heading {
+    font-size: 30px;
+    @media screen and (max-width: 500px) {
+      text-align: center;
+      font-size: 26px;
+    }
+  }
 }
