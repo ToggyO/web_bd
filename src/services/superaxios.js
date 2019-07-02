@@ -79,9 +79,9 @@ superaxios.interceptors.response.use(
       return retryOriginalRequest;
     }
 
-    if (status === 500) {
-      store.dispatch({ type: authTypes.LOGOUT });
-    }
+    // if (status === 500) {
+    //   store.dispatch({ type: authTypes.LOGOUT });
+    // }
 
     return Promise.reject(error);
   }
