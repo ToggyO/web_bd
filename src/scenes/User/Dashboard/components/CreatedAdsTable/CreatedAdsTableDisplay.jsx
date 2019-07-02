@@ -14,11 +14,11 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
       const tr = document.querySelector(`tr[data-row-key="${history.location.state.id}"]`);
       if (tr) {
         tr.classList.add('hover');
+        setTimeout(() => {
+          tr.classList.remove('hover');
+          history.push({ state: null });
+        }, 3000);
       }
-      setTimeout(() => {
-        tr.classList.remove('hover');
-        history.push({ state: null });
-      }, 3000);
     }
 
     //
