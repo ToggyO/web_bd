@@ -19,7 +19,7 @@ import { EditPhoneNumberDisplay } from '../scenes/User/Profile/EditPhoneNumber';
 import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
 import { PostTradeContainer } from '../scenes/PostTrade';
-import { Dashboard } from '../scenes/User/Dashboard';
+import { DashboardContainer } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
 import { TradesContainer } from '../scenes/Trades';
 import { EditTradeContainer } from '../scenes/EditTrade';
@@ -55,7 +55,7 @@ const Routes = ({ loading }) => (
       <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
       <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
-      <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={Dashboard} />
+      <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={DashboardContainer} />
       <AuthRoute path={ROUTES.PROFILE.SETTINGS} exact component={SettingsContainer} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_EMAIL} exact component={EditEmailDisplay} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_FULLNAME} exact component={EditFullNameDisplay} />

@@ -18,6 +18,7 @@ const antColors = {
   'border-color-split': 'hsv(0, 0, 91%)',
   'box-shadow-base': '0 0 10px 0 rgba(0, 0, 0, 0.1)',
   'label-color': 'fade(#000, 65%);',
+  'table-row-hover-bg': 'none',
 };
 
 exports.antColors = antColors;

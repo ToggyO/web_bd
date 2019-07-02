@@ -36,9 +36,13 @@ export function* getTradeByIdSaga() {
 
 function* editTrade(action) {
   try {
-    const data = yield call(api.trades.editTrade, action.payload);
+    const { data } = yield call(api.trades.editTrade, action.payload);
     yield put({ type: types.EDIT_TRADE_SUCCESS, payload: data });
-    yield call(history.push, ROUTES.USER_DASHBOARD);
+    console.log(data.id);
+    yield call(history.push, {
+      pathname: ROUTES.USER_DASHBOARD,
+      state: { id: data.id },
+    });
     yield call(message.success, 'Success! Trade has been changed');
   } catch (error) {
     yield put({ type: types.EDIT_TRADE_ERROR, payload: error });

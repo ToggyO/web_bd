@@ -50,3 +50,4 @@ export const payments = [
 ];
 
 export const pageSize = 25;
+export const pageSizeDashboard = 1000;

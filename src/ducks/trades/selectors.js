@@ -9,6 +9,7 @@ export const tradesSelector = createSelector(
   items =>
     items.map(({ trade }) => ({
       key: trade.id,
+      createdAt: new Date(trade.createDate).getTime(),
       transactionLimit: `${formatMoney(trade.minTransactionLimit)} - ${formatMoney(
         trade.maxTransactionLimit
       )} ${trade.currency}`,

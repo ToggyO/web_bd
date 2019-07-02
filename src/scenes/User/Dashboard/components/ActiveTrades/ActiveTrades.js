@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
-import{ ROUTES }from '@config/constants';
+import { ROUTES } from '@config/constants';
 import './style.less';
 
 const columns = [
@@ -204,7 +204,6 @@ class CreatedTrades extends React.Component {
 
     return (
       <>
-        <h2 className="dashboard__header">Created trades</h2>
         <Table
           columns={columns}
           dataSource={this.state.data}

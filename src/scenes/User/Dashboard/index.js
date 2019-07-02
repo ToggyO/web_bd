@@ -1,1 +1,2 @@
-export { default as Dashboard } from './Dashboard';
+export { default as DashboardDisplay } from './DashboardDisplay';
+export { default as DashboardContainer } from './DashboardContainer';

@@ -10,11 +10,19 @@ import * as userSagas from '@ducks/user/sagas';
 import { buyTradesSagas } from '@ducks/trades/buy';
 import { sellTradesSagas } from '@ducks/trades/sell';
 import { tradeSagas } from '@ducks/trades/trade';
+import { tradesSagas } from '@ducks/trades/trades';
 import { saveTokens, saveUserName, logout } from '../middleware';
 
 export default function configureStore() {
   const reducer = combineReducers({ _global, auth, user, trades });
-  const sagas = { ...authSagas, ...userSagas, ...buyTradesSagas, ...sellTradesSagas, ...tradeSagas };
+  const sagas = {
+    ...authSagas,
+    ...userSagas,
+    ...buyTradesSagas,
+    ...sellTradesSagas,
+    ...tradeSagas,
+    ...tradesSagas,
+  };
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware, saveTokens, saveUserName, logout];
   const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
