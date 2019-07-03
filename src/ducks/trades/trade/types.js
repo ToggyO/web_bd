@@ -11,3 +11,4 @@ export const EDIT_TRADE_SUCCESS = 'bitcoins-direct/trades/trade/EDIT_TRADE_SUCCE
 export const EDIT_TRADE_ERROR = 'bitcoins-direct/trades/trade/EDIT_TRADE_ERROR';
 
 export const PERSIST_FORM_STATE = 'bitcoins-direct/trades/trade/PERSIST_FORM_STATE';
+export const CLEAN_FORM_STATE = 'bitcoins-direct/trades/trade/CLEAN_FORM_STATE';

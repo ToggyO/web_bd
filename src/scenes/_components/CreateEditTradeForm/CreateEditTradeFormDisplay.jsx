@@ -19,9 +19,14 @@ class CreateEditTradeFormDisplay extends React.Component {
   };
 
   componentDidMount() {
+    const { location } = history;
+    const { forEdit, cleanFormState } = this.props;
+
+    if (location.pathname === ROUTES.TRADES.CREATE) cleanFormState();
     if (history.location.search) return;
-    if (!this.props.forEdit) {
+    if (!forEdit) {
       this.fetchData(getInitialValuesBasedOnNavigatorLanguage().currency);
+      this.setFields();
     }
   }
 
@@ -34,15 +39,11 @@ class CreateEditTradeFormDisplay extends React.Component {
 
   fetchData = async value => {
     this.setState({ loading: true });
-    const { forEdit } = this.props;
     const response = await fetch(
       `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`
     );
     const data = await response.json();
     this.setState({ btcPrice: +data.bpi[value].rate_float.toFixed(2), loading: false });
-    if (!forEdit) {
-      this.setFields();
-    }
   };
 
   setFields = () => {
@@ -117,8 +118,8 @@ class CreateEditTradeFormDisplay extends React.Component {
 
   render() {
     const { form, isAuthorized, loading, forEdit, specificTrade } = this.props;
-
     const payment = form.getFieldValue('payment');
+
     return (
       <Form onSubmit={this.handleSubmit} className="create-edit-form" hideRequiredMark>
         <div className="create-edit-form__block">
@@ -136,96 +137,102 @@ class CreateEditTradeFormDisplay extends React.Component {
             )}
           </Form.Item>
         </div>
-
-        <div className="create-edit-form__block">
-          <h3 className="create-edit-form__header">Trade information</h3>
-          <Divider />
-          <Row gutter={48}>
-            <Col lg={11}>
-              <Form.Item className="create-edit-form__item" label="Currency">
-                {form.getFieldDecorator('currency', {
-                  rules: [{ required: true, message: <div>Please select currency!</div> }],
-                  initialValue: specificTrade.currency || getInitialValuesBasedOnNavigatorLanguage().currency,
-                })(
-                  <Select
-                    showSearch
-                    placeholder="Select currency"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    onChange={this.handleCurrencyChange}
-                  >
-                    {currencies.map(currency_ => (
-                      <Option key={currency_.name} value={currency_.value}>
-                        {currency_.name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-            </Col>
-            <Col lg={11}>
-              <Form.Item className="create-edit-form__item" label="Location">
-                {form.getFieldDecorator('location', {
-                  rules: [{ required: true, message: <div>Please select location!</div> }],
-                  initialValue: specificTrade.location || getInitialValuesBasedOnNavigatorLanguage().location,
-                })(
-                  <Select
-                    showSearch
-                    placeholder="Select country"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {locations.map(location_ => (
-                      <Option key={location_.name} value={location_.value}>
-                        {location_.name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={48}>
-            <Col lg={11}>
-              <Form.Item className="create-edit-form__item" label="Payment method">
-                {form.getFieldDecorator('payment', {
-                  rules: [{ required: true, message: <div>Please select payment method!</div> }],
-                  initialValue: specificTrade.payment || null,
-                })(
-                  <Select
-                    showSearch
-                    placeholder="Select payment method"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {payments.map(payment_ => (
-                      <Option key={payment_.name} value={payment_.value}>
-                        {payment_.name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-            </Col>
-            {(payment === payments[1].value || payment === payments[4].value || specificTrade.bankName) && (
+        <Spin spinning={loading}>
+          <div className="create-edit-form__block">
+            <h3 className="create-edit-form__header">Trade information</h3>
+            <Divider />
+            <Row gutter={48}>
               <Col lg={11}>
-                <Form.Item className="create-edit-form__item create-edit-form__bank-field" label="Bank name">
-                  {form.getFieldDecorator('bankName', {
-                    rules: validations.bank,
-                    initialValue: specificTrade.bankName || null,
-                  })(<Input placeholder="Sberbank" />)}
+                <Form.Item className="create-edit-form__item" label="Currency">
+                  {form.getFieldDecorator('currency', {
+                    rules: [{ required: true, message: <div>Please select currency!</div> }],
+                    initialValue:
+                      specificTrade.currency || getInitialValuesBasedOnNavigatorLanguage().currency,
+                  })(
+                    <Select
+                      showSearch
+                      placeholder="Select currency"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      onChange={this.handleCurrencyChange}
+                    >
+                      {currencies.map(currency_ => (
+                        <Option key={currency_.name} value={currency_.value}>
+                          {currency_.name}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
                 </Form.Item>
               </Col>
-            )}
-          </Row>
-        </div>
+              <Col lg={11}>
+                <Form.Item className="create-edit-form__item" label="Location">
+                  {form.getFieldDecorator('location', {
+                    rules: [{ required: true, message: <div>Please select location!</div> }],
+                    initialValue:
+                      specificTrade.location || getInitialValuesBasedOnNavigatorLanguage().location,
+                  })(
+                    <Select
+                      showSearch
+                      placeholder="Select country"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                      {locations.map(location_ => (
+                        <Option key={location_.name} value={location_.value}>
+                          {location_.name}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={48}>
+              <Col lg={11}>
+                <Form.Item className="create-edit-form__item" label="Payment method">
+                  {form.getFieldDecorator('payment', {
+                    rules: [{ required: true, message: <div>Please select payment method!</div> }],
+                    initialValue: specificTrade.payment || payments[0].value,
+                  })(
+                    <Select
+                      showSearch
+                      placeholder="Select payment method"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                      {payments.map(payment_ => (
+                        <Option key={payment_.name} value={payment_.value}>
+                          {payment_.name}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
+                </Form.Item>
+              </Col>
+              {(payment === payments[1].value || payment === payments[4].value) && (
+                <Col lg={11}>
+                  <Form.Item
+                    className="create-edit-form__item create-edit-form__bank-field"
+                    label="Bank name"
+                  >
+                    {form.getFieldDecorator('bankName', {
+                      rules: validations.bank,
+                      initialValue: specificTrade.bankName || null,
+                    })(<Input placeholder="Sberbank" />)}
+                  </Form.Item>
+                </Col>
+              )}
+            </Row>
+          </div>
+        </Spin>
 
         <div className="create-edit-form__block">
           <h3 className="create-edit-form__header">Price</h3>
@@ -352,6 +359,7 @@ CreateEditTradeFormDisplay.propTypes = {
   isAuthorized: PropTypes.bool,
   loading: PropTypes.bool,
   forEdit: PropTypes.bool,
+  cleanFormState: PropTypes.func,
   specificTrade: PropTypes.shape({
     id: PropTypes.string,
     type: PropTypes.string,

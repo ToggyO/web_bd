@@ -77,7 +77,7 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
           key="createdAt"
           render={(text, record) => formatDate(record.createdAt)}
           sorter={(a, b) => a.createdAt - b.createdAt}
-          defaultSortOrder="ascend"
+          defaultSortOrder="descend"
         />
 
         <Column
@@ -108,7 +108,7 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
           )}
           dataIndex="btcPrice"
           key="btcPrice"
-          sorter={withTerms}
+          // sorter={withTerms}
           // sortOrder={field === 'btcPrice' && order}
         />
 

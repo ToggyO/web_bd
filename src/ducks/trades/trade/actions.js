@@ -19,3 +19,7 @@ export const persistFormState = values => ({
   type: types.PERSIST_FORM_STATE,
   payload: values,
 });
+
+export const cleanFormState = () => ({
+  type: types.CLEAN_FORM_STATE,
+});

@@ -19,6 +19,7 @@ export default function trade(state = initialState, action) {
 
     case types.POST_TRADE_SUCCESS:
     case types.EDIT_TRADE_SUCCESS:
+    case types.CLEAN_FORM_STATE:
       return initialState;
     default:
       return state;

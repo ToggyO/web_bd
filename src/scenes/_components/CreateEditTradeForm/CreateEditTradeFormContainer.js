@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { authSelectors } from '@ducks/auth';
+import { tradeActions } from '@ducks/trades/trade';
 
 import CreateEditTradeFormDisplay from './CreateEditTradeFormDisplay';
 
@@ -12,4 +13,15 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(CreateEditTradeFormDisplay);
+function mapDispatchToProps(dispatch) {
+  return {
+    cleanFormState() {
+      dispatch(tradeActions.cleanFormState());
+    },
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateEditTradeFormDisplay);
