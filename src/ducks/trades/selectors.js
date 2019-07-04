@@ -22,7 +22,7 @@ export const tradesSelector = createSelector(
     }))
 );
 
-export const tradesLoadingSelector = createSelector(
+export const tradeLoadingSelector = createSelector(
   [tradesByTypeSelector],
   tradesByType => tradesByType.loading
 );
@@ -32,7 +32,7 @@ export const totalPagesQuantitySelector = createSelector(
   tradesByType => tradesByType.data.total
 );
 
-export const tradeForEditSelector = createSelector(
+export const tradeSelector = createSelector(
   [tradesByTypeSelector],
   ({ data }) => ({
     id: data.id,

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { buyTradesActions } from '@ducks/trades/buy';
 import { sellTradesActions } from '@ducks/trades/sell';
-import { tradesLoadingSelector } from '@ducks/trades/selectors';
+import { tradesSelectors } from '@ducks/trades';
 import TenTradesDisplay from './TenTradesDisplay';
 
 function mapStateToProps(state, props) {
   return {
-    loading: tradesLoadingSelector(state, props),
+    loading: tradesSelectors.tradeLoadingSelector(state, props),
   };
 }
 

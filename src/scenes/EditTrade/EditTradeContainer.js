@@ -5,7 +5,7 @@ import EditTradeDisplay from './EditTradeDisplay';
 
 function mapStateToProps(state, props) {
   return {
-    specificTrade: tradesSelectors.tradeForEditSelector(state, props),
+    specificTrade: tradesSelectors.tradeSelector(state, props),
   };
 }
 function mapDispatchToProps(dispatch) {

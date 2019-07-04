@@ -8,7 +8,7 @@ function mapStateToProps(state, props) {
     queryString: searchParamsSelectors.searchQueryStringSelector(state),
     type: props.type,
     tradesData: tradesSelectors.tradesSelector(state, props),
-    loading: tradesSelectors.tradesLoadingSelector(state, props),
+    loading: tradesSelectors.tradeLoadingSelector(state, props),
     totalPages: tradesSelectors.totalPagesQuantitySelector(state, props),
     withTerms: !!props.withTerms,
     classNames: props.classNames,

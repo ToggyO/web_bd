@@ -7,7 +7,7 @@ import PostTradeDisplay from './PostTradeDisplay';
 function mapStateToProps(state, props) {
   return {
     isAuthorized: !!authSelectors.userNameSelector(state),
-    specificTrade: tradesSelectors.tradeForEditSelector(state, props),
+    specificTrade: tradesSelectors.tradeSelector(state, props),
   };
 }
 

@@ -7,7 +7,7 @@ import TradesDisplay from './TradesDisplay';
 function mapStateToProps(state, props) {
   return {
     tradesData: tradesSelectors.tradesSelector(state, props),
-    loading: tradesSelectors.tradesLoadingSelector(state, props),
+    loading: tradesSelectors.tradeLoadingSelector(state, props),
     totalPages: tradesSelectors.totalPagesQuantitySelector(state, props),
   };
 }

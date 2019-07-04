@@ -9,10 +9,11 @@ export const getQueries = url => {
   };
 };
 
-export const catchUserIdFromPath = path => {
-  const name = path.split('user/')[1];
-  if (name.indexOf('/') > -1) return name.replace('/', '');
-  return name;
+export const catchFromPath = (path, separators) => {
+  if (Array.isArray(separators)) {
+    return path.match(`${separators[0]}/(.*)/${separators[1]}`)[1];
+  }
+  return path.match(`${separators}/(.*)`)[1].replace('/', '');
 };
 
 // simple check for values from form
