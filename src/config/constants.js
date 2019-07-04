@@ -25,7 +25,7 @@ export const ROUTES = {
     EDIT_TRADE: '/trades/:id/edit',
     BUY: '/buy-trades',
     SELL: '/sell-trades',
-    INITIATE: '/trades/initiate',
+    INITIATE: '/trades/:id/initiate',
   },
 };
 

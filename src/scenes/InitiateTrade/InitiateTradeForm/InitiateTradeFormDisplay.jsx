@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
 import { Form, Icon, Row, Col, Input, Button } from 'antd';
-import { formatMoney } from '@utils';
-
-const btcAmount = '0.23206';
-const amount = '2000';
-const currency = 'USD';
 
 const InitiateTradeFormDisplay = props => {
-  const { form } = props;
+  const { form, min, max, currency } = props;
   useEffect(() => {
     form.setFieldsValue({ fiat: '', tradeAmount: '' });
   }, []);
@@ -33,6 +29,18 @@ const InitiateTradeFormDisplay = props => {
     });
   };
 
+  const checkFiatValue = (rule, value, callback) => {
+    if (value <= max && value >= min) {
+      callback();
+      return;
+    }
+    if (!value) {
+      callback('Please input trade amount');
+      return;
+    }
+    callback(`Trade amount for this ad should be between ${min} - ${max} ${currency}`);
+  };
+
   const { fiat, tradeAmount } = form.getFieldsValue(['fiat', 'tradeAmount']);
 
   return (
@@ -42,14 +50,7 @@ const InitiateTradeFormDisplay = props => {
           <Form.Item>
             {form.getFieldDecorator('fiat', {
               initialValue: null,
-              normalize: (value, prevValue) => {
-                console.log(value, prevValue);
-                // let strValue = value.toString();
-                // const index = strValue.indexOf('.');
-                // if (index > -1) strValue = strValue.slice(0, index + 3);
-                // return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
-              },
-              rules: [{ required: true, message: <div>Please input trade amount</div> }],
+              rules: [{ validator: checkFiatValue }],
             })(<Input addonAfter={currency} onChange={handleFiatChange} />)}
           </Form.Item>
         </Col>
@@ -57,8 +58,6 @@ const InitiateTradeFormDisplay = props => {
           <Form.Item>
             {form.getFieldDecorator('tradeAmount', {
               initialValue: null,
-
-              rules: [{ required: true, message: <div>Please input trade amount</div> }],
             })(<Input addonAfter="BTC" onChange={handleTradeAmountChange} />)}
           </Form.Item>
         </Col>

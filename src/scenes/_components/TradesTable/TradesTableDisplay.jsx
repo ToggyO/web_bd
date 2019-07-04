@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
+import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { pageSize } from '@config/constants';
 import { NoData } from './_components/NoData';
@@ -116,7 +117,7 @@ const TradesTableDisplay = ({
         dataIndex="type"
         key="type"
         columnWidth={80}
-        render={(text, record) => <a>{record.type}</a>}
+        render={(text, record) => <Link to={`/trades/${record.key}/initiate`}>{record.type}</Link>}
       />
     </Table>
   );
