@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { tradesActions } from '@ducks/trades/trades';
-import OtherProfileDisplay from './OtherProfileDIsplay';
+import OtherProfileDisplay from './OtherProfileDisplay';
 
 function mapDispatchToProps(dispatch) {
   return {
