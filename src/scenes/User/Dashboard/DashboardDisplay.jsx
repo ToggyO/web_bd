@@ -4,7 +4,7 @@ import { Tabs } from 'antd';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { pageSizeDashboard } from '@config/constants';
 import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
-import { ActiveTrades } from './components/ActiveTrades';
+import { ActiveTradesContainer } from './components/ActiveTrades';
 import './style.less';
 
 const { TabPane } = Tabs;
@@ -45,7 +45,7 @@ const DashboardDisplay = ({ getCreatedAdsRequest }) => {
             </TabPane>
             <TabPane tab="Active trades" key="2">
               <h2 className="dashboard__header">Active trades</h2>
-              <ActiveTrades />
+              <ActiveTradesContainer withTerms />
             </TabPane>
             <TabPane tab="Completed trades" key="3">
               Completed trades

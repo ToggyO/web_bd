@@ -114,6 +114,7 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
 
         <Column
           title="Ad status"
+          // eslint-disable-next-line no-unused-vars
           render={(text, record) => <span>status</span>}
           key="transactionLimit"
           sorter={withTerms}
