@@ -25,8 +25,4 @@ PostTradeDisplay.propTypes = {
   persistFormState: PropTypes.func,
 };
 
-PostTradeDisplay.defaultProps = {
-  specificTrade: {},
-};
-
 export default PostTradeDisplay;
