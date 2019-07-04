@@ -24,3 +24,4 @@ export { default as SyncOutline } from '@ant-design/icons/lib/outline/SyncOutlin
 export { default as UserAddOutline } from '@ant-design/icons/lib/outline/UserAddOutline';
 export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/PaperClipOutline';
 export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline';
+export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill';

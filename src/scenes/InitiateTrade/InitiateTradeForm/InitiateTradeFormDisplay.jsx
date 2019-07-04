@@ -1,0 +1,86 @@
+import React, { useState, useEffect } from 'react';
+import { Form, Icon, Row, Col, Input, Button } from 'antd';
+import { formatMoney } from '@utils';
+
+const btcAmount = '0.23206';
+const amount = '2000';
+const currency = 'USD';
+
+const InitiateTradeFormDisplay = props => {
+  const { form } = props;
+  useEffect(() => {
+    form.setFieldsValue({ fiat: '', tradeAmount: '' });
+  }, []);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log(values);
+      }
+    });
+  };
+
+  const handleFiatChange = e => {
+    form.setFieldsValue({
+      tradeAmount: e.target.value / 10000 || '',
+    });
+  };
+
+  const handleTradeAmountChange = e => {
+    form.setFieldsValue({
+      fiat: e.target.value * 10000 || '',
+    });
+  };
+
+  const { fiat, tradeAmount } = form.getFieldsValue(['fiat', 'tradeAmount']);
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Row gutter={12}>
+        <Col xs={12}>
+          <Form.Item>
+            {form.getFieldDecorator('fiat', {
+              initialValue: null,
+              normalize: (value, prevValue) => {
+                console.log(value, prevValue);
+                // let strValue = value.toString();
+                // const index = strValue.indexOf('.');
+                // if (index > -1) strValue = strValue.slice(0, index + 3);
+                // return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
+              },
+              rules: [{ required: true, message: <div>Please input trade amount</div> }],
+            })(<Input addonAfter={currency} onChange={handleFiatChange} />)}
+          </Form.Item>
+        </Col>
+        <Col xs={12}>
+          <Form.Item>
+            {form.getFieldDecorator('tradeAmount', {
+              initialValue: null,
+
+              rules: [{ required: true, message: <div>Please input trade amount</div> }],
+            })(<Input addonAfter="BTC" onChange={handleTradeAmountChange} />)}
+          </Form.Item>
+        </Col>
+      </Row>
+
+      <div className="initiate-trade__note">
+        <Icon type="exclamation-circle" theme="filled" className="initiate-trade__icon" />
+        <p className="initiate-trade__text">
+          Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow fee is
+          0,75% from the trade amount. Current blockchain transaction fee is approximately 0.00033239 BTC.
+        </p>
+      </div>
+      <div className="initiate-trade__message">
+        <span className="initiate-trade__label">Contact message</span>
+        <div className="initiate-trade__fake-message">{`Hi, I'd like to buy your ${tradeAmount} BTC for my ${fiat} ${currency}`}</div>
+      </div>
+      <p className="initiate-trade__confirm-text">Please confirm you are willing to trade.</p>
+      <Button htmlType="submit" type="primary">
+        Request trade
+      </Button>
+    </Form>
+  );
+};
+
+export default Form.create()(InitiateTradeFormDisplay);
