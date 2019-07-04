@@ -17,6 +17,7 @@ export const ROUTES = {
     EDIT_PHONENUMBER: '/profile/edit-phonenumber',
     EDIT_PASSWORD: '/profile/edit-password',
     REQUEST_VERIFICATION: '/profile/request-verification',
+    OTHER: '/user/:id',
   },
   USER_DASHBOARD: '/dashboard',
   TRADES: {
@@ -24,6 +25,7 @@ export const ROUTES = {
     EDIT_TRADE: '/trades/:id/edit',
     BUY: '/buy-trades',
     SELL: '/sell-trades',
+    INITIATE: '/trades/initiate',
   },
 };
 
@@ -51,3 +53,4 @@ export const payments = [
 
 export const pageSize = 25;
 export const pageSizeDashboard = 1000;
+export const pageSizeOtherProfile = 1000;

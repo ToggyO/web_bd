@@ -9,6 +9,12 @@ export const getQueries = url => {
   };
 };
 
+export const catchUserIdFromPath = path => {
+  const name = path.split('user/')[1];
+  if (name.indexOf('/') > -1) return name.replace('/', '');
+  return name;
+};
+
 // simple check for values from form
 export const notUndefinedObjectProps = obj => !Object.values(obj).includes(undefined);
 

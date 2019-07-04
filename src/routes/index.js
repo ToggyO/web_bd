@@ -23,6 +23,8 @@ import { DashboardContainer } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
 import { TradesContainer } from '../scenes/Trades';
 import { EditTradeContainer } from '../scenes/EditTrade';
+import { InitiateTradeContainer } from '../scenes/InitiateTrade';
+import { OtherProfileContainer } from '../scenes/User/OtherProfile';
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
 
@@ -45,6 +47,7 @@ const Routes = ({ loading }) => (
         exact
         component={props => <PostTradeContainer {...props} type="trade" />}
       />
+      <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
 
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
@@ -62,6 +65,7 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.PROFILE.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.PROFILE.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
+      <AuthRoute path={ROUTES.PROFILE.OTHER} exact component={OtherProfileContainer} />
 
       <AuthRoute
         path={ROUTES.TRADES.EDIT_TRADE}

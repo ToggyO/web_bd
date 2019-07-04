@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
@@ -13,6 +14,7 @@ const TradesTableDisplay = ({
   tradesData,
   loading,
   withTerms,
+  withPagination,
   totalPages,
   tablePageChange,
   tableSort,
@@ -24,11 +26,13 @@ const TradesTableDisplay = ({
   let buyerOrSeller;
   if (type.toLowerCase() === 'buy') buyerOrSeller = 'Seller';
   if (type.toLowerCase() === 'sell') buyerOrSeller = 'Buyer';
+
   useEffect(() => {
     if (queryString) {
       history.push({ search: queryString });
     }
   });
+
   return (
     <Table
       expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
@@ -43,7 +47,7 @@ const TradesTableDisplay = ({
             pageSize,
             total: totalPages,
           }
-          : false
+          : !!withPagination
       }
       className={classNames}
       loading={loading}
@@ -134,6 +138,7 @@ TradesTableDisplay.propTypes = {
   ),
   loading: PropTypes.bool,
   withTerms: PropTypes.bool,
+  withPagination: PropTypes.bool,
   totalPages: PropTypes.number,
   tablePageChange: PropTypes.func,
   tableSort: PropTypes.func,
@@ -148,6 +153,7 @@ TradesTableDisplay.defaultProps = {
   classNames: '',
   loading: false,
   withTerms: false,
+  withPagination: false,
   totalPages: null,
 };
 

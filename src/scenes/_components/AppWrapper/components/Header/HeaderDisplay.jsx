@@ -48,15 +48,27 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
           />
         </a>
 
-        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.BUY)} className="nav__link">
+        <a
+          href={ROUTES.TRADES.BUY}
+          onClick={e => handleLinkAction(e, ROUTES.TRADES.BUY)}
+          className="nav__link"
+        >
           Buy <span>bitcoins</span>
         </a>
 
-        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.SELL)} className="nav__link">
+        <a
+          href={ROUTES.TRADES.SELL}
+          onClick={e => handleLinkAction(e, ROUTES.TRADES.SELL)}
+          className="nav__link"
+        >
           Sell <span>bitcoins</span>
         </a>
 
-        <a href="#" onClick={e => handleLinkAction(e, ROUTES.TRADES.CREATE)} className="nav__link">
+        <a
+          href={ROUTES.TRADES.CREATE}
+          onClick={e => handleLinkAction(e, ROUTES.TRADES.CREATE)}
+          className="nav__link"
+        >
           Post <span>a trade</span>
         </a>
 
