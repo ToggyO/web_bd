@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber } from 'antd';
+import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Icon } from 'antd';
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import history from '@services/history';
@@ -18,15 +18,15 @@ class CreateEditTradeFormDisplay extends React.Component {
     btcPrice: 0,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { location } = history;
     const { forEdit, cleanFormState } = this.props;
 
     if (location.pathname === ROUTES.TRADES.CREATE) cleanFormState();
     if (history.location.search) return;
     if (!forEdit) {
-      this.fetchData(getInitialValuesBasedOnNavigatorLanguage().currency);
-      this.setFields();
+      await this.fetchData(getInitialValuesBasedOnNavigatorLanguage().currency);
+      await this.setFields();
     }
   }
 
@@ -288,9 +288,22 @@ class CreateEditTradeFormDisplay extends React.Component {
             </Col>
           </Row>
 
+          <Row gutter={48} style={{padding: '0 24px'}}>
+            <Col>
+              <div className="initiate-trade__note">
+                <Icon type="exclamation-circle" theme="filled" className="initiate-trade__icon" />
+                <p className="initiate-trade__text">
+                  Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow
+                  fee is 0,75% from the trade amount. Current blockchain transaction fee is approximately
+                  0.00033239 BTC.
+                </p>
+              </div>
+            </Col>
+          </Row>
+
           <Row gutter={48}>
             <Col lg={11}>
-              <Form.Item className="create-edit-form__item" label="Transaction limits">
+              <Form.Item className="create-edit-form__item" label="Trade limits">
                 {form.getFieldDecorator('limits', {
                   initialValue: {
                     minTransactionLimit: specificTrade.minTransactionLimit || 0,

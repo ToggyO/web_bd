@@ -74,7 +74,7 @@ const TradesTableDisplay = ({
       <Column
         title={() => (
           <span>
-            Transaction <span className="removable">limits</span>
+            Trade <span className="removable">limits</span>
           </span>
         )}
         render={(text, record) => record.transactionLimit}
