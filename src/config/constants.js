@@ -3,6 +3,7 @@ export const API_URL = 'https://4rzmeh95xa.execute-api.eu-west-1.amazonaws.com/s
 
 export const ROUTES = {
   HOME: '/',
+  404: '/404',
   LOGIN: '/login',
   CONFIRM_EMAIL: '/confirm-email',
   SUCCESS: '/success',
