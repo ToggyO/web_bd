@@ -107,7 +107,7 @@ export const formatDate = (timestamp, locale) => {
   if (day.length < 2) day = `0${day}`;
 
   let month;
-  month = date.getMonth().toString();
+  month = (date.getMonth() + 1).toString();
   if (month.length < 2) month = `0${month}`;
 
   const year = date
