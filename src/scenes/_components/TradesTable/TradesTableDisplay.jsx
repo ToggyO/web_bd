@@ -102,6 +102,7 @@ const TradesTableDisplay = ({
       />
       <Column title="Location" dataIndex="location" key="location" />
       <Column
+        align="right"
         title={() => (
           <span>
             Price <span className="removable">/ BTC</span>
