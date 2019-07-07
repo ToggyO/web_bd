@@ -37,6 +37,9 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
             ? record => (
               <div className="extra-row">
                 <div className="extra-row__head">
+                  <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                      View
+                  </Link>
                   <Link className="extra-row__edit" to={`/trades/${record.key}/edit`}>
                       Edit
                   </Link>
