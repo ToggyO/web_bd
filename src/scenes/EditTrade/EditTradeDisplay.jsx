@@ -16,7 +16,7 @@ const EditTrade = ({ match, getTradeById, editTradeRequest, specificTrade }) => 
     <AppWrapperContainer>
       <div className="paper">
         <div className="edit-trade">
-          <Link to={ROUTES.USER_DASHBOARD} className="back-to-dashboard__link">
+          <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
             <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
           </Link>
           <h2 className="edit-trade__header">Edit the post trade #{match.params.id}</h2>

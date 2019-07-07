@@ -1,16 +1,20 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { message } from 'antd';
-import { ROUTES } from '@config/constants';
+import { message, Modal } from 'antd';
+import { ROUTES, pageSizeDashboard } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
 import * as types from './types';
+import { tradesTypes } from '../trades';
 
 function* postTrade(action) {
   try {
-    const data = yield call(api.trades.postTrade, action.payload);
+    const { data } = yield call(api.trades.postTrade, action.payload);
     yield put({ type: types.POST_TRADE_SUCCESS, payload: data });
-    yield call(history.push, ROUTES.USER_DASHBOARD);
-    yield call(message.success, 'Success! Your trade has been added');
+    yield call(history.push, {
+      pathname: ROUTES.DASHBOARD.CREATED,
+      state: { id: data.id },
+    });
+    yield call(message.success, 'Success! Trade has been created');
   } catch (error) {
     yield put({ type: types.POST_TRADE_ERROR, payload: error });
   }
@@ -26,7 +30,7 @@ function* getTradeById(action) {
     yield put({ type: types.GET_TRADE_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     yield put({ type: types.GET_TRADE_BY_ID_ERROR, payload: error });
-    yield call(history.push, ROUTES.USER_DASHBOARD);
+    yield call(history.push, ROUTES.DASHBOARD.ROOT);
   }
 }
 
@@ -38,9 +42,8 @@ function* editTrade(action) {
   try {
     const { data } = yield call(api.trades.editTrade, action.payload);
     yield put({ type: types.EDIT_TRADE_SUCCESS, payload: data });
-    console.log(data.id);
     yield call(history.push, {
-      pathname: ROUTES.USER_DASHBOARD,
+      pathname: ROUTES.DASHBOARD.CREATED,
       state: { id: data.id },
     });
     yield call(message.success, 'Success! Trade has been changed');
