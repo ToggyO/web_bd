@@ -7,7 +7,7 @@ import CreateEditTradeFormDisplay from './CreateEditTradeFormDisplay';
 function mapStateToProps(state, props) {
   return {
     isAuthorized: !!authSelectors.userNameSelector(state),
-    loading: state._global.localLoading,
+    loading: state._global.submitting,
     onSubmit: props.onSubmit,
     isCurrency: !!state.trades.trade.data.currency,
   };
