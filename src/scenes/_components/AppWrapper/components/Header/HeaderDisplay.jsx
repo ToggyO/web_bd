@@ -17,7 +17,7 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link rel="noopener noreferrer" to={ROUTES.PROFILE.SETTINGS}>
+        <Link rel="noopener noreferrer" to={ROUTES.SETTINGS.ROOT}>
           <Icon type="user" /> Profile settings
         </Link>
       </Menu.Item>
@@ -72,7 +72,9 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
           Post <span>a trade</span>
         </a>
 
-        <a className="nav__link">Help</a>
+        <Link to={ROUTES.OTHER.HELP} className="nav__link">
+          Help
+        </Link>
 
         <div className="right-nav">
           {userName ? (

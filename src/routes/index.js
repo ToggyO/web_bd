@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import { NotFound } from '@scenes/404';
 import { LoginContainer } from '../scenes/Auth/Login';
@@ -59,20 +59,17 @@ const Routes = ({ loading }) => (
       <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
       <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
-      <Switch>
-        {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED].map(path => (
-          <AuthRoute key={path} path={path} exact component={DashboardContainer} />
-        ))}
-        <Route path="*" component={NotFound} />
-      </Switch>
+      {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED].map(path => (
+        <AuthRoute key={path} path={path} exact component={DashboardContainer} />
+      ))}
 
-      <AuthRoute path={ROUTES.PROFILE.SETTINGS} exact component={SettingsContainer} />
-      <AuthRoute path={ROUTES.PROFILE.EDIT_EMAIL} exact component={EditEmailDisplay} />
-      <AuthRoute path={ROUTES.PROFILE.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
-      <AuthRoute path={ROUTES.PROFILE.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
-      <AuthRoute path={ROUTES.PROFILE.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
-      <AuthRoute path={ROUTES.PROFILE.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
-      <AuthRoute path={ROUTES.PROFILE.OTHER} exact component={OtherProfileContainer} />
+      <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />
+      <AuthRoute path={ROUTES.SETTINGS.EDIT_EMAIL} exact component={EditEmailDisplay} />
+      <AuthRoute path={ROUTES.SETTINGS.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
+      <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
+      <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
+      <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
+      <AuthRoute path={ROUTES.SETTINGS.OTHER} exact component={OtherProfileContainer} />
 
       <AuthRoute
         path={ROUTES.TRADES.EDIT_TRADE}

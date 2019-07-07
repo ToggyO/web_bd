@@ -1,15 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@config/constants';
 import './style.less';
 
 const Footer = () => (
   <footer className="footer">
     <div className="footer__links">
-      <a href="#" className="footer__link">
+      <Link to={ROUTES.OTHER.PRIVACY} className="footer__link">
         Privacy
-      </a>
-      <a href="#" className="footer__link">
+      </Link>
+      <Link to={ROUTES.OTHER.TERMS} className="footer__link">
         Terms
-      </a>
+      </Link>
     </div>
     <span className="footer__copyright">Copyright © 2019 All Rights Reserved.</span>
   </footer>

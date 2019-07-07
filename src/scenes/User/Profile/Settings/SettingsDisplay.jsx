@@ -34,13 +34,13 @@ const SettingsDisplay = ({
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_FULLNAME}>
+                    <Link to={ROUTES.SETTINGS.EDIT_FULLNAME}>
                       Change <span>name</span>
                     </Link>,
                   ]}
                 >
                   <List.Item.Meta title="Real Name" description={loading ? <Spinner /> : fullName} />
-                  <Link to={ROUTES.PROFILE.REQUEST_VERIFICATION} className="user-settings__verification">
+                  <Link to={ROUTES.SETTINGS.REQUEST_VERIFICATION} className="user-settings__verification">
                     Request Verification
                   </Link>
                 </List.Item>
@@ -52,7 +52,7 @@ const SettingsDisplay = ({
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_PHONENUMBER}>
+                    <Link to={ROUTES.SETTINGS.EDIT_PHONENUMBER}>
                       Change <span>phone</span>
                     </Link>,
                   ]}
@@ -65,7 +65,7 @@ const SettingsDisplay = ({
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_EMAIL}>
+                    <Link to={ROUTES.SETTINGS.EDIT_EMAIL}>
                       Change <span>email</span>
                     </Link>,
                   ]}
@@ -75,7 +75,7 @@ const SettingsDisplay = ({
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_PASSWORD}>
+                    <Link to={ROUTES.SETTINGS.EDIT_PASSWORD}>
                       Change <span>password</span>
                     </Link>,
                   ]}

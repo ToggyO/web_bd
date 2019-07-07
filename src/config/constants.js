@@ -11,15 +11,17 @@ export const ROUTES = {
   WELCOME_BACK: '/welcome-back',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
-  PROFILE: {
-    SETTINGS: '/profile',
-    EDIT_FULLNAME: '/profile/edit-fullname',
-    EDIT_EMAIL: '/profile/edit-email',
-    EDIT_PHONENUMBER: '/profile/edit-phonenumber',
-    EDIT_PASSWORD: '/profile/edit-password',
-    REQUEST_VERIFICATION: '/profile/request-verification',
+
+  SETTINGS: {
+    ROOT: '/settings',
+    EDIT_FULLNAME: '/settings/name/edit',
+    EDIT_EMAIL: '/settings/email/edit',
+    EDIT_PHONENUMBER: '/settings/phone/edit',
+    EDIT_PASSWORD: '/settings/password/edit',
+    REQUEST_VERIFICATION: '/settings/verify',
     OTHER: '/user/:id',
   },
+
   DASHBOARD: {
     ROOT: '/dashboard',
     CREATED: '/dashboard/created',
@@ -34,6 +36,11 @@ export const ROUTES = {
     BUY: '/buy-trades',
     SELL: '/sell-trades',
     INITIATE: '/trades/:id/initiate',
+  },
+  OTHER: {
+    HELP: '/help',
+    PRIVACY: '/privacy',
+    TERMS: '/terms',
   },
 };
 
