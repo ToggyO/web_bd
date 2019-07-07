@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import { NotFound } from '@scenes/404';
 import { LoginContainer } from '../scenes/Auth/Login';
@@ -49,7 +49,6 @@ const Routes = ({ loading }) => (
         component={props => <PostTradeContainer {...props} type="trade" />}
       />
       <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
-
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
       <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
@@ -62,7 +61,6 @@ const Routes = ({ loading }) => (
       {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED].map(path => (
         <AuthRoute key={path} path={path} exact component={DashboardContainer} />
       ))}
-
       <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />
       <AuthRoute path={ROUTES.SETTINGS.EDIT_EMAIL} exact component={EditEmailDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
@@ -70,13 +68,26 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.OTHER} exact component={OtherProfileContainer} />
-
       <AuthRoute
         path={ROUTES.TRADES.EDIT_TRADE}
         exact
         component={props => <EditTradeContainer {...props} type="trade" />}
       />
+
+      {/* REDIRECTS */}
+      {[
+        `${ROUTES.SETTINGS.ROOT}/name`,
+        `${ROUTES.SETTINGS.ROOT}/phone`,
+        `${ROUTES.SETTINGS.ROOT}/email`,
+        `${ROUTES.SETTINGS.ROOT}/password`,
+      ].map(path => (
+        <AuthRoute key={path} path={path} exact component={() => <Redirect to={ROUTES.SETTINGS.ROOT} />} />
+      ))}
+      {/* /REDIRECTS */}
+
+      {/* NOT FOUND PAGE */}
       <Route path="*" component={NotFound} />
+      {/* /NOT FOUND PAGE */}
     </Switch>
   </Spin>
 );
