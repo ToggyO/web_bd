@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
+import { NotFound } from '@scenes/404';
 import { LoginContainer } from '../scenes/Auth/Login';
 import { ConfirmEmailContainer } from '../scenes/Auth/ConfirmEmail';
 import { SuccessDisplay } from '../scenes/Auth/Success';
@@ -58,7 +59,13 @@ const Routes = ({ loading }) => (
       <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
       <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
-      <AuthRoute path={ROUTES.USER_DASHBOARD} exact component={DashboardContainer} />
+      <Switch>
+        {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED].map(path => (
+          <AuthRoute key={path} path={path} exact component={DashboardContainer} />
+        ))}
+        <Route path="*" component={NotFound} />
+      </Switch>
+
       <AuthRoute path={ROUTES.PROFILE.SETTINGS} exact component={SettingsContainer} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_EMAIL} exact component={EditEmailDisplay} />
       <AuthRoute path={ROUTES.PROFILE.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
@@ -72,6 +79,7 @@ const Routes = ({ loading }) => (
         exact
         component={props => <EditTradeContainer {...props} type="trade" />}
       />
+      <Route path="*" component={NotFound} />
     </Switch>
   </Spin>
 );

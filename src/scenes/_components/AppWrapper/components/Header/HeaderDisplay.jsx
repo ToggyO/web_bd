@@ -23,7 +23,7 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
-        <Link rel="noopener noreferrer" to={ROUTES.USER_DASHBOARD}>
+        <Link rel="noopener noreferrer" to={ROUTES.DASHBOARD.ROOT}>
           <Icon type="dashboard" /> Dashboard
         </Link>
       </Menu.Item>

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import history from '@services/history';
 import { Tabs } from 'antd';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { pageSizeDashboard } from '@config/constants';
+import { ROUTES, pageSizeDashboard } from '@config/constants';
 import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
 import { ActiveTradesContainer } from './components/ActiveTrades';
 import './style.less';
@@ -18,40 +19,54 @@ const DashboardDisplay = ({ getCreatedAdsRequest }) => {
 
   const handleChangeTab = tab => {
     switch (tab) {
-      case '1':
-        console.log('fetch created');
+      case 'CREATED':
+        history.push(ROUTES.DASHBOARD[tab]);
+        console.log('fetch created trades data');
         break;
-      case '2':
-        console.log('fetch active');
+      case 'REQUESTS':
+        history.push(ROUTES.DASHBOARD[tab]);
+        console.log('fetch trade requests');
         break;
-      case '3':
-        console.log('fetch completed');
+      case 'ACTIVE':
+        history.push(ROUTES.DASHBOARD[tab]);
+        console.log('fetch active trades data');
         break;
-      case '4':
-        console.log('fetch canceled');
+      case 'COMPLETED':
+        history.push(ROUTES.DASHBOARD[tab]);
+        console.log('fetch completed trades data');
+        break;
+      case 'CANCELED':
+        history.push(ROUTES.DASHBOARD[tab]);
+        console.log('fetch canceled trades data');
         break;
       default:
-        console.log('default case');
+        history.push(ROUTES.HOME);
     }
   };
   return (
     <AppWrapperContainer>
       <div className="paper">
         <div className="dashboard custom-tabs">
-          <Tabs defaultActiveKey="1" tabPosition="left" size="small" onChange={handleChangeTab}>
-            <TabPane tab="Created trades" key="1">
-              <h2 className="dashboard__header">Created trades</h2>
+          <Tabs defaultActiveKey="CREATED" tabPosition="left" size="small" onChange={handleChangeTab}>
+            <TabPane tab="Created ads" key="CREATED">
+              <h2 className="dashboard__header">Created ads</h2>
               <CreatedAdsTableContainer withTerms />
             </TabPane>
-            <TabPane tab="Active trades" key="2">
+            <TabPane tab="Trade requests" key="REQUESTS">
+              <h2 className="dashboard__header">Trade requests</h2>
+              <div>Trade Requests</div>
+            </TabPane>
+            <TabPane tab="Active trades" key="ACTIVE">
               <h2 className="dashboard__header">Active trades</h2>
               <ActiveTradesContainer withTerms />
             </TabPane>
-            <TabPane tab="Completed trades" key="3">
-              Completed trades
+            <TabPane tab="Completed trades" key="COMPLETED">
+              <h2 className="dashboard__header">Completed trades</h2>
+              <div>Completed trades</div>
             </TabPane>
-            <TabPane tab="Canceled trades" key="4">
-              Canceled trades
+            <TabPane tab="Canceled trades" key="CANCELED">
+              <h2 className="dashboard__header">Canceled trades</h2>
+              <div>Canceled trades</div>
             </TabPane>
           </Tabs>
         </div>

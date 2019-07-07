@@ -20,7 +20,14 @@ export const ROUTES = {
     REQUEST_VERIFICATION: '/profile/request-verification',
     OTHER: '/user/:id',
   },
-  USER_DASHBOARD: '/dashboard',
+  DASHBOARD: {
+    ROOT: '/dashboard',
+    CREATED: '/dashboard/created',
+    REQUESTS: '/dashboard/requests',
+    ACTIVE: '/dashboard/active',
+    COMPLETED: '/dashboard/completed',
+    CANCELED: '/dashboard/canceled',
+  },
   TRADES: {
     CREATE: '/trades/create',
     EDIT_TRADE: '/trades/:id/edit',
