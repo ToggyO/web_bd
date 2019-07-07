@@ -15,6 +15,11 @@ export const editTradeRequest = values => ({
   payload: values,
 });
 
+export const deleteTradeRequest = id => ({
+  type: types.DELETE_TRADE_REQUEST,
+  payload: id,
+});
+
 export const persistFormState = values => ({
   type: types.PERSIST_FORM_STATE,
   payload: values,

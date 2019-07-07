@@ -52,3 +52,22 @@ function* editTrade(action) {
 export function* editTradeSaga() {
   yield takeLatest(types.EDIT_TRADE_REQUEST, editTrade);
 }
+
+function* deleteTrade(aciton) {
+  try {
+    const { data } = yield call(api.trades.deleteTrade, aciton.payload);
+    yield put({ type: types.DELETE_TRADE_SUCCESS, payload: data });
+
+    yield call(Modal.destroyAll);
+    yield put({
+      type: tradesTypes.GET_CREATED_ADS_REQUEST,
+      payload: `?profileID=f2359e39-f62c-4636-ba4d-67ae5f4335f8&status[]=Created&pageSize=${pageSizeDashboard}`,
+    });
+  } catch (error) {
+    yield put({ type: types.DELETE_TRADE_ERROR, payload: error });
+  }
+}
+
+export function* deleteTradeSaga() {
+  yield takeLatest(types.DELETE_TRADE_REQUEST, deleteTrade);
+}

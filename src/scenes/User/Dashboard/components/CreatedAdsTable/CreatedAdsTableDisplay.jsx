@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+/* eslint-disable import/no-unresolved */
+import React, { useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table } from 'antd';
+import { Table, Modal } from 'antd';
 import history from '@services/history';
 import { formatDate, sortStrings } from '@utils';
+import { NoData } from '@scenes/_components/TradesTable/_components/NoData';
 import './style.less';
 
 const { Column } = Table;
 
-const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
+const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loading, submitting }) => {
+
   useEffect(() => {
     if (history.location.state) {
       const tr = document.querySelector(`tr[data-row-key="${history.location.state.id}"]`);
@@ -20,18 +23,37 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
         }, 3000);
       }
     }
-
-    //
   });
+
+  const showConfirm = id => {
+    Modal.confirm({
+      title: 'Would you like to delete this ad?',
+      content: 'This action cannot be undone.',
+      onOk() {
+        deleteTradeRequest(id);
+      },
+      okText: 'Yes',
+      okButtonProps: {
+        style: { width: 74, height: 28 },
+        loading: submitting,
+      },
+      cancelText: 'No',
+      cancelButtonProps: {
+        style: { width: 74, height: 28 },
+      },
+      onCancel() {},
+      maskClosable: true,
+    });
+  };
+
   return (
     <div>
+      
       <Table
-        // pagination={false}
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={tradesData}
-        // className={classNames}
         loading={loading}
-        // locale={{ emptyText: <NoData /> }}
+        locale={{ emptyText: <NoData /> }}
         expandedRowRender={
           withTerms
             ? record => (
@@ -43,7 +65,7 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
                   <Link className="extra-row__edit" to={`/trades/${record.key}/edit`}>
                       Edit
                   </Link>
-                  <a href="#" className="extra-row__delete">
+                  <a className="extra-row__delete" onClick={() => showConfirm(record.key)}>
                       Delete
                   </a>
                 </div>
@@ -67,13 +89,6 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
             )
             : null
         }
-        // onChange={(p, f, s) => {
-        //   if (Object.keys(s).length > 0) {
-        //     tableSort({ field: s.field, order: s.order });
-        //   } else {
-        //     tableSort({ field: null, order: null });
-        //   }
-        // }}
       >
         <Column
           title="Date"
@@ -111,8 +126,6 @@ const CreatedAdsTableDisplay = ({ withTerms, tradesData, loading }) => {
           )}
           dataIndex="btcPrice"
           key="btcPrice"
-          // sorter={withTerms}
-          // sortOrder={field === 'btcPrice' && order}
         />
 
         <Column
@@ -143,7 +156,9 @@ CreatedAdsTableDisplay.propTypes = {
       terms: PropTypes.string,
     })
   ),
+  deleteTradeRequest: PropTypes.func,
   loading: PropTypes.bool,
+  submitting: PropTypes.bool,
 };
 
 CreatedAdsTableDisplay.defaultProps = {

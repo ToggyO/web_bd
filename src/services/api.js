@@ -79,5 +79,9 @@ export default {
       const response = await superaxios.put('/trade', values);
       return response.data;
     },
+    deleteTrade: async id => {
+      const response = await superaxios.delete(`/trade/${id}`);
+      return response.data;
+    },
   },
 };
