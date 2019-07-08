@@ -78,7 +78,7 @@ const TradesTableDisplay = ({
           </span>
         )}
         render={(text, record) => record.transactionLimit}
-        // dataIndex="transactionLimit"
+        dataIndex="transactionLimit"
         key="transactionLimit"
         width="25%"
         sorter={withTerms}
