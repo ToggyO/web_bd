@@ -74,3 +74,24 @@ function* deleteTrade(aciton) {
 export function* deleteTradeSaga() {
   yield takeLatest(types.DELETE_TRADE_REQUEST, deleteTrade);
 }
+
+function* toggleTradeStatus(aciton) {
+  try {
+    const { data } = yield call(api.trades.toggleTradeStatus, aciton.payload);
+    yield put({ type: types.TOGGLE_TRADE_STATUS_SUCCESS, payload: data });
+
+    yield put({
+      type: tradesTypes.GET_MY_CREATED_ADS_REQUEST,
+      payload: 'created',
+    });
+    yield call(history.push, {
+      state: { id: data.id },
+    });
+  } catch (error) {
+    yield put({ type: types.TOGGLE_TRADE_STATUS_ERROR, payload: error });
+  }
+}
+
+export function* toggleTradeStatusSaga() {
+  yield takeLatest(types.TOGGLE_TRADE_STATUS_REQUEST, toggleTradeStatus);
+}

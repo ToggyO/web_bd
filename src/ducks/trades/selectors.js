@@ -18,6 +18,7 @@ export const tradesSelector = createSelector(
       location: trade.location,
       btcPrice: `${formatMoney(trade.btcPrice)} ${trade.currency}`,
       terms: trade.terms,
+      shown: trade.shown,
       type: trade.type,
     }))
 );

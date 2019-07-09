@@ -67,6 +67,11 @@ export default {
       const response = await superaxios.get(`/trade${params}`);
       return response.data;
     },
+    toggleTradeStatus: async idWithStatus => {
+      const response = await superaxios.put('/trade/status', idWithStatus);
+      return response.data;
+    },
+
     postTrade: async values => {
       const response = await superaxios.post('/trade', values);
       return response.data;

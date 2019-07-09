@@ -1,17 +1,25 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Modal } from 'antd';
+import { Table, Modal, Spin, Tag } from 'antd';
 import history from '@services/history';
 import { formatDate, sortStrings } from '@utils';
 import { NoData } from '@scenes/_components/TradesTable/_components/NoData';
 import './style.less';
+import { Spinner } from '@components/Spinner/index';
 
 const { Column } = Table;
 
-const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loading, submitting }) => {
-
+const CreatedAdsTableDisplay = ({
+  withTerms,
+  deleteTradeRequest,
+  tradesData,
+  loading,
+  submitting,
+  statusLoading,
+  toggleTradeStatusRequest,
+}) => {
   useEffect(() => {
     if (history.location.state) {
       const tr = document.querySelector(`tr[data-row-key="${history.location.state.id}"]`);
@@ -24,6 +32,8 @@ const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loa
       }
     }
   });
+
+  const [idToToggle, setIdToToggle] = useState('');
 
   const showConfirm = id => {
     Modal.confirm({
@@ -46,9 +56,13 @@ const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loa
     });
   };
 
+  const handleStatusToggle = (id, status) => {
+    setIdToToggle(() => id);
+    toggleTradeStatusRequest({ id, shown: !status });
+  };
+
   return (
     <div>
-      
       <Table
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={tradesData}
@@ -91,34 +105,35 @@ const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loa
         }
       >
         <Column
-          title="Date"
           key="createdAt"
+          title="Date"
           render={(text, record) => formatDate(record.createdAt)}
           sorter={(a, b) => a.createdAt - b.createdAt}
           defaultSortOrder="descend"
         />
 
         <Column
-          title="Type"
-          dataIndex="type"
           key="type"
+          dataIndex="type"
+          title="Type"
           columnWidth={80}
           render={(text, record) => <span>{record.type}</span>}
           sorter={(a, b) => sortStrings(a.type, b.type)}
         />
         <Column
+          key="payment"
           title={() => (
             <span>
               Payment <span className="removable">method</span>
             </span>
           )}
           dataIndex="payment"
-          key="payment"
           sorter={(a, b) => sortStrings(a.payment, b.payment)}
           width="25%"
         />
 
         <Column
+          align="right"
           title={() => (
             <span>
               Price <span className="removable">/ BTC</span>
@@ -126,15 +141,28 @@ const CreatedAdsTableDisplay = ({ withTerms, deleteTradeRequest, tradesData, loa
           )}
           dataIndex="btcPrice"
           key="btcPrice"
+          width="20%"
         />
 
         <Column
-          title="Ad status"
-          // eslint-disable-next-line no-unused-vars
-          render={(text, record) => <span>status</span>}
-          key="transactionLimit"
+          title="Status"
+          align="center"
+          render={(text, record) => (
+            <Spinner
+              fontSize={16}
+              margin="-8px 0 0 -12px"
+              spinning={statusLoading && idToToggle === record.key}
+            >
+              <Tag
+                color={record.shown ? 'green' : ''}
+                onClick={() => handleStatusToggle(record.key, record.shown)}
+              >
+                {record.shown ? 'Shown' : 'Hidden'}
+              </Tag>
+            </Spinner>
+          )}
+          key="dispayStatus"
           sorter={withTerms}
-          // sortOrder={field === 'transactionLimit' && order}
         />
       </Table>
     </div>
@@ -159,6 +187,8 @@ CreatedAdsTableDisplay.propTypes = {
   deleteTradeRequest: PropTypes.func,
   loading: PropTypes.bool,
   submitting: PropTypes.bool,
+  statusLoading: PropTypes.bool,
+  toggleTradeStatusRequest: PropTypes.func,
 };
 
 CreatedAdsTableDisplay.defaultProps = {

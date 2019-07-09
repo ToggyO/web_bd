@@ -6,6 +6,10 @@ export const GET_TRADE_BY_ID_REQUEST = 'bitcoins-direct/trades/trade/GET_TRADE_B
 export const GET_TRADE_BY_ID_SUCCESS = 'bitcoins-direct/trades/trade/GET_TRADE_BY_ID_SUCCESS';
 export const GET_TRADE_BY_ID_ERROR = 'bitcoins-direct/trades/trade/GET_TRADE_BY_ID_ERROR';
 
+export const TOGGLE_TRADE_STATUS_REQUEST = 'bitcoins-direct/trades/trade/TOGGLE_TRADE_STATUS_REQUEST';
+export const TOGGLE_TRADE_STATUS_SUCCESS = 'bitcoins-direct/trades/trade/TOGGLE_TRADE_STATUS_SUCCESS';
+export const TOGGLE_TRADE_STATUS_ERROR = 'bitcoins-direct/trades/trade/TOGGLE_TRADE_STATUS_ERROR';
+
 export const EDIT_TRADE_REQUEST = 'bitcoins-direct/trades/trade/EDIT_TRADE_REQUEST';
 export const EDIT_TRADE_SUCCESS = 'bitcoins-direct/trades/trade/EDIT_TRADE_SUCCESS';
 export const EDIT_TRADE_ERROR = 'bitcoins-direct/trades/trade/EDIT_TRADE_ERROR';

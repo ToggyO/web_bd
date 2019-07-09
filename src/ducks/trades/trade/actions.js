@@ -10,6 +10,11 @@ export const getTradeByIdRequest = id => ({
   payload: id,
 });
 
+export const toggleTradeStatusRequest = idWithStatus => ({
+  type: types.TOGGLE_TRADE_STATUS_REQUEST,
+  payload: idWithStatus,
+});
+
 export const editTradeRequest = values => ({
   type: types.EDIT_TRADE_REQUEST,
   payload: values,
