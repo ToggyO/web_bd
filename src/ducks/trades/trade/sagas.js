@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { message, Modal } from 'antd';
-import { ROUTES, pageSizeDashboard } from '@config/constants';
+import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
 import * as types from './types';
@@ -63,8 +63,8 @@ function* deleteTrade(aciton) {
 
     yield call(Modal.destroyAll);
     yield put({
-      type: tradesTypes.GET_CREATED_ADS_REQUEST,
-      payload: `?profileID=f2359e39-f62c-4636-ba4d-67ae5f4335f8&status[]=Created&pageSize=${pageSizeDashboard}`,
+      type: tradesTypes.GET_MY_CREATED_ADS_REQUEST,
+      payload: 'created',
     });
   } catch (error) {
     yield put({ type: types.DELETE_TRADE_ERROR, payload: error });

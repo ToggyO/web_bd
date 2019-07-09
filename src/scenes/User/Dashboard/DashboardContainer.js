@@ -4,8 +4,8 @@ import DashboardDisplay from './DashboardDisplay';
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCreatedAdsRequest(params) {
-      dispatch(tradesActions.getCreatedAdsRequest(params));
+    getMyCreatedAdsRequest(params) {
+      dispatch(tradesActions.getMyCreatedAdsRequest(params));
     },
   };
 }

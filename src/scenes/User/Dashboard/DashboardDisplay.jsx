@@ -10,11 +10,9 @@ import './style.less';
 
 const { TabPane } = Tabs;
 
-const DashboardDisplay = ({ getCreatedAdsRequest }) => {
+const DashboardDisplay = ({ getMyCreatedAdsRequest }) => {
   useEffect(() => {
-    getCreatedAdsRequest(
-      `?profileID=f2359e39-f62c-4636-ba4d-67ae5f4335f8&status[]=Created&pageSize=${pageSizeDashboard}`
-    );
+    getMyCreatedAdsRequest('created');
   }, []);
 
   const handleChangeTab = tab => {
@@ -76,6 +74,6 @@ const DashboardDisplay = ({ getCreatedAdsRequest }) => {
 };
 
 DashboardDisplay.propTypes = {
-  getCreatedAdsRequest: PropTypes.func,
+  getMyCreatedAdsRequest: PropTypes.func,
 };
 export default DashboardDisplay;

@@ -14,3 +14,16 @@ function* getCreatedAds(action) {
 export function* getCreatedAdsSaga() {
   yield takeLatest(tradesTypes.GET_CREATED_ADS_REQUEST, getCreatedAds);
 }
+
+function* getMyCreatedAds(action) {
+  try {
+    const { data } = yield call(api.trades.getMyTrades, action.payload);
+    yield put({ type: tradesTypes.GET_MY_CREATED_ADS_SUCCESS, payload: data });
+  } catch (error) {
+    yield put({ type: tradesTypes.GET_MY_CREATED_ADS_ERROR, payload: error });
+  }
+}
+
+export function* getMyCreatedAdsSaga() {
+  yield takeLatest(tradesTypes.GET_MY_CREATED_ADS_REQUEST, getMyCreatedAds);
+}

@@ -1,3 +1,4 @@
+import { pageSizeDashboard } from '@config/constants';
 import superaxios from './superaxios';
 
 export default {
@@ -65,6 +66,12 @@ export default {
   trades: {
     getTrades: async params => {
       const response = await superaxios.get(`/trade${params}`);
+      return response.data;
+    },
+    getMyTrades: async type => {
+      const response = await superaxios.get(
+        `/trade/currentuser?pageSize=${pageSizeDashboard}&status[]=${type}`
+      );
       return response.data;
     },
     toggleTradeStatus: async idWithStatus => {
