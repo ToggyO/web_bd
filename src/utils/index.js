@@ -103,7 +103,7 @@ export const formatDate = (timestamp, locale) => {
   const date = new Date(timestamp);
 
   let day;
-  day = date.getDay().toString();
+  day = date.getDate().toString();
   if (day.length < 2) day = `0${day}`;
 
   let month;
