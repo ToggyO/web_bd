@@ -19,8 +19,8 @@ const HomePageDisplay = () => (
       <QuickFiltersTabsDisplay />
       <Divider />
       <div className="quick-buy-sell">
-        <TenTradesContainer type="buy" />
         <TenTradesContainer type="sell" />
+        <TenTradesContainer type="buy" />
       </div>
     </div>
   </AppWrapperContainer>

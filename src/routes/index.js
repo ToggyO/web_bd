@@ -37,12 +37,8 @@ const Routes = ({ loading }) => (
   >
     <Switch>
       <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
-      <Route path={ROUTES.TRADES.BUY} exact component={props => <TradesContainer {...props} type="buy" />} />
-      <Route
-        path={ROUTES.TRADES.SELL}
-        exact
-        component={props => <TradesContainer {...props} type="sell" />}
-      />
+      <Route path={ROUTES.TRADES.BUY} exact component={props => <TradesContainer {...props} type="sell" />} />
+      <Route path={ROUTES.TRADES.SELL} exact component={props => <TradesContainer {...props} type="buy" />} />
       <Route
         path={ROUTES.TRADES.CREATE}
         exact

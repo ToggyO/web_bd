@@ -25,9 +25,9 @@ const TradesTableDisplay = ({
   order,
   page,
 }) => {
-  let buyerOrSeller;
-  if (type.toLowerCase() === 'buy') buyerOrSeller = 'Seller';
-  if (type.toLowerCase() === 'sell') buyerOrSeller = 'Buyer';
+  let buyOrSell;
+  if (type.toLowerCase() === 'buy') buyOrSell = 'Sell';
+  if (type.toLowerCase() === 'sell') buyOrSell = 'Buy';
 
   useEffect(() => {
     if (queryString) {
@@ -97,7 +97,7 @@ const TradesTableDisplay = ({
         width="25%"
       />
       <Column
-        title={buyerOrSeller}
+        title={`${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
         key="userName"
         render={(text, record) => <a>{record.userName}</a>}
@@ -120,7 +120,7 @@ const TradesTableDisplay = ({
         dataIndex="type"
         key="type"
         columnWidth={80}
-        render={(text, record) => <Link to={`/trades/${record.key}/initiate`}>{record.type}</Link>}
+        render={(text, record) => <Link to={`/trades/${record.key}/initiate`}>{buyOrSell}</Link>}
       />
     </Table>
   );

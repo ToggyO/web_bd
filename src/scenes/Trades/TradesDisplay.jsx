@@ -9,7 +9,9 @@ import './style.less';
 
 const TradesDisplay = ({ getTradesRequest, type }) => {
   let initialState;
-  const Type = type.charAt(0).toUpperCase() + type.slice(1);
+  let Type;
+  if (type === 'sell') Type = 'Buy';
+  if (type === 'buy') Type = 'Sell';
   const searchQuery = history.location.search.replace('?', '&');
 
   if (history.location.state) {
@@ -17,7 +19,7 @@ const TradesDisplay = ({ getTradesRequest, type }) => {
   }
 
   useEffect(() => {
-    getTradesRequest(`?pageSize=${pageSize}&type[]=${Type}${searchQuery}`);
+    getTradesRequest(`?pageSize=${pageSize}&type[]=${type}${searchQuery}`);
   }, [history.location.search]);
 
   return (

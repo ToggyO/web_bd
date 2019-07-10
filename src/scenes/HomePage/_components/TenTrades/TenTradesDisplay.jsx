@@ -6,10 +6,12 @@ import { TenTradesSkeleton } from '@components/TenTradesSkeleton';
 import { TradesTableContainer } from '@scenes/_components/TradesTable';
 
 const TenTradesDisplay = ({ getTradesRequest, loading, type }) => {
-  const Type = type.charAt(0).toUpperCase() + type.slice(1);
+  let Type;
+  if (type === 'sell') Type = 'Buy';
+  if (type === 'buy') Type = 'Sell';
 
   useEffect(() => {
-    getTradesRequest(`?type[]=${Type}&pageSize=10`);
+    getTradesRequest(`?type[]=${type}&pageSize=10`);
   }, []);
 
   return (
@@ -20,7 +22,7 @@ const TenTradesDisplay = ({ getTradesRequest, loading, type }) => {
       ) : (
         <TradesTableContainer type={type} classNames="mb-20" />
       )}
-      <Link to={ROUTES.TRADES[type.toUpperCase()]}>Show more {type} trades</Link>
+      <Link to={ROUTES.TRADES[Type.toUpperCase()]}>Show more {Type.toLowerCase()} trades</Link>
     </div>
   );
 };

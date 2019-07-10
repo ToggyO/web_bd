@@ -33,8 +33,8 @@ export const ROUTES = {
   TRADES: {
     CREATE: '/trades/create',
     EDIT_TRADE: '/trades/:id/edit',
-    BUY: '/buy-trades',
-    SELL: '/sell-trades',
+    BUY: '/buy',
+    SELL: '/sell',
     INITIATE: '/trades/:id/initiate',
   },
   OTHER: {
