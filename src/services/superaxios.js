@@ -4,7 +4,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_URL } from '@config/constants';
 import { globalTypes } from '@ducks/_global';
-import { authTypes } from '@ducks/auth';
 import { store } from '../store';
 
 let isAlreadyFetchingAccessToken = false;
@@ -63,8 +62,7 @@ superaxios.interceptors.response.use(
             isAlreadyFetchingAccessToken = false;
             onAccessTokenFetched(accessToken);
           })
-          .catch(e => {
-            console.log(e);
+          .catch(() => {
             store.dispatch({ type: globalTypes.REFRESHING_TOKEN_ERROR });
             // store.dispatch({ type: authTypes.LOGOUT });
           });
