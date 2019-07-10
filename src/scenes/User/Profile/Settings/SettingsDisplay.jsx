@@ -17,6 +17,8 @@ const SettingsDisplay = ({
   email,
   loading,
   getUserProfileRequest,
+
+  // eslint-disable-next-line no-unused-vars
   verificationStatus,
 }) => {
   useEffect(() => {
@@ -39,14 +41,20 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta title="Real Name" description={loading ? <Spinner /> : fullName} />
+                  <List.Item.Meta
+                    title="Real Name"
+                    description={loading ? <Spinner fontSize={15} /> : fullName}
+                  />
                   <Link to={ROUTES.SETTINGS.REQUEST_VERIFICATION} className="user-settings__verification">
                     Request Verification
                   </Link>
                 </List.Item>
 
                 <List.Item className="user-settings__item">
-                  <List.Item.Meta title="Username" description={loading ? <Spinner /> : userName} />
+                  <List.Item.Meta
+                    title="Username"
+                    description={loading ? <Spinner fontSize={15} /> : userName}
+                  />
                 </List.Item>
 
                 <List.Item
@@ -59,7 +67,7 @@ const SettingsDisplay = ({
                 >
                   <List.Item.Meta
                     title="Phone Number"
-                    description={loading ? <Spinner /> : secretize(phoneNumber)}
+                    description={loading ? <Spinner fontSize={15} /> : secretize(phoneNumber)}
                   />
                 </List.Item>
                 <List.Item
@@ -70,7 +78,10 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta title="Email" description={loading ? <Spinner /> : secretize(email)} />
+                  <List.Item.Meta
+                    title="Email"
+                    description={loading ? <Spinner fontSize={15} /> : secretize(email)}
+                  />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"
@@ -80,7 +91,10 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta title="Account Password" description={loading ? <Spinner /> : '********'} />
+                  <List.Item.Meta
+                    title="Account Password"
+                    description={loading ? <Spinner fontSize={15} /> : '********'}
+                  />
                 </List.Item>
                 <List.Item className="user-settings__item">
                   <List.Item.Meta title="Confirmed by other users" description="0" />

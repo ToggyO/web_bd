@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Modal, Spin, Tag } from 'antd';
+import { Table, Modal, Tag } from 'antd';
 import history from '@services/history';
 import { formatDate, sortStrings } from '@utils';
 import { NoData } from '@scenes/_components/TradesTable/_components/NoData';
@@ -66,7 +66,7 @@ const CreatedAdsTableDisplay = ({
       <Table
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={tradesData}
-        loading={loading}
+        loading={{spinning: loading, indicator: <Spinner />}}
         locale={{ emptyText: <NoData /> }}
         expandedRowRender={
           withTerms
@@ -117,7 +117,8 @@ const CreatedAdsTableDisplay = ({
           dataIndex="type"
           title="Type"
           columnWidth={80}
-          render={(text, record) => <span>{record.type}</span>}
+          render={(text, record) => record.type
+          }
           sorter={(a, b) => sortStrings(a.type, b.type)}
         />
         <Column
@@ -150,7 +151,7 @@ const CreatedAdsTableDisplay = ({
           render={(text, record) => (
             <Spinner
               fontSize={16}
-              margin="-8px 0 0 -12px"
+              margin="-7px 0 0 40px"
               spinning={statusLoading && idToToggle === record.key}
             >
               <Tag

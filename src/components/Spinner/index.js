@@ -27,13 +27,14 @@ export const Spinner = ({ children, global, fontSize, margin, spinning }) => {
 };
 
 Spinner.propTypes = {
+  children: PropTypes.element,
   global: PropTypes.bool,
   fontSize: PropTypes.number,
   margin: PropTypes.string,
+  spinning: PropTypes.bool,
 };
 
 Spinner.defaultProps = {
   global: false,
-  fontSize: 15,
-  margin: '0 0 0 0',
+  fontSize: 25,
 };

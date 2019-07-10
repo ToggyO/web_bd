@@ -5,6 +5,7 @@ import { Table } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { pageSize } from '@config/constants';
+import { Spinner } from '@components/Spinner';
 import { NoData } from './_components/NoData';
 
 const { Column } = Table;
@@ -45,13 +46,14 @@ const TradesTableDisplay = ({
               tablePageChange(currentPage);
             },
             defaultCurrent: page,
+            current: page || 1,
             pageSize,
             total: totalPages,
           }
           : !!withPagination
       }
       className={classNames}
-      loading={loading}
+      loading={{ spinning: loading, indicator: <Spinner /> }}
       locale={{ emptyText: <NoData /> }}
       expandedRowRender={
         withTerms
