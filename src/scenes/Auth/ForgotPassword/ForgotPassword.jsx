@@ -1,7 +1,7 @@
 import React from 'react';
 import{ ROUTES }from '@config/constants';
 import AuthBox from '@components/AuthBox';
-import ToSignIn from '@components/ToSignIn';
+import ArrowLink from '@components/ArrowLink';
 import SignWrapper from '../../_components/SignWrapper';
 import { ForgotPasswordFormContainer } from './components/ForgotPasswordForm';
 
@@ -13,7 +13,7 @@ const ForgotPassword = () => (
         your spam folder.
       </p>
       <ForgotPasswordFormContainer />
-      <ToSignIn text="Back to Sign in" leftArrow goTo={ROUTES.LOGIN} />
+      <ArrowLink text="Back to Sign in" leftArrow goTo={ROUTES.LOGIN} />
     </AuthBox>
   </SignWrapper>
 );

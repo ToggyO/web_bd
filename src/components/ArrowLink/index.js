@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './style.less';
 
-const ToSignIn = ({ text, leftArrow, goTo }) => (
+const ArrowLink = ({ text, leftArrow, goTo }) => (
   <Link to={goTo} className="tosignin__link">
     {leftArrow ? (
       <React.Fragment>
@@ -18,13 +18,13 @@ const ToSignIn = ({ text, leftArrow, goTo }) => (
   </Link>
 );
 
-export default ToSignIn;
+export default ArrowLink;
 
-ToSignIn.propTypes = {
+ArrowLink.propTypes = {
   text: PropTypes.string.isRequired,
   leftArrow: PropTypes.bool,
   goTo: PropTypes.string.isRequired,
 };
-ToSignIn.defaultProps = {
+ArrowLink.defaultProps = {
   leftArrow: false,
 };

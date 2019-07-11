@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import{ ROUTES }from '@config/constants';
 import AuthBox from '@components/AuthBox';
-import ToSignIn from '@components/ToSignIn';
+import ArrowLink from '@components/ArrowLink';
 import SignWrapper from '../../_components/SignWrapper';
 
 import { ResetPasswordFormContainer } from './components/ResetPasswordForm';
@@ -15,7 +15,7 @@ const ResetPassword = ({ location: { search } }) => (
         everything else about the user account will remain unchanged.
       </p>
       <ResetPasswordFormContainer location={search} />
-      <ToSignIn text="Back to Sign in" leftArrow goTo={ROUTES.HOME} />
+      <ArrowLink text="Back to Sign in" leftArrow goTo={ROUTES.HOME} />
     </AuthBox>
   </SignWrapper>
 );
