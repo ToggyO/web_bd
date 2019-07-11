@@ -128,3 +128,5 @@ export const sortStrings = (a, b) => {
   }
   return 0;
 };
+
+export const prettifyId = id => `#${id.split('-')[0]}`;
