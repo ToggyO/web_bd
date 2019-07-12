@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import './style.less';
 
 const ArrowLink = ({ text, leftArrow, goTo }) => (
-  <Link to={goTo} className="tosignin__link">
+  <Link to={goTo} className="arrow-link">
     {leftArrow ? (
       <React.Fragment>
-        <Icon type="arrow-left" className="tosignin__icon" /> {text}
+        <Icon type="arrow-left" className="arrow-icon" /> {text}
       </React.Fragment>
     ) : (
       <React.Fragment>
-        {text} <Icon type="arrow-right" className="tosignin__icon" />
+        {text} <Icon type="arrow-right" className="arrow-icon" />
       </React.Fragment>
     )}
   </Link>
