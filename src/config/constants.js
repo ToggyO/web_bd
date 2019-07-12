@@ -36,6 +36,10 @@ export const ROUTES = {
     BUY: '/buy',
     SELL: '/sell',
     INITIATE: '/trades/:id/initiate',
+
+  TRANSACTIONS: {
+    ROOT: '/transactions',
+    TRANSACTION: '/transactions/:id',
   },
   OTHER: {
     HELP: '/help',

@@ -96,4 +96,15 @@ export default {
       return response.data;
     },
   },
+  transactions: {
+    initiate: async data => {
+      const response = await superaxios.post('/transaction', data);
+      return response.data;
+    },
+
+    getTransactions: async type => {
+      const response = await superaxios.get(`/transaction?status[]=${type}`);
+      return response.data;
+    },
+  },
 };

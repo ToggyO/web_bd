@@ -26,6 +26,7 @@ import { TradesContainer } from '../scenes/Trades';
 import { EditTradeContainer } from '../scenes/EditTrade';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { OtherProfileContainer } from '../scenes/User/OtherProfile';
+import { TransactionContainer } from '../scenes/Transaction';
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
 
@@ -54,7 +55,7 @@ const Routes = ({ loading }) => (
       <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
       <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
-      {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED].map(path => (
+      {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED, ROUTES.DASHBOARD.REQUESTS].map(path => (
         <AuthRoute key={path} path={path} exact component={DashboardContainer} />
       ))}
       <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />
@@ -63,11 +64,16 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
-      <AuthRoute path={ROUTES.SETTINGS.OTHER} exact component={OtherProfileContainer} />
+      <AuthRoute path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
       <AuthRoute
         path={ROUTES.TRADES.EDIT_TRADE}
         exact
         component={props => <EditTradeContainer {...props} type="trade" />}
+      />
+      <AuthRoute
+        path={ROUTES.TRANSACTIONS.TRANSACTION}
+        exact
+        component={props => <TransactionContainer {...props} />}
       />
 
       {/* REDIRECTS */}
