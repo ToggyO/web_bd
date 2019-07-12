@@ -1,9 +1,22 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { Form, Icon, Row, Col, Input, Button } from 'antd';
+import { Form, Row, Col, Input, Button } from 'antd';
+import { ExclamationMessage } from '@components/ExclamationMessage';
+import { Spinner } from '@components/Spinner';
 
 const InitiateTradeFormDisplay = props => {
-  const { form, min, max, currency } = props;
+  const {
+    form,
+    tradeId,
+    min,
+    max,
+    currency,
+    userName,
+    cachedUserName,
+    loading,
+    initiateTransactionRequest,
+    submitting,
+  } = props;
   useEffect(() => {
     form.setFieldsValue({ fiat: '', tradeAmount: '' });
   }, []);
@@ -12,7 +25,7 @@ const InitiateTradeFormDisplay = props => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log(values);
+        initiateTransactionRequest({ ...values, tradeId });
       }
     });
   };
@@ -64,20 +77,32 @@ const InitiateTradeFormDisplay = props => {
       </Row>
 
       <div className="initiate-trade__note">
-        <Icon type="exclamation-circle" theme="filled" className="initiate-trade__icon" />
-        <p className="initiate-trade__text">
+        <ExclamationMessage>
           Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow fee is
-          0,75% from the trade amount. Current blockchain transaction fee is approximately 0.00033239 BTC.
-        </p>
+          0.75% from the trade amount. Current blockchain transaction fee is approximately 0.00033239 BTC.
+        </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">
         <span className="initiate-trade__label">Contact message</span>
         <div className="initiate-trade__fake-message">{`Hi, I'd like to buy your ${tradeAmount} BTC for my ${fiat} ${currency}`}</div>
       </div>
-      <p className="initiate-trade__confirm-text">Please confirm you are willing to trade.</p>
-      <Button htmlType="submit" type="primary">
-        Request trade
-      </Button>
+      <Spinner spinning={loading}>
+        {userName === cachedUserName ? (
+          <div className="hidden">
+            <p className="initiate-trade__confirm-text">You cannot trade with yourself.</p>
+            <Button htmlType="button" type="primary" className="primary-btn" disabled>
+              Sorry, bro
+            </Button>
+          </div>
+        ) : (
+          <div className="hidden">
+            <p className="initiate-trade__confirm-text">Please confirm you are willing to trade.</p>
+            <Button htmlType="submit" type="primary" loading={submitting}>
+              Request trade
+            </Button>
+          </div>
+        )}
+      </Spinner>
     </Form>
   );
 };

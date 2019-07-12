@@ -7,6 +7,7 @@ function mapStateToProps(state) {
   return {
     specificTrade: tradesSelectors.tradeSelector(state, { type: 'trade' }),
     loading: tradesSelectors.tradeLoadingSelector(state, { type: 'trade' }),
+    cachedUserName: state.auth.data.userName,
   };
 }
 

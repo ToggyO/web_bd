@@ -19,6 +19,10 @@ export const ROUTES = {
     EDIT_PHONENUMBER: '/settings/phone/edit',
     EDIT_PASSWORD: '/settings/password/edit',
     REQUEST_VERIFICATION: '/settings/verify',
+  },
+
+  USER: {
+    ROOT: '/user',
     OTHER: '/user/:id',
   },
 
@@ -35,7 +39,8 @@ export const ROUTES = {
     EDIT_TRADE: '/trades/:id/edit',
     BUY: '/buy',
     SELL: '/sell',
-    INITIATE: '/trades/:id/initiate',
+    INITIATE: '/trades/:id',
+  },
 
   TRANSACTIONS: {
     ROOT: '/transactions',
