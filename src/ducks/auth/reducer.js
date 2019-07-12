@@ -1,5 +1,4 @@
 import * as types from './types';
-
 /* shape
 
 		data: {
@@ -21,7 +20,11 @@ import * as types from './types';
 */
 
 const initialState = {
-  data: {},
+  data: {
+    userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName')
+      ? localStorage.getItem('userName')
+      : null,
+  },
   tokens: {},
   loading: false,
   errors: {},

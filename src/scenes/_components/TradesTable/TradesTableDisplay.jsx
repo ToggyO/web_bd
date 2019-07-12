@@ -25,10 +25,6 @@ const TradesTableDisplay = ({
   order,
   page,
 }) => {
-  let buyOrSell;
-  if (type.toLowerCase() === 'buy') buyOrSell = 'Sell';
-  if (type.toLowerCase() === 'sell') buyOrSell = 'Buy';
-
   useEffect(() => {
     if (queryString) {
       history.push({ search: queryString });
@@ -97,10 +93,10 @@ const TradesTableDisplay = ({
         width="25%"
       />
       <Column
-        title={`${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
+        title={type === 'trades' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
         key="userName"
-        render={(text, record) => <a>{record.userName}</a>}
+        render={(text, record) => <Link to={`/user/${record.userName}`}>{record.userName}</Link>}
       />
       <Column title="Location" dataIndex="location" key="location" />
       <Column
@@ -120,7 +116,17 @@ const TradesTableDisplay = ({
         dataIndex="type"
         key="type"
         columnWidth={80}
-        render={(text, record) => <Link to={`/trades/${record.key}/initiate`}>{buyOrSell}</Link>}
+        render={(text, record) => {
+          let buyOrSell;
+          if (record.type.toLowerCase() === 'buy') {
+            buyOrSell = 'Sell';
+          }
+          if (record.type.toLowerCase() === 'sell') {
+            buyOrSell = 'Buy';
+          }
+
+          return <Link to={`/trades/${record.key}`}>{buyOrSell}</Link>;
+        }}
       />
     </Table>
   );

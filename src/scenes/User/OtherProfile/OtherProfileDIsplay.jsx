@@ -10,12 +10,12 @@ import './style.less';
 const OtherProfileDisplay = ({ getCreatedAdsRequest }) => {
   const name = catchFromPath(history.location.pathname, 'user');
   useEffect(() => {
-    getCreatedAdsRequest(`?PageSize=${pageSizeOtherProfile}&profileId=${name}`);
+    getCreatedAdsRequest(`?PageSize=${pageSizeOtherProfile}&username=${name}`);
   }, [history.location.search]);
   return (
     <AppWrapperContainer>
       <div className="paper other-profile">
-        <h2> View ads from {name}</h2>
+        <h2>View ads from {name}</h2>
         <TradesTableContainer type="trades" withPagination />
       </div>
     </AppWrapperContainer>

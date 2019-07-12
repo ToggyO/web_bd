@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Icon } from 'antd';
+import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber } from 'antd';
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import history from '@services/history';
 import * as validations from '@services/validations';
+import { ExclamationMessage } from '@components/ExclamationMessage';
 import TransactionLimits from './_components/TransactionLimits';
 import './style.less';
 import { formatMoney } from '@utils';
@@ -288,15 +289,14 @@ class CreateEditTradeFormDisplay extends React.Component {
             </Col>
           </Row>
 
-          <Row gutter={48} style={{padding: '0 24px'}}>
+          <Row gutter={48} style={{ padding: '0 24px' }}>
             <Col>
               <div className="initiate-trade__note">
-                <Icon type="exclamation-circle" theme="filled" className="initiate-trade__icon" />
-                <p className="initiate-trade__text">
+                <ExclamationMessage>                 
                   Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow
                   fee is 0,75% from the trade amount. Current blockchain transaction fee is approximately
                   0.00033239 BTC.
-                </p>
+                </ExclamationMessage>
               </div>
             </Col>
           </Row>

@@ -47,5 +47,6 @@ export const tradeSelector = createSelector(
     minTransactionLimit: data.minTransactionLimit,
     maxTransactionLimit: data.maxTransactionLimit,
     terms: data.terms,
+    userName: data.userName,
   })
 );

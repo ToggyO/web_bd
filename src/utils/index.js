@@ -11,9 +11,12 @@ export const getQueries = url => {
 
 export const catchFromPath = (path, separators) => {
   if (Array.isArray(separators)) {
-    return path.match(`${separators[0]}/(.*)/${separators[1]}`)[1];
+    const match = path.match(`${separators[0]}/(.*)/${separators[1]}`);
+    if (match) return match[1];
   }
-  return path.match(`${separators}/(.*)`)[1].replace('/', '');
+  const match = path.match(`${separators}/(.*)`);
+  if (match) return match[1].replace('/', '');
+  return '';
 };
 
 // simple check for values from form
