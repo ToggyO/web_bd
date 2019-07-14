@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import logo from '@assets/logo.svg';
 import './style.less';
 
-const AuthBox = ({ header, children }) => (
+export const AuthBox = ({ header, children }) => (
   <div className="auth-box">
     <aside className="auth-box__aside">
       <div className="auth-box__bubble" />
@@ -20,5 +20,3 @@ AuthBox.propTypes = {
   header: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
-
-export default AuthBox;

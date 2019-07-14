@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 import './style.less';
 
 export const ButtonLink = props => (
@@ -7,7 +7,3 @@ export const ButtonLink = props => (
     {props.children}
   </button>
 );
-
-ButtonLink.propTypes = {
-  children: PropTypes.string,
-};

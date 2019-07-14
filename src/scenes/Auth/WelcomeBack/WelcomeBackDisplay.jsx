@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ROUTES } from '@config/constants';
-import AuthBox from '@components/AuthBox';
+import { AuthBox } from '@components/AuthBox';
 import history from '@services/history';
 import SignWrapper from '../../_components/SignWrapper';
 import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
@@ -15,7 +15,9 @@ const WelcomeBackDisplay = ({ emailConfirmed, phoneNumberConfirmed }) => {
   return (
     <SignWrapper>
       <AuthBox header="Welcome back!">
-        <p>To get access, click «Get code» and enter the verification code you received on the linked phone.</p>
+        <p>
+          To get access, click «Get code» and enter the verification code you received on the linked phone.
+        </p>
         <WelcomeBackFormContainer />
       </AuthBox>
     </SignWrapper>

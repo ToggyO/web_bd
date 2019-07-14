@@ -1,6 +1,6 @@
 import React from 'react';
 import { ROUTES } from '@config/constants';
-import AuthBox from '@components/AuthBox';
+import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
 import SignWrapper from '../../_components/SignWrapper';
 import { ForgotPasswordFormContainer } from './components/ForgotPasswordForm';
