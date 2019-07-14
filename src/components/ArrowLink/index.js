@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './style.less';
 
-const ArrowLink = ({ text, leftArrow, goTo }) => (
+export const ArrowLink = ({ text, leftArrow, goTo }) => (
   <Link to={goTo} className="arrow-link">
     {leftArrow ? (
       <React.Fragment>
@@ -17,8 +17,6 @@ const ArrowLink = ({ text, leftArrow, goTo }) => (
     )}
   </Link>
 );
-
-export default ArrowLink;
 
 ArrowLink.propTypes = {
   text: PropTypes.string.isRequired,

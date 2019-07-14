@@ -3,7 +3,7 @@ import { Row, Col, Divider } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import ArrowLink from '@components/ArrowLink';
+import { ArrowLink } from '@components/ArrowLink';
 import { ButtonLink } from '@components/ButtonLink';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES } from '@config/constants';
