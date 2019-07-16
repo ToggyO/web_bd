@@ -1,0 +1,39 @@
+.container {
+  max-width: 1202px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.paper {
+  max-width: 1172px;
+  margin: 8px auto 0;
+  border-radius: 6px;
+  box-shadow: @box-shadow-base;
+  background: @component-background;
+}
+
+.primary-btn[disabled] {
+  background-color: rgba(@primary-color, 0.5) !important;
+  border-color: transparent !important;
+  color: @btn-primary-color !important;
+}
+
+.hover {
+  // background: #ecffe245;
+  background: #ebf7f3;
+}
+
+.span-head {
+  font-weight: 500;
+}
+
+.hidden {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.removable {
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
