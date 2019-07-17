@@ -7,7 +7,7 @@ import { TradesTableContainer } from '@scenes/_components/TradesTable';
 import { pageSize } from '@config/constants';
 import './style.less';
 
-const TradesDisplay = ({ getTradesRequest, type }) => {
+const TradesDisplay = ({ getAdsRequest, type }) => {
   let initialState;
   let Type;
   if (type === 'sell') Type = 'Buy';
@@ -19,13 +19,13 @@ const TradesDisplay = ({ getTradesRequest, type }) => {
   }
 
   useEffect(() => {
-    getTradesRequest(`?pageSize=${pageSize}&type[]=${type}${searchQuery}`);
+    getAdsRequest(`?pageSize=${pageSize}&type[]=${type}${searchQuery}`);
   }, [history.location.search]);
 
   return (
     <AppWrapperContainer>
       <div className="paper">
-        <div className="trades">
+        <div className="ads">
           <h1>{Type} bitcoins</h1>
           <QuickFilterFormContainer type={type} initialState={initialState} />
           <TradesTableContainer type={type} withTerms />
@@ -36,7 +36,7 @@ const TradesDisplay = ({ getTradesRequest, type }) => {
 };
 
 TradesDisplay.propTypes = {
-  getTradesRequest: PropTypes.func,
+  getAdsRequest: PropTypes.func,
   type: PropTypes.string.isRequired,
 };
 export default TradesDisplay;

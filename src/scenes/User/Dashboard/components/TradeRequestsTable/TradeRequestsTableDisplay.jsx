@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@components/Spinner';
-import { NoData } from '@scenes/_components/TradesTable/_components/NoData';
+import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
 import { formatDate, formatMoney, sortStrings } from '@utils';
 import { ROUTES } from '@config/constants';
 
@@ -53,8 +53,8 @@ const TradeRequestsTableDisplay = ({ withTerms, transactionsData, loading }) => 
                   <span>Terms of trade</span>
                   <p>{record.terms}</p>
                 </div>
-              </Col>  
-            </Row> 
+              </Col>
+            </Row>
           </div>
         )
         : null
@@ -73,10 +73,8 @@ const TradeRequestsTableDisplay = ({ withTerms, transactionsData, loading }) => 
       render={(text, record) => {
         let user;
         if (record.type === 'Buy') user = record.adOwner;
-        if (record.type === 'Sell') user = record.tradePartner
-        return (
-          <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>
-        )
+        if (record.type === 'Sell') user = record.tradePartner;
+        return <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>;
       }}
       sorter={(a, b) => sortStrings(a.tradePartner, b.tradePartner)}
       width="20%"
@@ -112,21 +110,22 @@ const TradeRequestsTableDisplay = ({ withTerms, transactionsData, loading }) => 
 
 TradeRequestsTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
-  transactionsData: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    createdAt: PropTypes.number,
-    transactionLimit: PropTypes.string,
-    tradePartner: PropTypes.string,
-    type: PropTypes.string,
-    tradeAmount: PropTypes.number,
-    currency: PropTypes.string,
-    fiat: PropTypes.number,
-    location: PropTypes.string,
-    payment: PropTypes.string,
-    btcPrice: PropTypes.number,
-    terms: PropTypes.string,
-  })
+  transactionsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      createdAt: PropTypes.number,
+      transactionLimit: PropTypes.string,
+      tradePartner: PropTypes.string,
+      type: PropTypes.string,
+      tradeAmount: PropTypes.number,
+      currency: PropTypes.string,
+      fiat: PropTypes.number,
+      location: PropTypes.string,
+      payment: PropTypes.string,
+      btcPrice: PropTypes.number,
+      terms: PropTypes.string,
+    })
   ),
   loading: PropTypes.bool,
-}
+};
 export default TradeRequestsTableDisplay;

@@ -17,7 +17,7 @@ const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTransactionsReques
     const path = catchFromPath(history.location.pathname, 'dashboard');
     if (path === 'created' || path === '') getMyCreatedAdsRequest('created');
     if (path === 'requests') getPendingTransactionsRequest('pending');
-  });
+  }, [history.location.pathname]);
 
   const handleChangeTab = tab => {
     history.push(ROUTES.DASHBOARD[tab]);

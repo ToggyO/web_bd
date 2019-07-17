@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
-import { tradesSelectors } from '@ducks/trades';
-import { tradeActions } from '@ducks/trades/trade';
+import { adsSelectors } from '@ducks/ads';
+import { adActions } from '@ducks/ads/ad';
 import CreatedAdsTableDisplay from './CreatedAdsTableDisplay';
 
 function mapStateToProps(state) {
   return {
-    tradesData: tradesSelectors.tradesSelector(state, { type: 'trades' }),
-    loading: tradesSelectors.tradeLoadingSelector(state, { type: 'trades' }),
-    statusLoading: state.trades.trade.loading,
+    adsData: adsSelectors.adsSelector(state, { type: 'ads' }),
+    loading: adsSelectors.adsLoadingSelector(state, { type: 'ads' }),
+    statusLoading: state.ads.ad.loading,
     submitting: state._global.submitting,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteTradeRequest(id) {
-      dispatch(tradeActions.deleteTradeRequest(id));
+    deleteAdRequest(id) {
+      dispatch(adActions.deleteAdRequest(id));
     },
-    toggleTradeStatusRequest(idWithStatus) {
-      dispatch(tradeActions.toggleTradeStatusRequest(idWithStatus));
+    toggleAdStatusRequest(idWithStatus) {
+      dispatch(adActions.toggleAdStatusRequest(idWithStatus));
     },
   };
 }

@@ -34,12 +34,16 @@ export const ROUTES = {
     COMPLETED: '/dashboard/completed',
     CANCELED: '/dashboard/canceled',
   },
-  TRADES: {
-    CREATE: '/trades/create',
-    EDIT_TRADE: '/trades/:id/edit',
+  ADS: {
+    CREATE: '/ads/create',
+    EDIT: '/ads/:id/edit',
     BUY: '/buy',
     SELL: '/sell',
-    INITIATE: '/trades/:id',
+    INITIATE_TRADE: '/ads/:id',
+  },
+
+  TRADES: {
+    INITIATE: '/ads/:id',
   },
 
   TRANSACTIONS: {

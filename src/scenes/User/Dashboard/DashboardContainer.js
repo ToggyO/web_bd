@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { tradesActions } from '@ducks/trades/trades';
+import { adsActions } from '@ducks/ads/ads';
 import { transactionsActions } from '@ducks/transactions/transactions';
 import DashboardDisplay from './DashboardDisplay';
 
 function mapDispatchToProps(dispatch) {
   return {
     getMyCreatedAdsRequest(params) {
-      dispatch(tradesActions.getMyCreatedAdsRequest(params));
+      dispatch(adsActions.getMyCreatedAdsRequest(params));
     },
     getPendingTransactionsRequest(type) {
       dispatch(transactionsActions.getPendingTransactionsRequest(type));

@@ -22,13 +22,13 @@ const QuickFilterFormDisplay = Form.create()(props => {
 
         if (type.toLowerCase() === 'buy') {
           history.push({
-            pathname: ROUTES.TRADES.BUY,
+            pathname: ROUTES.ADS.BUY,
             search: queryString,
           });
         }
         if (type.toLowerCase() === 'sell') {
           history.push({
-            pathname: ROUTES.TRADES.SELL,
+            pathname: ROUTES.ADS.SELL,
             search: queryString,
           });
         }

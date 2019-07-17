@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { authActions, authSelectors } from '@ducks/auth';
-import { searchParamsActions } from '@ducks/trades/searchParams';
+import { searchActions } from '@ducks/ads/search';
 
 import HeaderDisplay from './HeaderDisplay';
 
@@ -16,7 +16,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(authActions.logoutRequest());
     },
     cleanState() {
-      dispatch(searchParamsActions.cleanState());
+      dispatch(searchActions.cleanState());
     },
   };
 }

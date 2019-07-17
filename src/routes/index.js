@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
 import { NotFound } from '@scenes/404';
 import { LoginContainer } from '../scenes/Auth/Login';
@@ -19,11 +20,11 @@ import { EditFullNameDisplay } from '../scenes/User/Profile/EditFullName';
 import { EditPhoneNumberDisplay } from '../scenes/User/Profile/EditPhoneNumber';
 import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
-import { PostTradeContainer } from '../scenes/PostTrade';
+import { CreateAdContainer } from '../scenes/CreateAd';
 import { DashboardContainer } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
 import { TradesContainer } from '../scenes/Trades';
-import { EditTradeContainer } from '../scenes/EditTrade';
+import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { OtherProfileContainer } from '../scenes/User/OtherProfile';
 import { TransactionContainer } from '../scenes/Transaction';
@@ -35,20 +36,17 @@ const Routes = ({ loading }) => (
     spinning={loading}
     tip="Restoring your session... Please, do not reload this page until it finishes."
     wrapperClassName="global-loading"
+    indicator={<Spinner />}
   >
     <Switch>
       <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
-      <Route path={ROUTES.TRADES.BUY} exact component={props => <TradesContainer {...props} type="sell" />} />
-      <Route path={ROUTES.TRADES.SELL} exact component={props => <TradesContainer {...props} type="buy" />} />
-      <Route
-        path={ROUTES.TRADES.CREATE}
-        exact
-        component={props => <PostTradeContainer {...props} type="trade" />}
-      />
-      <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
+      <Route path={ROUTES.ADS.BUY} exact component={props => <TradesContainer {...props} type="sell" />} />
+      <Route path={ROUTES.ADS.SELL} exact component={props => <TradesContainer {...props} type="buy" />} />
+      <Route path={ROUTES.ADS.CREATE} exact component={props => <CreateAdContainer {...props} type="ad" />} />
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
       <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
+      <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
 
       <UnAuthRoute path={ROUTES.LOGIN} exact component={LoginContainer} />
       <UnAuthRoute path={ROUTES.SUCCESS} exact component={SuccessDisplay} />
@@ -65,11 +63,7 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
       <AuthRoute path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
-      <AuthRoute
-        path={ROUTES.TRADES.EDIT_TRADE}
-        exact
-        component={props => <EditTradeContainer {...props} type="trade" />}
-      />
+      <AuthRoute path={ROUTES.ADS.EDIT} exact component={props => <EditAdContainer {...props} type="ad" />} />
       <AuthRoute
         path={ROUTES.TRANSACTIONS.TRANSACTION}
         exact

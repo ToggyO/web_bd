@@ -4,27 +4,27 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from '@ducks/auth/reducer';
 import user from '@ducks/user/reducer';
 import _global from '@ducks/_global';
-import trades from '@ducks/trades';
+import ads from '@ducks/ads';
 import transactions from '@ducks/transactions';
 import * as authSagas from '@ducks/auth/sagas';
 import * as userSagas from '@ducks/user/sagas';
-import { buyTradesSagas } from '@ducks/trades/buy';
-import { sellTradesSagas } from '@ducks/trades/sell';
-import { tradeSagas } from '@ducks/trades/trade';
-import { tradesSagas } from '@ducks/trades/trades';
+import { buyAdsSagas } from '@ducks/ads/buy';
+import { sellAdsSagas } from '@ducks/ads/sell';
+import { adSagas } from '@ducks/ads/ad';
+import { adsSagas } from '@ducks/ads/ads';
 import { transactionSagas } from '@ducks/transactions/transaction';
 import { transactionsSagas } from '@ducks/transactions/transactions';
 import { saveTokens, saveUserName, logout } from '../middleware';
 
 export default function configureStore() {
-  const reducer = combineReducers({ _global, auth, user, trades, transactions });
+  const reducer = combineReducers({ _global, auth, user, ads, transactions });
   const sagas = {
     ...authSagas,
     ...userSagas,
-    ...buyTradesSagas,
-    ...sellTradesSagas,
-    ...tradeSagas,
-    ...tradesSagas,
+    ...buyAdsSagas,
+    ...sellAdsSagas,
+    ...adSagas,
+    ...adsSagas,
     ...transactionSagas,
     ...transactionsSagas,
   };

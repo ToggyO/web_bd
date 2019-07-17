@@ -63,36 +63,34 @@ export default {
     },
   },
 
-  trades: {
-    getTrades: async params => {
-      const response = await superaxios.get(`/trade${params}`);
+  ads: {
+    getAds: async params => {
+      const response = await superaxios.get(`/ad${params}`);
       return response.data;
     },
-    getMyTrades: async type => {
-      const response = await superaxios.get(
-        `/trade/currentuser?pageSize=${pageSizeDashboard}&status[]=${type}`
-      );
+    getMyAds: async type => {
+      const response = await superaxios.get(`/ad/currentuser?pageSize=${pageSizeDashboard}&status[]=${type}`);
       return response.data;
     },
-    toggleTradeStatus: async idWithStatus => {
-      const response = await superaxios.put('/trade/status', idWithStatus);
+    toggleAdStatus: async idWithStatus => {
+      const response = await superaxios.put('/ad/status', idWithStatus);
       return response.data;
     },
 
-    postTrade: async values => {
-      const response = await superaxios.post('/trade', values);
+    createAd: async values => {
+      const response = await superaxios.post('/ad', values);
       return response.data;
     },
-    getTradeById: async id => {
-      const response = await superaxios.get(`/trade/${id}`);
+    getAdById: async id => {
+      const response = await superaxios.get(`/ad/${id}`);
       return response.data;
     },
-    editTrade: async values => {
-      const response = await superaxios.put('/trade', values);
+    editAd: async values => {
+      const response = await superaxios.put('/ad', values);
       return response.data;
     },
-    deleteTrade: async id => {
-      const response = await superaxios.delete(`/trade/${id}`);
+    deleteAd: async id => {
+      const response = await superaxios.delete(`/ad/${id}`);
       return response.data;
     },
   },

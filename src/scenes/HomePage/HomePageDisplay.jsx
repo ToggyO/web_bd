@@ -4,7 +4,7 @@ import { checkTokens } from '@services/auth';
 import { AppWrapperContainer } from '../_components/AppWrapper';
 import { EasyWayDisplay } from './_components/EasyWay';
 import { QuickFiltersTabsDisplay } from './_components/QuickFiltersTabs';
-import { TenTradesContainer } from './_components/TenTrades';
+import { TenAdsContainer } from './_components/TenAds';
 import './style.less';
 
 const HomePageDisplay = () => (
@@ -19,8 +19,8 @@ const HomePageDisplay = () => (
       <QuickFiltersTabsDisplay />
       <Divider />
       <div className="quick-buy-sell">
-        <TenTradesContainer type="sell" />
-        <TenTradesContainer type="buy" />
+        <TenAdsContainer type="sell" />
+        <TenAdsContainer type="buy" />
       </div>
     </div>
   </AppWrapperContainer>

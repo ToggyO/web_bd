@@ -9,10 +9,10 @@ import { InitiateTradeFormContainer } from './InitiateTradeForm';
 import './style.less';
 import { catchFromPath } from '@utils';
 
-const InitiateTradeDisplay = ({ getTradeByIdRequest, specificTrade, loading, cachedUserName }) => {
-  const tradeId = catchFromPath(history.location.pathname, 'trades');
+const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserName }) => {
+  const tradeId = catchFromPath(history.location.pathname, 'ads');
   useEffect(() => {
-    getTradeByIdRequest(tradeId);
+    getAdByIdRequest(tradeId);
   }, []);
 
   const {
@@ -93,7 +93,7 @@ const InitiateTradeDisplay = ({ getTradeByIdRequest, specificTrade, loading, cac
 };
 
 InitiateTradeDisplay.propTypes = {
-  getTradeByIdRequest: PropTypes.func,
+  getAdByIdRequest: PropTypes.func,
   specificTrade: PropTypes.object,
   loading: PropTypes.bool,
   cachedUserName: PropTypes.string,

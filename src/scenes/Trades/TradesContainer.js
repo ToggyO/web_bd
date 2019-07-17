@@ -1,29 +1,29 @@
 import { connect } from 'react-redux';
-import { buyTradesActions } from '@ducks/trades/buy';
-import { sellTradesActions } from '@ducks/trades/sell';
-import * as tradesSelectors from '@ducks/trades/selectors';
+import { buyAdsActions } from '@ducks/ads/buy';
+import { sellAdsActions } from '@ducks/ads/sell';
+import * as adsSelectors from '@ducks/ads/selectors';
 import TradesDisplay from './TradesDisplay';
 
 function mapStateToProps(state, props) {
   return {
-    tradesData: tradesSelectors.tradesSelector(state, props),
-    loading: tradesSelectors.tradeLoadingSelector(state, props),
-    totalPages: tradesSelectors.totalPagesQuantitySelector(state, props),
+    adsData: adsSelectors.adsSelector(state, props),
+    loading: adsSelectors.adsLoadingSelector(state, props),
+    totalPages: adsSelectors.totalPagesQuantitySelector(state, props),
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   if (ownProps.type.toLowerCase() === 'buy') {
     return {
-      getTradesRequest(query) {
-        dispatch(buyTradesActions.getBuyTradesRequest(query));
+      getAdsRequest(query) {
+        dispatch(buyAdsActions.getBuyAdsRequest(query));
       },
     };
   }
   if (ownProps.type.toLowerCase() === 'sell') {
     return {
-      getTradesRequest(query) {
-        dispatch(sellTradesActions.getSellTradesRequest(query));
+      getAdsRequest(query) {
+        dispatch(sellAdsActions.getSellAdsRequest(query));
       },
     };
   }

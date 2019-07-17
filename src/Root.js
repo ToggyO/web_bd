@@ -6,7 +6,7 @@ import history from '@services/history';
 import Routes from '@routes';
 import { ScrollToTop } from '@components/ScrollToTop';
 import { store } from './store';
-import './global.less';
+import './styles/index.less';
 
 message.config({
   top: 68,

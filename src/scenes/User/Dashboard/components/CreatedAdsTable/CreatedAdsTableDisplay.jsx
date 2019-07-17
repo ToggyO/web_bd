@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Table, Modal, Tag } from 'antd';
 import history from '@services/history';
 import { formatDate, sortStrings } from '@utils';
-import { NoData } from '@scenes/_components/TradesTable/_components/NoData';
+import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
 import './style.less';
 import { Spinner } from '@components/Spinner/index';
 
@@ -13,12 +13,12 @@ const { Column } = Table;
 
 const CreatedAdsTableDisplay = ({
   withTerms,
-  deleteTradeRequest,
-  tradesData,
+  deleteAdRequest,
+  adsData,
   loading,
   submitting,
   statusLoading,
-  toggleTradeStatusRequest,
+  toggleAdStatusRequest,
 }) => {
   useEffect(() => {
     if (history.location.state) {
@@ -40,7 +40,7 @@ const CreatedAdsTableDisplay = ({
       title: 'Would you like to delete this ad?',
       content: 'This action cannot be undone.',
       onOk() {
-        deleteTradeRequest(id);
+        deleteAdRequest(id);
       },
       okText: 'Yes',
       okButtonProps: {
@@ -58,14 +58,14 @@ const CreatedAdsTableDisplay = ({
 
   const handleStatusToggle = (id, status) => {
     setIdToToggle(() => id);
-    toggleTradeStatusRequest({ id, shown: !status });
+    toggleAdStatusRequest({ id, shown: !status });
   };
 
   return (
     <div>
       <Table
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
-        dataSource={tradesData}
+        dataSource={adsData}
         loading={{spinning: loading, indicator: <Spinner />}}
         locale={{ emptyText: <NoData /> }}
         expandedRowRender={
@@ -73,10 +73,10 @@ const CreatedAdsTableDisplay = ({
             ? record => (
               <div className="extra-row">
                 <div className="extra-row__head">
-                  <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                  <Link className="extra-row__view" to={`/ads/${record.key}`}>
                       View
                   </Link>
-                  <Link className="extra-row__edit" to={`/trades/${record.key}/edit`}>
+                  <Link className="extra-row__edit" to={`/ads/${record.key}/edit`}>
                       Edit
                   </Link>
                   <a className="extra-row__delete" onClick={() => showConfirm(record.key)}>
@@ -87,7 +87,7 @@ const CreatedAdsTableDisplay = ({
                   <div className="extra-row__left">
                     <div className="extra-row__location">
                       <span>Trade limits</span>
-                      <p>{record.transactionLimit}</p>
+                      <p>{record.tradeLimits}</p>
                     </div>
                     <div className="extra-row__currency">
                       <span>Terms of trade</span>
@@ -172,7 +172,7 @@ const CreatedAdsTableDisplay = ({
 
 CreatedAdsTableDisplay.propTypes = {
   withTerms: PropTypes.bool.isRequired,
-  tradesData: PropTypes.arrayOf(
+  adsData: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       createdAt: PropTypes.number,
@@ -185,11 +185,11 @@ CreatedAdsTableDisplay.propTypes = {
       terms: PropTypes.string,
     })
   ),
-  deleteTradeRequest: PropTypes.func,
+  deleteAdRequest: PropTypes.func,
   loading: PropTypes.bool,
   submitting: PropTypes.bool,
   statusLoading: PropTypes.bool,
-  toggleTradeStatusRequest: PropTypes.func,
+  toggleAdStatusRequest: PropTypes.func,
 };
 
 CreatedAdsTableDisplay.defaultProps = {

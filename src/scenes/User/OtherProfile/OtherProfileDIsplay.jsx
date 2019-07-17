@@ -16,7 +16,7 @@ const OtherProfileDisplay = ({ getCreatedAdsRequest }) => {
     <AppWrapperContainer>
       <div className="paper other-profile">
         <h2>View ads from {name}</h2>
-        <TradesTableContainer type="trades" withPagination />
+        <TradesTableContainer type="ads" withPagination />
       </div>
     </AppWrapperContainer>
   );
