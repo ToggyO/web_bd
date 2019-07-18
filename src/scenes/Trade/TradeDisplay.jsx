@@ -14,12 +14,12 @@ const handleClick = () => {
   console.log('clicked');
 };
 
-const TransactionDisplay = () => {
-  const id = catchFromPath(history.location.pathname, 'transactions');
+const TradeDisplay = () => {
+  const id = catchFromPath(history.location.pathname, 'trades');
   return (
     <AppWrapperContainer>
       <div className="paper">
-        <div className="transaction">
+        <div className="trade">
           <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />
           <h2>
             {prettifyId(id)} Buy bitcoins from <Link to={`${ROUTES.USER.ROOT}/vit`}>vit</Link>
@@ -36,7 +36,7 @@ const TransactionDisplay = () => {
             <Col md={12}>
               <p>
                 You can close the trade window while waiting for a reply. You will receive an Email alert and
-                notification when the seller reply. You can open the window of this transaction from your
+                notification when the seller reply. You can open the window of this trade from your
                 <Link to={ROUTES.DASHBOARD.ROOT}> dashboard</Link>.
               </p>
 
@@ -101,4 +101,4 @@ const TransactionDisplay = () => {
   );
 };
 
-export default TransactionDisplay;
+export default TradeDisplay;

@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { transactionsSelectors } from '@ducks/transactions';
+import { tradesSelectors } from '@ducks/trades';
 import TradeRequestsTableDisplay from './TradeRequestsTableDisplay';
 
 function mapStateToProps(state) {
   return {
-    transactionsData: transactionsSelectors.transactionsSelector(state),
-    loading: transactionsSelectors.transactionsLoadingSelector(state),
+    tradesData: tradesSelectors.tradesSelector(state),
+    loading: tradesSelectors.tradesLoadingSelector(state),
   };
 }
 

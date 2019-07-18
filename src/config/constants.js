@@ -44,12 +44,10 @@ export const ROUTES = {
 
   TRADES: {
     INITIATE: '/ads/:id',
+    ROOT: '/trades',
+    TRADE: '/trades/:id',
   },
 
-  TRANSACTIONS: {
-    ROOT: '/transactions',
-    TRANSACTION: '/transactions/:id',
-  },
   OTHER: {
     HELP: '/help',
     PRIVACY: '/privacy',

@@ -14,7 +14,7 @@ const InitiateTradeFormDisplay = props => {
     userName,
     cachedUserName,
     loading,
-    initiateTransactionRequest,
+    initiateTradeRequest,
     submitting,
   } = props;
   useEffect(() => {
@@ -25,7 +25,7 @@ const InitiateTradeFormDisplay = props => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        initiateTransactionRequest({ ...values, tradeId });
+        initiateTradeRequest({ ...values, tradeId });
       }
     });
   };

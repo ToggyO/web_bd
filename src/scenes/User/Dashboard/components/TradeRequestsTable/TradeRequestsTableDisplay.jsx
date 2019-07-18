@@ -10,10 +10,10 @@ import { ROUTES } from '@config/constants';
 
 const { Column } = Table;
 
-const TradeRequestsTableDisplay = ({ withTerms, transactionsData, loading }) => (
+const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) => (
   <Table
     expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
-    dataSource={transactionsData}
+    dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
     expandedRowRender={
@@ -103,14 +103,14 @@ const TradeRequestsTableDisplay = ({ withTerms, transactionsData, loading }) => 
 
     <Column
       title="Action"
-      render={(text, record) => <Link to={`${ROUTES.TRANSACTIONS.ROOT}/${record.key}`}>View</Link>}
+      render={(text, record) => <Link to={`${ROUTES.TRADES.ROOT}/${record.key}`}>View</Link>}
     />
   </Table>
 );
 
 TradeRequestsTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
-  transactionsData: PropTypes.arrayOf(
+  tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
       createdAt: PropTypes.number,

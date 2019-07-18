@@ -23,11 +23,11 @@ import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerifi
 import { CreateAdContainer } from '../scenes/CreateAd';
 import { DashboardContainer } from '../scenes/User/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
-import { TradesContainer } from '../scenes/Trades';
+import { AdsContainer } from '../scenes/Ads';
 import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { OtherProfileContainer } from '../scenes/User/OtherProfile';
-import { TransactionContainer } from '../scenes/Transaction';
+import { TradeContainer } from '../scenes/Trade';
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
 
@@ -40,8 +40,8 @@ const Routes = ({ loading }) => (
   >
     <Switch>
       <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
-      <Route path={ROUTES.ADS.BUY} exact component={props => <TradesContainer {...props} type="sell" />} />
-      <Route path={ROUTES.ADS.SELL} exact component={props => <TradesContainer {...props} type="buy" />} />
+      <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
+      <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
       <Route path={ROUTES.ADS.CREATE} exact component={props => <CreateAdContainer {...props} type="ad" />} />
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
@@ -64,11 +64,7 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
       <AuthRoute path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
       <AuthRoute path={ROUTES.ADS.EDIT} exact component={props => <EditAdContainer {...props} type="ad" />} />
-      <AuthRoute
-        path={ROUTES.TRANSACTIONS.TRANSACTION}
-        exact
-        component={props => <TransactionContainer {...props} />}
-      />
+      <AuthRoute path={ROUTES.TRADES.TRADES} exact component={props => <TradeContainer {...props} />} />
 
       {/* REDIRECTS */}
       {[

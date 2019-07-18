@@ -94,14 +94,17 @@ export default {
       return response.data;
     },
   },
-  transactions: {
+  trades: {
     initiate: async data => {
-      const response = await superaxios.post('/transaction', data);
+      const response = await superaxios.post('/trade', data);
       return response.data;
     },
-
-    getTransactions: async type => {
-      const response = await superaxios.get(`/transaction?status[]=${type}`);
+    getTrades: async type => {
+      const response = await superaxios.get(`/trade?status[]=${type}`);
+      return response.data;
+    },
+    getTradeById: async id => {
+      const response = await superaxios.get(`/trade/${id}`);
       return response.data;
     },
   },

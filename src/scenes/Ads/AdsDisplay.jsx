@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
-import { TradesTableContainer } from '@scenes/_components/TradesTable';
+import { AdsTableContainer } from '@scenes/_components/AdsTable';
 import { pageSize } from '@config/constants';
 import './style.less';
 
-const TradesDisplay = ({ getAdsRequest, type }) => {
+const AdsDisplay = ({ getAdsRequest, type }) => {
   let initialState;
   let Type;
   if (type === 'sell') Type = 'Buy';
@@ -28,15 +28,15 @@ const TradesDisplay = ({ getAdsRequest, type }) => {
         <div className="ads">
           <h1>{Type} bitcoins</h1>
           <QuickFilterFormContainer type={type} initialState={initialState} />
-          <TradesTableContainer type={type} withTerms />
+          <AdsTableContainer type={type} withTerms />
         </div>
       </div>
     </AppWrapperContainer>
   );
 };
 
-TradesDisplay.propTypes = {
+AdsDisplay.propTypes = {
   getAdsRequest: PropTypes.func,
   type: PropTypes.string.isRequired,
 };
-export default TradesDisplay;
+export default AdsDisplay;

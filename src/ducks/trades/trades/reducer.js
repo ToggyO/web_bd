@@ -8,13 +8,13 @@ const initialState = {
   loading: false,
 };
 
-export default function transactions(state = initialState, action) {
+export default function trades(state = initialState, action) {
   switch (action.type) {
-    case types.GET_PENDING_TRANSACTIONS_REQUEST:
+    case types.GET_PENDING_REQUEST:
       return { ...state, loading: true };
-    case types.GET_PENDING_TRANSACTIONS_SUCCESS:
+    case types.GET_PENDING_SUCCESS:
       return { ...state, data: action.payload, loading: false };
-    case types.GET_PENDING_TRANSACTIONS_ERROR:
+    case types.GET_PENDING_ERROR:
       return { ...state, errors: action.payload, loading: false };
     default:
       return state;

@@ -1,6 +1,6 @@
 import * as globalTypes from './types';
 import { adTypes } from '../ads/ad';
-import { transactionTypes } from '../transactions/transaction';
+import { tradeTypes } from '../trades/trade';
 
 const initialState = {
   globalLoading: false,
@@ -19,7 +19,7 @@ export default function _global(state = initialState, action) {
     case adTypes.CREATE_REQUEST:
     case adTypes.EDIT_REQUEST:
     case adTypes.DELETE_REQUEST:
-    case transactionTypes.INITIATE_TRANSACTION_REQUEST:
+    case tradeTypes.INITIATE_TRADE_REQUEST:
       return { ...state, submitting: true };
 
     case adTypes.CREATE_SUCCESS:
@@ -28,8 +28,8 @@ export default function _global(state = initialState, action) {
     case adTypes.EDIT_ERROR:
     case adTypes.DELETE_SUCCESS:
     case adTypes.DELETE_ERROR:
-    case transactionTypes.INITIATE_TRANSACTION_SUCCESS:
-    case transactionTypes.INITIATE_TRANSACTION_ERROR:
+    case tradeTypes.INITIATE_TRADE_SUCCESS:
+    case tradeTypes.INITIATE_TRADE_ERROR:
       return { ...state, submitting: false };
     default:
       return state;

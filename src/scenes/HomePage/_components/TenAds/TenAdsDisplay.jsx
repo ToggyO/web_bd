@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import { TenTradesSkeleton } from '@scenes/_components/TenTradesSkeleton';
-import { TradesTableContainer } from '@scenes/_components/TradesTable';
+import { AdsTableContainer } from '@scenes/_components/AdsTable';
 
 const TenAdsDisplay = ({ getAdsRequest, loading, type }) => {
   let Type;
@@ -20,7 +20,7 @@ const TenAdsDisplay = ({ getAdsRequest, loading, type }) => {
       {loading ? (
         <TenTradesSkeleton loading={loading} />
       ) : (
-        <TradesTableContainer type={type} classNames="mb-20" />
+        <AdsTableContainer type={type} classNames="mb-20" />
       )}
       <Link to={ROUTES.ADS[Type.toUpperCase()]}>Show more {Type.toLowerCase()} ads</Link>
     </div>

@@ -12,11 +12,11 @@ import './style.less';
 
 const { TabPane } = Tabs;
 
-const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTransactionsRequest }) => {
+const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTradesRequest }) => {
   useEffect(() => {
     const path = catchFromPath(history.location.pathname, 'dashboard');
     if (path === 'created' || path === '') getMyCreatedAdsRequest('created');
-    if (path === 'requests') getPendingTransactionsRequest('pending');
+    if (path === 'requests') getPendingTradesRequest('pending');
   }, [history.location.pathname]);
 
   const handleChangeTab = tab => {
@@ -27,7 +27,7 @@ const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTransactionsReques
         getMyCreatedAdsRequest('created');
         break;
       case 'REQUESTS':
-        getPendingTransactionsRequest('pending');
+        getPendingTradesRequest('pending');
         break;
       default:
         getMyCreatedAdsRequest();
@@ -75,6 +75,6 @@ const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTransactionsReques
 
 DashboardDisplay.propTypes = {
   getMyCreatedAdsRequest: PropTypes.func,
-  getPendingTransactionsRequest: PropTypes.func,
+  getPendingTradesRequest: PropTypes.func,
 };
 export default DashboardDisplay;

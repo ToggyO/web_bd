@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { transactionActions } from '@ducks/transactions/transaction';
+import { tradeActions } from '@ducks/trades/trade';
 import InitiateTradeFormDisplay from './InitiateTradeFormDisplay';
 
 function mapStateToProps(state) {
@@ -10,8 +10,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    initiateTransactionRequest(data) {
-      dispatch(transactionActions.initiateTransactionRequest(data));
+    initiateTradeRequest(data) {
+      dispatch(tradeActions.initiateTradeRequest(data));
     },
   };
 }

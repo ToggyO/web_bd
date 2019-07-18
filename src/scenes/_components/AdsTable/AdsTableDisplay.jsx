@@ -138,7 +138,7 @@ AdsTableDisplay.propTypes = {
   adsData: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      transactionLimit: PropTypes.string,
+      tradeLimits: PropTypes.string,
       payment: PropTypes.string,
       userName: PropTypes.string,
       location: PropTypes.string,
