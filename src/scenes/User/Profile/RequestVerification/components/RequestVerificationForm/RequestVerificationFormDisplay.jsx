@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import axios from 'axios';
+import superaxios from '@services/superaxios';
 import { Upload, Form, Button, message } from 'antd';
 import { API_URL } from '@config/constants';
 import VerificationIcon from '@assets/verification-icon.svg';
@@ -24,7 +24,7 @@ class RequestVerificationFormDisplay extends React.Component {
       });
       const data = parseBase64(e.target.result);
 
-      axios({
+      superaxios({
         method: 'post',
         url: `${API_URL}/profile/resources`,
         data,
