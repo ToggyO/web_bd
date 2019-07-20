@@ -4,9 +4,9 @@
   "description": "Antd React custom boilerplate with loading styles and components on demand",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js --open 'Google Chrome Canary' --port 3005  --host 0.0.0.0 --allowed-hosts myDevServerMachine",
+    "dev": "webpack-dev-server --config webpack.dev.js --open 'Google Chrome Canary' --port 3005  --host 0.0.0.0 --allowed-hosts myDevServerMachine",
     "build": "webpack --config webpack.prod.js --progress --colors",
-    "lint:js": "eslint --ext .js src",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "lint:style": "stylelint \"src//*.less\" --syntax less",
     "prettier": "prettier --write src//*.{js,less}"
   },
