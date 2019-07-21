@@ -26,3 +26,4 @@ export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/Paper
 export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline';
 export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill';
 export { default as QuestionCircleOutline } from '@ant-design/icons/lib/outline/QuestionCircleOutline';
+export { default as FilterFill } from '@ant-design/icons/lib/fill/FilterFill';

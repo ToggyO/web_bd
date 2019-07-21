@@ -29,6 +29,6 @@ const SetTwoFactorDisplay = ({ emailConfirmed }) => {
 };
 
 SetTwoFactorDisplay.propTypes = {
-  emailConfirmed: PropTypes.bool.isRequired,
+  emailConfirmed: PropTypes.bool,
 };
 export default SetTwoFactorDisplay;
