@@ -64,7 +64,7 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
       <AuthRoute path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
       <AuthRoute path={ROUTES.ADS.EDIT} exact component={props => <EditAdContainer {...props} type="ad" />} />
-      <AuthRoute path={ROUTES.TRADES.TRADES} exact component={props => <TradeContainer {...props} />} />
+      <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
 
       {/* REDIRECTS */}
       {[
