@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { userActions, userProfileSelectors } from '@ducks/user';
+import { meActions, meSelectors } from '@ducks/me';
 import EditPhoneNumberFormDisplay from './EditPhoneNumberFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    errors: userProfileSelectors.errorsSelector(state),
+    errors: meSelectors.errorsSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     editPhoneNumberRequest(phoneNumber) {
-      dispatch(userActions.editPhoneNumberRequest(phoneNumber));
+      dispatch(meActions.editPhoneNumberRequest(phoneNumber));
     },
   };
 }

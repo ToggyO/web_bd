@@ -9,9 +9,9 @@ const initialState = {
   error: null,
 };
 
-export default function user(state = initialState, action) {
+export default function me(state = initialState, action) {
   switch (action.type) {
-    case types.GET_USER_PROFILE_REQUEST:
+    case types.GET_PROFILE_REQUEST:
       return { ...state, loading: true, error: null };
     case types.GET_SMS_CODE_REQUEST:
     case types.EDIT_EMAIL_REQUEST:
@@ -19,7 +19,7 @@ export default function user(state = initialState, action) {
     case types.EDIT_PASSWORD_REQUEST:
       return { ...state, code: null, error: null };
 
-    case types.GET_USER_PROFILE_SUCCESS: {
+    case types.GET_PROFILE_SUCCESS: {
       const { data, code } = action.payload;
       return { ...state, data, loading: false, code };
     }
@@ -30,7 +30,7 @@ export default function user(state = initialState, action) {
       const { code } = action.payload;
       return { ...state, code };
     }
-    case types.GET_USER_PROFILE_ERROR:
+    case types.GET_PROFILE_ERROR:
       return { ...state, loading: false, error: action.payload };
     case types.GET_SMS_CODE_ERROR: {
       const { code } = action.payload;

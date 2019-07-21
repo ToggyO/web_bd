@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Cookies from 'js-cookie';
 import { authTypes } from '@ducks/auth';
-import { userProfileTypes } from '@ducks/user';
+import { meTypes } from '@ducks/me';
 import { setHeaders, userLogout } from '@services/auth';
 
 export const saveTokens = store => next => action => {
@@ -20,7 +20,7 @@ export const saveUserName = store => next => action => {
 
     localStorage.setItem('userName', userName);
   }
-  if (action.type === userProfileTypes.GET_USER_PROFILE_SUCCESS) {
+  if (action.type === meTypes.GET_USER_PROFILE_SUCCESS) {
     const { userName } = action.payload.data.user;
 
     localStorage.setItem('userName', userName);

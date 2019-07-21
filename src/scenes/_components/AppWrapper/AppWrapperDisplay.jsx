@@ -5,9 +5,9 @@ import { checkTokens } from '@services/auth';
 import { Footer } from '@components/Footer';
 import { HeaderContainer } from './components/Header';
 
-const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
+const AppWrapperDisplay = ({ userName, getProfileRequest, children }) => {
   useEffect(() => {
-    if (!userName && checkTokens()) getUserProfileRequest();
+    if (!userName && checkTokens()) getProfileRequest();
   }, []);
 
   return (
@@ -21,7 +21,7 @@ const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
 
 AppWrapperDisplay.propTypes = {
   userName: PropTypes.string,
-  getUserProfileRequest: PropTypes.func,
+  getProfileRequest: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
 

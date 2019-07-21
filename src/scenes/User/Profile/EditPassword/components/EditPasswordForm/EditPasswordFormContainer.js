@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { userActions, userProfileSelectors } from '@ducks/user';
+import { meActions, meSelectors } from '@ducks/me';
 import EditPasswordFormDisplay from './EditPasswordFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    errors: userProfileSelectors.errorsSelector(state),
+    errors: meSelectors.errorsSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     editPasswordRequest(oldAndNewPasswords) {
-      dispatch(userActions.editPasswordRequest(oldAndNewPasswords));
+      dispatch(meActions.editPasswordRequest(oldAndNewPasswords));
     },
   };
 }

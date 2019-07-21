@@ -36,8 +36,8 @@ export default {
     },
   },
 
-  userProfile: {
-    getUserProfile: async () => {
+  me: {
+    getProfile: async () => {
       const response = await superaxios.get('/profile');
       return response.data;
     },

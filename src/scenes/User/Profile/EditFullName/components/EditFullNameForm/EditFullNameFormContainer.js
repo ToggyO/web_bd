@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { userActions, userProfileSelectors } from '@ducks/user';
+import { meActions, meSelectors } from '@ducks/me';
 import EditFullNameFormDisplay from './EditFullNameFormDisplay';
 
 function mapStateToProps(state) {
   return {
-    errors: userProfileSelectors.errorsSelector(state),
+    errors: meSelectors.errorsSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     editFullNameRequest(fullName) {
-      dispatch(userActions.editFullNameRequest(fullName));
+      dispatch(meActions.editFullNameRequest(fullName));
     },
   };
 }

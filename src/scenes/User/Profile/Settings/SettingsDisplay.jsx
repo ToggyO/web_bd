@@ -16,13 +16,13 @@ const SettingsDisplay = ({
   phoneNumber,
   email,
   loading,
-  getUserProfileRequest,
+  getProfileRequest,
 
   // eslint-disable-next-line no-unused-vars
   verificationStatus,
 }) => {
   useEffect(() => {
-    getUserProfileRequest();
+    getProfileRequest();
   }, []);
   return (
     <AppWrapperContainer>
@@ -114,7 +114,7 @@ SettingsDisplay.propTypes = {
   phoneNumber: PropTypes.string,
   email: PropTypes.string,
   loading: PropTypes.bool,
-  getUserProfileRequest: PropTypes.func.isRequired,
+  getProfileRequest: PropTypes.func.isRequired,
   verificationStatus: PropTypes.string,
 };
 

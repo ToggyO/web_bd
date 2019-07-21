@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { userActions } from '@ducks/user';
+import { meActions } from '@ducks/me';
 import { authSelectors } from '@ducks/auth';
 
 import AppWrapperDisplay from './AppWrapperDisplay';
@@ -12,8 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getUserProfileRequest() {
-      dispatch(userActions.getUserProfileRequest());
+    getProfileRequest() {
+      dispatch(meActions.getProfileRequest());
     },
   };
 }
