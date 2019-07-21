@@ -68,6 +68,7 @@ const CreatedAdsTableDisplay = ({
         dataSource={adsData}
         loading={{spinning: loading, indicator: <Spinner />}}
         locale={{ emptyText: <NoData /> }}
+        pagination={!(adsData.length < 11)}
         expandedRowRender={
           withTerms
             ? record => (

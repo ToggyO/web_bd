@@ -10,37 +10,55 @@ import './style.less';
 import { catchFromPath } from '@utils';
 
 const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserName }) => {
-  const tradeId = catchFromPath(history.location.pathname, 'ads');
+  const adId = catchFromPath(history.location.pathname, 'ads');
   useEffect(() => {
-    getAdByIdRequest(tradeId);
+    getAdByIdRequest(adId);
   }, []);
 
   const {
+    type,
     btcPrice,
     currency,
     payment,
     location,
     terms,
-    minTransactionLimit,
-    maxTransactionLimit,
+    minTradeLimit,
+    maxTradeLimit,
     userName,
   } = specificTrade;
+  let header;
+  let action;
+  let message = ['🔥', '🔥'];
+
+  if (type) {
+    if (type.toLowerCase() === 'buy') {
+      header = `Sell bitcoins to ${userName}`;
+      action = 'sell';
+      message = ['Hi, I\'d like to sell you my', 'for your'];
+    }
+    if (type.toLowerCase() === 'sell') {
+      header = `Buy bitcoins from ${userName}`;
+      action = 'buy';
+      message = ['Hi, I\'d like to buy your', 'for my'];
+    }
+  }
   return (
     <AppWrapperContainer>
       <div className="paper">
         <div className="initiate-trade">
-          <h2 className="initiate-trade__header">Buy bitcoins from {userName}</h2>
-          <span className="initiate-trade__label">How much do you want to buy?</span>
+          <h2 className="initiate-trade__header">{header}</h2>
+          <span className="initiate-trade__label">How much do you want to {action}?</span>
           <Row gutter={{ sm: 12, lg: 48 }}>
             <Col lg={11}>
               <InitiateTradeFormContainer
-                tradeId={tradeId}
-                min={minTransactionLimit}
-                max={maxTransactionLimit}
-                currency={currency}
+                adId={adId}
+                min={minTradeLimit}
+                max={maxTradeLimit}
+                currency={currency || ''}
                 userName={userName}
                 cachedUserName={cachedUserName}
                 loading={loading}
+                message={message}
               />
             </Col>
             <Col lg={13}>
@@ -60,14 +78,14 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                   </Row>
                   <Row gutter={{ sm: 12, lg: 48 }}>
                     <Col xs={12}>
-                      <span style={{ fontWeight: 500 }}>Seller</span>
+                      <span style={{ fontWeight: 500 }}>{type}er</span>
                       <p>
                         <Link to={`/user/${userName}`}>{userName}</Link>
                       </p>
                     </Col>
                     <Col xs={12}>
                       <span style={{ fontWeight: 500 }}>Trade limits</span>
-                      <p>{`${minTransactionLimit} - ${maxTransactionLimit} ${currency}`}</p>
+                      <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
                     </Col>
                   </Row>
                   <Row gutter={48}>

@@ -7,7 +7,7 @@ import { Spinner } from '@components/Spinner';
 const InitiateTradeFormDisplay = props => {
   const {
     form,
-    tradeId,
+    adId,
     min,
     max,
     currency,
@@ -16,6 +16,7 @@ const InitiateTradeFormDisplay = props => {
     loading,
     initiateTradeRequest,
     submitting,
+    message,
   } = props;
   useEffect(() => {
     form.setFieldsValue({ fiat: '', tradeAmount: '' });
@@ -25,7 +26,7 @@ const InitiateTradeFormDisplay = props => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        initiateTradeRequest({ ...values, tradeId });
+        initiateTradeRequest({ ...values, adId });
       }
     });
   };
@@ -84,7 +85,9 @@ const InitiateTradeFormDisplay = props => {
       </div>
       <div className="initiate-trade__message">
         <span className="initiate-trade__label">Contact message</span>
-        <div className="initiate-trade__fake-message">{`Hi, I'd like to buy your ${tradeAmount} BTC for my ${fiat} ${currency}`}</div>
+        <div className="initiate-trade__fake-message">{`${message[0]} ${tradeAmount} BTC ${
+          message[1]
+        } ${fiat} ${currency}`}</div>
       </div>
       <Spinner spinning={loading}>
         {userName === cachedUserName ? (

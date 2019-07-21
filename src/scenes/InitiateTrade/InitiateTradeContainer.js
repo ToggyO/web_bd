@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { tradeActions } from '@ducks/trades/trade';
+import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
 import InitiateTradeDisplay from './InitiateTradeDisplay';
 
@@ -13,8 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTradeByIdRequest(id) {
-      dispatch(tradeActions.getTradeByIdRequest(id));
+    getAdByIdRequest(id) {
+      dispatch(adActions.getAdByIdRequest(id));
     },
   };
 }

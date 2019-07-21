@@ -8,7 +8,7 @@ function* initiateTrade(aciton) {
   try {
     const { data } = yield call(api.trades.initiate, aciton.payload);
     yield put({ type: types.INITIATE_SUCCESS, payload: data });
-    history.push(`${ROUTES.TRANSACTIONS.ROOT}/${data.id}`);
+    history.push(`${ROUTES.TRADES.ROOT}/${data.id}`);
   } catch (error) {
     yield put({ type: types.INITIATE_ERROR, payload: error });
   }

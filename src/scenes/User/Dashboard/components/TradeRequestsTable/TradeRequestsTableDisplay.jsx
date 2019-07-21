@@ -5,79 +5,98 @@ import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@components/Spinner';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
-import { formatDate, formatMoney, sortStrings } from '@utils';
+import { formatDate, formatMoney, sortStrings, prettifyId } from '@utils';
 import { ROUTES } from '@config/constants';
 
 const { Column } = Table;
 
-const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) => (
+const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
   <Table
     expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
     dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
+    pagination={!(tradesData.length < 11)}
     expandedRowRender={
       withTerms
         ? record => (
-          <div className="extra-row extra-row__left">
-            <Row>
-              <Col lg={6}>
-                <div className="extra-row__location">
-                  <span>Trade limits</span>
-                  <p>{record.transactionLimit}</p>
-                </div>
-              </Col>
+          <div className="extra-row">
+            <div className="extra-row__head">
+              <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                  View trade
+              </Link>
+              <Link className="extra-row__edit" to="/">
+                  Cancel trade
+              </Link>
+            
+            </div>
 
-              <Col lg={6}>
-                <div className="extra-row__currency">
-                  <span>Payment method</span>
-                  <p>{record.payment}</p>
-                </div>
-              </Col>
-              <Col lg={6}>
-                <div className="extra-row__currency">
-                  <span>Trade limits</span>
-                  <p>{record.transactionLimit}</p>
-                </div>
-              </Col>
-              <Col lg={6}>
-                <div className="extra-row__currency">
-                  <span>Price/BTC</span>
-                  <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className="extra-row__currency">
-                  <span>Terms of trade</span>
-                  <p>{record.terms}</p>
-                </div>
-              </Col>
-            </Row>
+          
+            <div className="extra-row extra-row__left">
+              <Row>
+                <Col lg={6}>
+                  <div className="extra-row__location">
+                    <span>Location</span>
+                    <p>{record.location}</p>
+                  </div>
+                </Col>
+
+                <Col lg={6}>
+                  <div className="extra-row__currency">
+                    <span>Payment method</span>
+                    <p>{record.payment}</p>
+                  </div>
+                </Col>
+                <Col lg={6}>
+                  <div className="extra-row__currency">
+                    <span>Trade limits</span>
+                    <p>{record.tradeLimit}</p>
+                  </div>
+                </Col>
+                <Col lg={6}>
+                  <div className="extra-row__currency">
+                    <span>Price/BTC</span>
+                    <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="extra-row__currency">
+                    <span>Terms of trade</span>
+                    <p>{record.terms}</p>
+                  </div>
+                </Col>
+              </Row>
+            </div>
           </div>
         )
         : null
     }
   >
     <Column
+      key="key"
+      title="ID"
+      render={(text,record) => prettifyId(record.key)}
+    
+    />
+    {/* <Column
       key="createdAt"
       title="Date"
       render={(text, record) => formatDate(record.createdAt)}
       sorter={(a, b) => a.createdAt - b.createdAt}
       defaultSortOrder="descend"
-    />
+    /> */}
     <Column
       key="tradePartner"
-      title="Seller/Buyer"
+      title="Trade partner"
       render={(text, record) => {
         let user;
-        if (record.type === 'Buy') user = record.adOwner;
-        if (record.type === 'Sell') user = record.tradePartner;
+        if (record.direction === 'Outgoing') user = record.adOwner;
+        if (record.direction === 'Incoming') user = record.tradePartner;
         return <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>;
       }}
       sorter={(a, b) => sortStrings(a.tradePartner, b.tradePartner)}
-      width="20%"
     />
 
     <Column
@@ -85,14 +104,15 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) => (
       dataIndex="type"
       title="Type"
       columnWidth={80}
-      render={(text, record) => record.type}
-      sorter={(a, b) => sortStrings(a.type, b.type)}
+      onFilter={(value, record) => record.type.indexOf(value) === 0}
+      filters={ [{ text: 'Buy', value: 'Buy' }, { text: 'Sell', value: 'Sell' }]}
+      filterMultiple={false}
     />
     <Column
       key="tradeAmount"
       title="Trade amount"
-      render={(text, record) => `${record.tradeAmount} BTC`}
-      sorter={(a, b) => a.tradeAmount - b.tradeAmount}
+      render={(text, record) => `${record.amount} BTC`}
+      sorter={(a, b) => a.amount - b.amount}
     />
     <Column
       key="fiat"
@@ -102,8 +122,12 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) => (
     />
 
     <Column
-      title="Action"
-      render={(text, record) => <Link to={`${ROUTES.TRADES.ROOT}/${record.key}`}>View</Link>}
+      title="Direction"
+      dataIndex="direction"
+      render={(text, record) => record.direction}
+      onFilter={(value, record) => record.direction.indexOf(value) === 0}
+      filters={ [{ text: 'Outgoing', value: 'Outgoing' }, { text: 'Incoming', value: 'Incoming' }]}
+      filterMultiple={false}
     />
   </Table>
 );

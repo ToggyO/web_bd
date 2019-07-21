@@ -19,7 +19,7 @@ export default function _global(state = initialState, action) {
     case adTypes.CREATE_REQUEST:
     case adTypes.EDIT_REQUEST:
     case adTypes.DELETE_REQUEST:
-    case tradeTypes.INITIATE_TRADE_REQUEST:
+    case tradeTypes.INITIATE_REQUEST:
       return { ...state, submitting: true };
 
     case adTypes.CREATE_SUCCESS:
@@ -28,8 +28,8 @@ export default function _global(state = initialState, action) {
     case adTypes.EDIT_ERROR:
     case adTypes.DELETE_SUCCESS:
     case adTypes.DELETE_ERROR:
-    case tradeTypes.INITIATE_TRADE_SUCCESS:
-    case tradeTypes.INITIATE_TRADE_ERROR:
+    case tradeTypes.INITIATE_SUCCESS:
+    case tradeTypes.INITIATE_ERROR:
       return { ...state, submitting: false };
     default:
       return state;

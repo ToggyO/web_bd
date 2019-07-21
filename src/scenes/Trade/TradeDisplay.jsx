@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Divider } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
@@ -14,8 +14,14 @@ const handleClick = () => {
   console.log('clicked');
 };
 
-const TradeDisplay = () => {
+const TradeDisplay = ({ getTradeByIdRequest, specificTrade }) => {
   const id = catchFromPath(history.location.pathname, 'trades');
+  useEffect(() => {
+    getTradeByIdRequest(id);
+  }, []);
+
+  console.log(specificTrade);
+
   return (
     <AppWrapperContainer>
       <div className="paper">

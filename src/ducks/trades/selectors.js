@@ -4,22 +4,23 @@ import { formatMoney } from '@utils';
 export const tradesSelector = createSelector(
   state => state.trades.trades.data.items,
   trades =>
-    trades.map(({ trade }) => ({
-      key: trade.id,
-      createdAt: new Date(trade.createDate).getTime(),
-      tradeLimit: `${formatMoney(trade.trade.minTradeLimit)} - ${formatMoney(trade.trade.maxTradeLimit)} ${
-        trade.trade.currency
+    trades.map(el => ({
+      key: el.trade.id,
+      createdAt: new Date(el.trade.createDate).getTime(),
+      tradeLimit: `${formatMoney(el.trade.ad.minTradeLimit)} - ${formatMoney(el.trade.ad.maxTradeLimit)} ${
+        el.trade.ad.currency
       }`,
-      adOwner: trade.trade.userName,
-      tradePartner: trade.profile.user.userName,
-      type: trade.trade.type,
-      tradeAmount: trade.tradeAmount,
-      currency: trade.trade.currency,
-      fiat: trade.fiat,
-      location: trade.trade.location,
-      payment: trade.trade.payment,
-      btcPrice: trade.trade.btcPrice,
-      terms: trade.trade.terms,
+      adOwner: el.trade.ad.userName,
+      tradePartner: el.trade.tradePartner,
+      type: el.trade.ad.type,
+      amount: el.trade.amount,
+      currency: el.trade.ad.currency,
+      fiat: el.trade.fiat,
+      location: el.trade.ad.location,
+      payment: el.trade.ad.payment,
+      btcPrice: el.trade.ad.btcPrice,
+      terms: el.trade.ad.terms,
+      direction: el.direction,
     }))
 );
 
@@ -29,6 +30,6 @@ export const tradesLoadingSelector = createSelector(
 );
 
 export const tradeSelector = createSelector(
-  state => state.trades.trade,
+  state => state.trades.trade.data,
   trade => trade
 );

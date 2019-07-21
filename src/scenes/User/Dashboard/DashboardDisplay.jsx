@@ -21,17 +21,6 @@ const DashboardDisplay = ({ getMyCreatedAdsRequest, getPendingTradesRequest }) =
 
   const handleChangeTab = tab => {
     history.push(ROUTES.DASHBOARD[tab]);
-
-    switch (tab) {
-      case 'CREATED':
-        getMyCreatedAdsRequest('created');
-        break;
-      case 'REQUESTS':
-        getPendingTradesRequest('pending');
-        break;
-      default:
-        getMyCreatedAdsRequest();
-    }
   };
 
   return (
