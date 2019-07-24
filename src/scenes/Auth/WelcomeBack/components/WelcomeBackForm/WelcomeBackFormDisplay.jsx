@@ -31,11 +31,16 @@ class WelcomeBackForm extends React.Component {
   handleSubmit = (e, code) => {
     const { userName, form } = this.props;
     e.preventDefault();
-    form.validateFields(err => {
-      if (!err) {
-        const twoFactorCode = code;
 
-        this.props.signInWithCode({ userName, twoFactorCode });
+    if (code) {
+      const twoFactorCode = code;
+      this.props.signInWithCode({ userName, twoFactorCode });
+      return;
+    }
+
+    form.validateFields((err, values) => {
+      if (!err) {
+        this.props.signInWithCode({ userName, twoFactorCode: values.twoFactorCode });
       }
     });
   };
@@ -51,6 +56,7 @@ class WelcomeBackForm extends React.Component {
 
   handleCodeChange = e => {
     if (e.target.value.length === 6) {
+      this.codeInput.blur();
       this.handleSubmit(e, e.target.value);
     }
   };
