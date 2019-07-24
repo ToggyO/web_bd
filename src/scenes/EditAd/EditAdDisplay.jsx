@@ -27,7 +27,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
             assumenda debitis ipsam, minima fugit. Sapiente perspiciatis, adipisci praesentium, debitis ipsa
             amet totam minus!
           </p>
-          <AdFormContainer onSubmit={editAdRequest} type="ad" />
+          <AdFormContainer onSubmit={editAdRequest} type="ad" forEdit />
         </div>
       </div>
     </AppWrapperContainer>

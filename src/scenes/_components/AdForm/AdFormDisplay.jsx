@@ -163,97 +163,97 @@ class AdFormDisplay extends React.Component {
             )}
           </Form.Item>
         </div>
-        <Spin spinning={loading} indicator={<Spinner/>} >
-          <div className="ad-form__block">
-            <h3 className="ad-form__header">Trade information</h3>
-            <Divider />
-            <Row gutter={48}>
-              <Col lg={11}>
-                <Form.Item className="ad-form__item" label="Currency">
-                  {form.getFieldDecorator('currency', {
-                    rules: [{ required: true, message: <div>Please select currency!</div> }],
-                    initialValue: specificAd.currency || getInitialValuesBasedOnNavigatorLanguage().currency,
-                  })(
-                    <Select
-                      showSearch
-                      placeholder="Select currency"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      onChange={this.handleCurrencyChange}
-                    >
-                      {currencies.map(currency_ => (
-                        <Option key={currency_.name} value={currency_.value}>
-                          {currency_.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
-                </Form.Item>
-              </Col>
-              <Col lg={11}>
-                <Form.Item className="ad-form__item" label="Location">
-                  {form.getFieldDecorator('location', {
-                    rules: [{ required: true, message: <div>Please select location!</div> }],
-                    initialValue: specificAd.location || getInitialValuesBasedOnNavigatorLanguage().location,
-                  })(
-                    <Select
-                      showSearch
-                      placeholder="Select country"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                    >
-                      {locations.map(location_ => (
-                        <Option key={location_.name} value={location_.value}>
-                          {location_.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
+        
+        <div className="ad-form__block">
+          <h3 className="ad-form__header">Trade information</h3>
+          <Divider />
+          <Row gutter={48}>
+            <Col lg={11}>
+              <Form.Item className="ad-form__item" label="Currency">
+                {form.getFieldDecorator('currency', {
+                  rules: [{ required: true, message: <div>Please select currency!</div> }],
+                  initialValue: specificAd.currency || getInitialValuesBasedOnNavigatorLanguage().currency,
+                })(
+                  <Select
+                    showSearch
+                    placeholder="Select currency"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    onChange={this.handleCurrencyChange}
+                  >
+                    {currencies.map(currency_ => (
+                      <Option key={currency_.name} value={currency_.value}>
+                        {currency_.name}
+                      </Option>
+                    ))}
+                  </Select>
+                )}
+              </Form.Item>
+            </Col>
+            <Col lg={11}>
+              <Form.Item className="ad-form__item" label="Location">
+                {form.getFieldDecorator('location', {
+                  rules: [{ required: true, message: <div>Please select location!</div> }],
+                  initialValue: specificAd.location || getInitialValuesBasedOnNavigatorLanguage().location,
+                })(
+                  <Select
+                    showSearch
+                    placeholder="Select country"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {locations.map(location_ => (
+                      <Option key={location_.name} value={location_.value}>
+                        {location_.name}
+                      </Option>
+                    ))}
+                  </Select>
+                )}
+              </Form.Item>
+            </Col>
+          </Row>
 
-            <Row gutter={48}>
+          <Row gutter={48}>
+            <Col lg={11}>
+              <Form.Item className="ad-form__item" label="Payment method">
+                {form.getFieldDecorator('payment', {
+                  rules: [{ required: true, message: <div>Please select payment method!</div> }],
+                  initialValue: specificAd.payment || payments[0].value,
+                })(
+                  <Select
+                    showSearch
+                    placeholder="Select payment method"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {payments.map(payment_ => (
+                      <Option key={payment_.name} value={payment_.value}>
+                        {payment_.name}
+                      </Option>
+                    ))}
+                  </Select>
+                )}
+              </Form.Item>
+            </Col>
+            {(payment === payments[1].value || payment === payments[4].value) && (
               <Col lg={11}>
-                <Form.Item className="ad-form__item" label="Payment method">
-                  {form.getFieldDecorator('payment', {
-                    rules: [{ required: true, message: <div>Please select payment method!</div> }],
-                    initialValue: specificAd.payment || payments[0].value,
-                  })(
-                    <Select
-                      showSearch
-                      placeholder="Select payment method"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                    >
-                      {payments.map(payment_ => (
-                        <Option key={payment_.name} value={payment_.value}>
-                          {payment_.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
+                <Form.Item className="ad-form__item ad-form__bank-field" label="Bank name">
+                  {form.getFieldDecorator('bankName', {
+                    rules: validations.bank,
+                    initialValue: specificAd.bankName || null,
+                  })(<Input placeholder="Sberbank" />)}
                 </Form.Item>
               </Col>
-              {(payment === payments[1].value || payment === payments[4].value) && (
-                <Col lg={11}>
-                  <Form.Item className="ad-form__item ad-form__bank-field" label="Bank name">
-                    {form.getFieldDecorator('bankName', {
-                      rules: validations.bank,
-                      initialValue: specificAd.bankName || null,
-                    })(<Input placeholder="Sberbank" />)}
-                  </Form.Item>
-                </Col>
-              )}
-            </Row>
-          </div>
-        </Spin>
+            )}
+          </Row>
+        </div>
+       
 
         <div className="ad-form__block">
           <h3 className="ad-form__header">Price</h3>
