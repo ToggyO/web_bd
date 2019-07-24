@@ -23,7 +23,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
           <div className="extra-row">
             <div className="extra-row__head">
               <Link className="extra-row__view" to={`/trades/${record.key}`}>
-                  View trade
+                  View trade request
               </Link>
               <Link className="extra-row__edit" to="/">
                   Cancel trade
@@ -36,15 +36,15 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
               <Row>
                 <Col lg={6}>
                   <div className="extra-row__location">
-                    <span>Location</span>
-                    <p>{record.location}</p>
+                    <span>Trade status</span>
+                    <p className="green-status">{record.status}</p>
                   </div>
                 </Col>
 
                 <Col lg={6}>
                   <div className="extra-row__currency">
-                    <span>Payment method</span>
-                    <p>{record.payment}</p>
+                    <span>Date</span>
+                    <p>{formatDate(record.createdAt)}</p>
                   </div>
                 </Col>
                 <Col lg={6}>
@@ -57,6 +57,20 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
                   <div className="extra-row__currency">
                     <span>Price/BTC</span>
                     <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={6}>
+                  <div className="extra-row__currency">
+                    <span>Payment method</span>
+                    <p>{record.payment}</p>
+                  </div>
+                </Col>
+                <Col lg={6}>
+                  <div className="extra-row__currency">
+                    <span>Location</span>
+                    <p>{record.location}</p>
                   </div>
                 </Col>
               </Row>
@@ -115,6 +129,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
       sorter={(a, b) => a.amount - b.amount}
     />
     <Column
+      align="right"
       key="fiat"
       title="Fiat"
       render={(text, record) => `${formatMoney(record.fiat)} ${record.currency}`}

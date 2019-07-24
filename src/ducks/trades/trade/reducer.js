@@ -2,7 +2,9 @@ import * as types from './types';
 
 const initialState = {
   data: {
-    ad: {},
+    trade: {
+      ad: {},
+    },
   },
   errors: {},
   loading: false,

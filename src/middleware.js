@@ -16,9 +16,10 @@ export const saveTokens = store => next => action => {
 
 export const saveUserName = store => next => action => {
   if (action.type === authTypes.SIGNIN_SUCCESS || action.type === authTypes.SIGNUP_SUCCESS) {
-    const { userName } = action.payload.data;
+    const { userName, id } = action.payload.data;
 
     localStorage.setItem('userName', userName);
+    localStorage.setItem('userID', id);
   }
   if (action.type === meTypes.GET_USER_PROFILE_SUCCESS) {
     const { userName } = action.payload.data.user;

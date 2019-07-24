@@ -107,5 +107,9 @@ export default {
       const response = await superaxios.get(`/trade/${id}`);
       return response.data;
     },
+    confirm: async params => {
+      const response = await superaxios.post('/trade/confirm', params);
+      return response.data;
+    },
   },
 };

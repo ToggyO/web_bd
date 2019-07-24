@@ -20,6 +20,7 @@ export const tradesSelector = createSelector(
       payment: el.trade.ad.payment,
       btcPrice: el.trade.ad.btcPrice,
       terms: el.trade.ad.terms,
+      status: el.trade.status,
       direction: el.direction,
     }))
 );
@@ -31,5 +32,25 @@ export const tradesLoadingSelector = createSelector(
 
 export const tradeSelector = createSelector(
   state => state.trades.trade.data,
-  trade => trade
+  ({ trade, direction }) => ({
+    amount: trade.amount,
+    fiat: trade.fiat,
+    tradePartner: trade.tradePartner,
+    adOwner: trade.ad.userName,
+    btcPrice: trade.ad.btcPrice,
+    payment: trade.ad.payment,
+    status: trade.status,
+    minTradeLimit: trade.ad.minTradeLimit,
+    maxTradeLimit: trade.ad.maxTradeLimit,
+    currency: trade.ad.currency,
+    location: trade.ad.location,
+    terms: trade.ad.terms,
+    adType: trade.ad.type,
+    direction,
+  })
+);
+
+export const tradeLoadingSelector = createSelector(
+  state => state.trades.trade.loading,
+  loading => loading
 );

@@ -5,6 +5,7 @@ import TradeDisplay from './TradeDisplay';
 
 function mapStateToProps(state) {
   return {
+    loading: tradesSelectors.tradeLoadingSelector(state),
     specificTrade: tradesSelectors.tradeSelector(state),
   };
 }

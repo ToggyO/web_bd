@@ -9,3 +9,8 @@ export const getTradeByIdRequest = id => ({
   type: types.GET_BY_ID_REQUEST,
   payload: id,
 });
+
+export const confirmTradeRequest = params => ({
+  type: types.CONFIRM_REQUEST,
+  payload: params,
+});
