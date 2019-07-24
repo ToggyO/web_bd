@@ -55,7 +55,7 @@ const InitiateTradeFormDisplay = props => {
     callback(`Trade amount for this ad should be between ${min} - ${max} ${currency}`);
   };
 
-  const { fiat, tradeAmount } = form.getFieldsValue(['fiat', 'tradeAmount']);
+  const { fiat, amount } = form.getFieldsValue(['fiat', 'amount']);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -70,7 +70,7 @@ const InitiateTradeFormDisplay = props => {
         </Col>
         <Col xs={12}>
           <Form.Item>
-            {form.getFieldDecorator('tradeAmount', {
+            {form.getFieldDecorator('amount', {
               initialValue: null,
             })(<Input addonAfter="BTC" onChange={handleTradeAmountChange} />)}
           </Form.Item>
@@ -85,7 +85,7 @@ const InitiateTradeFormDisplay = props => {
       </div>
       <div className="initiate-trade__message">
         <span className="initiate-trade__label">Contact message</span>
-        <div className="initiate-trade__fake-message">{`${message[0]} ${tradeAmount} BTC ${
+        <div className="initiate-trade__fake-message">{`${message[0]} ${amount} BTC ${
           message[1]
         } ${fiat} ${currency}`}</div>
       </div>
