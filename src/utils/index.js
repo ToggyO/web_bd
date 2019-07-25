@@ -69,6 +69,7 @@ export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands =
 
 // inserts space
 export const formatCapitals = stringWithCapitalLetters => {
+  if (!stringWithCapitalLetters) return '';
   if (stringWithCapitalLetters.toLowerCase() === 'paypal') return stringWithCapitalLetters;
   if (stringWithCapitalLetters.toLowerCase() === 'qiwi') return stringWithCapitalLetters;
   return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
