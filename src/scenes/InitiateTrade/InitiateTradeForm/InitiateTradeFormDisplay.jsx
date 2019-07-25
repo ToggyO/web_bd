@@ -11,15 +11,15 @@ const InitiateTradeFormDisplay = props => {
     min,
     max,
     currency,
-    userName,
-    cachedUserName,
     loading,
     initiateTradeRequest,
     submitting,
     message,
+    adOwnerID,
+    cachedUserID,
   } = props;
   useEffect(() => {
-    form.setFieldsValue({ fiat: '', tradeAmount: '' });
+    form.setFieldsValue({ fiat: '', amount: '' });
   }, []);
 
   const handleSubmit = e => {
@@ -33,7 +33,7 @@ const InitiateTradeFormDisplay = props => {
 
   const handleFiatChange = e => {
     form.setFieldsValue({
-      tradeAmount: e.target.value / 10000 || '',
+      amount: e.target.value / 10000 || '',
     });
   };
 
@@ -65,14 +65,26 @@ const InitiateTradeFormDisplay = props => {
             {form.getFieldDecorator('fiat', {
               initialValue: null,
               rules: [{ validator: checkFiatValue }],
-            })(<Input addonAfter={currency} onChange={handleFiatChange} />)}
+            })(
+              <Input
+                addonAfter={currency}
+                onChange={handleFiatChange}
+                disabled={adOwnerID === cachedUserID}
+              />
+            )}
           </Form.Item>
         </Col>
         <Col xs={12}>
           <Form.Item>
             {form.getFieldDecorator('amount', {
               initialValue: null,
-            })(<Input addonAfter="BTC" onChange={handleTradeAmountChange} />)}
+            })(
+              <Input
+                addonAfter="BTC"
+                onChange={handleTradeAmountChange}
+                disabled={adOwnerID === cachedUserID}
+              />
+            )}
           </Form.Item>
         </Col>
       </Row>
@@ -90,7 +102,7 @@ const InitiateTradeFormDisplay = props => {
         } ${fiat} ${currency}`}</div>
       </div>
       <Spinner spinning={loading}>
-        {userName === cachedUserName ? (
+        {adOwnerID === cachedUserID ? (
           <div className="hidden">
             <p className="initiate-trade__confirm-text">You cannot trade with yourself.</p>
             <Button htmlType="button" type="primary" className="primary-btn" disabled>
@@ -99,10 +111,29 @@ const InitiateTradeFormDisplay = props => {
           </div>
         ) : (
           <div className="hidden">
-            <p className="initiate-trade__confirm-text">Please confirm you are willing to trade.</p>
-            <Button htmlType="submit" type="primary" loading={submitting}>
-              Request trade
-            </Button>
+            <p className="initiate-trade__confirm-text">
+              Enter receiving Bitcoin wallet public address and confirm you are willing to trade.
+            </p>
+            <Row gutter={12}>
+              <Col lg={17}>
+                <Form.Item>
+                  {form.getFieldDecorator('walletAddress', {
+                    rules: [{ required: true, message: 'Please input your bitcoin wallet public address' }],
+                  })(<Input placeholder="Enter wallet address" />)}
+                </Form.Item>
+              </Col>
+              <Col lg={7}>
+                <Button
+                  type="primary"
+                  style={{ marginBottom: 34 }}
+                  htmlType="submit"
+                  loading={submitting}
+                  block={!!window.matchMedia('(max-width: 992px)').matches}
+                >
+                  Request trade
+                </Button>
+              </Col>
+            </Row>
           </div>
         )}
       </Spinner>

@@ -7,7 +7,7 @@ function mapStateToProps(state) {
   return {
     specificTrade: adsSelectors.adSelector(state, { type: 'ad' }),
     loading: adsSelectors.adsLoadingSelector(state, { type: 'ad' }),
-    cachedUserName: state.auth.data.userName,
+    cachedUserID: localStorage.getItem('userID'),
   };
 }
 

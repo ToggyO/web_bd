@@ -4,6 +4,7 @@ const initialState = {
   data: {
     trade: {
       ad: {},
+      multisigWallet: {},
     },
   },
   errors: {},

@@ -21,6 +21,7 @@ export default function _global(state = initialState, action) {
     case adTypes.DELETE_REQUEST:
     case tradeTypes.INITIATE_REQUEST:
     case tradeTypes.CONFIRM_REQUEST:
+    case tradeTypes.FIAT_SENT_REQUEST:
       return { ...state, submitting: true };
 
     case adTypes.CREATE_SUCCESS:
@@ -33,6 +34,8 @@ export default function _global(state = initialState, action) {
     case tradeTypes.INITIATE_ERROR:
     case tradeTypes.CONFIRM_SUCCESS:
     case tradeTypes.CONFIRM_ERROR:
+    case tradeTypes.FIAT_SENT_SUCCESS:
+    case tradeTypes.FIAT_SENT_ERROR:
       return { ...state, submitting: false };
     default:
       return state;

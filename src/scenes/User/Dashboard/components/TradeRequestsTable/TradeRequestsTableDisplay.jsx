@@ -5,12 +5,14 @@ import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@components/Spinner';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
-import { formatDate, formatMoney, sortStrings, prettifyId } from '@utils';
+import { formatDate, formatMoney, sortStrings, prettifyId, formatCapitals } from '@utils';
 import { ROUTES } from '@config/constants';
+import { ButtonLink } from '@components/ButtonLink';
+import { ShowConfirm } from '@components/ShowConfirm';
 
 const { Column } = Table;
 
-const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
+const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeRequest, loading, requests }) => (
   <Table
     expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
     dataSource={tradesData}
@@ -23,21 +25,33 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
           <div className="extra-row">
             <div className="extra-row__head">
               <Link className="extra-row__view" to={`/trades/${record.key}`}>
-                  View trade request
+                {requests ? 'View request' : 'View trade'}
               </Link>
-              <Link className="extra-row__edit" to="/">
-                  Cancel trade
-              </Link>
-            
+              {requests ? (
+                <ButtonLink
+                  onClick={() =>
+                    ShowConfirm(record.key, deleteNewTradeRequest, loading, {
+                      title: 'You\'re about to delete this trade request',
+                      content: 'You won\'t be able to accept it after it is deleted.',
+                    }, {
+                      okText: 'Delete',
+                      cancelText: 'Keep it',
+                    })
+                  }
+                >
+                      Delete request
+                </ButtonLink>
+              ) : (
+                <ButtonLink onClick={() => deleteNewTradeRequest(record.key)}>Cancel trade</ButtonLink>
+              )}
             </div>
 
-          
             <div className="extra-row extra-row__left">
               <Row>
                 <Col lg={6}>
                   <div className="extra-row__location">
                     <span>Trade status</span>
-                    <p className="green-status">{record.status}</p>
+                    <p className="green-status">{formatCapitals(record.status)}</p>
                   </div>
                 </Col>
 
@@ -88,12 +102,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
         : null
     }
   >
-    <Column
-      key="key"
-      title="ID"
-      render={(text,record) => prettifyId(record.key)}
-    
-    />
+    <Column key="key" title="ID" render={(text, record) => prettifyId(record.key)} />
     {/* <Column
       key="createdAt"
       title="Date"
@@ -119,7 +128,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
       title="Type"
       columnWidth={80}
       onFilter={(value, record) => record.type.indexOf(value) === 0}
-      filters={ [{ text: 'Buy', value: 'Buy' }, { text: 'Sell', value: 'Sell' }]}
+      filters={[{ text: 'Buy', value: 'Buy' }, { text: 'Sell', value: 'Sell' }]}
       filterMultiple={false}
     />
     <Column
@@ -141,7 +150,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
       dataIndex="direction"
       render={(text, record) => record.direction}
       onFilter={(value, record) => record.direction.indexOf(value) === 0}
-      filters={ [{ text: 'Outgoing', value: 'Outgoing' }, { text: 'Incoming', value: 'Incoming' }]}
+      filters={[{ text: 'Outgoing', value: 'Outgoing' }, { text: 'Incoming', value: 'Incoming' }]}
       filterMultiple={false}
     />
   </Table>
@@ -149,6 +158,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, loading }) =>(
 
 TradeRequestsTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
+  deleteNewTradeRequest: PropTypes.func,
   tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -165,6 +175,12 @@ TradeRequestsTableDisplay.propTypes = {
       terms: PropTypes.string,
     })
   ),
+  requests: PropTypes.bool,
   loading: PropTypes.bool,
 };
+
+TradeRequestsTableDisplay.defaultProps = {
+  requests: false,
+};
+
 export default TradeRequestsTableDisplay;

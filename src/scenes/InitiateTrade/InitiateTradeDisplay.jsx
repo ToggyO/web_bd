@@ -9,7 +9,7 @@ import { InitiateTradeFormContainer } from './InitiateTradeForm';
 import './style.less';
 import { catchFromPath } from '@utils';
 
-const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserName }) => {
+const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
   const adId = catchFromPath(history.location.pathname, 'ads');
   useEffect(() => {
     getAdByIdRequest(adId);
@@ -25,6 +25,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
     minTradeLimit,
     maxTradeLimit,
     userName,
+    adOwnerID,
   } = specificTrade;
   let header;
   let action;
@@ -56,7 +57,8 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                 max={maxTradeLimit}
                 currency={currency || ''}
                 userName={userName}
-                cachedUserName={cachedUserName}
+                adOwnerID={adOwnerID}
+                cachedUserID={cachedUserID}
                 loading={loading}
                 message={message}
               />
@@ -114,11 +116,11 @@ InitiateTradeDisplay.propTypes = {
   getAdByIdRequest: PropTypes.func,
   specificTrade: PropTypes.object,
   loading: PropTypes.bool,
-  cachedUserName: PropTypes.string,
+  cachedUserID: PropTypes.string,
 };
 InitiateTradeDisplay.defaultProps = {
   loading: false,
-  cachedUserName: null,
+  cachedUserID: localStorage.getItem('userID'),
 };
 
 export default InitiateTradeDisplay;

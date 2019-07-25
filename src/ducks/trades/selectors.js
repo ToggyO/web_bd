@@ -37,6 +37,7 @@ export const tradeSelector = createSelector(
     fiat: trade.fiat,
     tradePartner: trade.tradePartner,
     adOwner: trade.ad.userName,
+    // adOwnerID: trade.ad.userID,
     btcPrice: trade.ad.btcPrice,
     payment: trade.ad.payment,
     status: trade.status,
@@ -47,6 +48,8 @@ export const tradeSelector = createSelector(
     terms: trade.ad.terms,
     adType: trade.ad.type,
     direction,
+    buyerWallet: trade.multisigWallet.buyerReceivingWalletAddress,
+    sellerWallet: trade.multisigWallet.sellerReceivingWalletAddress,
   })
 );
 

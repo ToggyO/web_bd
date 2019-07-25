@@ -53,7 +53,12 @@ const Routes = ({ loading }) => (
       <UnAuthRoute path={ROUTES.FORGOT_PASSWORD} exact component={ForgotPassword} />
       <UnAuthRoute path={ROUTES.RESET_PASSWORD} exact component={ResetPassword} />
 
-      {[ROUTES.DASHBOARD.ROOT, ROUTES.DASHBOARD.CREATED, ROUTES.DASHBOARD.REQUESTS].map(path => (
+      {[
+        ROUTES.DASHBOARD.ROOT,
+        ROUTES.DASHBOARD.CREATED,
+        ROUTES.DASHBOARD.REQUESTS,
+        ROUTES.DASHBOARD.ACTIVE,
+      ].map(path => (
         <AuthRoute key={path} path={path} exact component={DashboardContainer} />
       ))}
       <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />

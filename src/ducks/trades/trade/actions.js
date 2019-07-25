@@ -14,3 +14,18 @@ export const confirmTradeRequest = params => ({
   type: types.CONFIRM_REQUEST,
   payload: params,
 });
+
+export const fiatSentRequest = id => ({
+  type: types.FIAT_SENT_REQUEST,
+  payload: id,
+});
+
+export const fiatReceivedRequest = id => ({
+  type: types.FIAT_RECEIVED_REQUEST,
+  payload: id,
+});
+
+export const deleteNewTradeRequest = id => ({
+  type: types.DELETE_NEW_REQUEST,
+  payload: id,
+});

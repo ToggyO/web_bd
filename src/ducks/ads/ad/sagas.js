@@ -66,6 +66,7 @@ function* deleteAd(aciton) {
       type: adsTypes.GET_MY_CREATED_REQUEST,
       payload: 'created',
     });
+    yield call(message.success, 'Deleted!', 2);
   } catch (error) {
     yield put({ type: adTypes.DELETE_ERROR, payload: error });
   }

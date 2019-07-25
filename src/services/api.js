@@ -68,15 +68,14 @@ export default {
       const response = await superaxios.get(`/ad${params}`);
       return response.data;
     },
-    getMyAds: async type => {
-      const response = await superaxios.get(`/ad/currentuser?pageSize=${pageSizeDashboard}&status[]=${type}`);
+    getMyAds: async () => {
+      const response = await superaxios.get(`/ad/currentuser?pageSize=${pageSizeDashboard}`);
       return response.data;
     },
     toggleAdStatus: async idWithStatus => {
       const response = await superaxios.put('/ad/status', idWithStatus);
       return response.data;
     },
-
     createAd: async values => {
       const response = await superaxios.post('/ad', values);
       return response.data;
@@ -109,6 +108,18 @@ export default {
     },
     confirm: async params => {
       const response = await superaxios.post('/trade/confirm', params);
+      return response.data;
+    },
+    fiatSent: async id => {
+      const response = await superaxios.post(`/trade/${id}/fiatsent`);
+      return response.data;
+    },
+    fiatReceived: async id => {
+      const response = await superaxios.post(`/trade/${id}/fiatreceived`);
+      return response.data;
+    },
+    deleteTraderqvst: async id => {
+      const response = await superaxios.post(`/trade/${id}/delete`);
       return response.data;
     },
   },

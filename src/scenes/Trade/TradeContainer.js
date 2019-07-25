@@ -7,6 +7,7 @@ function mapStateToProps(state) {
   return {
     loading: tradesSelectors.tradeLoadingSelector(state),
     specificTrade: tradesSelectors.tradeSelector(state),
+    submitting: state._global.submitting,
   };
 }
 
@@ -14,6 +15,12 @@ function mapDispatchToProps(dispatch) {
   return {
     getTradeByIdRequest(id) {
       dispatch(tradeActions.getTradeByIdRequest(id));
+    },
+    fiatSentRequest(id) {
+      dispatch(tradeActions.fiatSentRequest(id));
+    },
+    fiatReceivedRequest(id) {
+      dispatch(tradeActions.fiatReceivedRequest(id));
     },
   };
 }

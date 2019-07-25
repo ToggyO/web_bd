@@ -46,5 +46,6 @@ export const adSelector = createSelector(
     maxTradeLimit: data.maxTradeLimit,
     terms: data.terms,
     userName: data.userName,
+    adOwnerID: data.userId,
   })
 );

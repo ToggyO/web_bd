@@ -5,7 +5,6 @@ export const getCreatedAdsRequest = values => ({
   payload: values,
 });
 
-export const getMyCreatedAdsRequest = values => ({
+export const getMyCreatedAdsRequest = () => ({
   type: types.GET_MY_CREATED_REQUEST,
-  payload: values,
 });

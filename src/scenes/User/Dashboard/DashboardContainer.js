@@ -1,19 +1,34 @@
 import { connect } from 'react-redux';
 import { adsActions } from '@ducks/ads/ads';
 import { tradesActions } from '@ducks/trades/trades';
+import { tradeActions } from '@ducks/trades/trade';
+import { tradesSelectors } from '@ducks/trades';
 import DashboardDisplay from './DashboardDisplay';
+
+function mapStateToProps(state) {
+  return {
+    tradesLoading: tradesSelectors.tradesLoadingSelector(state),
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
     getMyCreatedAdsRequest(params) {
       dispatch(adsActions.getMyCreatedAdsRequest(params));
     },
-    getPendingTradesRequest(type) {
-      dispatch(tradesActions.getPendingTradesRequest(type));
+    getNewTradesRequest(type) {
+      dispatch(tradesActions.getNewTradesRequest(type));
+    },
+    getActiveTradesRequest(type) {
+      dispatch(tradesActions.getActiveTradesRequest(type));
+    },
+    deleteNewTradeRequest(id) {
+      dispatch(tradeActions.deleteNewTradeRequest(id));
     },
   };
 }
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(DashboardDisplay);

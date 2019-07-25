@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Divider, Spin} from 'antd';
+import { Row, Col, Divider, Spin, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
@@ -10,34 +10,59 @@ import { ButtonLink } from '@components/ButtonLink';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES } from '@config/constants';
 import { WalletAddressFormContainer } from './WalletAddressForm';
+import { catchFromPath, prettifyId, formatMoney, formatCapitals } from '@utils';
 import './style.less';
-import { catchFromPath, prettifyId, formatMoney } from '@utils';
 
 const handleClick = () => {
   console.log('clicked');
 };
 
-const TradeDisplay = ({ getTradeByIdRequest, specificTrade, loading }) => {
+const TradeDisplay = ({
+  getTradeByIdRequest,
+  fiatSentRequest,
+  fiatReceivedRequest,
+  specificTrade,
+  loading,
+  submitting,
+}) => {
   const id = catchFromPath(history.location.pathname, 'trades');
   useEffect(() => {
     getTradeByIdRequest(id);
   }, []);
 
+  console.log(specificTrade);
   let action;
+  let you;
+  let other;
+
   const user = specificTrade.direction === 'Incoming' ? specificTrade.tradePartner : specificTrade.adOwner;
 
   switch (specificTrade.adType) {
     case 'Sell': {
       if (specificTrade.direction === 'Outgoing') {
         action = 'Buy bitcoins from ';
+        you = 'buyer';
+        other = 'seller';
       }
-      if (specificTrade.direction === 'Incoming') action = 'Sell bitcoins to ';
+      if (specificTrade.direction === 'Incoming') {
+        action = 'Sell bitcoins to ';
+        you = 'seller';
+        other = 'buyer';
+      }
       break;
     }
 
     case 'Buy': {
-      if (specificTrade.direction === 'Incoming') action = 'Buy bitcoins from ';
-      if (specificTrade.direction === 'Outgoing') action = 'Sell bitcoins to ';
+      if (specificTrade.direction === 'Incoming') {
+        action = 'Buy bitcoins from ';
+        you = 'buyer';
+        other = 'seller';
+      }
+      if (specificTrade.direction === 'Outgoing') {
+        action = 'Sell bitcoins to ';
+        you = 'seller';
+        other = 'buyer';
+      }
       break;
     }
 
@@ -58,23 +83,125 @@ const TradeDisplay = ({ getTradeByIdRequest, specificTrade, loading }) => {
               <Col md={12}>
                 <div className="chat">
                   <div className="chat__window">Chat</div>
-                  {(specificTrade.status === 'Pending' && specificTrade.adOwner === localStorage.getItem('userName')) ? (
-                    <>
-                      <p>Enter receiving Bitcoin wallet public address and confirm you are willing to trade.</p>
-                      <WalletAddressFormContainer/>
-                    </>
-                  ) : (
+
+                  {/* FIRST STEP */}
+                  {specificTrade.status === 'New' && you === 'buyer' && specificTrade[`${you}Wallet`] && (
                     <ExclamationMessage>
                       Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm trading.
                     </ExclamationMessage>
                   )}
-                  
+
+                  {specificTrade.status === 'New' && you === 'seller' && !specificTrade[`${you}Wallet`] && (
+                    <>
+                      <p>
+                        To confirm you are willing to trade with{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin wallet
+                        public address. BTC will be transferred to this address if trade is cancelled or you
+                        win a dispute.
+                      </p>
+                      <WalletAddressFormContainer />
+                    </>
+                  )}
+
+                  {/* SECOND STEP */}
+                  {specificTrade.status === 'Pending' && you === 'buyer' && (
+                    <ExclamationMessage>
+                      Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit funds to
+                      Escrow.
+                    </ExclamationMessage>
+                  )}
+
+                  {specificTrade.status === 'Pending' && you === 'seller' && (
+                    <>
+                      <ExclamationMessage>
+                        This is Escrow multisig wallet address, please transfer {specificTrade.amount} BTC.
+                        Note it may take a while for the funds to arrive.
+                      </ExclamationMessage>
+                      <div className="initiate-trade__fake-message" style={{ wordBreak: 'break-all' }}>
+                        KJHKJHFDKJ*&&*&#*&&*#&*#J#^$BDKSFSSDFDSJFH#767242JFJDGH234
+                      </div>
+                    </>
+                  )}
+
+                  {/* THIRD STEP */}
+                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
+                    <>
+                      <ExclamationMessage>
+                        BTC were successfully deposited to Escrow. It is safe now to proceed with the payment.
+                        Confirm you’ve sent fiat to <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                      </ExclamationMessage>
+                      <Button
+                        loading={submitting}
+                        type="primary"
+                        style={{ padding: '0 24px' }}
+                        onClick={() => fiatSentRequest(id)}
+                      >
+                        Fiat sent
+                      </Button>
+                    </>
+                  )}
+
+                  {specificTrade.status === 'InProgress' && you === 'seller' && (
+                    <>
+                      <ExclamationMessage>
+                        BTC were successfully deposited to Escrow. Waiting for{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm sending the fiat.
+                      </ExclamationMessage>
+                    </>
+                  )}
+
+                  {/* FOURTH STEP, CHANGE STATUS TO FIATSENT */}
+                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
+                    <>
+                      <ExclamationMessage>
+                        Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
+                        receiving the fiat.
+                      </ExclamationMessage>
+                    </>
+                  )}
+
+
+                  {specificTrade.status === 'InProgress' && you === 'seller' && (
+                    <>
+                      <ExclamationMessage>
+                        Confirm you’ve received fiat from{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                      </ExclamationMessage>
+                      <Button
+                        loading={submitting}
+                        type="primary"
+                        style={{ padding: '0 24px' }}
+                        onClick={() => fiatReceivedRequest(id)}
+                      >
+                        Fiat received
+                      </Button>
+                    </>
+                  )}
+
+                  {/* FIFTH STEP, CHANGE STATUS TO COMPLETED */}
+                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
+                    <>
+                      <ExclamationMessage>
+                        Escrow has released the funds to your wallet address. You can check transaction status
+                        on <a href="https://blockchain.info">blockchain.info</a>
+                      </ExclamationMessage>
+                    </>
+                  )}
+
+                  {specificTrade.status === 'InProgress' && you === 'seller' && (
+                    <>
+                      <ExclamationMessage>
+                        Escrow has released the funds to{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                      </ExclamationMessage>
+                    </>
+                  )}
                 </div>
               </Col>
               <Col md={12}>
                 <p>
                   You can close the trade window while waiting for a reply. You will receive an Email alert
-                  and notification when the seller reply. You can open the window of this trade from your
+                  and notification when the seller reply. You can open the window of this trade from you
                   <Link to={ROUTES.DASHBOARD.ROOT}> dashboard</Link>.
                 </p>
 
@@ -95,7 +222,7 @@ const TradeDisplay = ({ getTradeByIdRequest, specificTrade, loading }) => {
                 <Row>
                   <Col xs={12}>
                     <span className="span-head">Trade status</span>
-                    <p className="green-status">{specificTrade.status}</p>
+                    <p className="green-status">{formatCapitals(specificTrade.status)}</p>
                   </Col>
                   <Col xs={12}>
                     <span className="span-head">Ad owner</span>
@@ -164,7 +291,10 @@ TradeDisplay.propTypes = {
     direction: PropTypes.string,
   }),
   getTradeByIdRequest: PropTypes.func,
+  fiatSentRequest: PropTypes.func,
+  fiatReceivedRequest: PropTypes.func,
   loading: PropTypes.bool,
+  submitting: PropTypes.bool,
 };
 
 TradeDisplay.defaultProps = {
@@ -173,6 +303,7 @@ TradeDisplay.defaultProps = {
     adType: 'Sell',
   },
   loading: true,
+  submitting: false,
 };
 
 export default TradeDisplay;

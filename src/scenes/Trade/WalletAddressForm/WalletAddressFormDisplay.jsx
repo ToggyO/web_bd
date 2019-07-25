@@ -21,7 +21,7 @@ const WalletAddressFormDisplay = ({ form, confirmTradeRequest, submitting }) => 
           <Form.Item>
             {form.getFieldDecorator('walletPublicAddress', {
               rules: [{ required: true, message: 'Please input your bitcoin wallet public address' }],
-            })(<Input autoFocus placeholder="Enter wallet address" />)}
+            })(<Input placeholder="Enter wallet address" />)}
           </Form.Item>
         </Col>
         <Col lg={7}>
