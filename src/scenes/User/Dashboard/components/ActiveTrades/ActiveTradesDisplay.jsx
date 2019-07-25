@@ -8,6 +8,7 @@ import { formatDate, sortStrings } from '@utils';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
 import './style.less';
 import { Spinner } from '@components/Spinner/index';
+import { ShowConfirm } from '@components/ShowConfirm';
 
 const { Column } = Table;
 
@@ -35,27 +36,6 @@ const ActiveTradesDisplay = ({
 
   const [idToToggle, setIdToToggle] = useState('');
 
-  const showConfirm = id => {
-    Modal.confirm({
-      title: 'Would you like to delete this ad?',
-      content: 'This action cannot be undone.',
-      onOk() {
-        deleteAdRequest(id);
-      },
-      okText: 'Yes',
-      okButtonProps: {
-        style: { width: 74, height: 28 },
-        loading: submitting,
-      },
-      cancelText: 'No',
-      cancelButtonProps: {
-        style: { width: 74, height: 28 },
-      },
-      onCancel() {},
-      maskClosable: true,
-    });
-  };
-
   const handleStatusToggle = (id, status) => {
     setIdToToggle(() => id);
     toggleAdStatusRequest({ id, shown: !status });
@@ -66,7 +46,7 @@ const ActiveTradesDisplay = ({
       <Table
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={adsData}
-        loading={{spinning: loading, indicator: <Spinner />}}
+        loading={{ spinning: loading, indicator: <Spinner /> }}
         locale={{ emptyText: <NoData /> }}
         pagination={!(adsData.length < 11)}
         expandedRowRender={
@@ -80,7 +60,15 @@ const ActiveTradesDisplay = ({
                   <Link className="extra-row__edit" to={`/ads/${record.key}/edit`}>
                       Edit
                   </Link>
-                  <a className="extra-row__delete" onClick={() => showConfirm(record.key)}>
+                  <a
+                    className="extra-row__delete"
+                    onClick={() =>
+                      ShowConfirm(record.key, deleteAdRequest, {
+                        title: 'Would you like to delete this ad?',
+                        content: 'This action cannot be undone.',
+                      })
+                    }
+                  >
                       Delete
                   </a>
                 </div>
@@ -118,8 +106,7 @@ const ActiveTradesDisplay = ({
           dataIndex="type"
           title="Type"
           columnWidth={80}
-          render={(text, record) => record.type
-          }
+          render={(text, record) => record.type}
           sorter={(a, b) => sortStrings(a.type, b.type)}
         />
         <Column

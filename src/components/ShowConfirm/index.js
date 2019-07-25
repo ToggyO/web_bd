@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 
-export const ShowConfirm = (id, onOk, loading, { title, content }, { okText = 'Yes', cancelText = 'No' }) => {
+export const ShowConfirm = (id, onOk, { title, content }, { okText = 'Yes', cancelText = 'No' }) => {
   Modal.confirm({
     title,
     content,
@@ -10,7 +10,6 @@ export const ShowConfirm = (id, onOk, loading, { title, content }, { okText = 'Y
     okText,
     okButtonProps: {
       style: { width: 74, height: 28 },
-      loading,
     },
     cancelText,
     cancelButtonProps: {

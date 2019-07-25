@@ -30,7 +30,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeReques
               {requests ? (
                 <ButtonLink
                   onClick={() =>
-                    ShowConfirm(record.key, deleteNewTradeRequest, loading, {
+                    ShowConfirm(record.key, deleteNewTradeRequest, {
                       title: 'You\'re about to delete this trade request',
                       content: 'You won\'t be able to accept it after it is deleted.',
                     }, {
