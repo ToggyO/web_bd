@@ -6,7 +6,7 @@ import { Refresher } from '@components/Refresher';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ROUTES } from '@config/constants';
 import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
-import { TradeRequestsTableContainer } from './components/TradeRequestsTable';
+import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
 import { catchFromPath } from '@utils/';
 import './style.less';
 
@@ -16,6 +16,7 @@ const DashboardDisplay = ({
   getMyCreatedAdsRequest,
   getNewTradesRequest,
   getActiveTradesRequest,
+  getCompletedTradesRequest,
   deleteNewTradeRequest,
   tradesLoading,
 }) => {
@@ -24,6 +25,7 @@ const DashboardDisplay = ({
     if (path === 'created' || path === '') getMyCreatedAdsRequest();
     if (path === 'requests') getNewTradesRequest();
     if (path === 'active') getActiveTradesRequest();
+    if (path === 'completed') getCompletedTradesRequest();
   }, [history.location.pathname]);
 
   const handleChangeTab = tab => {
@@ -51,19 +53,19 @@ const DashboardDisplay = ({
               <h2 className="dashboard__header">
                 Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
               </h2>
-              <TradeRequestsTableContainer withTerms requests deleteNewTradeRequest={deleteNewTradeRequest} />
+              <TradesDashboardTableContainer withTerms requests onDelete={deleteNewTradeRequest} />
             </TabPane>
             <TabPane tab="Active trades" key="ACTIVE">
               <h2 className="dashboard__header">
                 Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
               </h2>
-              <TradeRequestsTableContainer withTerms />
+              <TradesDashboardTableContainer withTerms onDelete={deleteNewTradeRequest} />
             </TabPane>
             <TabPane tab="Completed trades" key="COMPLETED">
               <h2 className="dashboard__header">
-                Completed trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
+                Completed trades <Refresher loading={tradesLoading} cb={getCompletedTradesRequest} />
               </h2>
-              <div>Completed trades</div>
+              <TradesDashboardTableContainer withTerms />
             </TabPane>
             <TabPane tab="Canceled trades" key="CANCELED">
               <h2 className="dashboard__header">Canceled trades</h2>
@@ -80,6 +82,7 @@ DashboardDisplay.propTypes = {
   getMyCreatedAdsRequest: PropTypes.func,
   getNewTradesRequest: PropTypes.func,
   getActiveTradesRequest: PropTypes.func,
+  getCompletedTradesRequest: PropTypes.func,
   deleteNewTradeRequest: PropTypes.func,
   tradesLoading: PropTypes.bool,
 };

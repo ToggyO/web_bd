@@ -10,3 +10,8 @@ export const getActiveTradesRequest = () => ({
   payload:
     'pending&status[]=Depositing&status[]=InProgress&status[]=FiatSent&status[]=FiatReceived&status[]=Disputed',
 });
+
+export const getCompletedTradesRequest = () => ({
+  type: types.GET_COMPLETED_REQUEST,
+  payload: 'completed',
+});

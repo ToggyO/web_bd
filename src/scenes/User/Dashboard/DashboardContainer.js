@@ -22,6 +22,9 @@ function mapDispatchToProps(dispatch) {
     getActiveTradesRequest(type) {
       dispatch(tradesActions.getActiveTradesRequest(type));
     },
+    getCompletedTradesRequest(type) {
+      dispatch(tradesActions.getCompletedTradesRequest(type));
+    },
     deleteNewTradeRequest(id) {
       dispatch(tradeActions.deleteNewTradeRequest(id));
     },

@@ -27,3 +27,16 @@ function* getActiveTrades(action) {
 export function* getActiveTradesSaga() {
   yield takeLatest(types.GET_ACTIVE_REQUEST, getActiveTrades);
 }
+
+function* getCompletedTrades(action) {
+  try {
+    const { data } = yield call(api.trades.getTrades, action.payload);
+    yield put({ type: types.GET_COMPLETED_SUCCESS, payload: data });
+  } catch (error) {
+    yield put({ type: types.GET_COMPLETED_ERROR, payload: error });
+  }
+}
+
+export function* getCompletedTradesSaga() {
+  yield takeLatest(types.GET_COMPLETED_REQUEST, getCompletedTrades);
+}
