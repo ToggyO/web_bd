@@ -119,7 +119,7 @@ export default {
       return response.data;
     },
     deleteTraderqvst: async id => {
-      const response = await superaxios.post(`/trade/${id}/delete`);
+      const response = await superaxios.delete(`/trade/${id}`);
       return response.data;
     },
   },

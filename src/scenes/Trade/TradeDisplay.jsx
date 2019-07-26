@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button } from 'antd';
@@ -69,12 +70,20 @@ const TradeDisplay = ({
     default:
       action = '';
   }
+  console.log(you);
   return (
     <AppWrapperContainer>
       <div className="paper">
         <Spin spinning={loading} indicator={<Spinner />}>
           <div className="trade">
-            <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />
+            {specificTrade.status === 'New' ? (
+              <ArrowLink text="Back to requests" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />
+            ) : specificTrade.status === 'Completed' ? (
+              <ArrowLink text="Back to completed" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />
+            ) : (
+              <ArrowLink text="Back to active" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />
+            )}
+
             <h2>
               #{prettifyId(id)} {action}
               <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>
@@ -103,15 +112,40 @@ const TradeDisplay = ({
                     </>
                   )}
 
+                  {/* FIRST STEP */}
+                  {specificTrade.adType === 'Buy' &&
+                    specificTrade.status === 'New' &&
+                    you === 'buyer' &&
+                    !specificTrade[`${you}Wallet`] && (
+                      <>
+                        <p>
+                          To confirm you are willing to trade with{' '}
+                          <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
+                          wallet public address. BTC will be transferred to this address if trade is cancelled
+                          or you win a dispute.
+                        </p>
+                        <WalletAddressFormContainer />
+                      </>
+                  )}
+
+                  {specificTrade.adType === 'Buy' &&
+                    specificTrade.status === 'New' &&
+                    you === 'seller' &&
+                    specificTrade[`${you}Wallet`] && (
+                    <ExclamationMessage>
+                        Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm trading.
+                    </ExclamationMessage>
+                  )}
+
                   {/* SECOND STEP */}
-                  {specificTrade.status === 'Pending' && you === 'buyer' && (
+                  {specificTrade.status === 'Depositing' && you === 'buyer' && (
                     <ExclamationMessage>
                       Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit funds to
                       Escrow.
                     </ExclamationMessage>
                   )}
 
-                  {specificTrade.status === 'Pending' && you === 'seller' && (
+                  {specificTrade.status === 'Depositing' && you === 'seller' && (
                     <>
                       <ExclamationMessage>
                         This is Escrow multisig wallet address, please transfer {specificTrade.amount} BTC.
@@ -150,8 +184,8 @@ const TradeDisplay = ({
                     </>
                   )}
 
-                  {/* FOURTH STEP, CHANGE STATUS TO FIATSENT */}
-                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
+                  {/* FOURTH STEP */}
+                  {specificTrade.status === 'FiatSent' && you === 'buyer' && (
                     <>
                       <ExclamationMessage>
                         Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
@@ -160,8 +194,7 @@ const TradeDisplay = ({
                     </>
                   )}
 
-
-                  {specificTrade.status === 'InProgress' && you === 'seller' && (
+                  {specificTrade.status === 'FiatSent' && you === 'seller' && (
                     <>
                       <ExclamationMessage>
                         Confirm you’ve received fiat from{' '}
@@ -178,8 +211,29 @@ const TradeDisplay = ({
                     </>
                   )}
 
-                  {/* FIFTH STEP, CHANGE STATUS TO COMPLETED */}
-                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
+                  {/* FIFTH STEP */}
+                  {specificTrade.status === 'FiatReceived' && you === 'buyer' && (
+                    <>
+                      <ExclamationMessage>
+                        Congratulations! You have successfully purchased {specificTrade.amount} from{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>. This trade will remain active
+                        until we confirm you get bitcoins from escrow. You can check your TXid.
+                      </ExclamationMessage>
+                    </>
+                  )}
+
+                  {specificTrade.status === 'FiatReceived' && you === 'seller' && (
+                    <>
+                      <ExclamationMessage>
+                        Congratulations! You have sold {specificTrade.amount} to{' '}
+                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>. This trade will remain active
+                        until we confirm the buyer gets his bitcoins from escrow.
+                      </ExclamationMessage>
+                    </>
+                  )}
+
+                  {/* SIXTH STEP */}
+                  {specificTrade.status === 'Completed' && you === 'buyer' && (
                     <>
                       <ExclamationMessage>
                         Escrow has released the funds to your wallet address. You can check transaction status
@@ -188,7 +242,7 @@ const TradeDisplay = ({
                     </>
                   )}
 
-                  {specificTrade.status === 'InProgress' && you === 'seller' && (
+                  {specificTrade.status === 'Completed' && you === 'seller' && (
                     <>
                       <ExclamationMessage>
                         Escrow has released the funds to{' '}

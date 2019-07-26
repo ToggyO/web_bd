@@ -32,7 +32,7 @@ const WalletAddressFormDisplay = ({ form, confirmTradeRequest, submitting }) => 
             loading={submitting}
             block={!!window.matchMedia('(max-width: 992px)').matches}
           >
-            Request trade
+            Confirm trade
           </Button>
         </Col>
       </Row>

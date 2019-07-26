@@ -47,7 +47,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading,
                     Delete request
                 </ButtonLink>
               ) : (
-                <ButtonLink onClick={() => onDelete(record.key)}>Cancel trade</ButtonLink>
+                <ButtonLink onClick={() => onDelete(record.key)} ><span role="img" aria-label="img">💩</span></ButtonLink>
               )}
             </div>
 

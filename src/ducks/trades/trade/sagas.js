@@ -56,6 +56,7 @@ function* fiatSent(action) {
   try {
     const { data } = yield call(api.trades.fiatSent, action.payload);
     yield put({ type: types.FIAT_SENT_SUCCESS, payload: data });
+    yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
   } catch (error) {
     yield put({ type: types.FIAT_SENT_ERROR, payload: error });
   }
@@ -69,6 +70,7 @@ function* fiatReceived(action) {
   try {
     const { data } = yield call(api.trades.fiatReceived, action.payload);
     yield put({ type: types.FIAT_RECEIVED_SUCCESS, payload: data });
+    yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
   } catch (error) {
     yield put({ type: types.FIAT_RECEIVED_ERROR, payload: error });
   }
