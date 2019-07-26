@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { tradesSelectors } from '@ducks/trades';
-import TradeRequestsTableDisplay from './TradeRequestsTableDisplay';
+import TradesDashboardTableDisplay from './TradesDashboardTableDisplay';
 
 function mapStateToProps(state) {
   return {
@@ -9,4 +9,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TradeRequestsTableDisplay);
+export default connect(mapStateToProps)(TradesDashboardTableDisplay);

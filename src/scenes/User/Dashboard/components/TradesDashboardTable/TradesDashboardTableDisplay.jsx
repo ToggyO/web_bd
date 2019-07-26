@@ -12,7 +12,7 @@ import { ShowConfirm } from '@components/ShowConfirm';
 
 const { Column } = Table;
 
-const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeRequest, loading, requests }) => (
+const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading, requests }) => (
   <Table
     expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
     dataSource={tradesData}
@@ -32,7 +32,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeReques
                   onClick={() =>
                     ShowConfirm(
                       record.key,
-                      deleteNewTradeRequest,
+                      onDelete,
                       {
                         title: 'You\'re about to delete this trade request',
                         content: 'You won\'t be able to accept it after it is deleted.',
@@ -47,7 +47,7 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeReques
                     Delete request
                 </ButtonLink>
               ) : (
-                <ButtonLink onClick={() => deleteNewTradeRequest(record.key)}>Cancel trade</ButtonLink>
+                <ButtonLink onClick={() => onDelete(record.key)}>Cancel trade</ButtonLink>
               )}
             </div>
 
@@ -161,9 +161,9 @@ const TradeRequestsTableDisplay = ({ withTerms, tradesData, deleteNewTradeReques
   </Table>
 );
 
-TradeRequestsTableDisplay.propTypes = {
+TradesDashboardTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
-  deleteNewTradeRequest: PropTypes.func,
+  onDelete: PropTypes.func,
   tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -184,8 +184,9 @@ TradeRequestsTableDisplay.propTypes = {
   loading: PropTypes.bool,
 };
 
-TradeRequestsTableDisplay.defaultProps = {
+TradesDashboardTableDisplay.defaultProps = {
   requests: false,
+  onDelete: () => {},
 };
 
-export default TradeRequestsTableDisplay;
+export default TradesDashboardTableDisplay;
