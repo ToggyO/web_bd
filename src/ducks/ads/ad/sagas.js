@@ -68,6 +68,7 @@ function* deleteAd(aciton) {
     });
     yield call(message.success, 'Deleted!', 2);
   } catch (error) {
+    yield call(message.error, error.response.data.errors[0].message);
     yield put({ type: adTypes.DELETE_ERROR, payload: error });
   }
 }
