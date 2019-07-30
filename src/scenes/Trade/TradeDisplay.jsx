@@ -30,10 +30,8 @@ const TradeDisplay = ({
     getTradeByIdRequest(id);
   }, []);
 
-  console.log(specificTrade);
   let action;
   let you;
-  let other;
 
   const user = specificTrade.direction === 'Incoming' ? specificTrade.tradePartner : specificTrade.adOwner;
 
@@ -42,12 +40,10 @@ const TradeDisplay = ({
       if (specificTrade.direction === 'Outgoing') {
         action = 'Buy bitcoins from ';
         you = 'buyer';
-        other = 'seller';
       }
       if (specificTrade.direction === 'Incoming') {
         action = 'Sell bitcoins to ';
         you = 'seller';
-        other = 'buyer';
       }
       break;
     }
@@ -56,12 +52,10 @@ const TradeDisplay = ({
       if (specificTrade.direction === 'Incoming') {
         action = 'Buy bitcoins from ';
         you = 'buyer';
-        other = 'seller';
       }
       if (specificTrade.direction === 'Outgoing') {
         action = 'Sell bitcoins to ';
         you = 'seller';
-        other = 'buyer';
       }
       break;
     }
@@ -69,7 +63,7 @@ const TradeDisplay = ({
     default:
       action = '';
   }
-  console.log(you);
+  
   return (
     <AppWrapperContainer>
       <div className="paper">
@@ -431,7 +425,7 @@ TradeDisplay.propTypes = {
     terms: PropTypes.string,
     adType: PropTypes.string,
     direction: PropTypes.string,
-    multisigWalletAddress:PropTypes.string,
+    multisigWalletAddress: PropTypes.string,
   }),
   getTradeByIdRequest: PropTypes.func,
   fiatSentRequest: PropTypes.func,
