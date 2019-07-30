@@ -63,7 +63,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading,
                 <Col lg={6}>
                   <div className="extra-row__currency">
                     <span>Date</span>
-                    <p>{formatDate(record.createdAt)}</p>
+                    <p>{formatDate(record.createdAt, 'lol')}</p>
                   </div>
                 </Col>
                 <Col lg={6}>

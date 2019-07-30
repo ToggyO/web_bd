@@ -108,7 +108,7 @@ const CreatedAdsTableDisplay = ({
         <Column
           key="createdAt"
           title="Date"
-          render={(text, record) => formatDate(record.createdAt)}
+          render={(text, record) => formatDate(record.createdAt, 'lol')}
           sorter={(a, b) => a.createdAt - b.createdAt}
           defaultSortOrder="descend"
         />
