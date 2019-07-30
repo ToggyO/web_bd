@@ -9,6 +9,7 @@ export const adsSelector = createSelector(
   items =>
     items.map(({ ad }) => ({
       key: ad.id,
+      order: ad.order,
       createdAt: new Date(ad.createDate).getTime(),
       tradeLimits: `${formatMoney(ad.minTradeLimit)} - ${formatMoney(ad.maxTradeLimit)} ${ad.currency}`,
       payment: formatCapitals(ad.payment),
@@ -35,6 +36,7 @@ export const adSelector = createSelector(
   [adsByTypeSelector],
   ({ data }) => ({
     id: data.id,
+    order: data.order,
     type: data.type,
     location: data.location,
     currency: data.currency,

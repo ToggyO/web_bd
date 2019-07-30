@@ -74,10 +74,10 @@ const CreatedAdsTableDisplay = ({
             ? record => (
               <div className="extra-row">
                 <div className="extra-row__head">
-                  <Link className="extra-row__view" to={`/ads/${record.key}`}>
+                  <Link className="extra-row__view" to={`/ads/${record.order}`}>
                       View
                   </Link>
-                  <Link className="extra-row__edit" to={`/ads/${record.key}/edit`}>
+                  <Link className="extra-row__edit" to={`/ads/${record.order}/edit`}>
                       Edit
                   </Link>
                   <a className="extra-row__delete" onClick={() => showConfirm(record.key)}>

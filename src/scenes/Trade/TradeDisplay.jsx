@@ -173,7 +173,7 @@ const TradeDisplay = ({
                               </ExclamationMessage>
                               <div
                                 className="initiate-trade__fake-message"
-                                style={{ wordBreak: 'break-all' }}
+                                style={{ wordBreak: 'break-all', height: 42 }}
                               >
                                 {specificTrade.multisigWalletAddress}
                               </div>
@@ -211,8 +211,7 @@ const TradeDisplay = ({
                                     {
                                       okText: 'Yes',
                                       cancelText: 'No',
-                                    },
-                                    <Icon type="exclamation-circle" />
+                                    }
                                   )
                                 }
                               >
@@ -269,8 +268,7 @@ const TradeDisplay = ({
                                     {
                                       okText: 'Yes',
                                       cancelText: 'No',
-                                    },
-                                    <Icon type="exclamation-circle" />
+                                    }
                                   )
                                 }
                               >
@@ -326,7 +324,7 @@ const TradeDisplay = ({
                         <ButtonLink
                           onClick={() =>
                             ShowConfirm(
-                              id,
+                              specificTrade.id,
                               cancelTradeRequest,
                               { ...confirmData.requests.texts },
                               { ...confirmData.requests.buttons }
@@ -343,7 +341,7 @@ const TradeDisplay = ({
                         <ButtonLink
                           onClick={() =>
                             ShowConfirm(
-                              id,
+                              specificTrade.id,
                               cancelTradeRequest,
                               { ...confirmData.active.texts },
                               { ...confirmData.active.buttons }

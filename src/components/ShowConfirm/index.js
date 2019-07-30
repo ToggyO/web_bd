@@ -6,7 +6,7 @@ export const ShowConfirm = (
   onOk,
   { title, content },
   { okText = 'Yes', cancelText = 'No' },
-  icon = <Icon type="question-circle" />
+  icon = <Icon type="exclamation-circle" />
 ) => {
   Modal.confirm({
     icon,

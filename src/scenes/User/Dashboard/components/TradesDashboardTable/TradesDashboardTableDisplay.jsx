@@ -29,7 +29,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   case 'New':
                     return (
                         <>
-                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View request
                           </Link>
                           <ButtonLink
@@ -50,7 +50,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   case 'InProgress':
                     return (
                         <>
-                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                           <ButtonLink
@@ -71,7 +71,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   case 'FiatSent':
                     return (
                         <>
-                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                           <ButtonLink>Initiate a dispute</ButtonLink>
@@ -82,7 +82,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   case 'Completed':
                     return (
                         <>
-                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                         </>
@@ -91,7 +91,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   default:
                     return (
                         <>
-                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                           <ButtonLink
@@ -174,14 +174,8 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
         : null
     }
   >
-    <Column key="key" title="ID" render={(text, record) => prettifyId(record.key)} />
-    {/* <Column
-      key="createdAt"
-      title="Date"
-      render={(text, record) => formatDate(record.createdAt)}
-      sorter={(a, b) => a.createdAt - b.createdAt}
-      defaultSortOrder="descend"
-    /> */}
+    <Column key="key" title="ID" dataIndex="order" />
+    
     <Column
       key="tradePartner"
       title="Trade partner"

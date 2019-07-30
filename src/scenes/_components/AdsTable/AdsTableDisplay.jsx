@@ -125,7 +125,7 @@ const AdsTableDisplay = ({
             buyOrSell = 'Buy';
           }
 
-          return <Link to={`/ads/${record.key}`}>{buyOrSell}</Link>;
+          return <Link to={`/ads/${record.order}`}>{buyOrSell}</Link>;
         }}
       />
     </Table>

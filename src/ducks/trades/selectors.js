@@ -6,6 +6,7 @@ export const tradesSelector = createSelector(
   trades =>
     trades.map(el => ({
       key: el.trade.id,
+      order: el.trade.order,
       createdAt: new Date(el.trade.createDate).getTime(),
       tradeLimit: `${formatMoney(el.trade.ad.minTradeLimit)} - ${formatMoney(el.trade.ad.maxTradeLimit)} ${
         el.trade.ad.currency
@@ -33,6 +34,8 @@ export const tradesLoadingSelector = createSelector(
 export const tradeSelector = createSelector(
   state => state.trades.trade.data,
   ({ trade, direction }) => ({
+    id: trade.id,
+    order: trade.order,
     amount: trade.amount,
     fiat: trade.fiat,
     tradePartner: trade.tradePartner,
