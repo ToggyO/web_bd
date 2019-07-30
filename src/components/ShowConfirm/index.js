@@ -1,7 +1,15 @@
-import { Modal } from 'antd';
+import React from 'react';
+import { Icon, Modal } from 'antd';
 
-export const ShowConfirm = (id, onOk, { title, content }, { okText = 'Yes', cancelText = 'No' }) => {
+export const ShowConfirm = (
+  id,
+  onOk,
+  { title, content },
+  { okText = 'Yes', cancelText = 'No' },
+  icon = <Icon type="question-circle" />
+) => {
   Modal.confirm({
+    icon,
     title,
     content,
     onOk() {

@@ -1,7 +1,7 @@
 /* eslint-disable no-void */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Divider, Spin, Button } from 'antd';
+import { Icon, Row, Col, Divider, Spin, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
@@ -63,7 +63,7 @@ const TradeDisplay = ({
     default:
       action = '';
   }
-  
+
   return (
     <AppWrapperContainer>
       <div className="paper">
@@ -195,7 +195,26 @@ const TradeDisplay = ({
                                 loading={submitting}
                                 type="primary"
                                 style={{ padding: '0 24px' }}
-                                onClick={() => fiatSentRequest(id)}
+                                onClick={() =>
+                                  ShowConfirm(
+                                    id,
+                                    fiatSentRequest,
+                                    {
+                                      title: 'Confirm sending fiat',
+                                      content: (
+                                        <div>
+                                          Confirm you have sent fiat to{' '}
+                                          <span style={{ color: '#2EAC82' }}>{user}</span>?
+                                        </div>
+                                      ),
+                                    },
+                                    {
+                                      okText: 'Yes',
+                                      cancelText: 'No',
+                                    },
+                                    <Icon type="exclamation-circle" />
+                                  )
+                                }
                               >
                                 Fiat sent
                               </Button>
@@ -234,7 +253,26 @@ const TradeDisplay = ({
                                 loading={submitting}
                                 type="primary"
                                 style={{ padding: '0 24px' }}
-                                onClick={() => fiatReceivedRequest(id)}
+                                onClick={() =>
+                                  ShowConfirm(
+                                    id,
+                                    fiatReceivedRequest,
+                                    {
+                                      title: 'Confirm receiving fiat',
+                                      content: (
+                                        <div>
+                                          Confirm you have received fiat from{' '}
+                                          <span style={{ color: '#2EAC82' }}>{user}</span>?
+                                        </div>
+                                      ),
+                                    },
+                                    {
+                                      okText: 'Yes',
+                                      cancelText: 'No',
+                                    },
+                                    <Icon type="exclamation-circle" />
+                                  )
+                                }
                               >
                                 Fiat received
                               </Button>
@@ -319,20 +357,7 @@ const TradeDisplay = ({
                     case 'FiatSent':
                       return (
                         <ButtonLink
-                          onClick={() =>
-                            ShowConfirm(
-                              id,
-                              disputeTradeRequest,
-                              {
-                                title: 'You\'re about to dispute this trade request',
-                                content: 'You won\'t be able to accept it after it is declined.',
-                              },
-                              {
-                                okText: 'Cancel',
-                                cancelText: 'Dispute',
-                              }
-                            )
-                          }
+                          onClick={() => {}}
                         >
                           Initiate a dispute
                         </ButtonLink>
