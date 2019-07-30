@@ -163,7 +163,7 @@ const CreatedAdsTableDisplay = ({
             </Spinner>
           )}
           key="dispayStatus"
-          sorter={withTerms}
+          sorter={(a, b) => sortStrings(a.shown, b.shown)}
         />
       </Table>
     </div>
