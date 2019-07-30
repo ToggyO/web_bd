@@ -50,6 +50,7 @@ export const tradeSelector = createSelector(
     direction,
     buyerWallet: trade.multisigWallet.buyerReceivingWalletAddress,
     sellerWallet: trade.multisigWallet.sellerReceivingWalletAddress,
+    multisigWalletAddress: trade.multisigWallet.multisigWalletAddress,
   })
 );
 
