@@ -97,3 +97,26 @@ function* deleteNewTradeRequest(action) {
 export function* deleteNewTradeRequestSaga() {
   yield takeLatest(types.DELETE_NEW_REQUEST, deleteNewTradeRequest);
 }
+
+function* cancelTradeRequest(action) {
+  try {
+    const { data } = yield call(api.trades.cancelTrade, action.payload);
+    yield put({ type: types.CANCEL_SUCCESS, payload: data });
+
+    yield call(Modal.destroyAll);
+
+    if (history.location.pathname === ROUTES.DASHBOARD.ACTIVE) {
+      yield put(tradesActions.getActiveTradesRequest());
+    } else {
+      yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
+    }
+
+    yield call(message.success, 'Canceled!', 2);
+  } catch (error) {
+    yield put({ type: types.CANCEL_ERROR, payload: error });
+  }
+}
+
+export function* cancelTradeRequestSaga() {
+  yield takeLatest(types.CANCEL_REQUEST, cancelTradeRequest);
+}

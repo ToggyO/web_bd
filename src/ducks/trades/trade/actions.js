@@ -29,3 +29,8 @@ export const deleteNewTradeRequest = id => ({
   type: types.DELETE_NEW_REQUEST,
   payload: id,
 });
+
+export const cancelTradeRequest = id => ({
+  type: types.CANCEL_REQUEST,
+  payload: id,
+});

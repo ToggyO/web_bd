@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+/* eslint-disable no-void */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button } from 'antd';
@@ -8,20 +8,19 @@ import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ArrowLink } from '@components/ArrowLink';
 import { Spinner } from '@components/Spinner';
 import { ButtonLink } from '@components/ButtonLink';
+import { ShowConfirm } from '@components/ShowConfirm';
 import { ExclamationMessage } from '@components/ExclamationMessage';
-import { ROUTES } from '@config/constants';
+import { ROUTES, confirmData } from '@config/constants';
 import { WalletAddressFormContainer } from './WalletAddressForm';
 import { catchFromPath, prettifyId, formatMoney, formatCapitals } from '@utils';
 import './style.less';
-
-const handleClick = () => {
-  console.log('clicked');
-};
 
 const TradeDisplay = ({
   getTradeByIdRequest,
   fiatSentRequest,
   fiatReceivedRequest,
+  cancelTradeRequest,
+  disputeTradeRequest,
   specificTrade,
   loading,
   submitting,
@@ -76,13 +75,24 @@ const TradeDisplay = ({
       <div className="paper">
         <Spin spinning={loading} indicator={<Spinner />}>
           <div className="trade">
-            {specificTrade.status === 'New' ? (
-              <ArrowLink text="Back to requests" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />
-            ) : specificTrade.status === 'Completed' ? (
-              <ArrowLink text="Back to completed" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />
-            ) : (
-              <ArrowLink text="Back to active" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />
-            )}
+            {(() => {
+              switch (specificTrade.status) {
+                case 'New':
+                  return (
+                    <ArrowLink text="Back to trade requests" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />
+                  );
+                case 'Depositing':
+                case 'InProgress':
+                case 'FiatSent':
+                  return <ArrowLink text="Back to active trades" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />;
+                case 'Completed':
+                  return (
+                    <ArrowLink text="Back to completed trades" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />
+                  );
+                default:
+                  return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />;
+              }
+            })()}
 
             <h2>
               #{prettifyId(id)} {action}
@@ -93,163 +103,181 @@ const TradeDisplay = ({
                 <div className="chat">
                   <div className="chat__window">Chat</div>
 
-                  {/* FIRST STEP */}
-                  {specificTrade.status === 'New' && you === 'buyer' && specificTrade[`${you}Wallet`] && (
-                    <ExclamationMessage>
-                      Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm trading.
-                    </ExclamationMessage>
-                  )}
+                  {(() => {
+                    switch (specificTrade.status) {
+                      case 'New':
+                        // First step for case where adType === 'Sell'
+                        if (you === 'buyer' && specificTrade[`${you}Wallet`]) {
+                          return (
+                            <ExclamationMessage>
+                              Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm
+                              trading.
+                            </ExclamationMessage>
+                          );
+                        }
+                        if (you === 'seller' && !specificTrade[`${you}Wallet`]) {
+                          return (
+                            <>
+                              <p>
+                                To confirm you are willing to trade with{' '}
+                                <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
+                                wallet public address. BTC will be transferred to this address if trade is
+                                cancelled or you win a dispute.
+                              </p>
+                              <WalletAddressFormContainer />
+                            </>
+                          );
+                        }
 
-                  {specificTrade.status === 'New' && you === 'seller' && !specificTrade[`${you}Wallet`] && (
-                    <>
-                      <p>
-                        To confirm you are willing to trade with{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin wallet
-                        public address. BTC will be transferred to this address if trade is cancelled or you
-                        win a dispute.
-                      </p>
-                      <WalletAddressFormContainer />
-                    </>
-                  )}
+                        // First step for case where adType === 'Buy'
+                        if (
+                          specificTrade.adType === 'Buy' &&
+                          you === 'buyer' &&
+                          !specificTrade[`${you}Wallet`]
+                        ) {
+                          return (
+                            <>
+                              <p>
+                                To confirm you are willing to trade with{' '}
+                                <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
+                                wallet public address. BTC will be transferred to this address if trade is
+                                cancelled or you win a dispute.
+                              </p>
+                              <WalletAddressFormContainer />
+                            </>
+                          );
+                        }
+                        if (
+                          specificTrade.adType === 'Buy' &&
+                          you === 'seller' &&
+                          specificTrade[`${you}Wallet`]
+                        ) {
+                          return (
+                            <ExclamationMessage>
+                              Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm
+                              trading.
+                            </ExclamationMessage>
+                          );
+                        }
+                        break;
 
-                  {/* FIRST STEP */}
-                  {specificTrade.adType === 'Buy' &&
-                    specificTrade.status === 'New' &&
-                    you === 'buyer' &&
-                    !specificTrade[`${you}Wallet`] && (
-                      <>
-                        <p>
-                          To confirm you are willing to trade with{' '}
-                          <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
-                          wallet public address. BTC will be transferred to this address if trade is cancelled
-                          or you win a dispute.
-                        </p>
-                        <WalletAddressFormContainer />
-                      </>
-                  )}
+                      case 'Depositing':
+                        if (you === 'buyer') {
+                          return (
+                            <ExclamationMessage>
+                              Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit
+                              funds to Escrow.
+                            </ExclamationMessage>
+                          );
+                        }
+                        if (you === 'seller') {
+                          return (
+                            <>
+                              <ExclamationMessage>
+                                This is Escrow multisig wallet address, please transfer {specificTrade.amount}{' '}
+                                BTC. Note it may take a while for the funds to arrive.
+                              </ExclamationMessage>
+                              <div
+                                className="initiate-trade__fake-message"
+                                style={{ wordBreak: 'break-all' }}
+                              >
+                                {specificTrade.multisigWalletAddress}
+                              </div>
+                            </>
+                          );
+                        }
+                        break;
 
-                  {specificTrade.adType === 'Buy' &&
-                    specificTrade.status === 'New' &&
-                    you === 'seller' &&
-                    specificTrade[`${you}Wallet`] && (
-                    <ExclamationMessage>
-                        Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm trading.
-                    </ExclamationMessage>
-                  )}
+                      case 'InProgress':
+                        if (you === 'buyer') {
+                          return (
+                            <>
+                              <ExclamationMessage>
+                                BTC were successfully deposited to Escrow. It is safe now to proceed with the
+                                payment. Confirm you’ve sent fiat to{' '}
+                                <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                              </ExclamationMessage>
+                              <Button
+                                loading={submitting}
+                                type="primary"
+                                style={{ padding: '0 24px' }}
+                                onClick={() => fiatSentRequest(id)}
+                              >
+                                Fiat sent
+                              </Button>
+                            </>
+                          );
+                        }
 
-                  {/* SECOND STEP */}
-                  {specificTrade.status === 'Depositing' && you === 'buyer' && (
-                    <ExclamationMessage>
-                      Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit funds to
-                      Escrow.
-                    </ExclamationMessage>
-                  )}
+                        if (you === 'seller') {
+                          return (
+                            <ExclamationMessage>
+                              BTC were successfully deposited to Escrow. Waiting for{' '}
+                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm sending the
+                              fiat.
+                            </ExclamationMessage>
+                          );
+                        }
+                        break;
 
-                  {specificTrade.status === 'Depositing' && you === 'seller' && (
-                    <>
-                      <ExclamationMessage>
-                        This is Escrow multisig wallet address, please transfer {specificTrade.amount} BTC.
-                        Note it may take a while for the funds to arrive.
-                      </ExclamationMessage>
-                      <div className="initiate-trade__fake-message" style={{ wordBreak: 'break-all' }}>
-                        KJHKJHFDKJ*&&*&#*&&*#&*#J#^$BDKSFSSDFDSJFH#767242JFJDGH234
-                      </div>
-                    </>
-                  )}
+                      case 'FiatSent':
+                        if (you === 'buyer') {
+                          return (
+                            <ExclamationMessage>
+                              Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
+                              receiving the fiat.
+                            </ExclamationMessage>
+                          );
+                        }
+                        if (you === 'seller') {
+                          return (
+                            <>
+                              <ExclamationMessage>
+                                Confirm you’ve received fiat from{' '}
+                                <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                              </ExclamationMessage>
+                              <Button
+                                loading={submitting}
+                                type="primary"
+                                style={{ padding: '0 24px' }}
+                                onClick={() => fiatReceivedRequest(id)}
+                              >
+                                Fiat received
+                              </Button>
+                            </>
+                          );
+                        }
+                        break;
 
-                  {/* THIRD STEP */}
-                  {specificTrade.status === 'InProgress' && you === 'buyer' && (
-                    <>
-                      <ExclamationMessage>
-                        BTC were successfully deposited to Escrow. It is safe now to proceed with the payment.
-                        Confirm you’ve sent fiat to <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
-                      </ExclamationMessage>
-                      <Button
-                        loading={submitting}
-                        type="primary"
-                        style={{ padding: '0 24px' }}
-                        onClick={() => fiatSentRequest(id)}
-                      >
-                        Fiat sent
-                      </Button>
-                    </>
-                  )}
+                      case 'Completed':
+                        if (you === 'buyer') {
+                          return (
+                            <ExclamationMessage>
+                              Escrow has released the funds to your wallet address. You can check transaction
+                              status on <a href="https://blockchain.info">blockchain.info</a>
+                            </ExclamationMessage>
+                          );
+                        }
 
-                  {specificTrade.status === 'InProgress' && you === 'seller' && (
-                    <>
-                      <ExclamationMessage>
-                        BTC were successfully deposited to Escrow. Waiting for{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm sending the fiat.
-                      </ExclamationMessage>
-                    </>
-                  )}
+                        if (you === 'seller') {
+                          return (
+                            <ExclamationMessage>
+                              Escrow has released the funds to{' '}
+                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                            </ExclamationMessage>
+                          );
+                        }
 
-                  {/* FOURTH STEP */}
-                  {specificTrade.status === 'FiatSent' && you === 'buyer' && (
-                    <>
-                      <ExclamationMessage>
-                        Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
-                        receiving the fiat.
-                      </ExclamationMessage>
-                    </>
-                  )}
+                        break;
 
-                  {specificTrade.status === 'FiatSent' && you === 'seller' && (
-                    <>
-                      <ExclamationMessage>
-                        Confirm you’ve received fiat from{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
-                      </ExclamationMessage>
-                      <Button
-                        loading={submitting}
-                        type="primary"
-                        style={{ padding: '0 24px' }}
-                        onClick={() => fiatReceivedRequest(id)}
-                      >
-                        Fiat received
-                      </Button>
-                    </>
-                  )}
+                      case 'Cancelled':
+                        return <ExclamationMessage>This trade has been canceled.</ExclamationMessage>;
 
-                  {/* FIFTH STEP */}
-                  {specificTrade.status === 'FiatReceived' && you === 'buyer' && (
-                    <>
-                      <ExclamationMessage>
-                        Congratulations! You have successfully purchased {specificTrade.amount} from{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>. This trade will remain active
-                        until we confirm you get bitcoins from escrow. You can check your TXid.
-                      </ExclamationMessage>
-                    </>
-                  )}
-
-                  {specificTrade.status === 'FiatReceived' && you === 'seller' && (
-                    <>
-                      <ExclamationMessage>
-                        Congratulations! You have sold {specificTrade.amount} to{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>. This trade will remain active
-                        until we confirm the buyer gets his bitcoins from escrow.
-                      </ExclamationMessage>
-                    </>
-                  )}
-
-                  {/* SIXTH STEP */}
-                  {specificTrade.status === 'Completed' && you === 'buyer' && (
-                    <>
-                      <ExclamationMessage>
-                        Escrow has released the funds to your wallet address. You can check transaction status
-                        on <a href="https://blockchain.info">blockchain.info</a>
-                      </ExclamationMessage>
-                    </>
-                  )}
-
-                  {specificTrade.status === 'Completed' && you === 'seller' && (
-                    <>
-                      <ExclamationMessage>
-                        Escrow has released the funds to{' '}
-                        <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
-                      </ExclamationMessage>
-                    </>
-                  )}
+                      default:
+                        return null;
+                    }
+                    return void 0;
+                  })()}
                 </div>
               </Col>
               <Col md={12}>
@@ -259,7 +287,67 @@ const TradeDisplay = ({
                   <Link to={ROUTES.DASHBOARD.ROOT}> dashboard</Link>.
                 </p>
 
-                <ButtonLink onClick={handleClick}>Cancel trade</ButtonLink>
+                {(() => {
+                  switch (specificTrade.status) {
+                    case 'New':
+                      return (
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              id,
+                              cancelTradeRequest,
+                              { ...confirmData.requests.texts },
+                              { ...confirmData.requests.buttons }
+                            )
+                          }
+                        >
+                          Decline request
+                        </ButtonLink>
+                      );
+
+                    case 'Depositing':
+                    case 'InProgress':
+                      return (
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              id,
+                              cancelTradeRequest,
+                              { ...confirmData.active.texts },
+                              { ...confirmData.active.buttons }
+                            )
+                          }
+                        >
+                          Cancel trade
+                        </ButtonLink>
+                      );
+
+                    case 'FiatSent':
+                      return (
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              id,
+                              disputeTradeRequest,
+                              {
+                                title: 'You\'re about to dispute this trade request',
+                                content: 'You won\'t be able to accept it after it is declined.',
+                              },
+                              {
+                                okText: 'Cancel',
+                                cancelText: 'Dispute',
+                              }
+                            )
+                          }
+                        >
+                          Initiate a dispute
+                        </ButtonLink>
+                      );
+                    default:
+                      return null;
+                  }
+                })()}
+
                 <Divider />
                 <Row>
                   <Col xs={12}>
@@ -343,10 +431,13 @@ TradeDisplay.propTypes = {
     terms: PropTypes.string,
     adType: PropTypes.string,
     direction: PropTypes.string,
+    multisigWalletAddress:PropTypes.string,
   }),
   getTradeByIdRequest: PropTypes.func,
   fiatSentRequest: PropTypes.func,
   fiatReceivedRequest: PropTypes.func,
+  cancelTradeRequest: PropTypes.func,
+  disputeTradeRequest: PropTypes.func,
   loading: PropTypes.bool,
   submitting: PropTypes.bool,
 };

@@ -28,6 +28,9 @@ function mapDispatchToProps(dispatch) {
     deleteNewTradeRequest(id) {
       dispatch(tradeActions.deleteNewTradeRequest(id));
     },
+    cancelTradeRequest(id) {
+      dispatch(tradeActions.cancelTradeRequest(id));
+    },
   };
 }
 

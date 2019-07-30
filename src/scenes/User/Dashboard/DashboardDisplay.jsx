@@ -18,6 +18,7 @@ const DashboardDisplay = ({
   getActiveTradesRequest,
   getCompletedTradesRequest,
   deleteNewTradeRequest,
+  cancelTradeRequest,
   tradesLoading,
 }) => {
   useEffect(() => {
@@ -53,13 +54,18 @@ const DashboardDisplay = ({
               <h2 className="dashboard__header">
                 Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
               </h2>
-              <TradesDashboardTableContainer withTerms requests onDelete={deleteNewTradeRequest} />
+              <TradesDashboardTableContainer withTerms type="requests" onDecline={deleteNewTradeRequest} />
             </TabPane>
             <TabPane tab="Active trades" key="ACTIVE">
               <h2 className="dashboard__header">
                 Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
               </h2>
-              <TradesDashboardTableContainer withTerms onDelete={deleteNewTradeRequest} />
+              <TradesDashboardTableContainer
+                withTerms
+                type="active"
+                onCancel={cancelTradeRequest}
+                onDispute={() => {}}
+              />
             </TabPane>
             <TabPane tab="Completed trades" key="COMPLETED">
               <h2 className="dashboard__header">
@@ -84,6 +90,7 @@ DashboardDisplay.propTypes = {
   getActiveTradesRequest: PropTypes.func,
   getCompletedTradesRequest: PropTypes.func,
   deleteNewTradeRequest: PropTypes.func,
+  cancelTradeRequest: PropTypes.func,
   tradesLoading: PropTypes.bool,
 };
 export default DashboardDisplay;

@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 import { Spinner } from '@components/Spinner';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
 import { formatDate, formatMoney, sortStrings, prettifyId, formatCapitals } from '@utils';
-import { ROUTES } from '@config/constants';
+import { ROUTES, confirmData } from '@config/constants';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
 
 const { Column } = Table;
 
-const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading, requests }) => (
+const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCancel, loading }) => (
   <Table
     expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
     dataSource={tradesData}
@@ -24,31 +24,98 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading,
         ? record => (
           <div className="extra-row">
             <div className="extra-row__head">
-              <Link className="extra-row__view" to={`/trades/${record.key}`}>
-                {requests ? 'View request' : 'View trade'}
-              </Link>
-              {requests ? (
-                <ButtonLink
-                  onClick={() =>
-                    ShowConfirm(
-                      record.key,
-                      onDelete,
-                      {
-                        title: 'You\'re about to delete this trade request',
-                        content: 'You won\'t be able to accept it after it is deleted.',
-                      },
-                      {
-                        okText: 'Delete',
-                        cancelText: 'Keep it',
-                      }
-                    )
-                  }
-                >
-                    Delete request
-                </ButtonLink>
-              ) : (
-                <ButtonLink onClick={() => onDelete(record.key)} ><span role="img" aria-label="img">💩</span></ButtonLink>
-              )}
+              {(() => {
+                switch (record.status) {
+                  case 'New':
+                    return (
+                        <>
+                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                            View request
+                          </Link>
+                          <ButtonLink
+                            onClick={() =>
+                              ShowConfirm(
+                                record.key,
+                                onDecline,
+                                { ...confirmData.requests.texts },
+                                { ...confirmData.requests.buttons }
+                              )
+                            }
+                          >
+                            Decline request
+                          </ButtonLink>
+                        </>
+                    );
+                  case 'Depositing':
+                  case 'InProgress':
+                    return (
+                        <>
+                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                            View trade
+                          </Link>
+                          <ButtonLink
+                            onClick={() =>
+                              ShowConfirm(
+                                record.key,
+                                onCancel,
+                                { ...confirmData.active.texts },
+                                { ...confirmData.active.buttons }
+                              )
+                            }
+                          >
+                            Cancel trade
+                          </ButtonLink>
+                        </>
+                    );
+
+                  case 'FiatSent':
+                    return (
+                        <>
+                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                            View trade
+                          </Link>
+                          <ButtonLink>Initiate a dispute</ButtonLink>
+                        </>
+                    );
+
+                  case 'Disputed':
+                  case 'Completed':
+                    return (
+                        <>
+                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                            View trade
+                          </Link>
+                        </>
+                    );
+
+                  default:
+                    return (
+                        <>
+                          <Link className="extra-row__view" to={`/trades/${record.key}`}>
+                            View trade
+                          </Link>
+                          <ButtonLink
+                            onClick={() =>
+                              ShowConfirm(
+                                record.key,
+                                onCancel,
+                                {
+                                  title: 'You\'re about to cancel this trade request',
+                                  content: 'Cancel trade yo yo yo',
+                                },
+                                {
+                                  okText: 'Cancel it',
+                                  cancelText: 'Keep it',
+                                }
+                              )
+                            }
+                          >
+                            Cancel trade
+                          </ButtonLink>
+                        </>
+                    );
+                }
+              })()}
             </div>
 
             <div className="extra-row extra-row__left">
@@ -163,7 +230,8 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDelete, loading,
 
 TradesDashboardTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
-  onDelete: PropTypes.func,
+  onDecline: PropTypes.func,
+  onCancel: PropTypes.func,
   tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -180,13 +248,9 @@ TradesDashboardTableDisplay.propTypes = {
       terms: PropTypes.string,
     })
   ),
-  requests: PropTypes.bool,
   loading: PropTypes.bool,
 };
 
-TradesDashboardTableDisplay.defaultProps = {
-  requests: false,
-  onDelete: () => {},
-};
+TradesDashboardTableDisplay.defaultProps = {};
 
 export default TradesDashboardTableDisplay;

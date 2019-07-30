@@ -66,7 +66,7 @@ const CreatedAdsTableDisplay = ({
       <Table
         expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={adsData}
-        loading={{spinning: loading, indicator: <Spinner />}}
+        loading={{ spinning: loading, indicator: <Spinner /> }}
         locale={{ emptyText: <NoData /> }}
         pagination={!(adsData.length < 11)}
         expandedRowRender={
@@ -90,15 +90,15 @@ const CreatedAdsTableDisplay = ({
                       <span>Trade limits</span>
                       <p>{record.tradeLimits}</p>
                     </div>
-                    <div className="extra-row__currency">
-                      <span>Terms of trade</span>
-                      <p>{record.terms}</p>
-                    </div>
                   </div>
-                  <div className="extra-row__right">
-                    <span>Location</span>
-                    <p>{record.location}</p>
+                  <div className="extra-row__currency">
+                    <span>Terms of trade</span>
+                    <p>{record.terms}</p>
                   </div>
+                </div>
+                <div className="extra-row__right">
+                  <span>Location</span>
+                  <p>{record.location}</p>
                 </div>
               </div>
             )
@@ -118,8 +118,7 @@ const CreatedAdsTableDisplay = ({
           dataIndex="type"
           title="Type"
           columnWidth={80}
-          render={(text, record) => record.type
-          }
+          render={(text, record) => record.type}
           sorter={(a, b) => sortStrings(a.type, b.type)}
         />
         <Column

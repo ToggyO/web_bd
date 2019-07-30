@@ -22,6 +22,12 @@ function mapDispatchToProps(dispatch) {
     fiatReceivedRequest(id) {
       dispatch(tradeActions.fiatReceivedRequest(id));
     },
+    cancelTradeRequest(id) {
+      dispatch(tradeActions.cancelTradeRequest(id));
+    },
+    disputeTradeRequest(id) {
+      dispatch(tradeActions.disputeTradeRequest(id));
+    },
   };
 }
 
