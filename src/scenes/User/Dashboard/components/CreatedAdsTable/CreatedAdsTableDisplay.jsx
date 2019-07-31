@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Modal, Tag } from 'antd';
+import { Table, Modal, Tag, Row, Col } from 'antd';
 import history from '@services/history';
 import { formatDate, sortStrings } from '@utils';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
@@ -84,21 +84,29 @@ const CreatedAdsTableDisplay = ({
                       Delete
                   </a>
                 </div>
-                <div className="extra-row__main">
-                  <div className="extra-row__left">
-                    <div className="extra-row__location">
-                      <span>Trade limits</span>
-                      <p>{record.tradeLimits}</p>
-                    </div>
-                  </div>
-                  <div className="extra-row__currency">
-                    <span>Terms of trade</span>
-                    <p>{record.terms}</p>
-                  </div>
-                </div>
-                <div className="extra-row__right">
-                  <span>Location</span>
-                  <p>{record.location}</p>
+                <div className="extra-row extra-row__left">
+                  <Row>
+                    <Col lg={6}>
+                      <div className="extra-row__currency">
+                        <span>Trade limits</span>
+                        <p>{record.tradeLimits}</p>
+                      </div>
+                    </Col>
+                    <Col lg={6}>
+                      <div className="extra-row__currency">
+                        <span>Location</span>
+                        <p>{record.location}</p>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <div className="extra-row__currency">
+                        <span>Terms of trade</span>
+                        <p>{record.terms}</p>
+                      </div>
+                    </Col>
+                  </Row>
                 </div>
               </div>
             )
