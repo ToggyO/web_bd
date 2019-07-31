@@ -48,6 +48,10 @@ export const ROUTES = {
     TRADE: '/trades/:id',
   },
 
+  DISPUTES: {
+    CREATE: '/disputes/create',
+  },
+
   OTHER: {
     HELP: '/help',
     PRIVACY: '/privacy',

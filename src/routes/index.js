@@ -26,6 +26,7 @@ import { HomePageDisplay } from '../scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
 import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
+import { InitiateDisputeContainer } from '../scenes/InitiateDispute';
 import { OtherProfileContainer } from '../scenes/User/OtherProfile';
 import { TradeContainer } from '../scenes/Trade';
 import AuthRoute from './AuthRoute';
@@ -47,6 +48,7 @@ const Routes = ({ loading }) => (
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
       <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
       <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
+      <Route path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
 
       <UnAuthRoute path={ROUTES.LOGIN} exact component={LoginContainer} />
       <UnAuthRoute path={ROUTES.SUCCESS} exact component={SuccessDisplay} />
@@ -68,9 +70,9 @@ const Routes = ({ loading }) => (
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
       <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
-      <AuthRoute path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
       <AuthRoute path={ROUTES.ADS.EDIT} exact component={props => <EditAdContainer {...props} type="ad" />} />
       <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
+      <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDisputeContainer} />
 
       {/* REDIRECTS */}
       {[

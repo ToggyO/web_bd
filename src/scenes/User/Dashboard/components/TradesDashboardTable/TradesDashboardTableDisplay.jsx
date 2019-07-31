@@ -5,10 +5,11 @@ import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@components/Spinner';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
-import { formatDate, formatMoney, sortStrings, prettifyId, formatCapitals } from '@utils';
+import { formatDate, formatMoney, sortStrings, formatCapitals } from '@utils';
 import { ROUTES, confirmData } from '@config/constants';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
+import {InitiateDisputeLinkWithModal} from '@scenes/_components/InitiateDisputeLinkWithModal'
 
 const { Column } = Table;
 
@@ -74,7 +75,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
-                          <ButtonLink>Initiate a dispute</ButtonLink>
+                          <InitiateDisputeLinkWithModal id={record.key}/>
                         </>
                     );
 

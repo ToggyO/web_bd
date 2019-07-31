@@ -1,7 +1,7 @@
 /* eslint-disable no-void */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Row, Col, Divider, Spin, Button } from 'antd';
+import { Row, Col, Divider, Spin, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
@@ -11,6 +11,7 @@ import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES, confirmData } from '@config/constants';
+import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 import { WalletAddressFormContainer } from './WalletAddressForm';
 import { catchFromPath, prettifyId, formatMoney, formatCapitals } from '@utils';
 import './style.less';
@@ -20,7 +21,6 @@ const TradeDisplay = ({
   fiatSentRequest,
   fiatReceivedRequest,
   cancelTradeRequest,
-  disputeTradeRequest,
   specificTrade,
   loading,
   submitting,
@@ -353,13 +353,7 @@ const TradeDisplay = ({
                       );
 
                     case 'FiatSent':
-                      return (
-                        <ButtonLink
-                          onClick={() => {}}
-                        >
-                          Initiate a dispute
-                        </ButtonLink>
-                      );
+                      return <InitiateDisputeLinkWithModal id={specificTrade.id}/>;
                     default:
                       return null;
                   }
@@ -454,7 +448,6 @@ TradeDisplay.propTypes = {
   fiatSentRequest: PropTypes.func,
   fiatReceivedRequest: PropTypes.func,
   cancelTradeRequest: PropTypes.func,
-  disputeTradeRequest: PropTypes.func,
   loading: PropTypes.bool,
   submitting: PropTypes.bool,
 };
