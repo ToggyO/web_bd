@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import { AuthBox } from '@components/AuthBox';
+import { ArrowLink } from '@components/ArrowLink';
 import SignWrapper from '../../_components/SignWrapper';
 
 const ConfirmEmailDisplay = ({ email, emailConfirmed }) => {
@@ -17,6 +18,7 @@ const ConfirmEmailDisplay = ({ email, emailConfirmed }) => {
           Please confirm your email <span style={{ color: '#2EAC82' }}>{email}</span> to proceed with the
           website.
         </p>
+        <ArrowLink leftArrow text="Back to Sign in" goTo={ROUTES.LOGIN} />
       </AuthBox>
     </SignWrapper>
   );
