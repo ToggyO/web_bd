@@ -65,7 +65,7 @@ class RequestVerificationFormDisplay extends React.Component {
       },
       multiple: false,
       fileList,
-      accept: 'image/gif, image/jpeg, image/jpg, image/png',
+      accept: 'image/bmp, image/jpeg, image/jpg, image/png',
     };
 
     return (
@@ -76,7 +76,7 @@ class RequestVerificationFormDisplay extends React.Component {
               <img src={VerificationIcon} alt="Verification icon" />
             </p>
             <p className="ant-upload-text">Upload an ID for verification</p>
-            <p className="ant-upload-hint">.bmp .png .tiff .jpg</p>
+            <p className="ant-upload-hint">.bmp .png .jpg</p>
           </Dragger>
         </div>
 
