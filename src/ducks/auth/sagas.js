@@ -85,7 +85,7 @@ function* twoFactorAuth(action) {
       type: authTypes.TWO_FACTOR_AUTH_ERROR,
       payload: error.response.data.errors,
     });
-    yield call(message.error, 'Verification code is not valid');
+    yield call(message.error, 'Security code is not valid');
   }
 }
 
