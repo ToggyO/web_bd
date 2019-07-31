@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { API_URL } from '@config/constants';
+// import { API_URL } from '@config/constants';
 import { globalTypes } from '@ducks/_global';
 import { store } from '../store';
 
@@ -18,7 +18,7 @@ function addSubscriber(callback) {
 }
 
 const superaxios = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.API_URL,
 });
 
 superaxios.interceptors.request.use(config => {

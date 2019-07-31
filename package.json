@@ -4,8 +4,9 @@
   "description": "Bitcoins Direct",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.js --open 'Google Chrome Canary' --port 3005  --host 0.0.0.0 --allowed-hosts myDevServerMachine",
-    "build": "webpack --config webpack.prod.js --progress --colors",
+    "dev": "API_URL=https://4rzmeh95xa.execute-api.eu-west-1.amazonaws.com/stage/api/v0.1 webpack-dev-server  --config webpack.dev.js --open 'Google Chrome Canary' --port 3005  --host 0.0.0.0 --allowed-hosts myDevServerMachine",
+    "build:dev": "API_URL=https://4rzmeh95xa.execute-api.eu-west-1.amazonaws.com/stage/api/v0.1 webpack --config webpack.prod.js --progress --colors",
+    "build:prod": "API_URL=https://5hekuxyfck.execute-api.eu-west-1.amazonaws.com/prod/api/v0.1 webpack --config webpack.prod.js --progress --colors",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "lint:style": "stylelint \"src//*.less\" --syntax less",
     "prettier": "prettier --write src//*.{js,less}"

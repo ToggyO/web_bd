@@ -2,7 +2,7 @@
 import React from 'react';
 import superaxios from '@services/superaxios';
 import { Upload, Form, Button, message } from 'antd';
-import { API_URL } from '@config/constants';
+// import { API_URL } from '@config/constants';
 import VerificationIcon from '@assets/verification-icon.svg';
 import { parseBase64 } from '@utils';
 
@@ -26,7 +26,7 @@ class RequestVerificationFormDisplay extends React.Component {
 
       superaxios({
         method: 'post',
-        url: `${API_URL}/profile/resources`,
+        url: `${process.env.API_URL}/profile/resources`,
         data,
         config: { headers: { 'Content-Type': 'text/plain' } },
       })
