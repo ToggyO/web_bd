@@ -9,8 +9,9 @@ import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
 const WelcomeBackDisplay = ({ emailConfirmed, phoneNumberConfirmed }) => {
   useLayoutEffect(() => {
     if (!emailConfirmed && !phoneNumberConfirmed) return history.push(ROUTES.CONFIRM_EMAIL);
-    if (!emailConfirmed || !phoneNumberConfirmed) history.push(ROUTES.HOME);
-    if (emailConfirmed && !phoneNumberConfirmed) history.push(ROUTES.SET_2FA);
+    if (!emailConfirmed || !phoneNumberConfirmed) return history.push(ROUTES.HOME);
+    if (emailConfirmed && !phoneNumberConfirmed) return history.push(ROUTES.SET_2FA);
+    return void 0;
   });
 
   return (

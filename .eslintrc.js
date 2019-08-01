@@ -49,6 +49,7 @@ module.exports = {
     'max-len': 0,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
+    'no-void': 0,
     'no-console': 1,
     'no-underscore-dangle': 0,
     'no-use-before-define': 0,

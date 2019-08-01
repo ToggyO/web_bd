@@ -1,4 +1,3 @@
-/* eslint-disable no-void */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button } from 'antd';
