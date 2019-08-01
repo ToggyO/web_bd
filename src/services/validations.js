@@ -16,8 +16,11 @@ export const email = [
 export const phone = [
   {
     required: true,
-    pattern: /^[0-9]+$/,
     message: <div>Please your phone number!</div>,
+  },
+  {
+    pattern: /^[0-9]+$/,
+    message: <div>Phone number should include only digits!</div>,
   },
 ];
 
