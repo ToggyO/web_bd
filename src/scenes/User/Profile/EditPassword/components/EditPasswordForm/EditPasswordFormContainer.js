@@ -4,6 +4,7 @@ import EditPasswordFormDisplay from './EditPasswordFormDisplay';
 
 function mapStateToProps(state) {
   return {
+    loading: meSelectors.loadingSelector(state),
     errors: meSelectors.errorsSelector(state),
   };
 }

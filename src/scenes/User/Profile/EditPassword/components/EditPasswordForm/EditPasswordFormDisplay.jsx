@@ -24,6 +24,15 @@ class EditPasswordFormDisplay extends React.Component {
     }
   }
 
+  compareToFirstPassword = (rule, value, callback) => {
+    const { form } = this.props;
+    if (value && value !== form.getFieldValue('newPassword')) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
+  };
+
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();
@@ -36,23 +45,60 @@ class EditPasswordFormDisplay extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { loading } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form" hideRequiredMark>
-        <Form.Item>
+        <Form.Item label="Enter old password">
           {getFieldDecorator('oldPassword', {
             rules: [{ required: true, message: 'Please input your old password!' }],
-          })(<Input.Password type="password" placeholder="Old password" style={{ width: 368 }} />)}
+          })(
+            <Input.Password
+              type="password"
+              placeholder="Old password"
+              visibilityToggle={false}
+              style={{ width: 368 }}
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Enter new password">
+          {getFieldDecorator('newPassword', {
+            rules: validations.password,
+          })(
+            <Input.Password
+              type="password"
+              placeholder="New password"
+              visibilityToggle={false}
+              style={{ width: 368 }}
+            />
+          )}
         </Form.Item>
 
         <Form.Item>
-          {getFieldDecorator('newPassword', {
-            rules: validations.password,
-          })(<Input.Password type="password" placeholder="New password" style={{ width: 368 }} />)}
+          {getFieldDecorator('confirmPassword', {
+            rules: [
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              {
+                validator: this.compareToFirstPassword,
+              },
+            ],
+          })(
+            <Input.Password
+              type="password"
+              placeholder="Confirm password"
+              visibilityToggle={false}
+              style={{ width: 368 }}
+            />
+          )}
         </Form.Item>
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="primary-btn"

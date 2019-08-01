@@ -1,5 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
+import { ROUTES } from '@config/constants';
+import history from '@services/history';
 import api from '@services/api';
 import * as types from './types';
 
@@ -71,6 +73,7 @@ function* editPassword(action) {
   try {
     const data = yield call(api.me.editUserPassword, action.payload);
     yield put({ type: types.EDIT_PASSWORD_SUCCESS, payload: data });
+    yield call(history.push, ROUTES.SETTINGS.ROOT);
     yield call(message.success, 'Your password has been changed');
   } catch (error) {
     yield put({ type: types.EDIT_PASSWORD_ERROR, payload: error.response.data.errors });
