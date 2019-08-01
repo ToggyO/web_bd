@@ -12,7 +12,7 @@ const EditFullName = () => (
         <Link to={ROUTES.SETTINGS.ROOT} className="backtoprofile__link">
           <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile settings
         </Link>
-        <h2 className="change-setting__header">Change Real Name</h2>
+        <h2 className="change-setting__header">Edit real name</h2>
         <p>
           Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te odio
           zril facilisi, quo singulis torquatos in, sea in duis bonorum adipisci. Elit iudico iuvaret vis te.
