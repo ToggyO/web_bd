@@ -24,7 +24,7 @@ class EditEmailFormDisplay extends React.Component {
 
     if (errors !== prevProps.errors) {
       if (errors.DuplicateEmail) message.error(errors.DuplicateEmail, 8);
-      if (Array.isArray(errors)) message.error('Code has expired, request a new one', 8);
+      if (Array.isArray(errors)) message.error('Verification code is not valid', 8);
     }
   }
 
@@ -56,6 +56,7 @@ class EditEmailFormDisplay extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { deadline, isGetCodeDisabled } = this.state;
+    const { loading } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form" hideRequiredMark>
@@ -82,14 +83,20 @@ class EditEmailFormDisplay extends React.Component {
           </div>
         </Form.Item>
 
-        <Form.Item label="Enter new email address" style={{ maxWidth: 368, marginBottom: 40 }}>
+        <Form.Item label="Enter new email address" style={{ maxWidth: 368, marginBottom: 38 }}>
           {getFieldDecorator('email', {
             rules: validations.email,
           })(<Input type="email" placeholder="Email" />)}
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="primary-btn" disabled={this.state.submitDisabled}>
+          <Button
+            loading={loading}
+            type="primary"
+            htmlType="submit"
+            className="primary-btn"
+            disabled={this.state.submitDisabled}
+          >
             Change email
           </Button>
         </Form.Item>

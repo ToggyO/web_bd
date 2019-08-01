@@ -34,6 +34,7 @@ function* editEmail(action) {
   try {
     const data = yield call(api.me.editUserEmail, action.payload);
     yield put({ type: types.EDIT_EMAIL_SUCCESS, payload: data });
+    yield call(history.push, ROUTES.SETTINGS.ROOT);
     yield call(message.success, 'Email has been changed');
   } catch (error) {
     yield put({ type: types.EDIT_EMAIL_ERROR, payload: error.response.data.errors });
@@ -47,6 +48,7 @@ function* editFullName(action) {
   try {
     const data = yield call(api.me.editUserFullName, action.payload);
     yield put({ type: types.EDIT_FULLNAME_SUCCESS, payload: data });
+    yield call(history.push, ROUTES.SETTINGS.ROOT);
     yield call(message.success, 'Your real name has been changed');
   } catch (error) {
     yield put({ type: types.EDIT_FULLNAME_ERROR, payload: error.response.data.errors });
@@ -60,6 +62,7 @@ function* editPhoneNumber(action) {
   try {
     const data = yield call(api.me.editUserPhoneNumber, action.payload);
     yield put({ type: types.EDIT_PHONENUMBER_SUCCESS, payload: data });
+    yield call(history.push, ROUTES.SETTINGS.ROOT);
     yield call(message.success, 'Please check your email to confirm your new phone number');
   } catch (error) {
     yield put({ type: types.EDIT_PHONENUMBER_ERROR, payload: error.response.data.errors });

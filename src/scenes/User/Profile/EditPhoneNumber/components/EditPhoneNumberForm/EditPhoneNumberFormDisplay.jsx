@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import { Form, Input, Button, Select, Statistic } from 'antd';
 import { Form, Input, Button, Select } from 'antd';
 import * as validations from '@services/validations';
 import { notUndefinedObjectProps } from '@utils';
 
 const { Option } = Select;
-// const { Countdown } = Statistic;
 
 class EditPhoneNumberFormDisplay extends React.Component {
   state = {
@@ -36,6 +34,7 @@ class EditPhoneNumberFormDisplay extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { loading } = this.props;
 
     const prefixSelector = getFieldDecorator('prefix', {
       initialValue: '1',
@@ -56,6 +55,7 @@ class EditPhoneNumberFormDisplay extends React.Component {
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="signup__button primary-btn"

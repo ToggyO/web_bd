@@ -4,6 +4,7 @@ import EditEmailFormDisplay from './EditEmailFormDisplay';
 
 function mapStateToProps(state) {
   return {
+    loading: meSelectors.loadingSelector(state),
     errors: meSelectors.errorsSelector(state),
   };
 }

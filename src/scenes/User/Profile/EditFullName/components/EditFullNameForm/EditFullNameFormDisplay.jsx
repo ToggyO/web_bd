@@ -32,6 +32,7 @@ class EditFullNameFormDisplay extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { loading } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form" hideRequiredMark>
@@ -43,6 +44,7 @@ class EditFullNameFormDisplay extends React.Component {
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="primary-btn"
