@@ -9,7 +9,10 @@ import { authSelectors } from '@ducks/auth';
 const isTokensValid = checkTokens();
 
 const UnAuthRoute = ({ isEmailConfirmed, component: Component, ...rest }) => (
-  <Route {...rest} render={props => (!isTokensValid ? <Component {...props} /> : <Redirect to={ROUTES.HOME} />)} />
+  <Route
+    {...rest}
+    render={props => (!isTokensValid ? <Component {...props} /> : <Redirect to={ROUTES.HOME} />)}
+  />
 );
 
 function mapStateToProps(state) {
