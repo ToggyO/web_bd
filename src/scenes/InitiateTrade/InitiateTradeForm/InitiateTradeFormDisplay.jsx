@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { Form, Row, Col, Input, Button } from 'antd';
+import { Form, Row, Col, Input, InputNumber, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 
@@ -26,7 +26,7 @@ const InitiateTradeFormDisplay = props => {
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        initiateTradeRequest({ ...values, adId });
+        initiateTradeRequest({ ...values, fiat: parseInt(values.fiat, 10), adId });
       }
     });
   };
@@ -63,7 +63,7 @@ const InitiateTradeFormDisplay = props => {
         <Col xs={12}>
           <Form.Item>
             {form.getFieldDecorator('fiat', {
-              initialValue: null,
+              initialValue: 0,
               rules: [{ validator: checkFiatValue }],
             })(
               <Input
@@ -77,9 +77,10 @@ const InitiateTradeFormDisplay = props => {
         <Col xs={12}>
           <Form.Item>
             {form.getFieldDecorator('amount', {
-              initialValue: null,
+              initialValue: 0,
             })(
               <Input
+                // type="number"
                 addonAfter="BTC"
                 onChange={handleTradeAmountChange}
                 disabled={adOwnerID === cachedUserID}
