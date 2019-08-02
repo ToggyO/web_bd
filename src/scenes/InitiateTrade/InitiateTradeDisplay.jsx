@@ -16,6 +16,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
   }, []);
 
   const {
+    id,
     type,
     btcPrice,
     currency,
@@ -52,7 +53,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
           <Row gutter={{ sm: 12, lg: 48 }}>
             <Col lg={11}>
               <InitiateTradeFormContainer
-                adId={adId}
+                adId={id}
                 min={minTradeLimit}
                 max={maxTradeLimit}
                 currency={currency || ''}

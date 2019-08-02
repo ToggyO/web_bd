@@ -12,6 +12,7 @@ import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES, confirmData } from '@config/constants';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 import { WalletAddressFormContainer } from './WalletAddressForm';
+import TalkJS from './Talk';
 import { catchFromPath, prettifyId, formatMoney, formatCapitals } from '@utils';
 import './style.less';
 
@@ -30,7 +31,8 @@ const TradeDisplay = ({
   }, []);
 
   let action;
-  let you;
+  let me;
+  let other;
 
   const user = specificTrade.direction === 'Incoming' ? specificTrade.tradePartner : specificTrade.adOwner;
 
@@ -38,11 +40,13 @@ const TradeDisplay = ({
     case 'Sell': {
       if (specificTrade.direction === 'Outgoing') {
         action = 'Buy bitcoins from ';
-        you = 'buyer';
+        me = 'buyer';
+        other = 'seller';
       }
       if (specificTrade.direction === 'Incoming') {
         action = 'Sell bitcoins to ';
-        you = 'seller';
+        me = 'seller';
+        other = 'buyer';
       }
       break;
     }
@@ -50,11 +54,13 @@ const TradeDisplay = ({
     case 'Buy': {
       if (specificTrade.direction === 'Incoming') {
         action = 'Buy bitcoins from ';
-        you = 'buyer';
+        me = 'buyer';
+        other = 'seller';
       }
       if (specificTrade.direction === 'Outgoing') {
         action = 'Sell bitcoins to ';
-        you = 'seller';
+        me = 'seller';
+        other = 'buyer';
       }
       break;
     }
@@ -62,7 +68,7 @@ const TradeDisplay = ({
     default:
       action = '';
   }
-
+  console.log(me, other, specificTrade.chat);
   return (
     <AppWrapperContainer>
       <div className="paper">
@@ -94,13 +100,19 @@ const TradeDisplay = ({
             <Row gutter={34}>
               <Col md={12}>
                 <div className="chat">
-                  <div className="chat__window">Chat</div>
+                  <div className="chat__window">
+                    {loading ? (
+                      <div>loading</div>
+                    ) : (
+                      <TalkJS _me={specificTrade.chat[me]} _other={specificTrade.chat[other]} id={specificTrade.chat.id} />
+                    )}
+                  </div>
 
                   {(() => {
                     switch (specificTrade.status) {
                       case 'New':
                         // First step for case where adType === 'Sell'
-                        if (you === 'buyer' && specificTrade[`${you}Wallet`]) {
+                        if (me === 'buyer' && specificTrade[`${me}Wallet`]) {
                           return (
                             <ExclamationMessage>
                               Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm
@@ -108,7 +120,7 @@ const TradeDisplay = ({
                             </ExclamationMessage>
                           );
                         }
-                        if (you === 'seller' && !specificTrade[`${you}Wallet`]) {
+                        if (me === 'seller' && !specificTrade[`${me}Wallet`]) {
                           return (
                             <>
                               <p>
@@ -125,8 +137,8 @@ const TradeDisplay = ({
                         // First step for case where adType === 'Buy'
                         if (
                           specificTrade.adType === 'Buy' &&
-                          you === 'buyer' &&
-                          !specificTrade[`${you}Wallet`]
+                          me === 'buyer' &&
+                          !specificTrade[`${me}Wallet`]
                         ) {
                           return (
                             <>
@@ -142,8 +154,8 @@ const TradeDisplay = ({
                         }
                         if (
                           specificTrade.adType === 'Buy' &&
-                          you === 'seller' &&
-                          specificTrade[`${you}Wallet`]
+                          me === 'seller' &&
+                          specificTrade[`${me}Wallet`]
                         ) {
                           return (
                             <ExclamationMessage>
@@ -155,7 +167,7 @@ const TradeDisplay = ({
                         break;
 
                       case 'Depositing':
-                        if (you === 'buyer') {
+                        if (me === 'buyer') {
                           return (
                             <ExclamationMessage>
                               Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit
@@ -163,7 +175,7 @@ const TradeDisplay = ({
                             </ExclamationMessage>
                           );
                         }
-                        if (you === 'seller') {
+                        if (me === 'seller') {
                           return (
                             <>
                               <ExclamationMessage>
@@ -182,7 +194,7 @@ const TradeDisplay = ({
                         break;
 
                       case 'InProgress':
-                        if (you === 'buyer') {
+                        if (me === 'buyer') {
                           return (
                             <>
                               <ExclamationMessage>
@@ -220,7 +232,7 @@ const TradeDisplay = ({
                           );
                         }
 
-                        if (you === 'seller') {
+                        if (me === 'seller') {
                           return (
                             <ExclamationMessage>
                               BTC were successfully deposited to Escrow. Waiting for{' '}
@@ -232,7 +244,7 @@ const TradeDisplay = ({
                         break;
 
                       case 'FiatSent':
-                        if (you === 'buyer') {
+                        if (me === 'buyer') {
                           return (
                             <ExclamationMessage>
                               Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
@@ -240,7 +252,7 @@ const TradeDisplay = ({
                             </ExclamationMessage>
                           );
                         }
-                        if (you === 'seller') {
+                        if (me === 'seller') {
                           return (
                             <>
                               <ExclamationMessage>
@@ -279,7 +291,7 @@ const TradeDisplay = ({
                         break;
 
                       case 'Completed':
-                        if (you === 'buyer') {
+                        if (me === 'buyer') {
                           return (
                             <ExclamationMessage>
                               Escrow has released the funds to your wallet address. You can check transaction
@@ -288,7 +300,7 @@ const TradeDisplay = ({
                           );
                         }
 
-                        if (you === 'seller') {
+                        if (me === 'seller') {
                           return (
                             <ExclamationMessage>
                               Escrow has released the funds to{' '}
@@ -352,7 +364,7 @@ const TradeDisplay = ({
                       );
 
                     case 'FiatSent':
-                      return <InitiateDisputeLinkWithModal id={specificTrade.id}/>;
+                      return <InitiateDisputeLinkWithModal id={specificTrade.id} />;
                     default:
                       return null;
                   }

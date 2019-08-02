@@ -5,6 +5,7 @@ const initialState = {
     trade: {
       ad: {},
       multisigWallet: {},
+      chat: { buyer: { user: {} }, seller: { user: {} } },
     },
   },
   errors: {},

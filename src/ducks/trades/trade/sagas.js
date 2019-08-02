@@ -11,7 +11,7 @@ function* initiateTrade(action) {
   try {
     const { data } = yield call(api.trades.initiate, action.payload);
     yield put({ type: types.INITIATE_SUCCESS, payload: data });
-    history.push(`${ROUTES.TRADES.ROOT}/${data.id}`);
+    history.push(`${ROUTES.TRADES.ROOT}/${data.order}`);
   } catch (error) {
     yield put({ type: types.INITIATE_ERROR, payload: error });
   }
