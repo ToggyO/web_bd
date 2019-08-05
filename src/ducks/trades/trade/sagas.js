@@ -86,6 +86,7 @@ function* deleteNewTradeRequest(action) {
     yield put({ type: types.DELETE_NEW_SUCCESS, payload: data });
 
     yield call(Modal.destroyAll);
+    yield call(history.push, ROUTES.DASHBOARD.REQUESTS);
     yield put(tradesActions.getNewTradesRequest());
 
     yield call(message.success, 'Deleted!', 2);
