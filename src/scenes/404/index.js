@@ -29,7 +29,7 @@ export const NotFound = () => {
         }
       />
       <div style={{ textAlign: 'center', position: 'relative' }}>
-        <p style={{ marginBottom: 0, fontSize: 10 }}>Front-End 0.0.4</p>
+        <p style={{ marginBottom: 0, fontSize: 10 }}>Front-End 0.0.5f</p>
         <p style={{ marginBottom: 0, fontSize: 10 }}>Back-End {version}</p>
       </div>
     </>
