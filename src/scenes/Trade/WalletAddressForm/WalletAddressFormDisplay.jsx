@@ -1,15 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Row, Col, Button, Input } from 'antd';
-import history from '@services/history';
-import { catchFromPath } from '@utils';
 
-const WalletAddressFormDisplay = ({ form, confirmTradeRequest, submitting }) => {
+const WalletAddressFormDisplay = ({ form, id, confirmTradeRequest, submitting }) => {
   const handleSubmit = e => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        const id = catchFromPath(history.location.pathname, 'trades');
         confirmTradeRequest({ ...values, id });
       }
     });

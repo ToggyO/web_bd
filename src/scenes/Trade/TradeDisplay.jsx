@@ -12,14 +12,16 @@ import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES, confirmData } from '@config/constants';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 import { WalletAddressFormContainer } from './WalletAddressForm';
+import { TradeDetails } from './TradeDetails';
 import TalkJS from './Talk';
-import { catchFromPath, prettifyId, formatMoney, formatCapitals } from '@utils';
+import { catchFromPath} from '@utils';
 import './style.less';
 
 const TradeDisplay = ({
   getTradeByIdRequest,
   fiatSentRequest,
   fiatReceivedRequest,
+  deleteNewTradeRequest,
   cancelTradeRequest,
   specificTrade,
   loading,
@@ -74,6 +76,8 @@ const TradeDisplay = ({
       <div className="paper">
         <Spin spinning={loading} indicator={<Spinner />}>
           <div className="trade">
+
+            {/* Back arrow with corresponding text */}
             {(() => {
               switch (specificTrade.status) {
                 case 'New':
@@ -94,20 +98,23 @@ const TradeDisplay = ({
             })()}
 
             <h2>
-              #{prettifyId(id)} {action}
+              #{id} {action}
               <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>
             </h2>
+
             <Row gutter={34}>
+
+              {/* Left column with chat and payload for current trade status */}
               <Col md={12}>
                 <div className="chat">
                   <div className="chat__window">
                     {loading ? (
                       <div>loading</div>
-                    ) : (
-                      null
-                      // <TalkJS _me={specificTrade.chat[me]} _other={specificTrade.chat[other]} id={specificTrade.chat.id} />
-                    )}
+                    ) : null
+                    // <TalkJS _me={specificTrade.chat[me]} _other={specificTrade.chat[other]} id={specificTrade.chat.id} />
+                    }
                   </div>
+
 
                   {(() => {
                     switch (specificTrade.status) {
@@ -130,7 +137,7 @@ const TradeDisplay = ({
                                 wallet public address. BTC will be transferred to this address if trade is
                                 cancelled or you win a dispute.
                               </p>
-                              <WalletAddressFormContainer />
+                              <WalletAddressFormContainer id={specificTrade.id} />
                             </>
                           );
                         }
@@ -149,7 +156,7 @@ const TradeDisplay = ({
                                 wallet public address. BTC will be transferred to this address if trade is
                                 cancelled or you win a dispute.
                               </p>
-                              <WalletAddressFormContainer />
+                              <WalletAddressFormContainer id={specificTrade.id} />
                             </>
                           );
                         }
@@ -322,6 +329,8 @@ const TradeDisplay = ({
                   })()}
                 </div>
               </Col>
+
+              {/* Right column with buttons and Trade details */}
               <Col md={12}>
                 <p>
                   You can close the trade window while waiting for a reply. You will receive an Email alert
@@ -337,7 +346,7 @@ const TradeDisplay = ({
                           onClick={() =>
                             ShowConfirm(
                               specificTrade.id,
-                              cancelTradeRequest,
+                              deleteNewTradeRequest,
                               { ...confirmData.requests.texts },
                               { ...confirmData.requests.buttons }
                             )
@@ -372,63 +381,9 @@ const TradeDisplay = ({
                 })()}
 
                 <Divider />
-                <Row>
-                  <Col xs={12}>
-                    <span className="span-head">Trade amount</span>
-                    <p>{specificTrade.amount} BTC</p>
-                  </Col>
-                  <Col xs={12}>
-                    <span className="span-head">Fiat</span>
-                    <p>
-                      {formatMoney(specificTrade.fiat)} {specificTrade.currency}
-                    </p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <span className="span-head">Trade status</span>
-                    <p className="green-status">{formatCapitals(specificTrade.status)}</p>
-                  </Col>
-                  <Col xs={12}>
-                    <span className="span-head">Ad owner</span>
-                    <p>
-                      <Link to={`${ROUTES.USER.ROOT}/${specificTrade.adOwner}`}>{specificTrade.adOwner}</Link>
-                    </p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <span className="span-head">Price/BTC</span>
-                    <p>
-                      {formatMoney(specificTrade.btcPrice)} {specificTrade.currency}
-                    </p>
-                  </Col>
-                  <Col xs={12}>
-                    <span className="span-head">Payment method</span>
-                    <p>{specificTrade.payment}</p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <span className="span-head">Trade limits</span>
-                    <p>
-                      {`${formatMoney(specificTrade.minTradeLimit)} - ${formatMoney(
-                        specificTrade.maxTradeLimit
-                      )} `}{' '}
-                      {specificTrade.currency}
-                    </p>
-                  </Col>
-                  <Col xs={12}>
-                    <span className="span-head">Location</span>
-                    <p>{specificTrade.location}</p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <span className="span-head">Terms of trade</span>
-                    <p>{specificTrade.terms}</p>
-                  </Col>
-                </Row>
+                
+                <TradeDetails specificTrade={specificTrade} />
+
               </Col>
             </Row>
           </div>
@@ -459,6 +414,7 @@ TradeDisplay.propTypes = {
   getTradeByIdRequest: PropTypes.func,
   fiatSentRequest: PropTypes.func,
   fiatReceivedRequest: PropTypes.func,
+  deleteNewTradeRequest: PropTypes.func,
   cancelTradeRequest: PropTypes.func,
   loading: PropTypes.bool,
   submitting: PropTypes.bool,
