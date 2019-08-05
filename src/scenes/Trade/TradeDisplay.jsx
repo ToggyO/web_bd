@@ -104,7 +104,8 @@ const TradeDisplay = ({
                     {loading ? (
                       <div>loading</div>
                     ) : (
-                      <TalkJS _me={specificTrade.chat[me]} _other={specificTrade.chat[other]} id={specificTrade.chat.id} />
+                      null
+                      // <TalkJS _me={specificTrade.chat[me]} _other={specificTrade.chat[other]} id={specificTrade.chat.id} />
                     )}
                   </div>
 
