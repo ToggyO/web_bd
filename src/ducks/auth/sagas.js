@@ -39,7 +39,7 @@ function* signIn(action) {
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: authTypes.SIGNIN_ERROR, payload: errors });
-    yield call(message.error, 'Incorrect email or password');
+    yield call(message.error, 'Incorrect username or password');
   }
 }
 
