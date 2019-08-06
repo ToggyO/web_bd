@@ -11,7 +11,7 @@ export const adsSelector = createSelector(
       key: ad.id,
       order: ad.order,
       createdAt: new Date(ad.createDate).getTime(),
-      tradeLimits: `${formatMoney(ad.minTradeLimit)} - ${formatMoney(ad.maxTradeLimit)} ${ad.currency}`,
+      tradeLimit: `${formatMoney(ad.minTradeLimit)} - ${formatMoney(ad.maxTradeLimit)} ${ad.currency}`,
       payment: formatCapitals(ad.payment),
       userName: ad.userName,
       location: ad.location,

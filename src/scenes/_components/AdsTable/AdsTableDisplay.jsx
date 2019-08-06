@@ -75,12 +75,12 @@ const AdsTableDisplay = ({
             Trade <span className="removable">limits</span>
           </span>
         )}
-        render={(text, record) => record.tradeLimits}
-        dataIndex="tradeLimits"
-        key="tradeLimits"
+        render={(text, record) => record.tradeLimit}
+        dataIndex="tradeLimit"
+        key="tradeLimit"
         width="25%"
-        sorter={withTerms}
-        sortOrder={field === 'tradeLimits' && order}
+        sorter={!!history.location.search.includes('currency')}
+        sortOrder={field === 'tradeLimit' && order}
       />
       <Column
         title={() => (
@@ -138,7 +138,7 @@ AdsTableDisplay.propTypes = {
   adsData: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      tradeLimits: PropTypes.string,
+      tradeLimit: PropTypes.string,
       payment: PropTypes.string,
       userName: PropTypes.string,
       location: PropTypes.string,
