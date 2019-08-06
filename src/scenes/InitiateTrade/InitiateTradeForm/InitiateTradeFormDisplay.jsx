@@ -108,10 +108,7 @@ const InitiateTradeFormDisplay = props => {
       <Spinner spinning={loading}>
         {adOwnerID === cachedUserID ? (
           <div className="hidden">
-            <p className="initiate-trade__confirm-text">You cannot trade with yourself.</p>
-            <Button htmlType="button" type="primary" className="primary-btn" disabled>
-              Sorry, bro
-            </Button>
+            <p className="initiate-trade__confirm-text">You can't request a trade for your own ads.</p>
           </div>
         ) : (
           <div className="hidden">
