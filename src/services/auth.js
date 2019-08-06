@@ -68,4 +68,5 @@ export const userLogout = () => {
   clearCookies();
   window.location.reload();
   localStorage.removeItem('userName');
+  localStorage.removeItem('userID');
 };
