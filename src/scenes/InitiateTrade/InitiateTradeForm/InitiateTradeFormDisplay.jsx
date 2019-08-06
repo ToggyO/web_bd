@@ -3,9 +3,13 @@ import React, { useEffect } from 'react';
 import { Form, Row, Col, Input, InputNumber, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
+import { ROUTES } from '@config/constants';
+import history from '@services/history';
 
 const InitiateTradeFormDisplay = props => {
   const {
+    submitting,
+    isAuthorized,
     form,
     adId,
     min,
@@ -13,7 +17,6 @@ const InitiateTradeFormDisplay = props => {
     currency,
     loading,
     initiateTradeRequest,
-    submitting,
     message,
     adOwnerID,
     cachedUserID,
@@ -124,15 +127,27 @@ const InitiateTradeFormDisplay = props => {
                 </Form.Item>
               </Col>
               <Col lg={7}>
-                <Button
-                  type="primary"
-                  style={{ marginBottom: 34 }}
-                  htmlType="submit"
-                  loading={submitting}
-                  block={!!window.matchMedia('(max-width: 992px)').matches}
-                >
-                  Request trade
-                </Button>
+                {isAuthorized ? (
+                  <Button
+                    type="primary"
+                    style={{ marginBottom: 34 }}
+                    htmlType="submit"
+                    loading={submitting}
+                    block={!!window.matchMedia('(max-width: 992px)').matches}
+                  >
+                    Request trade
+                  </Button>
+                ) : (
+                  <Button
+                    type="primary"
+                    style={{ marginBottom: 34 }}
+                    htmlType="button"
+                    block={!!window.matchMedia('(max-width: 992px)').matches}
+                    onClick={() => history.push(`${ROUTES.LOGIN}?from=${history.location.pathname}`)}
+                  >
+                    Sign In
+                  </Button>
+                )}
               </Col>
             </Row>
           </div>
