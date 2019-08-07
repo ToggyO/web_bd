@@ -84,10 +84,8 @@ const InitiateTradeFormDisplay = props => {
               initialValue: 0,
               rules: [{ validator: checkFiatValue }],
               normalize: (value, prevValue) => {
-                let strValue = value.toString();
-                const index = strValue.indexOf('.');
-                if (index > -1) strValue = strValue.slice(0, index + 3);
-                return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
+                if (value < 0) return prevValue;
+                return Math.trunc(value);
               },
             })(
               <Input
@@ -102,6 +100,12 @@ const InitiateTradeFormDisplay = props => {
           <Form.Item>
             {form.getFieldDecorator('amount', {
               initialValue: 0,
+              normalize: (value, prevValue) => {
+
+                if (value === '') return '';
+                if (value < 0) return Math.ceil(prevValue * 100000000) / 100000000;
+                return Math.ceil(value * 100000000) / 100000000;
+              },
             })(
               <Input
                 type="number"
