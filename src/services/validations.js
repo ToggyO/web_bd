@@ -96,3 +96,11 @@ export const checkNotNull = (rule, value, cb) => {
   }
   cb('BTC price cannot be 0');
 };
+
+export const btcWallet = [
+  { required: true, message: <div>Please input your bitcoin wallet</div> },
+  {
+    pattern: /^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/,
+    message: <div>Invalid bitcoin wallet public address</div>,
+  },
+];

@@ -4,6 +4,7 @@ import { Form, Row, Col, Input, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
+import * as validations from '@services/validations'
 import history from '@services/history';
 
 const InitiateTradeFormDisplay = props => {
@@ -101,7 +102,6 @@ const InitiateTradeFormDisplay = props => {
             {form.getFieldDecorator('amount', {
               initialValue: 0,
               normalize: (value, prevValue) => {
-
                 if (value === '') return '';
                 if (value < 0) return Math.ceil(prevValue * 100000000) / 100000000;
                 return Math.ceil(value * 100000000) / 100000000;
@@ -142,7 +142,7 @@ const InitiateTradeFormDisplay = props => {
               <Col lg={17}>
                 <Form.Item>
                   {form.getFieldDecorator('walletAddress', {
-                    rules: [{ required: true, message: 'Please input your bitcoin wallet public address' }],
+                    rules: validations.btcWallet,
                   })(<Input placeholder="Enter wallet address" />)}
                 </Form.Item>
               </Col>
