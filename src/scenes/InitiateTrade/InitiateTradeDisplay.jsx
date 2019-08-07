@@ -8,7 +8,7 @@ import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
 import { ROUTES } from '@config/constants';
 import './style.less';
-import { catchFromPath } from '@utils';
+import { catchFromPath, formatCapitals } from '@utils';
 
 const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
   const adId = catchFromPath(history.location.pathname, 'ads');
@@ -101,7 +101,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                       </Col>
                       <Col xs={12}>
                         <span style={{ fontWeight: 500 }}>Payment method</span>
-                        <p>{payment}</p>
+                        <p>{formatCapitals(payment)}</p>
                       </Col>
                     </Row>
                     <Row gutter={{ sm: 12, lg: 48 }}>

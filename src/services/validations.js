@@ -88,3 +88,11 @@ export const bank = [
   { required: true, message: <div>Please input bank name</div> },
   { max: 60, message: <div>Max 60 characters</div> },
 ];
+
+export const checkNotNull = (rule, value, cb) => {
+  if (value !== 0) {
+    cb();
+    return;
+  }
+  cb('BTC price cannot be 0');
+};

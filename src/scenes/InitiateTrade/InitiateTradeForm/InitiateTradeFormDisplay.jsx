@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import { Form, Row, Col, Input, InputNumber, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Form, Row, Col, Input, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
@@ -21,9 +21,24 @@ const InitiateTradeFormDisplay = props => {
     adOwnerID,
     cachedUserID,
   } = props;
+
+  const [btcPrice, setBtcPrice] = useState(1);
+
   useEffect(() => {
-    form.setFieldsValue({ fiat: '', amount: '' });
-  }, []);
+    if (min) {
+      fetchBTCPrice(currency);
+      form.setFieldsValue({ fiat: min, amount: min / btcPrice });
+    }
+  }, [btcPrice]);
+
+  const fetchBTCPrice = async value => {
+    const response = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`
+    );
+    const data = await response.json();
+    setBtcPrice(() => +data.bpi[currency].rate_float.toFixed(2));
+    // this.setState({ btcPrice: +data.bpi[value].rate_float.toFixed(2), loading: false });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -36,13 +51,13 @@ const InitiateTradeFormDisplay = props => {
 
   const handleFiatChange = e => {
     form.setFieldsValue({
-      amount: e.target.value / 10000 || '',
+      amount: e.target.value / btcPrice || '',
     });
   };
 
   const handleTradeAmountChange = e => {
     form.setFieldsValue({
-      fiat: e.target.value * 10000 || '',
+      fiat: e.target.value * btcPrice || '',
     });
   };
 
@@ -68,6 +83,12 @@ const InitiateTradeFormDisplay = props => {
             {form.getFieldDecorator('fiat', {
               initialValue: 0,
               rules: [{ validator: checkFiatValue }],
+              normalize: (value, prevValue) => {
+                let strValue = value.toString();
+                const index = strValue.indexOf('.');
+                if (index > -1) strValue = strValue.slice(0, index + 3);
+                return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
+              },
             })(
               <Input
                 addonAfter={currency}
@@ -83,7 +104,7 @@ const InitiateTradeFormDisplay = props => {
               initialValue: 0,
             })(
               <Input
-                // type="number"
+                type="number"
                 addonAfter="BTC"
                 onChange={handleTradeAmountChange}
                 disabled={adOwnerID === cachedUserID}

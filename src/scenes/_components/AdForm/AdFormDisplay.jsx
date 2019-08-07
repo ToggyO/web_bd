@@ -1,7 +1,7 @@
 /* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber } from 'antd';
+import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import history from '@services/history';
@@ -163,7 +163,7 @@ class AdFormDisplay extends React.Component {
             )}
           </Form.Item>
         </div>
-        
+
         <div className="ad-form__block">
           <h3 className="ad-form__header">Trade information</h3>
           <Divider />
@@ -253,7 +253,6 @@ class AdFormDisplay extends React.Component {
             )}
           </Row>
         </div>
-       
 
         <div className="ad-form__block">
           <h3 className="ad-form__header">Price</h3>
@@ -264,7 +263,10 @@ class AdFormDisplay extends React.Component {
               <Spin spinning={this.state.loading} tip="Fetching currency..." indicator={<Spinner />}>
                 <Form.Item className="ad-form__item" label="BTC trade price">
                   {form.getFieldDecorator('btcPrice', {
-                    rules: [{ required: true, message: <div>Please input BTC price!</div> }],
+                    rules: [
+                      { required: true, message: <div>Please input BTC price!</div> },
+                      { validator: validations.checkNotNull },
+                    ],
                     initialValue: specificAd.btcPrice,
                     normalize: (value, prevValue) => {
                       let strValue = value.toString();
@@ -284,28 +286,36 @@ class AdFormDisplay extends React.Component {
             </Col>
 
             <Col lg={11}>
-              <Form.Item className="ad-form__item" label="Margin">
-                {form.getFieldDecorator('margin', {
-                  rules: [{ required: true, message: <div>Please input margin!</div> }],
-                  initialValue: specificAd.margin,
-                })(
-                  <InputNumber
-                    placeholder="0"
-                    formatter={value => `${value}%`}
-                    parser={value => {
-                      const strValue = value.replace('%', '').replace(',', '');
-                      if (!strValue.match(/^-?\d*[.]?\d{0,2}$/)) {
-                        return '0.0';
-                      }
-                      return strValue;
-                    }}
-                    step={0.1}
-                    min={-100}
-                    max={100}
-                    onChange={this.handleMarginChange}
-                  />
-                )}
-              </Form.Item>
+              <Tooltip placement="bottom" title={<span> Minimum: -100.00, maximum: 100.00</span>}>
+                <div>
+                  <Form.Item className="ad-form__item" label="Margin">
+                    {form.getFieldDecorator('margin', {
+                      rules: [{ required: true, message: <div>Please input margin!</div> }],
+                      initialValue: specificAd.margin,
+                    })(
+                      <InputNumber
+                        placeholder="0"
+                        formatter={value => `${value}%`}
+                        parser={value => {
+                          const strValue = value.replace('%', '').replace(',', '');
+                          if (strValue === '') return '0.00';
+                          if (strValue >= -100 && strValue <= 100) {
+                            if (!strValue.match(/^-?\d*[.]?\d{0,2}$/)) {
+                              return '0.00';
+                            }
+                            return strValue;
+                          }
+                          return '0.00';
+                        }}
+                        step={0.01}
+                        min={-100}
+                        max={100}
+                        onChange={this.handleMarginChange}
+                      />
+                    )}
+                  </Form.Item>
+                </div>
+              </Tooltip>
             </Col>
           </Row>
 
