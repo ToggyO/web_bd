@@ -55,7 +55,7 @@ const InitiateTradeFormDisplay = props => {
       callback('Please input trade amount');
       return;
     }
-    callback(`Trade amount for this ad should be between ${min} - ${max} ${currency}`);
+    callback('Min. trade limit should not exceed Max. trade limit');
   };
 
   const { fiat, amount } = form.getFieldsValue(['fiat', 'amount']);
