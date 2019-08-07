@@ -99,7 +99,7 @@ export default {
       return response.data;
     },
     getTrades: async type => {
-      const response = await superaxios.get(`/trade?status[]=${type}`);
+      const response = await superaxios.get(`/trade?pageSize=${pageSizeDashboard}&status[]=${type}`);
       return response.data;
     },
     getTradeById: async id => {
