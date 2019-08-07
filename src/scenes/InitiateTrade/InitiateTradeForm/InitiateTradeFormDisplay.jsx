@@ -107,11 +107,9 @@ const InitiateTradeFormDisplay = props => {
       </div>
       <Spinner spinning={loading}>
         {adOwnerID === cachedUserID ? (
-          <div className="hidden">
-            <p className="initiate-trade__confirm-text">You can't request a trade for your own ads.</p>
-          </div>
+          <p className="initiate-trade__confirm-text">You can't request a trade for your own ads.</p>
         ) : (
-          <div className="hidden">
+          <>
             <p className="initiate-trade__confirm-text">
               Enter receiving Bitcoin wallet public address and confirm you are willing to trade.
             </p>
@@ -147,7 +145,7 @@ const InitiateTradeFormDisplay = props => {
                 )}
               </Col>
             </Row>
-          </div>
+          </>
         )}
       </Spinner>
     </Form>

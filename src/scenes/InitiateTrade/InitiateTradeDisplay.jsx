@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
-import { Row, Col } from 'antd';
+import { Row, Col, Skeleton } from 'antd';
 import { Spinner } from '@components/Spinner';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
@@ -58,25 +58,38 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
       <div className="paper">
         <div className="initiate-trade">
           <h2 className="initiate-trade__header">{header}</h2>
-          <span className="initiate-trade__label">How much do you want to {action}?</span>
+          {loading ? (
+            <Skeleton paragraph={false} title={{ width: ['30%'] }} />
+          ) : (
+            <span className="initiate-trade__label">How much do you want to {action}?</span>
+          )}
           <Row gutter={{ sm: 12, lg: 48 }}>
             <Col lg={11}>
-              <InitiateTradeFormContainer
-                adId={id}
-                min={minTradeLimit}
-                max={maxTradeLimit}
-                currency={currency || ''}
-                userName={userName}
-                adOwnerID={adOwnerID}
-                cachedUserID={cachedUserID}
-                loading={loading}
-                message={message}
-              />
+              {loading ? (
+                <Skeleton
+                  paragraph={{
+                    rows: 9,
+                    width: ['100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%'],
+                  }}
+                />
+              ) : (
+                <InitiateTradeFormContainer
+                  adId={id}
+                  min={minTradeLimit}
+                  max={maxTradeLimit}
+                  currency={currency || ''}
+                  userName={userName}
+                  adOwnerID={adOwnerID}
+                  cachedUserID={cachedUserID}
+                  loading={loading}
+                  message={message}
+                />
+              )}
             </Col>
             <Col lg={13}>
               <Spinner spinning={loading}>
                 {loading ? (
-                  <p>Getting details...</p>
+                  <Skeleton />
                 ) : (
                   <>
                     <Row gutter={{ sm: 12, lg: 48 }}>
