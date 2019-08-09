@@ -6,7 +6,7 @@ const initialState = {
     seller: { user: {} },
   },
   errors: {},
-  loading: false,
+  loading: true,
 };
 
 export default function chat(state = initialState, action) {

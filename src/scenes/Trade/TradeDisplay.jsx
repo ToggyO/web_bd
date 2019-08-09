@@ -441,11 +441,12 @@ TradeDisplay.propTypes = {
 };
 
 TradeDisplay.defaultProps = {
+  loading: true,
   specificTrade: {
     currency: '',
     adType: 'Sell',
   },
-  loading: true,
+  
   submitting: false,
 };
 

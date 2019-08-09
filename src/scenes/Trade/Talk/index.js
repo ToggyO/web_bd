@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Icon } from 'antd';
 import Talk from 'talkjs';
 import photoUrl from '@assets/photoUrl.png';
 
-class TalkJS extends React.PureComponent {
-  componentDidMount() {
-    const { _me, _other, _id, _order } = this.props;
+const TalkJS = ({ _me, _other, _id, _order }) => {
+  let chatbox;
+  let container = useRef(null);
 
+  useEffect(() => {
     Talk.ready
       .then(() => {
         const me = new Talk.User({ ..._me, role: 'bitcoins_direct_user' });
@@ -35,34 +36,34 @@ class TalkJS extends React.PureComponent {
         //         var chatbox = talkSession.createChatbox(conversation);
         // chatbox.mount(document.getElementById("talkjs-container"));
 
-        this.chatbox = window.talkSession.createChatbox(conversation);
-        this.chatbox.mount(this.container);
+        chatbox = window.talkSession.createChatbox(conversation);
+        chatbox.mount(container);
       })
-      .catch(e => console.error(e));
-  }
+      .catch(e => {
+        chatbox.mount(<p>Lol</p>);
+      });
 
-  componentWillUnmount() {
-    if (this.inbox) {
-      this.inbox.destroy();
-    }
-  }
+    return () => {
+      if (chatbox) {
+        chatbox.destroy();
+      }
+    };
+  }, [_me]);
 
-  render() {
-    return (
-      <span>
-        <div
-          style={{ height: '100%', position: 'relative' }}
-          ref={c => {
-            this.container = c;
-          }}
-        >
-          <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-            <Icon type="loading" style={{ fontSize: 25 }} />
-          </p>
-        </div>
-      </span>
-    );
-  }
-}
+  return (
+    <span>
+      <div
+        style={{ height: '100%', position: 'relative' }}
+        ref={c => {
+          container = c;
+        }}
+      >
+        <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <Icon type="loading" style={{ fontSize: 25 }} />
+        </p>
+      </div>
+    </span>
+  );
+};
 
 export default TalkJS;
