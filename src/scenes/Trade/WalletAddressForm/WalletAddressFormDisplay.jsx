@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Row, Col, Button, Input } from 'antd';
+import * as validations from '@services/validations';
 
 const WalletAddressFormDisplay = ({ form, id, confirmTradeRequest, submitting }) => {
   const handleSubmit = e => {
@@ -17,7 +18,7 @@ const WalletAddressFormDisplay = ({ form, id, confirmTradeRequest, submitting })
         <Col lg={17}>
           <Form.Item>
             {form.getFieldDecorator('walletPublicAddress', {
-              rules: [{ required: true, message: 'Please input your bitcoin wallet public address' }],
+              rules: validations.btcWallet,
             })(<Input placeholder="Enter wallet address" />)}
           </Form.Item>
         </Col>
