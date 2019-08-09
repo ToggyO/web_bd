@@ -1,36 +1,42 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Icon } from 'antd';
 import Talk from 'talkjs';
+import photoUrl from '@assets/photoUrl.png';
 
-class TalkJS extends React.Component {
+class TalkJS extends React.PureComponent {
   componentDidMount() {
-    const { _me, _other } = this.props;
-    console.log(this.props);
+    const { _me, _other, _id, _order } = this.props;
+
     Talk.ready
       .then(() => {
-        const me = new Talk.User(_me);
+        const me = new Talk.User({ ..._me, role: 'bitcoins_direct_user' });
 
         if (!window.talkSession) {
           window.talkSession = new Talk.Session({
-            appId: 'tUyS8xpZ',
+            appId: 'tL9PLRIs',
             me,
           });
         }
 
-        const other = new Talk.User(_other);
+        const other = new Talk.User({ ..._other, photoUrl });
 
         // You control the ID of a conversation. oneOnOneId is a helper method that generates
         // a unique conversation ID for a given pair of users.
-        const conversationId = this.props.id;
 
-        const conversation = window.talkSession.getOrCreateConversation(conversationId);
+        const conversation = window.talkSession.getOrCreateConversation(_id);
         conversation.setParticipant(me);
         conversation.setParticipant(other);
-
-        this.inbox = window.talkSession.createInbox({
-          selected: conversation,
+        conversation.setAttributes({
+          subject: `Trade #${_order}`,
+          custom: { order: _order },
         });
-        this.inbox.mount(this.container);
+
+        //         var chatbox = talkSession.createChatbox(conversation);
+        // chatbox.mount(document.getElementById("talkjs-container"));
+
+        this.chatbox = window.talkSession.createChatbox(conversation);
+        this.chatbox.mount(this.container);
       })
       .catch(e => console.error(e));
   }
@@ -45,12 +51,14 @@ class TalkJS extends React.Component {
     return (
       <span>
         <div
-          style={{ height: '500px' }}
+          style={{ height: '100%', position: 'relative' }}
           ref={c => {
             this.container = c;
           }}
         >
-          Loading...
+          <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <Icon type="loading" style={{ fontSize: 25 }} />
+          </p>
         </div>
       </span>
     );

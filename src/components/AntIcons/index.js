@@ -28,3 +28,4 @@ export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/Exc
 export { default as QuestionCircleOutline } from '@ant-design/icons/lib/outline/QuestionCircleOutline';
 export { default as ExclamationCircleOutline } from '@ant-design/icons/lib/outline/ExclamationCircleOutline';
 export { default as FilterFill } from '@ant-design/icons/lib/fill/FilterFill';
+export { default as MessageOutline } from '@ant-design/icons/lib/outline/MessageOutline';

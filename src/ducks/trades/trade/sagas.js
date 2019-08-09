@@ -25,7 +25,11 @@ export function* initiateTradeSaga() {
 function* getTradeById(action) {
   try {
     const { data } = yield call(api.trades.getTradeById, action.payload);
-    yield put({ type: types.GET_BY_ID_SUCCESS, payload: data });
+    const {
+      trade: { chat, ...rest },
+      direction,
+    } = data;
+    yield put({ type: types.GET_BY_ID_SUCCESS, payload: { trade: rest, direction } });
   } catch (error) {
     yield call(history.push, ROUTES[404]);
     yield put({ type: types.GET_BY_ID_ERROR, payload: error });

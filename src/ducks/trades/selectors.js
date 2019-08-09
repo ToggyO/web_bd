@@ -54,19 +54,6 @@ export const tradeSelector = createSelector(
     buyerWallet: trade.multisigWallet.buyerReceivingWalletAddress,
     sellerWallet: trade.multisigWallet.sellerReceivingWalletAddress,
     multisigWalletAddress: trade.multisigWallet.multisigWalletAddress,
-    chat: {
-      id: trade.chat.id,
-      buyer: {
-        id: trade.chat.buyer.user.userName,
-        name: trade.chat.buyer.user.userName,
-        email: trade.chat.buyer.user.email,
-      },
-      seller: {
-        id: trade.chat.seller.user.userName,
-        name: trade.chat.seller.user.userName,
-        email: trade.chat.seller.user.email,
-      },
-    },
   })
 );
 
