@@ -420,7 +420,7 @@ TradeDisplay.propTypes = {
     maxTradeLimit: PropTypes.number,
     currency: PropTypes.string,
     location: PropTypes.string,
-    terms: PropTypes.string,
+    terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     adType: PropTypes.string,
     direction: PropTypes.string,
     multisigWalletAddress: PropTypes.string,

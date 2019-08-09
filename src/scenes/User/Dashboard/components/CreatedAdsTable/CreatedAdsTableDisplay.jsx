@@ -190,7 +190,7 @@ CreatedAdsTableDisplay.propTypes = {
       status: PropTypes.string,
       transactionLimit: PropTypes.string,
       location: PropTypes.string,
-      terms: PropTypes.string,
+      terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     })
   ),
   deleteAdRequest: PropTypes.func,

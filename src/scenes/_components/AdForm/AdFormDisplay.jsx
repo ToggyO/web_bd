@@ -414,12 +414,14 @@ AdFormDisplay.propTypes = {
     btcPrice: PropTypes.number,
     minTradeLimit: PropTypes.number,
     maxTradeLimit: PropTypes.number,
-    terms: PropTypes.string,
+    terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   }),
 };
 
 AdFormDisplay.defaultProps = {
-  specificAd: {},
+  specificAd: {
+    terms: '',
+  },
 };
 
 export default Form.create()(AdFormDisplay);

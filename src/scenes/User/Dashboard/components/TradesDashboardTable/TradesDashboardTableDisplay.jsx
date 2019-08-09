@@ -240,7 +240,7 @@ TradesDashboardTableDisplay.propTypes = {
       location: PropTypes.string,
       payment: PropTypes.string,
       btcPrice: PropTypes.number,
-      terms: PropTypes.string,
+      terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     })
   ),
   loading: PropTypes.bool,

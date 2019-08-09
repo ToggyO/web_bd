@@ -1,5 +1,7 @@
 /* eslint-disable no-restricted-globals */
 // parsing url callback from backend...
+import React from 'react';
+
 export const getQueries = url => {
   const startIndex = url.indexOf('userId');
   const [userId, code] = url.slice(startIndex).split('&');
@@ -134,3 +136,14 @@ export const sortStrings = (a, b) => {
 };
 
 export const prettifyId = id => id.split('-')[0];
+
+export const catchNewLines = (text = '') => {
+  if (text === '') return '';
+  return text.split('\n').map((item, key) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <span key={`${item.replace(/ /g, '+')}${key}`} style={{ color: 'inherit' }}>
+      {item}
+      <br />
+    </span>
+  ));
+};

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { formatMoney, formatCapitals } from '@utils';
+import { formatMoney, formatCapitals, catchNewLines } from '@utils';
 
 const adsByTypeSelector = (state, props) => state.ads[props.type];
 const adsItemsSelector = (state, props) => state.ads[props.type].data.items;
@@ -16,7 +16,7 @@ export const adsSelector = createSelector(
       userName: ad.userName,
       location: ad.location,
       btcPrice: `${formatMoney(ad.btcPrice)} ${ad.currency}`,
-      terms: ad.terms,
+      terms: catchNewLines(ad.terms),
       shown: ad.shown,
       type: ad.type,
     }))
@@ -46,7 +46,7 @@ export const adSelector = createSelector(
     btcPrice: data.btcPrice,
     minTradeLimit: data.minTradeLimit,
     maxTradeLimit: data.maxTradeLimit,
-    terms: data.terms,
+    terms: catchNewLines(data.terms),
     userName: data.userName,
     adOwnerID: data.userId,
   })
