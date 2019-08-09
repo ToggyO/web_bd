@@ -26,10 +26,15 @@ const InitiateTradeFormDisplay = props => {
   const [btcPrice, setBtcPrice] = useState(1);
 
   useEffect(() => {
-    if (min) {
-      fetchBTCPrice(currency);
-      form.setFieldsValue({ fiat: min, amount: min / btcPrice });
+    let isSubscribed = true;
+    if (isSubscribed) {
+      if (min) {
+        fetchBTCPrice(currency);
+        form.setFieldsValue({ fiat: min, amount: min / btcPrice });
+      }
     }
+
+    return () => {isSubscribed = false};
   }, [btcPrice]);
 
   const fetchBTCPrice = async value => {
