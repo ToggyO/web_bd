@@ -4,7 +4,7 @@ import { Form, Row, Col, Input, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
-import * as validations from '@services/validations'
+import * as validations from '@services/validations';
 import history from '@services/history';
 
 const InitiateTradeFormDisplay = props => {

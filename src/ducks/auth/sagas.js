@@ -109,7 +109,7 @@ function* forgotPassword(action) {
       type: authTypes.FORGOT_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
-    yield call(message.error, 'No users found');
+    yield call(message.error, 'No user registered with this email address');
   }
 }
 

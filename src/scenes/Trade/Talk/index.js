@@ -9,39 +9,35 @@ const TalkJS = ({ _me, _other, _id, _order }) => {
   let container = useRef(null);
 
   useEffect(() => {
-    Talk.ready
-      .then(() => {
-        const me = new Talk.User({ ..._me, role: 'bitcoins_direct_user' });
+    Talk.ready.then(() => {
+      const me = new Talk.User({ ..._me, role: 'bitcoins_direct_user' });
 
-        if (!window.talkSession) {
-          window.talkSession = new Talk.Session({
-            appId: 'tL9PLRIs',
-            me,
-          });
-        }
-
-        const other = new Talk.User({ ..._other, photoUrl });
-
-        // You control the ID of a conversation. oneOnOneId is a helper method that generates
-        // a unique conversation ID for a given pair of users.
-
-        const conversation = window.talkSession.getOrCreateConversation(_id);
-        conversation.setParticipant(me);
-        conversation.setParticipant(other);
-        conversation.setAttributes({
-          subject: `Trade #${_order}`,
-          custom: { order: _order },
+      if (!window.talkSession) {
+        window.talkSession = new Talk.Session({
+          appId: 'tL9PLRIs',
+          me,
         });
+      }
 
-        //         var chatbox = talkSession.createChatbox(conversation);
-        // chatbox.mount(document.getElementById("talkjs-container"));
+      const other = new Talk.User({ ..._other, photoUrl });
 
-        chatbox = window.talkSession.createChatbox(conversation);
-        chatbox.mount(container);
-      })
-      .catch(e => {
-        chatbox.mount(<p>Lol</p>);
+      // You control the ID of a conversation. oneOnOneId is a helper method that generates
+      // a unique conversation ID for a given pair of users.
+
+      const conversation = window.talkSession.getOrCreateConversation(_id);
+      conversation.setParticipant(me);
+      conversation.setParticipant(other);
+      conversation.setAttributes({
+        subject: `Trade #${_order}`,
+        custom: { order: _order },
       });
+
+      //         var chatbox = talkSession.createChatbox(conversation);
+      // chatbox.mount(document.getElementById("talkjs-container"));
+
+      chatbox = window.talkSession.createChatbox(conversation);
+      chatbox.mount(container);
+    });
 
     return () => {
       if (chatbox) {

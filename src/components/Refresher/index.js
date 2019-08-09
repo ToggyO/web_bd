@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import './style.less';
 
-export const Refresher = ({ loading, cb }) => {
+export const Refresher = ({ style, loading, cb }) => {
   const [spin, setSpin] = useState(false);
 
   const goSpin = () => {
@@ -19,7 +19,7 @@ export const Refresher = ({ loading, cb }) => {
 
   return (
     <Icon
-      style={{ transform: loading && 'scale(1.08)' }}
+      style={{ ...style, transform: loading && 'scale(1.08)' }}
       type="sync"
       spin={spin}
       className="refresher"
@@ -31,6 +31,7 @@ export const Refresher = ({ loading, cb }) => {
 };
 
 Refresher.propTypes = {
+  style: PropTypes.object,
   loading: PropTypes.bool,
   cb: PropTypes.func,
 };

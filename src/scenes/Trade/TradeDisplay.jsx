@@ -9,6 +9,7 @@ import { Spinner } from '@components/Spinner';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
 import { ExclamationMessage } from '@components/ExclamationMessage';
+import { Refresher } from '@components/Refresher';
 import { ROUTES, confirmData } from '@config/constants';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 import { WalletAddressFormContainer } from './WalletAddressForm';
@@ -385,6 +386,13 @@ const TradeDisplay = ({
                       return null;
                   }
                 })()}
+                {specificTrade.status !== 'Completed' ? (
+                  <Refresher
+                    style={{ marginLeft: 5, position: 'relative', top: 1 }}
+                    loading={loading}
+                    cb={() => getTradeByIdRequest(id)}
+                  />
+                ) : null}
 
                 <Divider />
 
@@ -446,7 +454,7 @@ TradeDisplay.defaultProps = {
     currency: '',
     adType: 'Sell',
   },
-  
+
   submitting: false,
 };
 
