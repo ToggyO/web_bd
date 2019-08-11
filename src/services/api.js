@@ -123,7 +123,7 @@ export default {
       return response.data;
     },
     cancelTrade: async id => {
-      const response = await superaxios.post(`/trade/${id}/cancelled`);
+      const response = await superaxios.post(`/trade/${id}/canceled`);
       return response.data;
     },
   },

@@ -17,6 +17,7 @@ const DashboardDisplay = ({
   getNewTradesRequest,
   getActiveTradesRequest,
   getCompletedTradesRequest,
+  getCanceledTradesRequest,
   deleteNewTradeRequest,
   cancelTradeRequest,
   tradesLoading,
@@ -27,6 +28,7 @@ const DashboardDisplay = ({
     if (path === 'requests') getNewTradesRequest();
     if (path === 'active') getActiveTradesRequest();
     if (path === 'completed') getCompletedTradesRequest();
+    if (path === 'canceled') getCanceledTradesRequest();
   }, [history.location.pathname]);
 
   const handleChangeTab = tab => {
@@ -75,7 +77,7 @@ const DashboardDisplay = ({
             </TabPane>
             <TabPane tab="Canceled trades" key="CANCELED">
               <h2 className="dashboard__header">Canceled trades</h2>
-              <div>Canceled trades</div>
+              <TradesDashboardTableContainer withTerms />
             </TabPane>
           </Tabs>
         </div>
@@ -89,6 +91,7 @@ DashboardDisplay.propTypes = {
   getNewTradesRequest: PropTypes.func,
   getActiveTradesRequest: PropTypes.func,
   getCompletedTradesRequest: PropTypes.func,
+  getCanceledTradesRequest: PropTypes.func,
   deleteNewTradeRequest: PropTypes.func,
   cancelTradeRequest: PropTypes.func,
   tradesLoading: PropTypes.bool,

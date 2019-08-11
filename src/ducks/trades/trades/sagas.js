@@ -40,3 +40,16 @@ function* getCompletedTrades(action) {
 export function* getCompletedTradesSaga() {
   yield takeLatest(types.GET_COMPLETED_REQUEST, getCompletedTrades);
 }
+
+function* getCanceledTrades(action) {
+  try {
+    const { data } = yield call(api.trades.getTrades, action.payload);
+    yield put({ type: types.GET_CANCELED_SUCCESS, payload: data });
+  } catch (error) {
+    yield put({ type: types.GET_CANCELED_ERROR, payload: error });
+  }
+}
+
+export function* getCanceledTradesSaga() {
+  yield takeLatest(types.GET_CANCELED_REQUEST, getCanceledTrades);
+}

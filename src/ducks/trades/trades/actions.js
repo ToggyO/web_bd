@@ -15,3 +15,8 @@ export const getCompletedTradesRequest = () => ({
   type: types.GET_COMPLETED_REQUEST,
   payload: 'completed',
 });
+
+export const getCanceledTradesRequest = () => ({
+  type: types.GET_CANCELED_REQUEST,
+  payload: 'canceled',
+});

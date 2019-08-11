@@ -81,6 +81,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
 
                   case 'Disputed':
                   case 'Completed':
+                  case 'Canceled':
                     return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>

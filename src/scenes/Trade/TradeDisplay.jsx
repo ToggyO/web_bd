@@ -149,7 +149,7 @@ const TradeDisplay = ({
                               To confirm you are willing to trade with{' '}
                               <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
                               wallet public address. BTC will be transferred to this address if trade is
-                              cancelled or you win a dispute.
+                              canceled or you win a dispute.
                             </p>
                             <WalletAddressFormContainer id={specificTrade.id} />
                           </>
@@ -164,7 +164,7 @@ const TradeDisplay = ({
                               To confirm you are willing to trade with{' '}
                               <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
                               wallet public address. BTC will be transferred to this address if trade is
-                              cancelled or you win a dispute.
+                              canceled or you win a dispute.
                             </p>
                             <WalletAddressFormContainer id={specificTrade.id} />
                           </>
@@ -325,7 +325,7 @@ const TradeDisplay = ({
 
                       break;
 
-                    case 'Cancelled':
+                    case 'Canceled':
                       return <ExclamationMessage>This trade has been canceled.</ExclamationMessage>;
 
                     default:

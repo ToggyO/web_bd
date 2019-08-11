@@ -61,6 +61,7 @@ const Routes = ({ loading }) => (
         ROUTES.DASHBOARD.REQUESTS,
         ROUTES.DASHBOARD.ACTIVE,
         ROUTES.DASHBOARD.COMPLETED,
+        ROUTES.DASHBOARD.CANCELED,
       ].map(path => (
         <AuthRoute key={path} path={path} exact component={DashboardContainer} />
       ))}
