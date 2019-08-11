@@ -89,7 +89,7 @@ const CreatedAdsTableDisplay = ({
                     <Col lg={6}>
                       <div className="extra-row__currency">
                         <span>Trade limits</span>
-                        <p>{record.tradeLimits}</p>
+                        <p>{record.tradeLimit}</p>
                       </div>
                     </Col>
                     <Col lg={6}>
