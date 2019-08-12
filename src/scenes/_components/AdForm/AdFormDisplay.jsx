@@ -112,7 +112,7 @@ class AdFormDisplay extends React.Component {
       }
     }
 
-    callback('Please check your limits!');
+    callback('Min. trade limit should not exceed Max. trade limit');
   };
 
   handleCurrencyChange = async value => {

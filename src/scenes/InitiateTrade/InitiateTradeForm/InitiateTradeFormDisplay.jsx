@@ -34,7 +34,9 @@ const InitiateTradeFormDisplay = props => {
       }
     }
 
-    return () => {isSubscribed = false};
+    return () => {
+      isSubscribed = false;
+    };
   }, [btcPrice]);
 
   const fetchBTCPrice = async value => {
@@ -76,6 +78,7 @@ const InitiateTradeFormDisplay = props => {
       callback('Please input trade amount');
       return;
     }
+
     callback('Min. trade limit should not exceed Max. trade limit');
   };
 
@@ -90,6 +93,9 @@ const InitiateTradeFormDisplay = props => {
               initialValue: 0,
               rules: [{ validator: checkFiatValue }],
               normalize: (value, prevValue) => {
+                if (value.length > 10) return '';
+                // eslint-disable-next-line no-restricted-globals
+                if (isNaN(value)) return '';
                 if (value < 0) return prevValue;
                 return Math.trunc(value);
               },
@@ -106,8 +112,9 @@ const InitiateTradeFormDisplay = props => {
           <Form.Item>
             {form.getFieldDecorator('amount', {
               initialValue: 0,
-              normalize: (value, prevValue) => {
-                if (value === '') return '';
+              normalize: (value, prevValue, allValues) => {
+                if (allValues.fiat === '') return 0;
+                if (value === '') return 0;
                 if (value < 0) return Math.ceil(prevValue * 100000000) / 100000000;
                 return Math.ceil(value * 100000000) / 100000000;
               },
@@ -140,9 +147,14 @@ const InitiateTradeFormDisplay = props => {
           <p className="initiate-trade__confirm-text">You can't request a trade for your own ads.</p>
         ) : (
           <>
-            <p className="initiate-trade__confirm-text">
-              Enter receiving Bitcoin wallet public address and confirm you are willing to trade.
-            </p>
+            {isAuthorized ? (
+              <p className="initiate-trade__confirm-text">
+                Enter receiving Bitcoin wallet public address and confirm you are willing to trade.
+              </p>
+            ) : (
+              <p className="initiate-trade__confirm-text">Please sign in to complete the trade.</p>
+            )}
+
             <Row gutter={12}>
               <Col lg={17}>
                 <Form.Item>

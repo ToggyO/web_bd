@@ -7,6 +7,7 @@ import history from '@services/history';
 import { pageSize } from '@config/constants';
 import { Spinner } from '@components/Spinner';
 import { NoData } from './_components/NoData';
+import { catchNewLines } from '@utils';
 
 const { Column } = Table;
 
@@ -56,7 +57,7 @@ const AdsTableDisplay = ({
           ? record => (
             <div>
               <span style={{ fontWeight: 500 }}>Terms of trade</span>
-              <p style={{ marginTop: 10 }}>{record.terms}</p>
+              <p style={{ marginTop: 10 }}>{catchNewLines(record.terms)}</p>
             </div>
           )
           : null

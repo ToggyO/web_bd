@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Modal, Tag, Row, Col } from 'antd';
 import history from '@services/history';
-import { formatDate, sortStrings } from '@utils';
+import { formatDate, sortStrings, catchNewLines } from '@utils';
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
 import './style.less';
 import { Spinner } from '@components/Spinner/index';
@@ -103,7 +103,7 @@ const CreatedAdsTableDisplay = ({
                     <Col>
                       <div className="extra-row__currency">
                         <span>Terms of trade</span>
-                        <p>{record.terms}</p>
+                        <p>{catchNewLines(record.terms)}</p>
                       </div>
                     </Col>
                   </Row>
@@ -190,7 +190,7 @@ CreatedAdsTableDisplay.propTypes = {
       status: PropTypes.string,
       transactionLimit: PropTypes.string,
       location: PropTypes.string,
-      terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+      terms: PropTypes.string,
     })
   ),
   deleteAdRequest: PropTypes.func,

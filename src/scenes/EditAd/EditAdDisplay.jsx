@@ -20,7 +20,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
           <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
             <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
           </Link>
-          <h2 className="edit-ad__header">Edit an ad {prettifyId(match.params.id)}</h2>
+          <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet
             nihil neque fugiat expedita dolorem quam deserunt eligendi pariatur odit vitae tempore, tempora

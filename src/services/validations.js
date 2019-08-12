@@ -100,7 +100,7 @@ export const checkNotNull = (rule, value, cb) => {
 export const btcWallet = [
   { required: true, message: <div>Please input your bitcoin wallet</div> },
   {
-    pattern: /^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/,
+    pattern: /^[1][a-km-zA-HJ-NP-Z1-9]{24,33}$/,
     message: <div>Invalid bitcoin wallet public address</div>,
   },
 ];

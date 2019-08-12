@@ -8,7 +8,7 @@ import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
 import { ROUTES } from '@config/constants';
 import './style.less';
-import { catchFromPath, formatCapitals } from '@utils';
+import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
 
 const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
   const adId = catchFromPath(history.location.pathname, 'ads');
@@ -125,7 +125,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                     <Row gutter={48}>
                       <Col>
                         <span style={{ fontWeight: 500 }}>Terms of trade</span>
-                        <p>{terms}</p>
+                        <p>{catchNewLines(terms)}</p>
                       </Col>
                     </Row>
                   </>
