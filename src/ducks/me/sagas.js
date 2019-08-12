@@ -62,8 +62,7 @@ function* editPhoneNumber(action) {
   try {
     const data = yield call(api.me.editUserPhoneNumber, action.payload);
     yield put({ type: types.EDIT_PHONENUMBER_SUCCESS, payload: data });
-    yield call(history.push, ROUTES.SETTINGS.ROOT);
-    yield call(message.success, 'Please check your email to confirm your new phone number');
+    yield call(history.push, { state: { email: data.data } });
   } catch (error) {
     yield put({ type: types.EDIT_PHONENUMBER_ERROR, payload: error.response.data.errors });
   }
