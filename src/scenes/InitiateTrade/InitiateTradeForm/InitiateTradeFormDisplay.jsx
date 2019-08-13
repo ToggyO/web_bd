@@ -156,25 +156,29 @@ const InitiateTradeFormDisplay = props => {
             )}
 
             <Row gutter={12}>
-              <Col lg={17}>
-                <Form.Item>
-                  {form.getFieldDecorator('walletAddress', {
-                    rules: validations.btcWallet,
-                  })(<Input placeholder="Enter wallet address" />)}
-                </Form.Item>
-              </Col>
-              <Col lg={7}>
-                {isAuthorized ? (
-                  <Button
-                    type="primary"
-                    style={{ marginBottom: 34 }}
-                    htmlType="submit"
-                    loading={submitting}
-                    block={!!window.matchMedia('(max-width: 992px)').matches}
-                  >
-                    Request trade
-                  </Button>
-                ) : (
+              {isAuthorized ? (
+                <>
+                  <Col lg={17}>
+                    <Form.Item>
+                      {form.getFieldDecorator('walletAddress', {
+                        rules: validations.btcWallet,
+                      })(<Input placeholder="Enter wallet address" />)}
+                    </Form.Item>
+                  </Col>
+                  <Col lg={7}>
+                    <Button
+                      type="primary"
+                      style={{ marginBottom: 34 }}
+                      htmlType="submit"
+                      loading={submitting}
+                      block={!!window.matchMedia('(max-width: 992px)').matches}
+                    >
+                      Request trade
+                    </Button>
+                  </Col>
+                </>
+              ) : (
+                <Col lg={7}>
                   <Button
                     type="primary"
                     style={{ marginBottom: 34 }}
@@ -184,8 +188,8 @@ const InitiateTradeFormDisplay = props => {
                   >
                     Sign In
                   </Button>
-                )}
-              </Col>
+                </Col>
+              )}
             </Row>
           </>
         )}
