@@ -269,6 +269,7 @@ class AdFormDisplay extends React.Component {
                     ],
                     initialValue: specificAd.btcPrice,
                     normalize: (value, prevValue) => {
+                      if (value.length > 10) return '';
                       let strValue = value.toString();
                       const index = strValue.indexOf('.');
                       if (index > -1) strValue = strValue.slice(0, index + 3);
@@ -276,6 +277,7 @@ class AdFormDisplay extends React.Component {
                     },
                   })(
                     <Input
+                     
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
