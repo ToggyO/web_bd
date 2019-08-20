@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import { Spinner } from '@components/Spinner';
@@ -45,9 +45,35 @@ const SettingsDisplay = ({
                     title="Real Name"
                     description={loading ? <Spinner fontSize={15} /> : fullName}
                   />
-                  <Link to={ROUTES.SETTINGS.REQUEST_VERIFICATION} className="user-settings__verification">
-                    Request Verification
-                  </Link>
+                  {(() => {
+                    switch (verificationStatus) {
+                      case 'New':
+                      case 'Declined':
+                        return (
+                          <Link
+                            to={ROUTES.SETTINGS.REQUEST_VERIFICATION}
+                            className="user-settings__verification"
+                          >
+                            Request Verification
+                          </Link>
+                        );
+                      case 'Pending':
+                        return (
+                          <Tag className="user-settings__verification user-settings__verification--on-review">
+                            On review
+                          </Tag>
+                        );
+                      case 'Verified':
+                        return (
+                          <Tag className="user-settings__verification user-settings__verification--verified">
+                            Verified
+                          </Tag>
+                        );
+
+                      default:
+                        return undefined;
+                    }
+                  })()}
                 </List.Item>
 
                 <List.Item className="user-settings__item">

@@ -9,6 +9,21 @@
     position: absolute;
     top: 13px;
     left: 80px;
+    &--on-review,
+    &--verified {
+      border: none;
+      color: white;
+    }
+    &--on-review:hover,
+    &--verified:hover {
+      cursor: default;
+    }
+    &--on-review {
+      background: #f5232d;
+    }
+    &--verified {
+      background: @primary-color;
+    }
   }
   &__list {
     width: 56%;

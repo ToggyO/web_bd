@@ -5,6 +5,7 @@ import RequestVerificationFormDisplay from './RequestVerificationFormDisplay';
 function mapStateToProps(state) {
   return {
     errors: meSelectors.errorsSelector(state),
+    verificationStatus: meSelectors.verificationStatusSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
