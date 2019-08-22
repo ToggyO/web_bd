@@ -1,16 +1,18 @@
 /* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
+import { ExclamationMessage } from '@components/ExclamationMessage';
+import { Spinner } from '@components/Spinner';
+import TradeLimits from './_components/TradeLimits';
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import history from '@services/history';
 import * as validations from '@services/validations';
-import { ExclamationMessage } from '@components/ExclamationMessage';
-import { Spinner } from '@components/Spinner';
-import TradeLimits from './_components/TradeLimits';
-import './style.less';
+import superaxios from '@services/superaxios';
 import { formatMoney } from '@utils';
+import './style.less';
 
 const { Option } = Select;
 
@@ -19,6 +21,7 @@ class AdFormDisplay extends React.Component {
     loading: false,
     margin: null,
     btcPrice: null,
+    escrowFee:'',
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -69,11 +72,12 @@ class AdFormDisplay extends React.Component {
 
   fetchBTCPrice = async value => {
     this.setState({ loading: true });
-    const response = await fetch(
+    const btcPriceResponse = axios.get(
       `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`
     );
-    const data = await response.json();
-    this.setState({ btcPrice: +data.bpi[value].rate_float.toFixed(2), loading: false });
+    const escrowFeeResponse = superaxios.get('/escrow');
+    const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
+    this.setState({ btcPrice: +btcPrice.data.bpi[value].rate_float.toFixed(2), loading: false, escrowFee:escrowFee.data.data[0].fee });
   };
 
   handleSubmit = e => {
@@ -326,7 +330,7 @@ class AdFormDisplay extends React.Component {
               <div className="initiate-trade__note">
                 <ExclamationMessage>
                   Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow
-                  fee is 0,75% from the trade amount. Current blockchain transaction fee is approximately
+                  fee is {this.state.escrowFee}% from the trade amount. Current blockchain transaction fee is approximately
                   0.00033239 BTC.
                 </ExclamationMessage>
               </div>
