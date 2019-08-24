@@ -21,7 +21,7 @@ function* getSmsCode() {
   try {
     const data = yield call(api.me.getSmsCode);
     yield put({ type: types.GET_SMS_CODE_SUCCESS, payload: data });
-    yield call(message.success, 'The verification code has been sent to your phone!');
+    yield call(message.success, 'Verification code has been sent to your phone!');
   } catch (error) {
     yield put({ type: types.GET_SMS_CODE_ERROR, payload: error });
   }
