@@ -50,7 +50,7 @@ class EditPhoneNumberFormDisplay extends React.Component {
         <Form.Item>
           {getFieldDecorator('phone', {
             rules: validations.phone,
-          })(<Input addonBefore={prefixSelector} style={{ width: 368 }} placeholder="Phone number" />)}
+          })(<Input addonBefore={prefixSelector} style={{ maxWidth: 368 }} placeholder="Phone number" />)}
         </Form.Item>
 
         <Form.Item>

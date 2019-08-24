@@ -23,8 +23,8 @@ export const NotFound = () => {
         subTitle="Sorry, the page you visited does not exist."
         icon={image()}
         extra={
-          <Button type="primary" onClick={() => history.push('/')}>
-            Back Home
+          <Button type="primary" onClick={() => history.goBack()}>
+            Go Back
           </Button>
         }
       />

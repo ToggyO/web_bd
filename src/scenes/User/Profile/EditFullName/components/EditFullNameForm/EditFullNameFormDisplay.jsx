@@ -39,7 +39,7 @@ class EditFullNameFormDisplay extends React.Component {
         <Form.Item label="Enter new real name">
           {getFieldDecorator('fullName', {
             rules: validations.realname,
-          })(<Input style={{ width: 368 }} placeholder="Riley Stivens" />)}
+          })(<Input style={{ maxWidth: 368 }} placeholder="Riley Stivens" />)}
         </Form.Item>
 
         <Form.Item>

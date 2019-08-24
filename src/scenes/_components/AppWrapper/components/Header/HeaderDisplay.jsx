@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Menu, Dropdown, Button, Avatar } from 'antd';
+import { Icon, Layout, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
-import logo from '@assets/logo.svg';
-import miniLogo from '@assets/mini-logo.svg';
+import logo from '@assets/bd-logo.svg';
+import miniLogo from '@assets/bd-mini-logo.svg';
 import './style.less';
 
-const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
+const { Header } = Layout;
+
+const HeaderDisplay = ({ userName, logoutRequest, cleanState, collapsed, setCollapsed }) => {
   const handleLinkAction = (e, to) => {
     e.preventDefault();
     cleanState();
@@ -37,44 +39,62 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
   );
 
   return (
-    <header className="header">
-      <nav className="container nav">
-        <div className="nav__bubble" />
-        <a href="#" onClick={e => handleLinkAction(e, ROUTES.HOME)} className="header__logo">
-          <img
-            src={window.matchMedia('(max-width: 500px)').matches ? miniLogo : logo}
-            aria-label="logo"
-            alt="Bitcoins direct"
-          />
-        </a>
+    <Header className="bd-header">
+      <div className="bd-header__container">
+        {window.matchMedia('(max-width: 813px)').matches ? (
+          <>
+            <div className="logo">
+              <a href="#">
+                <img src={miniLogo} aria-label="logo" alt="Bitcoins direct" />
+              </a>
+            </div>
+            <Icon
+              className="bd-header__trigger"
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={() => setCollapsed(() => !collapsed)}
+            />
+          </>
+        ) : (
+          <>
+            <a href="#" onClick={e => handleLinkAction(e, ROUTES.HOME)} className="large-logo">
+              <img src={logo} aria-label="logo" alt="Bitcoins direct" />
+            </a>
+            <nav className="nav">
+              <div className="nav__bubble" />
+              {!window.matchMedia('(max-width: 813px)').matches && (
+                <>
+                  <a
+                    href={ROUTES.ADS.BUY}
+                    onClick={e => handleLinkAction(e, ROUTES.ADS.BUY)}
+                    className="nav__link"
+                  >
+                    Buy bitcoins
+                  </a>
 
-        <a
-          href={ROUTES.ADS.BUY}
-          onClick={e => handleLinkAction(e, ROUTES.ADS.BUY)}
-          className="nav__link"
-        >
-          Buy <span>bitcoins</span>
-        </a>
+                  <a
+                    href={ROUTES.ADS.SELL}
+                    onClick={e => handleLinkAction(e, ROUTES.ADS.SELL)}
+                    className="nav__link"
+                  >
+                    Sell bitcoins
+                  </a>
 
-        <a
-          href={ROUTES.ADS.SELL}
-          onClick={e => handleLinkAction(e, ROUTES.ADS.SELL)}
-          className="nav__link"
-        >
-          Sell <span>bitcoins</span>
-        </a>
+                  <a
+                    href={ROUTES.ADS.CREATE}
+                    onClick={e => handleLinkAction(e, ROUTES.ADS.CREATE)}
+                    className="nav__link"
+                  >
+                    Create an ad
+                  </a>
 
-        <a
-          href={ROUTES.ADS.CREATE}
-          onClick={e => handleLinkAction(e, ROUTES.ADS.CREATE)}
-          className="nav__link"
-        >
-          Create <span>an ad</span>
-        </a>
-
-        <Link to={ROUTES.OTHER.HELP} className="nav__link">
-          Help
-        </Link>
+                  <Link to={ROUTES.OTHER.HELP} className="nav__link">
+                    Help
+                  </Link>
+                </>
+              )}
+            </nav>
+          </>
+        )}
 
         <div className="right-nav">
           {userName ? (
@@ -93,21 +113,19 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState }) => {
             <>
               <Link to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }} className="nav__link">
                 <>
-                  <span>
-                    <Icon type="user-add" /> Sign up for free
-                  </span>
+                  <Icon type="user-add" /> Sign up <span className="hideble-span">for free</span>
                 </>
               </Link>
               <Link to={{ pathname: ROUTES.LOGIN, state: { toSignIn: true } }} className="nav__link">
                 <>
-                  <Icon type="lock" /> <span>Sign in</span>
+                  <Icon type="lock" /> Sign in
                 </>
               </Link>
             </>
           )}
         </div>
-      </nav>
-    </header>
+      </div>
+    </Header>
   );
 };
 
@@ -115,6 +133,8 @@ HeaderDisplay.propTypes = {
   userName: PropTypes.string,
   logoutRequest: PropTypes.func,
   cleanState: PropTypes.func,
+  collapsed: PropTypes.bool,
+  setCollapsed: PropTypes.func,
 };
 
 export default HeaderDisplay;

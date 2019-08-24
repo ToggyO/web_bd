@@ -28,7 +28,11 @@ const SettingsDisplay = ({
     <AppWrapperContainer>
       <div className="paper">
         <div className="user-settings custom-tabs">
-          <Tabs defaultActiveKey="1" tabPosition="left" size="small">
+          <Tabs
+            defaultActiveKey="1"
+            tabPosition={window.matchMedia('(max-width: 813px)').matches ? 'top' : 'left'}
+            size="small"
+          >
             <TabPane tab="Profile settings" key="1">
               <h2 className="user-settings__header">Profile settings</h2>
 
@@ -37,7 +41,7 @@ const SettingsDisplay = ({
                   className="user-settings__item"
                   actions={[
                     <Link to={ROUTES.SETTINGS.EDIT_FULLNAME}>
-                      Change <span>name</span>
+                      Change <span className="hideble-span-xs">name</span>
                     </Link>,
                   ]}
                 >
@@ -87,7 +91,7 @@ const SettingsDisplay = ({
                   className="user-settings__item"
                   actions={[
                     <Link to={ROUTES.SETTINGS.EDIT_PHONENUMBER}>
-                      Change <span>phone</span>
+                      Change <span className="hideble-span-xs">phone</span>
                     </Link>,
                   ]}
                 >
@@ -100,7 +104,7 @@ const SettingsDisplay = ({
                   className="user-settings__item"
                   actions={[
                     <Link to={ROUTES.SETTINGS.EDIT_EMAIL}>
-                      Change <span>email</span>
+                      Change <span className="hideble-span-xs">email</span>
                     </Link>,
                   ]}
                 >
@@ -113,7 +117,7 @@ const SettingsDisplay = ({
                   className="user-settings__item"
                   actions={[
                     <Link to={ROUTES.SETTINGS.EDIT_PASSWORD}>
-                      Change <span>password</span>
+                      Change <span className="hideble-span-xs">password</span>
                     </Link>,
                   ]}
                 >
@@ -126,6 +130,9 @@ const SettingsDisplay = ({
                   <List.Item.Meta title="Confirmed by other users" description="0" />
                 </List.Item>
               </List>
+            </TabPane>
+            <TabPane tab="Notifications" key="2">
+              Notifications
             </TabPane>
           </Tabs>
         </div>

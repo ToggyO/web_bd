@@ -29,3 +29,5 @@ export { default as QuestionCircleOutline } from '@ant-design/icons/lib/outline/
 export { default as ExclamationCircleOutline } from '@ant-design/icons/lib/outline/ExclamationCircleOutline';
 export { default as FilterFill } from '@ant-design/icons/lib/fill/FilterFill';
 export { default as MessageOutline } from '@ant-design/icons/lib/outline/MessageOutline';
+export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFoldOutline';
+export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline';

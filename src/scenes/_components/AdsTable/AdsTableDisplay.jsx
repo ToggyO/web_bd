@@ -70,7 +70,7 @@ const AdsTableDisplay = ({
         }
       }}
     >
-      <Column
+      {/* <Column
         title={() => (
           <span>
             Trade <span className="removable">limits</span>
@@ -92,14 +92,14 @@ const AdsTableDisplay = ({
         dataIndex="payment"
         key="payment"
         width="22%"
-      />
+      /> */}
       <Column
         title={type === 'ads' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
         key="userName"
         render={(text, record) => <Link to={`/user/${record.userName}`}>{record.userName}</Link>}
       />
-      <Column title="Location" dataIndex="location" key="location" />
+      {/* <Column title="Location" dataIndex="location" key="location" /> */}
       <Column
         align="right"
         title={() => (

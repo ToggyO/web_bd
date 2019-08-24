@@ -1,15 +1,12 @@
-.container {
-  max-width: 1202px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
 .paper {
   max-width: 1172px;
   margin: 8px auto 0;
   border-radius: 6px;
   box-shadow: @box-shadow-base;
   background: @component-background;
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+  }
 }
 
 .primary-btn[disabled] {

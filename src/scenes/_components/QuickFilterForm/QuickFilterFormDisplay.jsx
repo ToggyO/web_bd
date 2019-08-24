@@ -38,8 +38,8 @@ const QuickFilterFormDisplay = Form.create()(props => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Row gutter={6}>
-        <Col lg={5}>
+      <Row type="flex" gutter={5}>
+        <Col xs={24} md={12} lg={5} xl={5}>
           <Form.Item>
             {getFieldDecorator('amount', {
               rules: validations.amount,
@@ -54,7 +54,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
             )}
           </Form.Item>
         </Col>
-        <Col lg={6}>
+        <Col xs={24} md={12} lg={5} xl={6}>
           <Form.Item>
             {getFieldDecorator('payment', {
               rules: [{ required: false, message: 'Please select payment method!' }],
@@ -70,7 +70,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
             )}
           </Form.Item>
         </Col>
-        <Col lg={6}>
+        <Col xs={24} md={12} lg={5} xl={6}>
           <Form.Item>
             {getFieldDecorator('location', {
               rules: [{ required: false, message: 'Please select country!' }],
@@ -86,7 +86,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
             )}
           </Form.Item>
         </Col>
-        <Col lg={5}>
+        <Col xs={24} md={12} lg={5} xl={5}>
           <Form.Item>
             {getFieldDecorator('currency', {
               rules: [{ required: false, message: 'Please select currency!' }],
@@ -102,7 +102,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
             )}
           </Form.Item>
         </Col>
-        <Col lg={2}>
+        <Col xs={24} md={24} lg={4} xl={2}>
           <Form.Item>
             <Button
               type="primary"

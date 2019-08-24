@@ -57,7 +57,7 @@ class EditPasswordFormDisplay extends React.Component {
               type="password"
               placeholder="Old password"
               visibilityToggle={false}
-              style={{ width: 368 }}
+              style={{ maxWidth: 368 }}
             />
           )}
         </Form.Item>
@@ -70,7 +70,7 @@ class EditPasswordFormDisplay extends React.Component {
               type="password"
               placeholder="New password"
               visibilityToggle={false}
-              style={{ width: 368 }}
+              style={{ maxWidth: 368 }}
             />
           )}
         </Form.Item>
@@ -91,7 +91,7 @@ class EditPasswordFormDisplay extends React.Component {
               type="password"
               placeholder="Confirm password"
               visibilityToggle={false}
-              style={{ width: 368 }}
+              style={{ maxWidth: 368 }}
             />
           )}
         </Form.Item>
