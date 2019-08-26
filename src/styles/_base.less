@@ -6,6 +6,9 @@ body {
 
 h1 {
   font-size: 38px;
+  @media screen and (max-width: 446px) {
+    font-size: 26px;
+  }
 }
 
 h2 {
@@ -21,4 +24,13 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+table {
+  @media screen and (max-width: 320px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 420px) {
+    font-size: 13px;
+  }
 }

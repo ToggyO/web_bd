@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'antd';
+import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
 import { pageSize } from '@config/constants';
@@ -34,10 +34,9 @@ const AdsTableDisplay = ({
 
   return (
     <Table
-      expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
       dataSource={adsData}
       pagination={
-        withTerms
+        withTerms || withPagination
           ? {
             onChange: currentPage => {
               tablePageChange(currentPage);
@@ -46,8 +45,9 @@ const AdsTableDisplay = ({
             current: page || 1,
             pageSize,
             total: totalPages,
+            size: window.matchMedia('(max-width: 575px)').matches && 'small',
           }
-          : !!withPagination
+          : false
       }
       className={classNames}
       loading={{ spinning: loading, indicator: <Spinner /> }}
@@ -55,9 +55,33 @@ const AdsTableDisplay = ({
       expandedRowRender={
         withTerms
           ? record => (
-            <div>
-              <span style={{ fontWeight: 500 }}>Terms of trade</span>
-              <p style={{ marginTop: 10 }}>{catchNewLines(record.terms)}</p>
+            <div className="extra-row">
+              <div className="extra-row extra-row__left">
+                <Row>
+                  <Col xs={24} sm={12} className="viewable768">
+                    <div className="extra-row__currency">
+                      <span>Trade limits</span>
+                      <p>{record.tradeLimit}</p>
+                    </div>
+                  </Col>
+
+                  <Col xs={24} sm={12} className="viewable-630">
+                    <div className="extra-row__currency">
+                      <span>Payment method</span>
+                      <p>{record.payment}</p>
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <div className="extra-row__currency">
+                      <span>Terms of trade</span>
+                      <p>{catchNewLines(record.terms)}</p>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
             </div>
           )
           : null
@@ -70,7 +94,7 @@ const AdsTableDisplay = ({
         }
       }}
     >
-      {/* <Column
+      <Column
         title={() => (
           <span>
             Trade <span className="removable">limits</span>
@@ -79,9 +103,9 @@ const AdsTableDisplay = ({
         render={(text, record) => record.tradeLimit}
         dataIndex="tradeLimit"
         key="tradeLimit"
-        width="25%"
         sorter={!!history.location.search.includes('currency')}
         sortOrder={field === 'tradeLimit' && order}
+        className="hideble-768"
       />
       <Column
         title={() => (
@@ -91,8 +115,8 @@ const AdsTableDisplay = ({
         )}
         dataIndex="payment"
         key="payment"
-        width="22%"
-      /> */}
+        className="hideble-630"
+      />
       <Column
         title={type === 'ads' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
@@ -115,8 +139,8 @@ const AdsTableDisplay = ({
       <Column
         title="Action"
         dataIndex="type"
+        align="center"
         key="type"
-        columnWidth={80}
         render={(text, record) => {
           let buyOrSell;
           if (record.type.toLowerCase() === 'buy') {

@@ -64,7 +64,6 @@ const CreatedAdsTableDisplay = ({
   return (
     <div>
       <Table
-        expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
         dataSource={adsData}
         loading={{ spinning: loading, indicator: <Spinner /> }}
         locale={{ emptyText: <NoData /> }}
@@ -86,16 +85,32 @@ const CreatedAdsTableDisplay = ({
                 </div>
                 <div className="extra-row extra-row__left">
                   <Row>
-                    <Col lg={6}>
-                      <div className="extra-row__currency">
-                        <span>Trade limits</span>
-                        <p>{record.tradeLimit}</p>
-                      </div>
-                    </Col>
-                    <Col lg={6}>
+                    {window.matchMedia('(max-width: 768px)').matches && (
+                      <Col xs={12} sm={6}>
+                        <div className="extra-row__currency">
+                          <span>Date</span>
+                          <p>{formatDate(record.createdAt, 'lol')}</p>
+                        </div>
+                      </Col>
+                    )}
+                    <Col xs={12} sm={6}>
                       <div className="extra-row__currency">
                         <span>Location</span>
                         <p>{record.location}</p>
+                      </div>
+                    </Col>
+                    {window.matchMedia('(max-width: 570px)').matches && (
+                      <Col xs={12} sm={6}>
+                        <div className="extra-row__currency">
+                          <span>Payment method</span>
+                          <p>{record.payment}</p>
+                        </div>
+                      </Col>
+                    )}
+                    <Col xs={12} sm={6}>
+                      <div className="extra-row__currency">
+                        <span>Trade limits</span>
+                        <p>{record.tradeLimit}</p>
                       </div>
                     </Col>
                   </Row>
@@ -119,6 +134,7 @@ const CreatedAdsTableDisplay = ({
           render={(text, record) => formatDate(record.createdAt, 'lol')}
           sorter={(a, b) => a.createdAt - b.createdAt}
           defaultSortOrder="descend"
+          className="hideble-768"
         />
 
         <Column
@@ -129,6 +145,7 @@ const CreatedAdsTableDisplay = ({
           render={(text, record) => record.type}
           sorter={(a, b) => sortStrings(a.type, b.type)}
         />
+
         <Column
           key="payment"
           title={() => (
@@ -138,19 +155,18 @@ const CreatedAdsTableDisplay = ({
           )}
           dataIndex="payment"
           sorter={(a, b) => sortStrings(a.payment, b.payment)}
-          width="25%"
+          className="hideble-630"
         />
 
         <Column
           align="right"
           title={() => (
             <span>
-              Price <span className="removable">/ BTC</span>
+              Price / BTC
             </span>
           )}
           dataIndex="btcPrice"
           key="btcPrice"
-          width="20%"
         />
 
         <Column

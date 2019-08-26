@@ -9,13 +9,13 @@ import { formatDate, formatMoney, sortStrings, formatCapitals } from '@utils';
 import { ROUTES, confirmData } from '@config/constants';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
-import {InitiateDisputeLinkWithModal} from '@scenes/_components/InitiateDisputeLinkWithModal'
+import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 
 const { Column } = Table;
 
 const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCancel, loading }) => (
   <Table
-    expandRowByClick={!!window.matchMedia('(max-width: 1100px)').matches}
+    
     dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
@@ -75,7 +75,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
-                          <InitiateDisputeLinkWithModal id={record.key}/>
+                          <InitiateDisputeLinkWithModal id={record.key} />
                         </>
                     );
 
@@ -122,43 +122,51 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
 
             <div className="extra-row extra-row__left">
               <Row>
-                <Col lg={6}>
+               
+                <Col xs={12} sm={6} className="viewable-768">
+                  <div className="extra-row__location">
+                    <span>ID</span>
+                    <p>{record.order}</p>
+                  </div>
+                </Col>
+
+                <Col xs={12} sm={6}>
                   <div className="extra-row__location">
                     <span>Trade status</span>
                     <p className="green-status">{formatCapitals(record.status)}</p>
                   </div>
                 </Col>
 
-                <Col lg={6}>
+                <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Date</span>
                     <p>{formatDate(record.createdAt, 'lol')}</p>
                   </div>
                 </Col>
-                <Col lg={6}>
+                <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Trade limits</span>
                     <p>{record.tradeLimit}</p>
                   </div>
                 </Col>
-                <Col lg={6}>
+                <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Price/BTC</span>
                     <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
                   </div>
                 </Col>
-              </Row>
-              <Row>
-                <Col lg={6}>
-                  <div className="extra-row__currency">
-                    <span>Payment method</span>
-                    <p>{record.payment}</p>
-                  </div>
-                </Col>
-                <Col lg={6}>
+             
+               
+                <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Location</span>
                     <p>{record.location}</p>
+                  </div>
+                </Col>
+                <Col xs={12} sm={6}>
+                  <div className="extra-row__currency">
+                    <span>Payment method</span>
+                    <p>{record.payment}</p>
                   </div>
                 </Col>
               </Row>
@@ -176,9 +184,10 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
         : null
     }
   >
-    <Column key="key" title="ID" dataIndex="order" />
-    
+    <Column key="key" title="ID" dataIndex="order" className="hideble-768"/>
+
     <Column
+    
       key="tradePartner"
       title="Trade partner"
       render={(text, record) => {
@@ -198,12 +207,14 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
       onFilter={(value, record) => record.type.indexOf(value) === 0}
       filters={[{ text: 'Buy', value: 'Buy' }, { text: 'Sell', value: 'Sell' }]}
       filterMultiple={false}
+      className="hideble-420"
     />
     <Column
       key="tradeAmount"
       title="Trade amount"
       render={(text, record) => `${record.amount} BTC`}
       sorter={(a, b) => a.amount - b.amount}
+      className="hideble-680"
     />
     <Column
       align="right"
@@ -211,6 +222,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
       title="Fiat"
       render={(text, record) => `${formatMoney(record.fiat)} ${record.currency}`}
       sorter={(a, b) => a.fiat - b.fiat}
+      className="hideble-680"
     />
 
     <Column

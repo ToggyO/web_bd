@@ -1,4 +1,26 @@
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
   padding: 10px 14px;
+  @media screen and (max-width: 420px) {
+    padding: 10px 8px;
+  }
+  @media screen and (max-width: 326px) {
+    padding: 10px 5px;
+  }
+}
+
+.ant-table-tbody {
+  tr {
+    td:last-child {
+      padding-right: 0;
+    }
+
+    td.ant-table-row-expand-icon-cell {
+      @media screen and (max-width: 420px) {
+        padding-left: 0;
+        width: auto;
+        min-width: inherit;
+      }
+    }
+  }
 }

@@ -4,9 +4,11 @@ import { Icon } from 'antd';
 import Talk from 'talkjs';
 import photoUrl from '@assets/photoUrl.png';
 
-const TalkJS = ({ _me, _other, _id, _order }) => {
+const TalkJS = ({ _me, _other, _id, _order, isMobile }) => {
   let chatbox;
   let container = useRef(null);
+
+  console.log(isMobile);
 
   useEffect(() => {
     Talk.ready.then(() => {
@@ -34,8 +36,9 @@ const TalkJS = ({ _me, _other, _id, _order }) => {
 
       //         var chatbox = talkSession.createChatbox(conversation);
       // chatbox.mount(document.getElementById("talkjs-container"));
-
-      chatbox = window.talkSession.createChatbox(conversation);
+      chatbox = window.matchMedia('(max-width: 813px)').matches
+        ? window.talkSession.createPopup(conversation, { launcher: 'always', keepOpen: 'false' })
+        : window.talkSession.createChatbox();
       chatbox.mount(container);
     });
 
@@ -47,18 +50,20 @@ const TalkJS = ({ _me, _other, _id, _order }) => {
   }, [_me]);
 
   return (
-    <span>
-      <div
-        style={{ height: '100%', position: 'relative' }}
-        ref={c => {
-          container = c;
-        }}
-      >
-        <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-          <Icon type="loading" style={{ fontSize: 25 }} />
-        </p>
-      </div>
-    </span>
+    !isMobile && (
+      <span>
+        <div
+          style={{ height: '100%', position: 'relative' }}
+          ref={c => {
+            container = c;
+          }}
+        >
+          <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+            <Icon type="loading" style={{ fontSize: 25 }} />
+          </p>
+        </div>
+      </span>
+    )
   );
 };
 

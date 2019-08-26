@@ -44,6 +44,8 @@ const TradeDisplay = ({
 
   const user = specificTrade.direction === 'Incoming' ? specificTrade.tradePartner : specificTrade.adOwner;
 
+  const isMobile = window.matchMedia('(max-width: 813px)').matches;
+
   switch (specificTrade.adType) {
     case 'Sell': {
       if (specificTrade.direction === 'Outgoing') {
@@ -108,27 +110,38 @@ const TradeDisplay = ({
             {/* Left column with chat and payload for current trade status */}
             <Col md={12}>
               <div className="chat">
-                <div className="chat__window">
-                  {chatLoading ? (
-                    <div
-                      style={{
-                        height: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Icon type="message" style={{ fontSize: 30 }} />
-                    </div>
-                  ) : (
-                    <TalkJS
-                      _me={specificChat[me]}
-                      _other={specificChat[other]}
-                      _id={specificChat.id}
-                      _order={`${specificTrade.order}`}
-                    />
-                  )}
-                </div>
+                {isMobile ? (
+                  <TalkJS
+                    _me={specificChat[me]}
+                    _other={specificChat[other]}
+                    _id={specificChat.id}
+                    _order={`${specificTrade.order}`}
+                    isMobile={isMobile}
+                  />
+                ) : (
+                  <div className="chat__window">
+                    {chatLoading ? (
+                      <div
+                        style={{
+                          height: '100%',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Icon type="message" style={{ fontSize: 30 }} />
+                      </div>
+                    ) : (
+                      <TalkJS
+                        _me={specificChat[me]}
+                        _other={specificChat[other]}
+                        _id={specificChat.id}
+                        _order={`${specificTrade.order}`}
+                        isMobile={isMobile}
+                      />
+                    )}
+                  </div>
+                )}
 
                 {(() => {
                   switch (specificTrade.status) {

@@ -87,7 +87,7 @@ const InitiateTradeFormDisplay = props => {
   return (
     <Form onSubmit={handleSubmit}>
       <Row gutter={12}>
-        <Col xs={12}>
+        <Col xs={24} md={12}>
           <Form.Item>
             {form.getFieldDecorator('fiat', {
               initialValue: 0,
@@ -108,7 +108,7 @@ const InitiateTradeFormDisplay = props => {
             )}
           </Form.Item>
         </Col>
-        <Col xs={12}>
+        <Col xs={24} md={12}>
           <Form.Item>
             {form.getFieldDecorator('amount', {
               initialValue: 0,

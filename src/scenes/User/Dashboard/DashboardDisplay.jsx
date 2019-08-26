@@ -43,22 +43,22 @@ const DashboardDisplay = ({
             defaultActiveKey={
               catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED'
             }
-            tabPosition="left"
+            tabPosition={window.matchMedia('(max-width: 1024px)').matches ? 'top' : 'left'}
             size="small"
             onChange={handleChangeTab}
           >
-            <TabPane tab="Created ads" key="CREATED">
+            <TabPane tab="Ads" key="CREATED">
               <h2 className="dashboard__header">Created ads</h2>
 
               <CreatedAdsTableContainer withTerms />
             </TabPane>
-            <TabPane tab="Trade requests" key="REQUESTS">
+            <TabPane tab="Requests" key="REQUESTS">
               <h2 className="dashboard__header">
                 Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
               </h2>
               <TradesDashboardTableContainer withTerms type="requests" onDecline={deleteNewTradeRequest} />
             </TabPane>
-            <TabPane tab="Active trades" key="ACTIVE">
+            <TabPane tab="Active" key="ACTIVE">
               <h2 className="dashboard__header">
                 Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
               </h2>
@@ -69,13 +69,13 @@ const DashboardDisplay = ({
                 onDispute={() => {}}
               />
             </TabPane>
-            <TabPane tab="Completed trades" key="COMPLETED">
+            <TabPane tab="Completed" key="COMPLETED">
               <h2 className="dashboard__header">
                 Completed trades <Refresher loading={tradesLoading} cb={getCompletedTradesRequest} />
               </h2>
               <TradesDashboardTableContainer withTerms />
             </TabPane>
-            <TabPane tab="Canceled trades" key="CANCELED">
+            <TabPane tab="Canceled" key="CANCELED">
               <h2 className="dashboard__header">Canceled trades</h2>
               <TradesDashboardTableContainer withTerms />
             </TabPane>
