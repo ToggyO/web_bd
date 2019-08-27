@@ -100,10 +100,11 @@ function* forgotPassword(action) {
   try {
     const data = yield call(api.auth.forgotPassword, action.payload);
     yield put({ type: authTypes.FORGOT_PASSWORD_SUCCESS, payload: data });
-    yield call(
-      message.success,
-      `Thanks! Please check ${action.payload.email} for a link to reset your password.`
-    );
+    history.push({
+      state: {
+        letterHasBeenSent: true,
+      },
+    });
   } catch (error) {
     yield put({
       type: authTypes.FORGOT_PASSWORD_ERROR,
