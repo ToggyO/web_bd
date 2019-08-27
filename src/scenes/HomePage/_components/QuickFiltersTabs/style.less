@@ -1,10 +1,14 @@
 .quick-filters {
   padding: 0px 80px;
+
   @media screen and (max-width: 1024px) {
     padding: 0 40px;
   }
   @media screen and (max-width: 768px) {
     padding: 0 24px;
+  }
+  @media screen and (max-width: 420px) {
+    padding: 0 8px;
   }
   &__tabs {
     .ant-tabs-tab {
@@ -15,5 +19,38 @@
   }
   .ant-tabs-bar {
     margin-bottom: 30px;
+  }
+}
+
+.collapse {
+  display: none;
+  @media screen and (max-width: 420px) {
+    display: block;
+  }
+  background: transparent;
+  border: none;
+  & .ant-collapse-header {
+    padding-left: 16px !important;
+  }
+  & .ant-collapse-arrow {
+    color: @primary-color !important;
+    font-size: 15px !important;
+    top: 70% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  &__header {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: @primary-color;
+  }
+}
+
+.uncollapsed {
+  display: block;
+
+  @media screen and (max-width: 420px) {
+    display: none;
   }
 }
