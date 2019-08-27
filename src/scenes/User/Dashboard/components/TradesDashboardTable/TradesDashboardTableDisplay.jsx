@@ -19,7 +19,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
     pagination={
-      !(tradesData.length < 11) ? { size: window.matchMedia('(max-width: 575px)').matches && 'small'} : false
+      !(tradesData.length < 11) ? { size: window.matchMedia('(max-width: 575px)').matches && 'small' } : false
     }
     expandedRowRender={
       withTerms
@@ -82,7 +82,9 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
 
                   case 'Disputed':
                   case 'Completed':
+                  case 'Cancelled':
                   case 'Canceled':
+                  case 'Resolved':
                     return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
@@ -104,11 +106,11 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 onCancel,
                                 {
                                   title: 'You\'re about to cancel this trade request',
-                                  content: 'Cancel trade yo yo yo',
+                                  content: 'Are you sure?',
                                 },
                                 {
-                                  okText: 'Cancel it',
-                                  cancelText: 'Keep it',
+                                  okText: 'Yes',
+                                  cancelText: 'No',
                                 }
                               )
                             }
@@ -183,7 +185,13 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
         : null
     }
   >
-    <Column key="key" title="ID" dataIndex="order" className="hideble-768" />
+    <Column
+      key="key"
+      title="ID"
+      render={(text, record) => <span data-id={record.key}>{record.order}</span>}
+      dataIndex="order"
+      className="hideble-768"
+    />
 
     <Column
       key="tradePartner"

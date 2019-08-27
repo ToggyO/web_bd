@@ -24,7 +24,7 @@ const DashboardDisplay = ({
 }) => {
   useEffect(() => {
     const path = catchFromPath(history.location.pathname, 'dashboard');
-    if (path === 'created' || path === '') getMyCreatedAdsRequest();
+    if (path === '' || path === '') getMyCreatedAdsRequest();
     if (path === 'requests') getNewTradesRequest();
     if (path === 'active') getActiveTradesRequest();
     if (path === 'completed') getCompletedTradesRequest();
