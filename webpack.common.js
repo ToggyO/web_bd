@@ -56,7 +56,7 @@ exports.webpackCommon = {
         test: /\.svg/,
         use: {
           loader: 'svg-url-loader',
-          options: { limit: 10 * 1024, noquotes: true },
+          options: { limit: 40 * 1024, noquotes: true },
         },
       },
       {

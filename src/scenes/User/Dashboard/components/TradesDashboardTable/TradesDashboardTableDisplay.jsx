@@ -15,11 +15,12 @@ const { Column } = Table;
 
 const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCancel, loading }) => (
   <Table
-    
     dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
-    pagination={!(tradesData.length < 11)}
+    pagination={
+      !(tradesData.length < 11) ? { size: window.matchMedia('(max-width: 575px)').matches && 'small'} : false
+    }
     expandedRowRender={
       withTerms
         ? record => (
@@ -122,7 +123,6 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
 
             <div className="extra-row extra-row__left">
               <Row>
-               
                 <Col xs={12} sm={6} className="viewable-768">
                   <div className="extra-row__location">
                     <span>ID</span>
@@ -155,8 +155,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                     <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
                   </div>
                 </Col>
-             
-               
+
                 <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Location</span>
@@ -184,10 +183,9 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
         : null
     }
   >
-    <Column key="key" title="ID" dataIndex="order" className="hideble-768"/>
+    <Column key="key" title="ID" dataIndex="order" className="hideble-768" />
 
     <Column
-    
       key="tradePartner"
       title="Trade partner"
       render={(text, record) => {
