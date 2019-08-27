@@ -83,6 +83,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                   cachedUserID={cachedUserID}
                   loading={loading}
                   message={message}
+                  btcPrice={btcPrice}
                 />
               )}
             </Col>

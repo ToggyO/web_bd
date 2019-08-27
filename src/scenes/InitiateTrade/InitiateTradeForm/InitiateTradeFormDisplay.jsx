@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
@@ -21,15 +21,13 @@ const InitiateTradeFormDisplay = props => {
     message,
     adOwnerID,
     cachedUserID,
+    btcPrice,
   } = props;
-
-  const [btcPrice, setBtcPrice] = useState(1);
 
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
       if (min) {
-        fetchBTCPrice(currency);
         form.setFieldsValue({ fiat: min, amount: min / btcPrice });
       }
     }
@@ -38,15 +36,6 @@ const InitiateTradeFormDisplay = props => {
       isSubscribed = false;
     };
   }, [btcPrice]);
-
-  const fetchBTCPrice = async value => {
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`
-    );
-    const data = await response.json();
-    setBtcPrice(() => +data.bpi[currency].rate_float.toFixed(2));
-    // this.setState({ btcPrice: +data.bpi[value].rate_float.toFixed(2), loading: false });
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
