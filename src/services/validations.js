@@ -37,7 +37,7 @@ export const username = [
     message: <div>Please input your username!</div>,
   },
   {
-    min: 2,
+    min: 6,
     max: 20,
     message: <div>Username should include from 2 to 20 characters!</div>,
   },
