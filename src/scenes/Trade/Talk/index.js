@@ -8,8 +8,6 @@ const TalkJS = ({ _me, _other, _id, _order, isMobile }) => {
   let chatbox;
   let container = useRef(null);
 
-  console.log(isMobile);
-
   useEffect(() => {
     Talk.ready.then(() => {
       const me = new Talk.User({ ..._me, role: 'bitcoins_direct_user' });
