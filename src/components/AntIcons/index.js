@@ -31,4 +31,4 @@ export { default as FilterFill } from '@ant-design/icons/lib/fill/FilterFill';
 export { default as MessageOutline } from '@ant-design/icons/lib/outline/MessageOutline';
 export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFoldOutline';
 export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
-export { default as CaretDownOutline } from '@ant-design/icons/lib/outline/CaretDownOutline';
+export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/DoubleRightOutline';
