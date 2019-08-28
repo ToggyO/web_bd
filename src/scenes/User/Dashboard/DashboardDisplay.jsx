@@ -47,18 +47,27 @@ const DashboardDisplay = ({
             size="small"
             onChange={handleChangeTab}
           >
-            <TabPane tab="Ads" key="CREATED">
+            <TabPane
+              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Ads' : 'Created ads'}
+              key="CREATED"
+            >
               <h2 className="dashboard__header">Created ads</h2>
 
               <CreatedAdsTableContainer withTerms />
             </TabPane>
-            <TabPane tab="Requests" key="REQUESTS">
+            <TabPane
+              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Requests' : 'Trade requests'}
+              key="REQUESTS"
+            >
               <h2 className="dashboard__header">
                 Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
               </h2>
               <TradesDashboardTableContainer withTerms type="requests" onDecline={deleteNewTradeRequest} />
             </TabPane>
-            <TabPane tab="Active" key="ACTIVE">
+            <TabPane
+              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Active' : 'Active trades'}
+              key="ACTIVE"
+            >
               <h2 className="dashboard__header">
                 Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
               </h2>
@@ -69,13 +78,19 @@ const DashboardDisplay = ({
                 onDispute={() => {}}
               />
             </TabPane>
-            <TabPane tab="Completed" key="COMPLETED">
+            <TabPane
+              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Completed' : 'Completed trades'}
+              key="COMPLETED"
+            >
               <h2 className="dashboard__header">
                 Completed trades <Refresher loading={tradesLoading} cb={getCompletedTradesRequest} />
               </h2>
               <TradesDashboardTableContainer withTerms />
             </TabPane>
-            <TabPane tab="Canceled" key="CANCELED">
+            <TabPane
+              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Canceled' : 'Canceled trades'}
+              key="CANCELED"
+            >
               <h2 className="dashboard__header">Canceled trades</h2>
               <TradesDashboardTableContainer withTerms />
             </TabPane>

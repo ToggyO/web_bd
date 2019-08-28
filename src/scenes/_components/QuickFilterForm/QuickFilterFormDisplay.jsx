@@ -9,7 +9,7 @@ import { purifyObject, makeQueryStringFromObject } from '@utils';
 const { Option } = Select;
 
 const QuickFilterFormDisplay = Form.create()(props => {
-  const { form, type, filterDataSubmit, amount, payment, location, currency } = props;
+  const { form, type, filterDataSubmit, amount, payment, location, currency, classNames } = props;
   const { getFieldDecorator } = form;
 
   const handleSubmit = e => {
@@ -37,7 +37,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className={classNames}>
       <Row type="flex" gutter={5}>
         <Col xs={24} md={12} lg={5} xl={5}>
           <Form.Item>

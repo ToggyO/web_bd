@@ -4,6 +4,7 @@ import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
 import { AdsTableContainer } from '@scenes/_components/AdsTable';
+import { Collapsed } from '@scenes/_components/Collapsed';
 import { pageSize } from '@config/constants';
 import './style.less';
 
@@ -27,7 +28,9 @@ const AdsDisplay = ({ getAdsRequest, type }) => {
       <div className="paper">
         <div className="ads">
           <h1>{Type} bitcoins</h1>
-          <QuickFilterFormContainer type={type} initialState={initialState} />
+          <Collapsed>
+            <QuickFilterFormContainer type={type} initialState={initialState} />
+          </Collapsed>
           <AdsTableContainer type={type} withTerms />
         </div>
       </div>
