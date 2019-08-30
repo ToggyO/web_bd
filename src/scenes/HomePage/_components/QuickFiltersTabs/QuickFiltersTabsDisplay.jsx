@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
-
 import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import './style.less';
 
@@ -24,5 +24,9 @@ const QuickFiltersTabsDisplay = ({ classNames }) => (
     </Tabs>
   </div>
 );
+
+QuickFiltersTabsDisplay.propTypes = {
+  classNames: PropTypes.string,
+};
 
 export default QuickFiltersTabsDisplay;
