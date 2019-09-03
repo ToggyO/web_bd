@@ -50,7 +50,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                 min={0}
                 step={10}
                 parser={string => (parseInt(string, 10) ? string : '')}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -66,7 +66,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {payment_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>
@@ -82,7 +82,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {location_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>
@@ -98,7 +98,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {currency_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>

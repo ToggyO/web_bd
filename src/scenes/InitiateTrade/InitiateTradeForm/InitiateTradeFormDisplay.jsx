@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
 import * as validations from '@services/validations';
 import history from '@services/history';
+import superaxios from '@services/superaxios';
 
 const InitiateTradeFormDisplay = props => {
   const {
@@ -24,10 +25,13 @@ const InitiateTradeFormDisplay = props => {
     btcPrice,
   } = props;
 
+  const [escrowFee, setEscrowFee] = useState(0);
+
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
       if (min) {
+        fetchEscrowFee();
         form.setFieldsValue({ fiat: min, amount: min / btcPrice });
       }
     }
@@ -36,6 +40,11 @@ const InitiateTradeFormDisplay = props => {
       isSubscribed = false;
     };
   }, [btcPrice]);
+
+  const fetchEscrowFee = async () => {
+    const escrowFeeResponse = await superaxios.get('/escrow');
+    setEscrowFee(() => escrowFeeResponse.data.data[0].fee);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -93,7 +102,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter={currency}
                 onChange={handleFiatChange}
                 disabled={adOwnerID === cachedUserID}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -113,7 +122,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter="BTC"
                 onChange={handleTradeAmountChange}
                 disabled={adOwnerID === cachedUserID}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -121,8 +130,9 @@ const InitiateTradeFormDisplay = props => {
 
       <div className="initiate-trade__note">
         <ExclamationMessage>
-          Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow fee is
-          0.75% from the trade amount. Current blockchain transaction fee is approximately 0.00033239 BTC.
+          Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow fee is{' '}
+          {escrowFee}% from the trade amount. Current blockchain transaction fee is approximately 0.00033239
+          BTC.
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">

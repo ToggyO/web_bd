@@ -39,6 +39,7 @@ const DashboardDisplay = ({
     <AppWrapperContainer>
       <div className="paper">
         <div className="dashboard custom-tabs">
+		<div>				</div>
           <Tabs
             defaultActiveKey={
               catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED'

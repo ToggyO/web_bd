@@ -39,7 +39,7 @@ export const username = [
   {
     min: 6,
     max: 20,
-    message: <div>Username should include from 2 to 20 characters!</div>,
+    message: <div>Username should include from 6 to 20 characters!</div>,
   },
   {
     pattern: /^[a-zA-Z0-9_.]+$/,

@@ -32,14 +32,13 @@ const TalkJS = ({ _me, _other, _id, _order, isMobile }) => {
         custom: { order: _order },
       });
 
-      //         var chatbox = talkSession.createChatbox(conversation);
+      // var chatbox = talkSession.createChatbox(conversation);
       // chatbox.mount(document.getElementById("talkjs-container"));
       chatbox = window.matchMedia('(max-width: 813px)').matches
         ? window.talkSession.createPopup(conversation, { launcher: 'always', keepOpen: 'false' })
-        : window.talkSession.createChatbox();
+        : window.talkSession.createChatbox(conversation);
       chatbox.mount(container);
     });
-
     return () => {
       if (chatbox) {
         chatbox.destroy();
