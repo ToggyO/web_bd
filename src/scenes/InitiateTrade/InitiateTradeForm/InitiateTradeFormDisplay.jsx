@@ -130,9 +130,8 @@ const InitiateTradeFormDisplay = props => {
 
       <div className="initiate-trade__note">
         <ExclamationMessage>
-          Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow fee is{' '}
-          {escrowFee}% from the trade amount. Current blockchain transaction fee is approximately 0.00033239
-          BTC.
+          Please note that the Escrow fee and blockchain fee are charged to the buyer. The current Escrow fee
+          is {escrowFee}% of the amount of bitcoin being traded. The current blockchain fee is 0.00033239 BTC.
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">

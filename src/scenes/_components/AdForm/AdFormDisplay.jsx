@@ -21,7 +21,7 @@ class AdFormDisplay extends React.Component {
     loading: false,
     margin: null,
     btcPrice: null,
-    escrowFee:'',
+    escrowFee: '',
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -52,7 +52,7 @@ class AdFormDisplay extends React.Component {
         100 - (this.state.btcPrice * 100) / this.props.specificAd.btcPrice,
         1,
         '.',
-        ''
+        '',
       );
       this.setState({ margin });
       this.props.form.setFieldsValue({
@@ -73,11 +73,15 @@ class AdFormDisplay extends React.Component {
   fetchBTCPrice = async value => {
     this.setState({ loading: true });
     const btcPriceResponse = axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`
+      `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`,
     );
     const escrowFeeResponse = superaxios.get('/escrow');
     const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
-    this.setState({ btcPrice: +btcPrice.data.bpi[value].rate_float.toFixed(2), loading: false, escrowFee:escrowFee.data.data[0].fee });
+    this.setState({
+      btcPrice: +btcPrice.data.bpi[value].rate_float.toFixed(2),
+      loading: false,
+      escrowFee: escrowFee.data.data[0].fee,
+    });
   };
 
   handleSubmit = e => {
@@ -147,7 +151,7 @@ class AdFormDisplay extends React.Component {
   };
 
   render() {
-    const { form, isAuthorized, loading, forEdit, specificAd } = this.props;
+    const { form, isAuthorized, loading, forEdit, specificAd, countryData } = this.props;
     const payment = form.getFieldValue('payment');
 
     return (
@@ -163,7 +167,7 @@ class AdFormDisplay extends React.Component {
               <Radio.Group disabled={history.location.pathname !== ROUTES.ADS.CREATE}>
                 <Radio value="Buy">I want to buy bitcoins</Radio>
                 <Radio value="Sell">I want to sell bitcoins</Radio>
-              </Radio.Group>
+              </Radio.Group>,
             )}
           </Form.Item>
         </div>
@@ -176,7 +180,7 @@ class AdFormDisplay extends React.Component {
               <Form.Item className="ad-form__item" label="Currency">
                 {form.getFieldDecorator('currency', {
                   rules: [{ required: true, message: <div>Please select currency!</div> }],
-                  initialValue: specificAd.currency || getInitialValuesBasedOnNavigatorLanguage().currency,
+                  initialValue: specificAd.currency || countryData.currency,
                 })(
                   <Select
                     showSearch
@@ -192,7 +196,7 @@ class AdFormDisplay extends React.Component {
                         {currency_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -200,7 +204,7 @@ class AdFormDisplay extends React.Component {
               <Form.Item className="ad-form__item" label="Location">
                 {form.getFieldDecorator('location', {
                   rules: [{ required: true, message: <div>Please select location!</div> }],
-                  initialValue: specificAd.location || getInitialValuesBasedOnNavigatorLanguage().location,
+                  initialValue: specificAd.location || countryData.location,
                 })(
                   <Select
                     showSearch
@@ -215,7 +219,7 @@ class AdFormDisplay extends React.Component {
                         {location_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -241,7 +245,7 @@ class AdFormDisplay extends React.Component {
                         {payment_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -281,11 +285,10 @@ class AdFormDisplay extends React.Component {
                     },
                   })(
                     <Input
-                     
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
-                    />
+                    />,
                   )}
                 </Form.Item>
               </Spin>
@@ -317,7 +320,7 @@ class AdFormDisplay extends React.Component {
                         min={-100}
                         max={100}
                         onChange={this.handleMarginChange}
-                      />
+                      />,
                     )}
                   </Form.Item>
                 </div>
@@ -329,9 +332,9 @@ class AdFormDisplay extends React.Component {
             <Col>
               <div className="initiate-trade__note">
                 <ExclamationMessage>
-                  Note that Escrow fee and blockchain transaction fee are charged from a buyer. Current Escrow
-                  fee is {this.state.escrowFee}% from the trade amount. Current blockchain transaction fee is approximately
-                  0.00033239 BTC.
+                  Please note that the Escrow fee and blockchain fee are charged to the buyer. The current
+                  Escrow fee is {this.state.escrowFee}% of the amount of bitcoin being traded. The current
+                  blockchain fee is 0.00033239 BTC.
                 </ExclamationMessage>
               </div>
             </Col>
@@ -369,7 +372,7 @@ class AdFormDisplay extends React.Component {
                     className=" ad-form__textarea"
                     placeholder="Any other information you wish to tell about your trade"
                     rows={5}
-                  />
+                  />,
                 )}
               </Form.Item>
             </Col>
@@ -421,6 +424,10 @@ AdFormDisplay.propTypes = {
     minTradeLimit: PropTypes.number,
     maxTradeLimit: PropTypes.number,
     terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  }),
+  countryData: PropTypes.shape({
+    currency: PropTypes.string,
+    location: PropTypes.string,
   }),
 };
 
