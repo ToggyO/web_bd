@@ -38,9 +38,13 @@ const DrawerDisplay = ({ collapsed, setCollapsed }) => (
         </Link>
       </Menu.Item>
       <Menu.Item key="4">
-        <Link onClick={() => setCollapsed(true)} to={ROUTES.OTHER.HELP}>
+        <a
+          onClick={() => setCollapsed(true)}
+          href="https://bitcoinsdirect.freshdesk.com/support/home"
+          target="_blank"
+        >
           Help
-        </Link>
+        </a>
       </Menu.Item>
       <Menu.Item key="5">
         <Link onClick={() => setCollapsed(true)} to={ROUTES.OTHER.PRIVACY}>

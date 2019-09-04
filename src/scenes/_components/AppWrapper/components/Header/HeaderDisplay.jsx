@@ -87,9 +87,13 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState, collapsed, setColl
                     Create an ad
                   </a>
 
-                  <Link to={ROUTES.OTHER.HELP} className="nav__link">
+                  <a
+                    className="nav__link"
+                    href="https://bitcoinsdirect.freshdesk.com/support/home"
+                    target="_blank"
+                  >
                     Help
-                  </Link>
+                  </a>
                 </>
               )}
             </nav>
