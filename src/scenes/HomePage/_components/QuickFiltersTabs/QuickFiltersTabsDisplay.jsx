@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
-import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import './style.less';
 
 const { TabPane } = Tabs;
 
 const initialState = {
   payment: 'PayPal',
-  ...getInitialValuesBasedOnNavigatorLanguage(),
 };
 
 const QuickFiltersTabsDisplay = ({ classNames }) => (
