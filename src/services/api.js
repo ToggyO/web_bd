@@ -34,6 +34,9 @@ export default {
       const response = await superaxios.put('/token', { refreshToken });
       return response.data;
     },
+    logout: async () => {
+      await superaxios.post('/auth/logout');
+    },
   },
 
   me: {

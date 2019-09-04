@@ -35,5 +35,5 @@ export const resetPasswordRequest = data => ({
 });
 
 export const logoutRequest = () => ({
-  type: types.LOGOUT,
+  type: types.LOGOUT_REQUEST,
 });

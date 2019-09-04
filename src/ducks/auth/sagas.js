@@ -143,3 +143,11 @@ export function* resetPasswordSaga() {
 }
 
 /*---------------------------------------------------------------------------*/
+
+function* logout() {
+  yield call(api.auth.logout);
+}
+
+export function* logoutSaga() {
+  yield takeLatest('bitcoins-direct/auth/LOGOUT_REQUEST', logout);
+}

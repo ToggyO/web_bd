@@ -29,4 +29,4 @@ export const RESET_PASSWORD_SUCCESS = 'bitcoins-direct/auth/RESET_PASSWORD_SUCCE
 export const RESET_PASSWORD_ERROR = 'bitcoins-direct/auth/RESET_PASSWORD_ERROR';
 
 /* Logout */
-export const LOGOUT = 'bitcoins-direct/auth/LOGOUT';
+export const LOGOUT_REQUEST = 'bitcoins-direct/auth/LOGOUT_REQUEST';

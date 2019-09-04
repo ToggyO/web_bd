@@ -77,7 +77,7 @@ export default function auth(state = initialState, action) {
     case types.RESET_PASSWORD_ERROR:
       return { ...state, loading: false, errors: action.payload };
 
-    case types.LOGOUT:
+    case types.LOGOUT_REQUEST:
       return initialState;
     default:
       return state;

@@ -42,7 +42,7 @@ export const renewCountryDataOnTokenRefresh = store => next => action => {
 };
 
 export const logout = store => next => action => {
-  if (action.type === authTypes.LOGOUT) {
+  if (action.type === authTypes.LOGOUT_REQUEST) {
     userLogout();
   }
   return next(action);
