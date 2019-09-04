@@ -29,6 +29,9 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
           </p>
           <AdFormContainer onSubmit={editAdRequest} type="ad" forEdit />
         </div>
+        <p className="coindesk-powered">
+          Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+        </p>
       </div>
     </AppWrapperContainer>
   );

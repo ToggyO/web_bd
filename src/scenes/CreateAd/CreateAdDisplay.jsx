@@ -11,6 +11,9 @@ const CreateAdDisplay = ({ isAuthorized, createAdRequest, persistFormState }) =>
         <h1>Create an ad</h1>
         <AdFormContainer onSubmit={isAuthorized ? createAdRequest : persistFormState} type="ad" />
       </div>
+      <p className="coindesk-powered">
+        Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+      </p>
     </div>
   </AppWrapperContainer>
 );

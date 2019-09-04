@@ -147,6 +147,7 @@ class AdFormDisplay extends React.Component {
   };
 
   render() {
+    const { location } = history;
     const { form, isAuthorized, loading, forEdit, specificAd, countryData } = this.props;
     const payment = form.getFieldValue('payment');
 
@@ -264,7 +265,15 @@ class AdFormDisplay extends React.Component {
 
           <Row gutter={48}>
             <Col lg={11}>
-              <Spin spinning={this.state.loading} tip="Fetching currency..." indicator={<Spinner />}>
+              <Spin
+                spinning={this.state.loading}
+                tip={
+                  location.pathname === ROUTES.ADS.CREATE
+                    ? 'Fetching from Coindesk...'
+                    : 'Fetching currency...'
+                }
+                indicator={<Spinner />}
+              >
                 <Form.Item className="ad-form__item" label="BTC trade price">
                   {form.getFieldDecorator('btcPrice', {
                     rules: [
