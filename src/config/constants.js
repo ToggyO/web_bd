@@ -59,7 +59,7 @@ export const ROUTES = {
 export const currencies = [
   { name: 'USD', value: 'USD' },
   { name: 'RUB', value: 'RUB' },
-  { name: 'VEF', value: 'VEF' },
+  { name: 'VES', value: 'VES' },
 ];
 export const locations = [
   { name: 'USA', value: 'USA' },

@@ -1,13 +1,11 @@
 /* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import TradeLimits from './_components/TradeLimits';
 import { ROUTES, currencies, locations, payments } from '@config/constants';
-import { getInitialValuesBasedOnNavigatorLanguage } from '@services/navigator';
 import history from '@services/history';
 import * as validations from '@services/validations';
 import superaxios from '@services/superaxios';
@@ -36,11 +34,11 @@ class AdFormDisplay extends React.Component {
 
   async componentDidMount() {
     const { location } = history;
-    const { cleanFormState } = this.props;
+    const { cleanFormState, countryData } = this.props;
 
     if (location.pathname === ROUTES.ADS.CREATE && !location.search) {
       cleanFormState();
-      await this.fetchBTCPrice(getInitialValuesBasedOnNavigatorLanguage().currency);
+      await this.fetchBTCPrice(countryData.currency);
       await this.setZeroFields();
     }
   }
@@ -72,13 +70,11 @@ class AdFormDisplay extends React.Component {
 
   fetchBTCPrice = async value => {
     this.setState({ loading: true });
-    const btcPriceResponse = axios.get(
-      `https://cors-anywhere.herokuapp.com/https://api.coindesk.com/v1/bpi/currentprice/${value}.json`,
-    );
+    const btcPriceResponse = superaxios.get(`/currency?currencies[]=${value}`);
     const escrowFeeResponse = superaxios.get('/escrow');
     const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
     this.setState({
-      btcPrice: +btcPrice.data.bpi[value].rate_float.toFixed(2),
+      btcPrice: +btcPrice.data.data[0].rate.toFixed(2),
       loading: false,
       escrowFee: escrowFee.data.data[0].fee,
     });

@@ -9,7 +9,18 @@ import { purifyObject, makeQueryStringFromObject } from '@utils';
 const { Option } = Select;
 
 const QuickFilterFormDisplay = Form.create()(props => {
-  const { form, type, filterDataSubmit, amount, payment, location, currency, classNames } = props;
+  const {
+    form,
+    type,
+    filterDataSubmit,
+    amount,
+    payment,
+    location,
+    currency,
+    classNames,
+    defaultCurrency,
+    defaultLocation,
+  } = props;
   const { getFieldDecorator } = form;
 
   const handleSubmit = e => {
@@ -74,7 +85,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
           <Form.Item>
             {getFieldDecorator('location', {
               rules: [{ required: false, message: 'Please select country!' }],
-              initialValue: location,
+              initialValue: defaultLocation || location,
             })(
               <Select placeholder="All countries" allowClear>
                 {locations.map(location_ => (
@@ -90,7 +101,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
           <Form.Item>
             {getFieldDecorator('currency', {
               rules: [{ required: false, message: 'Please select currency!' }],
-              initialValue: currency,
+              initialValue: currency || defaultCurrency,
             })(
               <Select placeholder="All currencies" allowClear>
                 {currencies.map(currency_ => (

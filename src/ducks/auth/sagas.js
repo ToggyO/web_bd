@@ -4,6 +4,7 @@ import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
 import * as authTypes from './types';
+import { meTypes } from '../me';
 
 /*
 	function* workerSaga
@@ -80,6 +81,7 @@ function* twoFactorAuth(action) {
     } else {
       history.push(ROUTES.HOME);
     }
+    yield put({ type: meTypes.GET_PROFILE_REQUEST });
   } catch (error) {
     yield put({
       type: authTypes.TWO_FACTOR_AUTH_ERROR,

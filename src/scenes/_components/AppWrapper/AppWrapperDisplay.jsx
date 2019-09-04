@@ -9,11 +9,11 @@ import { HeaderContainer } from './components/Header';
 
 const { Content } = Layout;
 
-const AppWrapperDisplay = ({ userName, getProfileRequest, children }) => {
+const AppWrapperDisplay = ({ userID, userName, countryCode, getProfileRequest, children }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
-    if (!userName && checkTokens()) getProfileRequest();
+    if ((!userID || !userName || !countryCode) && checkTokens()) getProfileRequest();
   }, []);
 
   return (
@@ -27,13 +27,11 @@ const AppWrapperDisplay = ({ userName, getProfileRequest, children }) => {
 };
 
 AppWrapperDisplay.propTypes = {
-  userName: PropTypes.string,
+  userID: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  countryCode: PropTypes.string,
   getProfileRequest: PropTypes.func,
   children: PropTypes.element.isRequired,
-};
-
-AppWrapperDisplay.defaultProps = {
-  userName: null,
 };
 
 export default AppWrapperDisplay;

@@ -2,7 +2,17 @@ import * as types from './types';
 
 const initialState = {
   data: {
-    user: {},
+    countryCode: Object.prototype.hasOwnProperty.call(localStorage, 'countryCode')
+      ? localStorage.getItem('countryCode')
+      : null,
+    user: {
+      userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName')
+        ? localStorage.getItem('userName')
+        : null,
+      id: Object.prototype.hasOwnProperty.call(localStorage, 'userID')
+        ? localStorage.getItem('userID')
+        : null,
+    },
   },
   loading: false,
   code: null,

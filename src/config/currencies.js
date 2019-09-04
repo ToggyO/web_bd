@@ -1,7 +1,7 @@
 export const currency = {
   USD: 'USD',
   RUB: 'RUB',
-  VEF: 'VEF',
+  VES: 'VES',
 };
 
 export const location = {

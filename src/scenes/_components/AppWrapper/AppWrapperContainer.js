@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { meActions } from '@ducks/me';
+import { meActions, meSelectors } from '@ducks/me';
 import { authSelectors } from '@ducks/auth';
 
 import AppWrapperDisplay from './AppWrapperDisplay';
@@ -7,6 +7,8 @@ import AppWrapperDisplay from './AppWrapperDisplay';
 function mapStateToProps(state) {
   return {
     userName: authSelectors.userNameSelector(state),
+    userID: meSelectors.userIDSelector(state),
+    countryCode: meSelectors.countryCodeSelector(state),
   };
 }
 
@@ -20,5 +22,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AppWrapperDisplay);

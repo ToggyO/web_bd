@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { authSelectors } from '@ducks/auth';
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
+import { meSelectors } from '@ducks/me';
 import AdFormDisplay from './AdFormDisplay';
 
 function mapStateToProps(state, props) {
@@ -11,6 +12,7 @@ function mapStateToProps(state, props) {
     loading: state._global.submitting,
     onSubmit: props.onSubmit,
     isCurrency: !!state.ads.ad.data.currency,
+    countryData: meSelectors.countryDataSelector(state),
   };
 }
 
@@ -24,5 +26,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AdFormDisplay);

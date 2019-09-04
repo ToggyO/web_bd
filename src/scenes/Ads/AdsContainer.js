@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { buyAdsActions } from '@ducks/ads/buy';
 import { sellAdsActions } from '@ducks/ads/sell';
 import * as adsSelectors from '@ducks/ads/selectors';
+import { meSelectors } from '@ducks/me';
 import AdsDisplay from './AdsDisplay';
 
 function mapStateToProps(state, props) {
@@ -9,6 +10,7 @@ function mapStateToProps(state, props) {
     adsData: adsSelectors.adsSelector(state, props),
     loading: adsSelectors.adsLoadingSelector(state, props),
     totalPages: adsSelectors.totalPagesQuantitySelector(state, props),
+    countryData: meSelectors.countryDataSelector(state),
   };
 }
 
@@ -31,5 +33,5 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AdsDisplay);

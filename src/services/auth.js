@@ -40,6 +40,8 @@ export const checkTokens = () => {
 
   if (!accessToken || !refreshToken) {
     localStorage.removeItem('userName');
+    localStorage.removeItem('userID');
+    localStorage.removeItem('countryCode');
     return false;
   }
 
