@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
-import { authActions } from 'src/ducks/auth';
-import { userProfileSelectors } from 'src/ducks/user';
+import { authActions, authSelectors } from '@ducks/auth';
+import { searchActions } from '@ducks/ads/search';
 
 import HeaderDisplay from './HeaderDisplay';
 
 function mapStateToProps(state) {
   return {
-    userName: userProfileSelectors.userNameSelector(state),
-    loading: userProfileSelectors.loadingSelector(state),
+    userName: authSelectors.userNameSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -15,6 +14,9 @@ function mapDispatchToProps(dispatch) {
     logoutRequest(e) {
       e.preventDefault();
       dispatch(authActions.logoutRequest());
+    },
+    cleanState() {
+      dispatch(searchActions.cleanState());
     },
   };
 }

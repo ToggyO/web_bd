@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const antColors = {
   white: '#fff',
@@ -17,6 +18,8 @@ const antColors = {
   'border-color-base': 'rgba(0,0,0,0.25)',
   'border-color-split': 'hsv(0, 0, 91%)',
   'box-shadow-base': '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+  'label-color': 'fade(#000, 65%);',
+  'table-row-hover-bg': 'none',
 };
 
 exports.antColors = antColors;
@@ -53,7 +56,7 @@ exports.webpackCommon = {
         test: /\.svg/,
         use: {
           loader: 'svg-url-loader',
-          options: { limit: 10 * 1024, noquotes: true },
+          options: { limit: 40 * 1024, noquotes: true },
         },
       },
       {
@@ -94,10 +97,26 @@ exports.webpackCommon = {
   resolve: {
     alias: {
       '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/components/AntIcons/index.js'),
+      '@assets': path.resolve(__dirname, 'src/assets/'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@config': path.resolve(__dirname, 'src/config'),
+      '@ducks': path.resolve(__dirname, 'src/ducks'),
+      '@routes': path.resolve(__dirname, 'src/routes'),
+      '@scenes': path.resolve(__dirname, 'src/scenes'),
+      '@services': path.resolve(__dirname, 'src/services'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      // get rid of
       assets: path.resolve(__dirname, 'assets/'),
       src: path.resolve(__dirname, 'src/'),
       components: path.resolve(__dirname, 'src/components'),
     },
     extensions: ['.js', '.jsx', 'less'],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        API_URL: JSON.stringify(process.env.API_URL),
+      },
+    }),
+  ],
 };

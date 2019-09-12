@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import reqwest from 'reqwest';
-import axios from 'axios';
+import superaxios from '@services/superaxios';
 import { Upload, Form, Button, message } from 'antd';
-import { API_URL } from 'src/services/api/config';
-import VerificationIcon from 'src/assets/verification-icon.svg';
+import VerificationIcon from '@assets/verification-icon.svg';
+import { ROUTES } from '@config/constants';
+import { parseBase64 } from '@utils';
+import history from '@services/history';
 
 const { Dragger } = Upload;
 
@@ -14,60 +15,44 @@ class RequestVerificationFormDisplay extends React.Component {
     uploading: false,
   };
 
+  componentDidMount() {
+    const { verificationStatus } = this.props;
+    if (verificationStatus === 'Pending' || verificationStatus === 'Verified') {
+      history.push(ROUTES.SETTINGS.ROOT);
+    }
+  }
+
   handleUpload = () => {
     const { fileList } = this.state;
-    const formData = new FormData();
-    formData.append('file', fileList[0]);
-
-    this.setState({
-      uploading: true,
-    });
-
-    axios({
-      method: 'post',
-      url: `${API_URL}/profile/resources`,
-      data: formData,
-      config: { headers: { 'Content-Type': 'multipart/form-data' } },
-    })
-      .then(() => {
-        this.setState({
-          fileList: [],
-          uploading: false,
-        });
-        message.success('Uploaded successfully.');
-      })
-      .catch(() => {
-        // this.setState({
-        //   uploading: false,
-        // });
-        // message.error('upload failed.');
-        this.setState({
-          fileList: [],
-          uploading: false,
-        });
-        message.success('Uploaded successfully.');
+    const reader = new FileReader();
+    reader.readAsDataURL(fileList[0]);
+    reader.onload = e => {
+      this.setState({
+        uploading: true,
       });
+      const data = parseBase64(e.target.result);
 
-    // reqwest({
-    //   url:
-    //     'https://4rzmeh95xa.execute-api.eu-west-1.amazonaws.com/stage/api/v0.1/profile/resources',
-    //   method: 'post',
-    //   processData: false,
-    //   data: formData,
-    //   success: () => {
-    //     this.setState({
-    //       fileList: [],
-    //       uploading: false,
-    //     });
-    //     message.success('upload successfully.');
-    //   },
-    //   error: () => {
-    //     this.setState({
-    //       uploading: false,
-    //     });
-    //     message.error('upload failed.');
-    //   },
-    // });
+      superaxios({
+        method: 'post',
+        url: `${process.env.API_URL}/profile/resources`,
+        data,
+        config: { headers: { 'Content-Type': 'text/plain' } },
+      })
+        .then(() => {
+          this.setState({
+            fileList: [],
+            uploading: false,
+          });
+          message.success('Uploaded successfully.');
+          history.replace(ROUTES.SETTINGS.ROOT);
+        })
+        .catch(() => {
+          this.setState({
+            uploading: false,
+          });
+          message.error('upload failed.');
+        });
+    };
   };
 
   render() {
@@ -89,7 +74,7 @@ class RequestVerificationFormDisplay extends React.Component {
       },
       multiple: false,
       fileList,
-      accept: 'image/gif, image/jpeg, image/jpg, image/png',
+      accept: 'image/bmp, image/jpeg, image/jpg, image/png',
     };
 
     return (
@@ -100,7 +85,7 @@ class RequestVerificationFormDisplay extends React.Component {
               <img src={VerificationIcon} alt="Verification icon" />
             </p>
             <p className="ant-upload-text">Upload an ID for verification</p>
-            <p className="ant-upload-hint">.bmp .png .tiff .jpg</p>
+            <p className="ant-upload-hint">.bmp .png .jpg</p>
           </Dragger>
         </div>
 

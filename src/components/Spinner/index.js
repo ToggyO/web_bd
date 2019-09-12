@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Icon, Spin } from 'antd';
 import './style.less';
 
-export const Spinner = ({ global, fontSize }) => {
-  const SpinIcon = <Icon type="loading" style={{ fontSize }} spin />;
+export const Spinner = ({ children, global, fontSize, margin, spinning }) => {
+  const SpinIcon = <Icon type="loading" style={{ fontSize, margin }} spin />;
   return (
     <div
       style={
@@ -19,17 +19,22 @@ export const Spinner = ({ global, fontSize }) => {
           : null
       }
     >
-      <Spin indicator={SpinIcon} />
+      <Spin indicator={SpinIcon} spinning={spinning}>
+        {children}
+      </Spin>
     </div>
   );
 };
 
 Spinner.propTypes = {
+  children: PropTypes.element,
   global: PropTypes.bool,
   fontSize: PropTypes.number,
+  margin: PropTypes.string,
+  spinning: PropTypes.bool,
 };
 
 Spinner.defaultProps = {
   global: false,
-  fontSize: 15,
+  fontSize: 25,
 };

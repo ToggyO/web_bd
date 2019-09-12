@@ -1,27 +1,36 @@
 /* eslint-disable no-prototype-builtins */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Layout } from 'antd';
 import PropTypes from 'prop-types';
-import { checkTokens } from 'src/services/auth';
+import { checkTokens } from '@services/auth';
+import { Footer } from '@components/Footer';
+import { DrawerDisplay } from './components/Drawer';
 import { HeaderContainer } from './components/Header';
 
-const AppWrapperDisplay = ({ userName, getUserProfileRequest, children }) => {
+const { Content } = Layout;
+
+const AppWrapperDisplay = ({ userID, userName, countryCode, getProfileRequest, children }) => {
+  const [collapsed, setCollapsed] = useState(true);
+
   useEffect(() => {
-    if (checkTokens() && userName !== localStorage.getItem('userName')) {
-      getUserProfileRequest();
-    }
+    if ((!userID || !userName || !countryCode) && checkTokens()) getProfileRequest();
   }, []);
 
   return (
-    <>
-      <HeaderContainer />
-      {children}
-    </>
+    <Layout>
+      <DrawerDisplay collapsed={collapsed} setCollapsed={setCollapsed} />
+      <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Content>{children}</Content>
+      <Footer />
+    </Layout>
   );
 };
 
 AppWrapperDisplay.propTypes = {
-  userName: PropTypes.string,
-  getUserProfileRequest: PropTypes.func,
+  userID: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+  countryCode: PropTypes.string,
+  getProfileRequest: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { authSelectors } from 'src/ducks/auth';
+import { authSelectors } from '@ducks/auth';
 import ConfirmEmailDisplay from './ConfirmEmailDisplay';
 
 function mapStateToProps(state) {

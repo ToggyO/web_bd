@@ -21,6 +21,7 @@ module.exports = {
     'comma-dangle': [2, 'always-multiline'],
     'import/imports-first': 0,
     'import/newline-after-import': 0,
+    'import/no-cycle': 0,
     'import/no-dynamic-require': 0,
     'import/no-extraneous-dependencies': 0,
     'import/no-named-as-default': 0,
@@ -48,7 +49,9 @@ module.exports = {
     'max-len': 0,
     'newline-per-chained-call': 0,
     'no-confusing-arrow': 0,
+    'no-void': 0,
     'no-console': 1,
+    'no-underscore-dangle': 0,
     'no-use-before-define': 0,
     'prefer-template': 2,
     'react/destructuring-assignment': 0,
@@ -60,7 +63,6 @@ module.exports = {
     'react/jsx-no-target-blank': 0,
     'react/require-default-props': 0,
     'react/require-extension': 0,
-    'react/self-closing-comp': 0,
     'react/sort-comp': 0,
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
@@ -69,7 +71,20 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        map: [['assets', './assets/'], ['src', './src/'], ['components', './src/components']],
+        map: [
+          ['@assets', './src/assets'],
+          ['@components', './src/components'],
+          ['@config', './src/config'],
+          ['@ducks', './src/ducks'],
+          ['@routes', './src/routes'],
+          ['@scenes', './src/scenes'],
+          ['@services', './src/services'],
+          ['@utils', './src/utils'],
+
+          ['assets', './assets/'],
+          ['src', './src/'],
+          ['components', './src/components'],
+        ],
         extensions: ['.js'],
       },
     },

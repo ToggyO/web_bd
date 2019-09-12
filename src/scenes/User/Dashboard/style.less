@@ -1,8 +1,37 @@
 .dashboard {
   // min-height: 81vh;
   padding: 63px 40px 63px 0;
+  @media screen and (max-width: 1024px) {
+    padding: 32px 24px;
+  }
 
   &__header {
     margin-bottom: 24px;
+  }
+
+  &.custom-tabs .ant-tabs-bar {
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      max-width: 540px;
+    }
+    & .ant-tabs-tab {
+      margin-right: 8px;
+    }
+  }
+
+  & .ant-tabs-nav-container-scrolling {
+    @media screen and (max-width: 1024px) {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      span.ant-tabs-tab-prev.ant-tabs-tab-arrow-show,
+      span.ant-tabs-tab-next.ant-tabs-tab-arrow-show {
+        width: 8px;
+      }
+    }
+  }
+  & .ant-table-expand-icon-th {
+    width: 0;
+    min-width: 0;
   }
 }

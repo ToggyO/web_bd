@@ -1,4 +1,6 @@
+import history from '@services/history';
 import * as types from './types';
+import { parseQueryString } from '@utils/';
 
 export const signUpRequest = credentials => ({
   type: types.SIGNUP_REQUEST,
@@ -8,6 +10,7 @@ export const signUpRequest = credentials => ({
 export const signInRequest = credentials => ({
   type: types.SIGNIN_REQUEST,
   payload: credentials,
+  extra: history.location.search,
 });
 
 export const smsCodeRequest = phone => ({
@@ -18,6 +21,7 @@ export const smsCodeRequest = phone => ({
 export const twoFactorAuthRequest = twoFactorCredentials => ({
   type: types.TWO_FACTOR_AUTH_REQUEST,
   payload: twoFactorCredentials,
+  extra: parseQueryString(history.location.search).from,
 });
 
 export const forgotPasswordRequest = email => ({
@@ -31,5 +35,5 @@ export const resetPasswordRequest = data => ({
 });
 
 export const logoutRequest = () => ({
-  type: types.LOGOUT,
+  type: types.LOGOUT_REQUEST,
 });

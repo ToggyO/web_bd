@@ -1,19 +1,59 @@
 .user-settings {
   padding: 63px 80px 0px 0px;
+  @media screen and (max-width: 813px) {
+    padding: 24px;
+  }
+  &.custom-tabs {
+    @media screen and (max-width: 813px) {
+      padding: 32px 24px;
+    }
+  }
+  &.custom-tabs .ant-tabs-bar {
+    @media screen and (max-width: 813px) {
+      width: 280px;
+    }
+  }
 
   &__header {
     margin-bottom: 34px;
+    @media screen and (max-width: 813px) {
+      display: none;
+    }
   }
 
   &__verification {
     position: absolute;
     top: 13px;
     left: 80px;
+    &--on-review,
+    &--verified {
+      border: none;
+      color: white;
+    }
+    &--on-review:hover,
+    &--verified:hover {
+      cursor: default;
+    }
+    &--on-review {
+      background: #f5232d;
+    }
+    &--verified {
+      background: @primary-color;
+    }
   }
   &__list {
     width: 56%;
     min-width: 310px;
     padding-bottom: 95px;
+    @media screen and (max-width: 956px) {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    @media screen and (max-width: 420px) {
+      padding-bottom: 35px;
+      min-width: 200px;
+    }
   }
 
   &__item .ant-list-item-meta-title {
@@ -41,6 +81,9 @@
 
 .change-setting {
   padding: 63px 80px;
+  @media screen and (max-width: 420px) {
+    padding: 32px 24px;
+  }
   min-height: 660px;
   &__header {
     margin: 10px 0 14px;

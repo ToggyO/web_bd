@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 
 class EditFullNameFormDisplay extends React.Component {
   state = {
@@ -32,17 +32,19 @@ class EditFullNameFormDisplay extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { loading } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form" hideRequiredMark>
         <Form.Item label="Enter new real name">
           {getFieldDecorator('fullName', {
             rules: validations.realname,
-          })(<Input style={{ width: 368 }} placeholder="Riley Stivens" />)}
+          })(<Input style={{ maxWidth: 368 }} placeholder="Riley Stivens" />)}
         </Form.Item>
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="primary-btn"

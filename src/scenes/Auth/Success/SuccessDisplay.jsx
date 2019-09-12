@@ -1,7 +1,7 @@
 import React from 'react';
-import ROUTES from 'src/routes';
-import AuthBox from 'src/components/AuthBox';
-import ToSignIn from 'src/components/ToSignIn';
+import { ROUTES } from '@config/constants';
+import { AuthBox } from '@components/AuthBox';
+import { ArrowLink } from '@components/ArrowLink';
 import SignWrapper from '../../_components/SignWrapper';
 
 const SuccessDisplay = () => (
@@ -9,7 +9,7 @@ const SuccessDisplay = () => (
     <AuthBox header="Congratulations">
       <p>You have successfully signed up.</p>
       <p>Please sign in to your account to proceed to the website.</p>
-      <ToSignIn text="Go to Sign in" goTo={ROUTES.LOGIN} />
+      <ArrowLink text="Go to Sign in" goTo={ROUTES.LOGIN} />
     </AuthBox>
   </SignWrapper>
 );

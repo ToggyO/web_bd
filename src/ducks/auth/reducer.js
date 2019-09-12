@@ -1,5 +1,4 @@
 import * as types from './types';
-
 /* shape
 
 		data: {
@@ -21,7 +20,11 @@ import * as types from './types';
 */
 
 const initialState = {
-  data: {},
+  data: {
+    userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName')
+      ? localStorage.getItem('userName')
+      : null,
+  },
   tokens: {},
   loading: false,
   errors: {},
@@ -74,7 +77,7 @@ export default function auth(state = initialState, action) {
     case types.RESET_PASSWORD_ERROR:
       return { ...state, loading: false, errors: action.payload };
 
-    case types.LOGOUT:
+    case types.LOGOUT_REQUEST:
       return initialState;
     default:
       return state;

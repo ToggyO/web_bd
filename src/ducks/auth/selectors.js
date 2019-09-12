@@ -22,10 +22,9 @@ export const emailSelector = createSelector(
   state => state.auth.data.email,
   email => email
 );
-export const userNameSelector = createSelector(
-  state => state.auth.data.userName,
-  userName => userName
-);
+export const userNameSelector = () =>
+  Object.prototype.hasOwnProperty.call(localStorage, 'userName') ? localStorage.getItem('userName') : null;
+
 export const phoneNumberSelector = createSelector(
   state => state.auth.data.phoneNumber,
   userName => userName

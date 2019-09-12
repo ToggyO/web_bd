@@ -1,11 +1,49 @@
-.header {
+.bd-header {
   background: @primary-color;
-  line-height: 28px;
+  padding: 0;
+  height: 64px;
+  line-height: 48px;
+  &__container {
+    max-width: 1202px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    height: inherit;
+    @media screen and (max-width: 1202px) {
+      padding: 0;
+    }
+    @media screen and (max-width: 1024px) {
+      margin: 0;
+    }
+  }
 
-  &__logo {
-    margin: 0 27px 0 0;
-    line-height: 47px;
+  &__trigger {
     z-index: 10;
+    font-size: 18px;
+    line-height: 72px;
+    padding: 0 24px;
+    cursor: pointer;
+    color: white;
+    margin-right: auto;
+  }
+}
+
+.logo {
+  padding: 22px 24px 21px;
+  background: @primary-color;
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  line-height: 21px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 64px;
+}
+.large-logo {
+  line-height: 62px;
+  margin-right: 18px;
+  z-index: 10;
+  @media screen and (max-width: 1200px) {
+    padding-left: 28px;
   }
 }
 
@@ -15,7 +53,8 @@
 
   &__link {
     display: inline-block;
-    padding: 10px 18px;
+    padding: 0px 18px;
+    line-height: 64px;
     font-size: 14px;
     color: white;
     z-index: 10;
@@ -25,6 +64,10 @@
       background: lighten(@primary-color, 2%);
       color: #fff;
     }
+
+    @media screen and (max-width: 840px) {
+      padding: 0 12px;
+    }
   }
 
   &__bubble {
@@ -33,8 +76,13 @@
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     position: absolute;
-    right: 240px;
+    left: 516px;
     top: -43px;
+
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+
     &::before,
     &::after {
       display: block;
@@ -63,12 +111,13 @@
   display: flex;
 
   &__bell {
+    height: 64px;
     font-size: 16px;
   }
 }
 
 .user-button {
-  height: 48px;
+  height: 64px;
   background: @primary-color;
   display: flex;
   align-items: center;
@@ -81,6 +130,12 @@
     background: lighten(@primary-color, 2%);
     color: #fff;
   }
+
+  .user-name {
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
 }
 .user-button.ant-dropdown-open {
   background: tint(@primary-color, 15%);
@@ -88,6 +143,10 @@
 .user-avatar {
   margin-right: 8px;
   background: rgba(255, 255, 255, 0.4);
+
+  @media screen and (max-width: 500px) {
+    margin-right: 0;
+  }
 }
 .user-avatar.ant-avatar-sm.ant-avatar-icon {
   font-size: 12px;

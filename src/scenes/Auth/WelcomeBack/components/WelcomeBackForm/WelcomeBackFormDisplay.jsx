@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, Statistic, message } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import { Form, Input, Button, Statistic } from 'antd';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 
 const { Countdown } = Statistic;
 
@@ -13,17 +13,13 @@ class WelcomeBackForm extends React.Component {
     isGetCodeDisabled: false,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { submitDisabled } = this.state;
-    const { form, errors } = this.props;
+    const { form } = this.props;
 
     if (submitDisabled) {
       const values = form.getFieldsValue();
       if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
-    }
-    if (errors !== prevProps.errors) {
-      if (Array.isArray(errors))
-        message.error('Invalid or expired code, check your input or request a new code ', 8);
     }
   }
 
@@ -32,14 +28,19 @@ class WelcomeBackForm extends React.Component {
     this.setState({ isGetCodeDisabled: false });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e, code) => {
     const { userName, form } = this.props;
     e.preventDefault();
+
+    if (code) {
+      const twoFactorCode = code;
+      this.props.signInWithCode({ userName, twoFactorCode });
+      return;
+    }
+
     form.validateFields((err, values) => {
       if (!err) {
-        const twoFactorCode = values.smscode;
-
-        this.props.signInWithCode({ userName, twoFactorCode });
+        this.props.signInWithCode({ userName, twoFactorCode: values.twoFactorCode });
       }
     });
   };
@@ -51,6 +52,13 @@ class WelcomeBackForm extends React.Component {
     this.codeInput.focus();
     // disable button for 60 seconds
     this.setState({ deadline: Date.now() + 60000, isGetCodeDisabled: true });
+  };
+
+  handleCodeChange = e => {
+    if (e.target.value.length === 6) {
+      this.codeInput.blur();
+      this.handleSubmit(e, e.target.value);
+    }
   };
 
   render() {
@@ -70,6 +78,7 @@ class WelcomeBackForm extends React.Component {
                 ref={input => {
                   this.codeInput = input;
                 }}
+                onChange={this.handleCodeChange}
               />
             )}
 

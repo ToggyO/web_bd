@@ -1,0 +1,57 @@
+.ant-tabs-bar {
+  width: 272px;
+  margin: 0 auto 24px;
+  border-color: fade(@primary-color, 20%);
+  text-align: center;
+}
+
+.bd-tabs .ant-tabs-tab {
+  min-width: 136px;
+  margin-right: 0;
+  padding-bottom: 8px;
+  padding-top: 20px;
+  &.ant-tabs-tab-active {
+    color: @primary-color;
+  }
+}
+
+.bd-tabs .ant-tabs-tab-active {
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: normal;
+}
+
+.custom-tabs {
+  & .ant-tabs-content {
+    min-height: 65vh;
+  }
+
+  & .ant-tabs.ant-tabs-left.ant-tabs-vertical.ant-tabs-small.ant-tabs-line {
+    height: 100%;
+  }
+
+  & .ant-tabs-bar {
+    width: 224px;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-tab {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-tab.ant-tabs-tab-active {
+    transition: background-color 0.2s ease-in;
+    background-color: #ebf7f3;
+    font-weight: 400;
+  }
+
+  & .ant-tabs .ant-tabs-left-bar .ant-tabs-ink-bar {
+    width: 3px;
+  }
+}
+
+//turn off animation for dashboard tabs because of routes push
+.dashboard {
+  .ant-tabs-left .ant-tabs-ink-bar-animated {
+    transition: none;
+  }
+}

@@ -1,0 +1,42 @@
+.paper {
+  max-width: 1172px;
+  margin: 8px auto 0;
+  border-radius: 6px;
+  box-shadow: @box-shadow-base;
+  background: @component-background;
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+  }
+}
+
+.primary-btn[disabled] {
+  background-color: rgba(@primary-color, 0.5) !important;
+  border-color: transparent !important;
+  color: @btn-primary-color !important;
+}
+
+.hover {
+  // background: #ecffe245;
+  background: #ebf7f3;
+}
+
+.span-head {
+  font-weight: 500;
+}
+
+.removable {
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
+
+.green-status {
+  color: #52c41a;
+}
+.red-status {
+  color: #f5232d;
+}
+
+.primary-color {
+  color: @primary-color;
+}

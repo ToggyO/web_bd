@@ -1,18 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import { Form, Input, Button, Select, Statistic } from 'antd';
 import { Form, Input, Button, Select } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 
 const { Option } = Select;
-// const { Countdown } = Statistic;
 
 class EditPhoneNumberFormDisplay extends React.Component {
   state = {
     submitDisabled: true,
-    // deadline: null,
-    isGetCodeDisabled: false,
   };
 
   componentDidUpdate() {
@@ -25,11 +21,6 @@ class EditPhoneNumberFormDisplay extends React.Component {
     }
   }
 
-  // method for switching back <button>Get Code</button> state
-  // onFinish = () => {
-  //   this.setState({ isGetCodeDisabled: false });
-  // };
-
   handleSubmit = e => {
     const { form } = this.props;
     e.preventDefault();
@@ -41,24 +32,9 @@ class EditPhoneNumberFormDisplay extends React.Component {
     });
   };
 
-  // handleGetCode = e => {
-  //   const { userName, form } = this.props;
-  //   e.preventDefault();
-  //   form.validateFields(['prefix', 'phone'], (err, values) => {
-  //     if (!err) {
-  //       const phone = values.prefix + values.phone;
-  //       this.props.smsCodeRequest({ userName, phone });
-  //       this.codeInput.focus();
-  //       // disable button for 60 seconds
-  //       this.setState({ deadline: Date.now() + 60000, isGetCodeDisabled: true });
-  //     }
-  //   });
-  // };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    // const { deadline, isGetCodeDisabled } = this.state;
-    const { isGetCodeDisabled } = this.state;
+    const { loading } = this.props;
 
     const prefixSelector = getFieldDecorator('prefix', {
       initialValue: '1',
@@ -74,41 +50,12 @@ class EditPhoneNumberFormDisplay extends React.Component {
         <Form.Item>
           {getFieldDecorator('phone', {
             rules: validations.phone,
-          })(
-            <Input
-              addonBefore={prefixSelector}
-              style={{ width: 368 }}
-              placeholder="Phone number"
-              disabled={isGetCodeDisabled}
-            />
-          )}
+          })(<Input addonBefore={prefixSelector} style={{ maxWidth: 368 }} placeholder="Phone number" />)}
         </Form.Item>
-        {/* <Form.Item>
-          <div className="verification-code">
-            {getFieldDecorator('smscode', {
-              rules: validations.smscode,
-            })(
-              <Input
-                placeholder="Verification code"
-                style={{ width: 268 }}
-                ref={input => {
-                  this.codeInput = input;
-                }}
-              />
-            )}
-
-            <Button onClick={this.handleGetCode} disabled={isGetCodeDisabled} className="timer-btn">
-              {isGetCodeDisabled ? (
-                <Countdown value={deadline} suffix="s" format="ss" onFinish={this.onFinish} />
-              ) : (
-                'Get code'
-              )}
-            </Button>
-          </div>
-        </Form.Item> */}
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="signup__button primary-btn"

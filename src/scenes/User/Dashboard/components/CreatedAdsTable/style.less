@@ -1,0 +1,32 @@
+.extra-row {
+  padding-top: 10px;
+  &__head {
+    border-bottom: 1px solid @border-color-split;
+  }
+  &__view,
+  &__edit,
+  &__delete {
+    display: inline-block;
+  }
+  &__view,
+  &__edit {
+    margin-right: 24px;
+  }
+  &__main {
+    display: flex;
+    padding-top: 10px;
+  }
+  &__left {
+    flex: 2;
+    margin-right: 16px;
+  }
+  &__left,
+  &__right {
+    & span {
+      color: @heading-color;
+    }
+  }
+  &__right {
+    flex: 5;
+  }
+}

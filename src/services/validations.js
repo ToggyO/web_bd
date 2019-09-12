@@ -16,14 +16,16 @@ export const email = [
 export const phone = [
   {
     required: true,
-    pattern: /^[0-9]+$/,
     message: <div>Please your phone number!</div>,
+  },
+  {
+    pattern: /^[0-9]+$/,
+    message: <div>Phone number should include only digits!</div>,
   },
 ];
 
 export const amount = [
   {
-    required: true,
     pattern: /^[0-9]+$/,
     message: <div>Please input amount!</div>,
   },
@@ -35,19 +37,19 @@ export const username = [
     message: <div>Please input your username!</div>,
   },
   {
-    min: 2,
+    min: 6,
     max: 20,
-    message: <div>Username should include from 2 to 20 characters!</div>,
+    message: <div>Username should include from 6 to 20 characters!</div>,
   },
   {
-    pattern: /^[a-zA-Z0-9_.]+$/,
-    message: <div>Username should contain only following characters: A-Z, a-z, 0-9, ., _,</div>,
+    pattern: /^[a-zA-Z0-9_]+$/,
+    message: <div>Username should contain only following characters: A-Z, a-z, 0-9, _,</div>,
   },
 ];
 
 export const realname = [
   { required: true, message: <div>Please input your real name!</div> },
-  { max: 70, message: <div>Full name can not exceed 70 characters limit!</div> },
+  { max: 70, message: <div>Real name can not exceed 70 characters limit!</div> },
   {
     pattern: /^[a-zA-Z0-9-' ]+$/,
     message: <div>Please input your real name!</div>,
@@ -79,5 +81,26 @@ export const smscode = [
     required: true,
     pattern: /^[a-zA-Z0-9]+$/,
     message: <div>Please enter code from SMS!</div>,
+  },
+];
+
+export const bank = [
+  { required: true, message: <div>Please input bank name</div> },
+  { max: 60, message: <div>Max 60 characters</div> },
+];
+
+export const checkNotNull = (rule, value, cb) => {
+  if (value !== 0) {
+    cb();
+    return;
+  }
+  cb('BTC price cannot be 0');
+};
+
+export const btcWallet = [
+  { required: true, message: <div>Please input your bitcoin wallet</div> },
+  {
+    pattern: /^[1][a-km-zA-HJ-NP-Z1-9]{24,33}$/,
+    message: <div>Invalid bitcoin wallet public address</div>,
   },
 ];

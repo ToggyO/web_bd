@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
-import ROUTES from 'src/routes';
-import { Spinner } from 'src/components/Spinner';
-import { secretize } from 'src/utils';
-import { AppWrapperContainer } from 'src/scenes/_components/AppWrapper';
+import { ROUTES } from '@config/constants';
+import { Spinner } from '@components/Spinner';
+import { secretize } from '@utils';
+import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 
 import './style.less';
 
@@ -16,17 +16,23 @@ const SettingsDisplay = ({
   phoneNumber,
   email,
   loading,
-  getUserProfileRequest,
+  getProfileRequest,
+
+  // eslint-disable-next-line no-unused-vars
   verificationStatus,
 }) => {
   useEffect(() => {
-    getUserProfileRequest();
+    getProfileRequest();
   }, []);
   return (
     <AppWrapperContainer>
       <div className="paper">
         <div className="user-settings custom-tabs">
-          <Tabs defaultActiveKey="1" tabPosition="left" size="small">
+          <Tabs
+            defaultActiveKey="1"
+            tabPosition={window.matchMedia('(max-width: 813px)').matches ? 'top' : 'left'}
+            size="small"
+          >
             <TabPane tab="Profile settings" key="1">
               <h2 className="user-settings__header">Profile settings</h2>
 
@@ -34,69 +40,99 @@ const SettingsDisplay = ({
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_FULLNAME}>
-                      Change <span>name</span>
+                    <Link to={ROUTES.SETTINGS.EDIT_FULLNAME}>
+                      Change <span className="hideble-span-xs">name</span>
                     </Link>,
                   ]}
                 >
                   <List.Item.Meta
                     title="Real Name"
-                    description={loading ? <Spinner /> : fullName}
+                    description={loading ? <Spinner fontSize={15} /> : fullName}
                   />
-                  <Link
-                    to={ROUTES.PROFILE.REQUEST_VERIFICATION}
-                    className="user-settings__verification"
-                  >
-                    Request Verification
-                  </Link>
+                  {(() => {
+                    switch (verificationStatus) {
+                      case 'New':
+                      case 'Declined':
+                        return (
+                          <Link
+                            to={ROUTES.SETTINGS.REQUEST_VERIFICATION}
+                            className="user-settings__verification"
+                          >
+                            Request Verification
+                          </Link>
+                        );
+                      case 'Pending':
+                        return (
+                          <Tag className="user-settings__verification user-settings__verification--on-review">
+                            On review
+                          </Tag>
+                        );
+                      case 'Verified':
+                        return (
+                          <Tag className="user-settings__verification user-settings__verification--verified">
+                            Verified
+                          </Tag>
+                        );
+
+                      default:
+                        return undefined;
+                    }
+                  })()}
                 </List.Item>
 
                 <List.Item className="user-settings__item">
-                  <List.Item.Meta title="Username" description={loading ? <Spinner /> : userName} />
+                  <List.Item.Meta
+                    title="Username"
+                    description={loading ? <Spinner fontSize={15} /> : userName}
+                  />
                 </List.Item>
+
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_PHONENUMBER}>
-                      Change <span>phone</span>
+                    <Link to={ROUTES.SETTINGS.EDIT_PHONENUMBER}>
+                      Change <span className="hideble-span-xs">phone</span>
                     </Link>,
                   ]}
                 >
                   <List.Item.Meta
                     title="Phone Number"
-                    description={loading ? <Spinner /> : secretize(phoneNumber)}
+                    description={loading ? <Spinner fontSize={15} /> : secretize(phoneNumber)}
                   />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_EMAIL}>
-                      Change <span>email</span>
+                    <Link to={ROUTES.SETTINGS.EDIT_EMAIL}>
+                      Change <span className="hideble-span-xs">email</span>
                     </Link>,
                   ]}
                 >
                   <List.Item.Meta
                     title="Email"
-                    description={loading ? <Spinner /> : secretize(email)}
+                    description={loading ? <Spinner fontSize={15} /> : secretize(email)}
                   />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"
                   actions={[
-                    <Link to={ROUTES.PROFILE.EDIT_PASSWORD}>
-                      Change <span>password</span>
+                    <Link to={ROUTES.SETTINGS.EDIT_PASSWORD}>
+                      Change <span className="hideble-span-xs">password</span>
                     </Link>,
                   ]}
                 >
                   <List.Item.Meta
                     title="Account Password"
-                    description={loading ? <Spinner /> : '********'}
+                    description={loading ? <Spinner fontSize={15} /> : '********'}
                   />
                 </List.Item>
                 <List.Item className="user-settings__item">
                   <List.Item.Meta title="Confirmed by other users" description="0" />
                 </List.Item>
               </List>
+            </TabPane>
+            <TabPane tab="Notifications" key="2">
+              Notifications
             </TabPane>
           </Tabs>
         </div>
@@ -111,7 +147,7 @@ SettingsDisplay.propTypes = {
   phoneNumber: PropTypes.string,
   email: PropTypes.string,
   loading: PropTypes.bool,
-  getUserProfileRequest: PropTypes.func.isRequired,
+  getProfileRequest: PropTypes.func.isRequired,
   verificationStatus: PropTypes.string,
 };
 

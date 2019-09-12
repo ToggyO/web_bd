@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Statistic, message } from 'antd';
-import * as validations from 'src/services/validations';
-import { notUndefinedObjectProps } from 'src/utils';
+import * as validations from '@services/validations';
+import { notUndefinedObjectProps } from '@utils';
 
 const { Countdown } = Statistic;
 
@@ -24,7 +24,7 @@ class EditEmailFormDisplay extends React.Component {
 
     if (errors !== prevProps.errors) {
       if (errors.DuplicateEmail) message.error(errors.DuplicateEmail, 8);
-      if (Array.isArray(errors)) message.error('Code has expired, request a new one', 8);
+      if (Array.isArray(errors)) message.error('Verification code is not valid', 8);
     }
   }
 
@@ -41,7 +41,6 @@ class EditEmailFormDisplay extends React.Component {
         const code = values.smscode;
         const { email } = values;
         this.props.editEmailRequest({ code, email });
-        // this.props.signInWithCode({ userName, twoFactorCode });
       }
     });
   };
@@ -57,6 +56,7 @@ class EditEmailFormDisplay extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { deadline, isGetCodeDisabled } = this.state;
+    const { loading } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="edit-form" hideRequiredMark>
@@ -83,7 +83,7 @@ class EditEmailFormDisplay extends React.Component {
           </div>
         </Form.Item>
 
-        <Form.Item label="Enter new email address" style={{ maxWidth: 368, marginBottom: 40 }}>
+        <Form.Item label="Enter new email address" style={{ maxWidth: 368, marginBottom: 38 }}>
           {getFieldDecorator('email', {
             rules: validations.email,
           })(<Input type="email" placeholder="Email" />)}
@@ -91,6 +91,7 @@ class EditEmailFormDisplay extends React.Component {
 
         <Form.Item>
           <Button
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="primary-btn"

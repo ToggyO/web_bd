@@ -1,39 +1,32 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { Divider } from 'antd';
-import { Spinner } from 'src/components/Spinner';
+import { checkTokens } from '@services/auth';
+import { Collapsed } from '@scenes/_components/Collapsed';
 import { AppWrapperContainer } from '../_components/AppWrapper';
-import { EasyWayDisplay } from './components/EasyWay';
-import { QuickFiltersDisplay } from './components/QuickFilters';
-import { BuySellDisplay } from './components/BuySell';
+import { EasyWayDisplay } from './_components/EasyWay';
+import { QuickFiltersTabsDisplay } from './_components/QuickFiltersTabs';
+import { TenAdsContainer } from './_components/TenAds';
 import './style.less';
 
-const HomePageDisplay = ({ verificationStatus, loading }) => (
+const HomePageDisplay = () => (
   <AppWrapperContainer>
     <div className="paper home-page">
-      {loading && <Spinner global fontSize={30} />}
-      {!loading && !verificationStatus ? (
+      {!checkTokens() && (
         <>
           <EasyWayDisplay />
           <Divider />
-          <QuickFiltersDisplay />
-          <Divider />
-          <BuySellDisplay />
-        </>
-      ) : (
-        <>
-          <QuickFiltersDisplay />
-          <Divider />
-          <BuySellDisplay />
         </>
       )}
+      <Collapsed>
+        <QuickFiltersTabsDisplay />
+      </Collapsed>
+      <Divider />
+      <div className="quick-buy-sell">
+        <TenAdsContainer type="sell" />
+        <TenAdsContainer type="buy" />
+      </div>
     </div>
   </AppWrapperContainer>
 );
-
-HomePageDisplay.propTypes = {
-  verificationStatus: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
 
 export default HomePageDisplay;
