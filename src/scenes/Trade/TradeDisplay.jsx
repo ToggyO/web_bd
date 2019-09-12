@@ -102,7 +102,7 @@ const TradeDisplay = ({
           <Spin spinning={loading} indicator={<span />}>
             <h2>
               #{id} {action}
-              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>
+              <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link>
             </h2>
           </Spin>
 
@@ -150,7 +150,7 @@ const TradeDisplay = ({
                       if (me === 'buyer' && specificTrade[`${me}Wallet`]) {
                         return (
                           <ExclamationMessage>
-                            Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm
+                            Waiting for <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> confirm
                             trading.
                           </ExclamationMessage>
                         );
@@ -160,7 +160,7 @@ const TradeDisplay = ({
                           <>
                             <p>
                               To confirm you are willing to trade with{' '}
-                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
+                              <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
                               wallet public address. BTC will be transferred to this address if trade is
                               canceled or you win a dispute.
                             </p>
@@ -175,7 +175,7 @@ const TradeDisplay = ({
                           <>
                             <p>
                               To confirm you are willing to trade with{' '}
-                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
+                              <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> enter receiving Bitcoin
                               wallet public address. BTC will be transferred to this address if trade is
                               canceled or you win a dispute.
                             </p>
@@ -186,7 +186,7 @@ const TradeDisplay = ({
                       if (specificTrade.adType === 'Buy' && me === 'seller' && specificTrade[`${me}Wallet`]) {
                         return (
                           <ExclamationMessage>
-                            Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> confirm
+                            Waiting for <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> confirm
                             trading.
                           </ExclamationMessage>
                         );
@@ -197,7 +197,7 @@ const TradeDisplay = ({
                       if (me === 'buyer') {
                         return (
                           <ExclamationMessage>
-                            Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to deposit
+                            Waiting for <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> to deposit
                             funds to Escrow.
                           </ExclamationMessage>
                         );
@@ -227,7 +227,7 @@ const TradeDisplay = ({
                             <ExclamationMessage>
                               BTC were successfully deposited to Escrow. It is safe now to proceed with the
                               payment. Confirm you’ve sent fiat to{' '}
-                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                              <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link>.
                             </ExclamationMessage>
                             <Button
                               loading={submitting}
@@ -263,7 +263,7 @@ const TradeDisplay = ({
                         return (
                           <ExclamationMessage>
                             BTC were successfully deposited to Escrow. Waiting for{' '}
-                            <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm sending the
+                            <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> to confirm sending the
                             fiat.
                           </ExclamationMessage>
                         );
@@ -274,7 +274,7 @@ const TradeDisplay = ({
                       if (me === 'buyer') {
                         return (
                           <ExclamationMessage>
-                            Waiting for <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link> to confirm
+                            Waiting for <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link> to confirm
                             receiving the fiat.
                           </ExclamationMessage>
                         );
@@ -284,7 +284,7 @@ const TradeDisplay = ({
                           <>
                             <ExclamationMessage>
                               Confirm you’ve received fiat from{' '}
-                              <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                              <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link>.
                             </ExclamationMessage>
                             <Button
                               loading={submitting}
@@ -331,7 +331,7 @@ const TradeDisplay = ({
                         return (
                           <ExclamationMessage>
                             Escrow has released the funds to{' '}
-                            <Link to={`${ROUTES.USER.ROOT}/${user}`}>{user}</Link>.
+                            <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link>.
                           </ExclamationMessage>
                         );
                       }

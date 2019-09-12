@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import history from '@services/history';
-import { pageSize } from '@config/constants';
+import { ROUTES, pageSize } from '@config/constants';
 import { Spinner } from '@components/Spinner';
 import { NoData } from './_components/NoData';
 import { catchNewLines } from '@utils';
@@ -121,7 +121,9 @@ const AdsTableDisplay = ({
         title={type === 'ads' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
         key="userName"
-        render={(text, record) => <Link to={`/user/${record.userName}`}>{record.userName}</Link>}
+        render={(text, record) => (
+          <Link to={`${ROUTES.USERS.ROOT}/${record.userName}`}>{record.userName}</Link>
+        )}
       />
       {/* <Column title="Location" dataIndex="location" key="location" /> */}
       <Column
@@ -169,7 +171,7 @@ AdsTableDisplay.propTypes = {
       location: PropTypes.string,
       btcPrice: PropTypes.string,
       type: PropTypes.string,
-    })
+    }),
   ),
   loading: PropTypes.bool,
   withTerms: PropTypes.bool,

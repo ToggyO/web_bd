@@ -18,9 +18,9 @@ export const ROUTES = {
     REQUEST_VERIFICATION: '/settings/verify',
   },
 
-  USER: {
-    ROOT: '/user',
-    OTHER: '/user/:id',
+  USERS: {
+    ROOT: '/users',
+    OTHER: '/users/:id',
   },
 
   DASHBOARD: {

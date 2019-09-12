@@ -8,7 +8,7 @@ import { AppWrapperContainer } from '../../_components/AppWrapper';
 import './style.less';
 
 const OtherProfileDisplay = ({ getCreatedAdsRequest }) => {
-  const name = catchFromPath(history.location.pathname, 'user');
+  const name = catchFromPath(history.location.pathname, 'users');
   useEffect(() => {
     getCreatedAdsRequest(`?PageSize=${pageSizeOtherProfile}&username=${name}`);
   }, [history.location.search]);

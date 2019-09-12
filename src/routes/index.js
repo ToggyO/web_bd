@@ -48,7 +48,7 @@ const Routes = ({ loading }) => (
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
       <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
       <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
-      <Route path={ROUTES.USER.OTHER} exact component={OtherProfileContainer} />
+      <Route path={ROUTES.USERS.OTHER} exact component={OtherProfileContainer} />
 
       <UnAuthRoute path={ROUTES.LOGIN} exact component={LoginContainer} />
       <UnAuthRoute path={ROUTES.SUCCESS} exact component={SuccessDisplay} />

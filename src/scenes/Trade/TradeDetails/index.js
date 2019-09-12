@@ -27,7 +27,7 @@ export const TradeDetails = ({ specificTrade }) => (
       <Col xs={12}>
         <span className="span-head">Ad owner</span>
         <p>
-          <Link to={`${ROUTES.USER.ROOT}/${specificTrade.adOwner}`}>{specificTrade.adOwner}</Link>
+          <Link to={`${ROUTES.USERS.ROOT}/${specificTrade.adOwner}`}>{specificTrade.adOwner}</Link>
         </p>
       </Col>
     </Row>

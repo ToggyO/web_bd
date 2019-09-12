@@ -46,7 +46,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
     if (type.toLowerCase() === 'sell') {
       header = (
         <span>
-          Buy bitcoins from <Link to={`${ROUTES.USER}/${userName}`}>{userName}</Link>
+          Buy bitcoins from <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
         </span>
       );
       action = 'buy';
@@ -109,7 +109,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                       <Col xs={12}>
                         <span style={{ fontWeight: 500 }}>{type}er</span>
                         <p>
-                          <Link to={`/user/${userName}`}>{userName}</Link>
+                          <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
                         </p>
                       </Col>
                       <Col xs={12}>
