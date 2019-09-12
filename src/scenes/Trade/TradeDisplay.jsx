@@ -249,7 +249,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  }
+                                  },
                                 )
                               }
                             >
@@ -306,7 +306,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  }
+                                  },
                                 )
                               }
                             >
@@ -368,7 +368,7 @@ const TradeDisplay = ({
                               specificTrade.id,
                               deleteNewTradeRequest,
                               { ...confirmData.requests.texts },
-                              { ...confirmData.requests.buttons }
+                              { ...confirmData.requests.buttons },
                             )
                           }
                         >
@@ -385,7 +385,7 @@ const TradeDisplay = ({
                               specificTrade.id,
                               cancelTradeRequest,
                               { ...confirmData.active.texts },
-                              { ...confirmData.active.buttons }
+                              { ...confirmData.active.buttons },
                             )
                           }
                         >

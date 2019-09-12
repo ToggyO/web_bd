@@ -49,6 +49,7 @@ function* confirmTrade(action) {
       payload: catchFromPath(history.location.pathname, 'trades'),
     });
   } catch (error) {
+    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.CONFIRM_ERROR, payload: error });
   }
 }

@@ -74,7 +74,7 @@ class AdFormDisplay extends React.Component {
     const escrowFeeResponse = superaxios.get('/escrow');
     const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
     this.setState({
-      btcPrice: +btcPrice.data.data[0].rate.toFixed(2),
+      btcPrice: +btcPrice.data.data[0].rateBTC.toFixed(2),
       loading: false,
       escrowFee: escrowFee.data.data[0].fee,
     });

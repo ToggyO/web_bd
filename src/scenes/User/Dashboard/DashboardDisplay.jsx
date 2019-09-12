@@ -24,7 +24,7 @@ const DashboardDisplay = ({
 }) => {
   useEffect(() => {
     const path = catchFromPath(history.location.pathname, 'dashboard');
-    if (path === '' || path === '') getMyCreatedAdsRequest();
+    if (path === '' || path === 'created') getMyCreatedAdsRequest();
     if (path === 'requests') getNewTradesRequest();
     if (path === 'active') getActiveTradesRequest();
     if (path === 'completed') getCompletedTradesRequest();
@@ -39,7 +39,6 @@ const DashboardDisplay = ({
     <AppWrapperContainer>
       <div className="paper">
         <div className="dashboard custom-tabs">
-		<div>				</div>
           <Tabs
             defaultActiveKey={
               catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED'

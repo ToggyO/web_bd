@@ -24,12 +24,12 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
     expandedRowRender={
       withTerms
         ? record => (
-          <div className="extra-row">
-            <div className="extra-row__head">
-              {(() => {
-                switch (record.status) {
-                  case 'New':
-                    return (
+            <div className="extra-row">
+              <div className="extra-row__head">
+                {(() => {
+                  switch (record.status) {
+                    case 'New':
+                      return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View request
@@ -40,17 +40,17 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 record.key,
                                 onDecline,
                                 { ...confirmData.requests.texts },
-                                { ...confirmData.requests.buttons }
+                                { ...confirmData.requests.buttons },
                               )
                             }
                           >
                             Decline request
                           </ButtonLink>
                         </>
-                    );
-                  case 'Depositing':
-                  case 'InProgress':
-                    return (
+                      );
+                    case 'Depositing':
+                    case 'InProgress':
+                      return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
@@ -61,40 +61,40 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 record.key,
                                 onCancel,
                                 { ...confirmData.active.texts },
-                                { ...confirmData.active.buttons }
+                                { ...confirmData.active.buttons },
                               )
                             }
                           >
                             Cancel trade
                           </ButtonLink>
                         </>
-                    );
+                      );
 
-                  case 'FiatSent':
-                    return (
+                    case 'FiatSent':
+                      return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                           <InitiateDisputeLinkWithModal id={record.key} />
                         </>
-                    );
+                      );
 
-                  case 'Disputed':
-                  case 'Completed':
-                  case 'Cancelled':
-                  case 'Canceled':
-                  case 'Resolved':
-                    return (
+                    case 'Disputed':
+                    case 'Completed':
+                    case 'Cancelled':
+                    case 'Canceled':
+                    case 'Resolved':
+                      return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                           </Link>
                         </>
-                    );
+                      );
 
-                  default:
-                    return (
+                    default:
+                      return (
                         <>
                           <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
@@ -105,83 +105,83 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 record.key,
                                 onCancel,
                                 {
-                                  title: 'You\'re about to cancel this trade request',
+                                  title: "You're about to cancel this trade request",
                                   content: 'Are you sure?',
                                 },
                                 {
                                   okText: 'Yes',
                                   cancelText: 'No',
-                                }
+                                },
                               )
                             }
                           >
                             Cancel trade
                           </ButtonLink>
                         </>
-                    );
-                }
-              })()}
+                      );
+                  }
+                })()}
+              </div>
+
+              <div className="extra-row extra-row__left">
+                <Row>
+                  <Col xs={12} sm={6} className="viewable-768">
+                    <div className="extra-row__location">
+                      <span>ID</span>
+                      <p>{record.order}</p>
+                    </div>
+                  </Col>
+
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__location">
+                      <span>Trade status</span>
+                      <p className="green-status">{formatCapitals(record.status)}</p>
+                    </div>
+                  </Col>
+
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__currency">
+                      <span>Date</span>
+                      <p>{formatDate(record.createdAt, 'lol')}</p>
+                    </div>
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__currency">
+                      <span>Trade limits</span>
+                      <p>{record.tradeLimit}</p>
+                    </div>
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__currency">
+                      <span>Price/BTC</span>
+                      <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
+                    </div>
+                  </Col>
+
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__currency">
+                      <span>Location</span>
+                      <p>{record.location}</p>
+                    </div>
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <div className="extra-row__currency">
+                      <span>Payment method</span>
+                      <p>{record.payment}</p>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <div className="extra-row__currency">
+                      <span>Terms of trade</span>
+                      <p>{record.terms}</p>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
             </div>
-
-            <div className="extra-row extra-row__left">
-              <Row>
-                <Col xs={12} sm={6} className="viewable-768">
-                  <div className="extra-row__location">
-                    <span>ID</span>
-                    <p>{record.order}</p>
-                  </div>
-                </Col>
-
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__location">
-                    <span>Trade status</span>
-                    <p className="green-status">{formatCapitals(record.status)}</p>
-                  </div>
-                </Col>
-
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__currency">
-                    <span>Date</span>
-                    <p>{formatDate(record.createdAt, 'lol')}</p>
-                  </div>
-                </Col>
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__currency">
-                    <span>Trade limits</span>
-                    <p>{record.tradeLimit}</p>
-                  </div>
-                </Col>
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__currency">
-                    <span>Price/BTC</span>
-                    <p>{`${formatMoney(record.btcPrice)} ${record.currency}`}</p>
-                  </div>
-                </Col>
-
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__currency">
-                    <span>Location</span>
-                    <p>{record.location}</p>
-                  </div>
-                </Col>
-                <Col xs={12} sm={6}>
-                  <div className="extra-row__currency">
-                    <span>Payment method</span>
-                    <p>{record.payment}</p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div className="extra-row__currency">
-                    <span>Terms of trade</span>
-                    <p>{record.terms}</p>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        )
+          )
         : null
     }
   >
@@ -192,7 +192,6 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
       dataIndex="order"
       className="hideble-768"
     />
-
     <Column
       key="tradePartner"
       title="Trade partner"
@@ -260,7 +259,7 @@ TradesDashboardTableDisplay.propTypes = {
       payment: PropTypes.string,
       btcPrice: PropTypes.number,
       terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    })
+    }),
   ),
   loading: PropTypes.bool,
 };

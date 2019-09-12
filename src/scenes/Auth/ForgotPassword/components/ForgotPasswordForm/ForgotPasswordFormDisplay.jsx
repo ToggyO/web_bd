@@ -13,7 +13,6 @@ class ForgotPasswordForm extends React.Component {
     form.validateFields((err, values) => {
       if (!err) {
         this.props.forgotPasswordRequest(values);
-        // console.log('Received values of form: ', values);
       }
     });
   };
@@ -27,13 +26,9 @@ class ForgotPasswordForm extends React.Component {
           {getFieldDecorator('email', {
             rules: validations.email,
           })(
-            <Input
-              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Email"
-            />
+            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
           )}
         </Form.Item>
-
         <Form.Item>
           <Button
             type="primary"
