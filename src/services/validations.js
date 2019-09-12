@@ -42,8 +42,8 @@ export const username = [
     message: <div>Username should include from 6 to 20 characters!</div>,
   },
   {
-    pattern: /^[a-zA-Z0-9_.]+$/,
-    message: <div>Username should contain only following characters: A-Z, a-z, 0-9, ., _,</div>,
+    pattern: /^[a-zA-Z0-9_]+$/,
+    message: <div>Username should contain only following characters: A-Z, a-z, 0-9, _,</div>,
   },
 ];
 
