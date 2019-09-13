@@ -43,6 +43,7 @@ module.exports = merge(common.webpackCommon, {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: 'public/favicon.ico',
       template: 'public/index.html',
       minify: {
         removeComments: true,

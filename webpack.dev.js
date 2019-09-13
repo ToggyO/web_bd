@@ -15,6 +15,7 @@ module.exports = merge(common.webpackCommon, {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
+      favicon: 'public/favicon.ico',
       template: 'public/index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
