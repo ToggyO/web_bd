@@ -6,8 +6,9 @@ import * as types from './types';
 // 3 - fiat sent
 // 4 - disputed
 // 5 - completed
-// 6 - resolved
-// 7 - canceled
+// 6 - resolved to buyer
+// 7 - resolved to seller
+// 8 - canceled
 
 export const getNewTradesRequest = () => ({
   type: types.GET_NEW_REQUEST,
@@ -21,10 +22,10 @@ export const getActiveTradesRequest = () => ({
 
 export const getCompletedTradesRequest = () => ({
   type: types.GET_COMPLETED_REQUEST,
-  payload: '5&status[]=6',
+  payload: '5&status[]=6&status[]=7',
 });
 
 export const getCanceledTradesRequest = () => ({
   type: types.GET_CANCELED_REQUEST,
-  payload: 7,
+  payload: 8,
 });
