@@ -1,6 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import api from '@services/api';
+
 import * as buyAdsTypes from './types';
+
+import api from '@services/api';
 
 function* getBuyAds(action) {
   try {

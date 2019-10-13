@@ -1,6 +1,7 @@
-import * as globalTypes from './types';
 import { adTypes } from '../ads/ad';
 import { tradeTypes } from '../trades/trade';
+
+import * as globalTypes from './types';
 
 const initialState = {
   globalLoading: false,

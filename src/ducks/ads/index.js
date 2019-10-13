@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import buy from './buy/reducer';
 import sell from './sell/reducer';
 import search from './search/reducer';

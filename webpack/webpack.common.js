@@ -1,5 +1,8 @@
 const path = require('path');
+
 const webpack = require('webpack');
+
+const { NODE_ENV, API_DOMAIN, API_VERSION, isPROD, isDEV, paths } = require('../bin');
 
 const antColors = {
   white: '#fff',
@@ -25,15 +28,32 @@ const antColors = {
 exports.antColors = antColors;
 
 exports.webpackCommon = {
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
+  entry: {
+    app: paths.appIndexJs,
   },
+  output: {
+    filename: `[name]-[hash]${isPROD ? '.min' : ''}.js`,
+    path: paths.appBuild,
+    publicPath: '/',
+  },
+  target: 'web',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        isPROD: JSON.stringify(isPROD),
+        isDEV: JSON.stringify(isDEV),
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        API_DOMAIN: JSON.stringify(API_DOMAIN),
+        API_VERSION: JSON.stringify(API_VERSION),
+      },
+    }),
+  ],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
+        include: paths.appSrc,
+        exclude: /(node_modules|bower_components)/,
         use: ['babel-loader'],
       },
 
@@ -96,27 +116,16 @@ exports.webpackCommon = {
   },
   resolve: {
     alias: {
-      '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/components/AntIcons/index.js'),
-      '@assets': path.resolve(__dirname, 'src/assets/'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@config': path.resolve(__dirname, 'src/config'),
-      '@ducks': path.resolve(__dirname, 'src/ducks'),
-      '@routes': path.resolve(__dirname, 'src/routes'),
-      '@scenes': path.resolve(__dirname, 'src/scenes'),
-      '@services': path.resolve(__dirname, 'src/services'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      // get rid of
-      assets: path.resolve(__dirname, 'assets/'),
-      src: path.resolve(__dirname, 'src/'),
-      components: path.resolve(__dirname, 'src/components'),
+      '@ant-design/icons/lib/dist$': path.resolve('src/components/AntIcons'),
+      '@assets': paths.resolveApp('src/assets/'),
+      '@components': paths.resolveApp('src/components'),
+      '@config': paths.resolveApp('src/config'),
+      '@ducks': paths.resolveApp('src/ducks'),
+      '@routes': paths.resolveApp('src/routes'),
+      '@scenes': paths.resolveApp('src/scenes'),
+      '@services': paths.resolveApp('src/services'),
+      '@utils': paths.resolveApp('src/utils'),
     },
     extensions: ['.js', '.jsx', 'less'],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        API_URL: JSON.stringify(process.env.API_URL),
-      },
-    }),
-  ],
 };

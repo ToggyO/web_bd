@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
-import { searchActions } from '@ducks/ads/search';
 
 import HeaderDisplay from './HeaderDisplay';
 
+import { authActions, authSelectors } from '@ducks/auth';
+import { searchActions } from '@ducks/ads/search';
+
 function mapStateToProps(state) {
   return {
-    userName: authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {

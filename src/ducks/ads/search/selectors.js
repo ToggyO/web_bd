@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { purifyObject, makeQueryStringFromObject } from '@utils';
 
 const searchSelector = state => state.ads.search;

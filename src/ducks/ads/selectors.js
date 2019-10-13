@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { formatMoney, formatCapitals } from '@utils';
 
 const adsByTypeSelector = (state, props) => state.ads[props.type];

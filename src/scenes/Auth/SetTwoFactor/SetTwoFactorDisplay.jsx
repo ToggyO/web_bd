@@ -1,10 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import SignWrapper from '../../_components/SignWrapper';
+
+import { TwoFactorFormContainer } from './components/TwoFactorForm';
+
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import { AuthBox } from '@components/AuthBox';
-import SignWrapper from '../../_components/SignWrapper';
-import { TwoFactorFormContainer } from './components/TwoFactorForm';
 
 const SetTwoFactorDisplay = ({ emailConfirmed }) => {
   useLayoutEffect(() => {

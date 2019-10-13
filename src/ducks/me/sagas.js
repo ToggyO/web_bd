@@ -1,9 +1,11 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
+
+import * as types from './types';
+
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
-import * as types from './types';
 
 function* getProfile() {
   try {

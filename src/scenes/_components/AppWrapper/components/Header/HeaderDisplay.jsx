@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Layout, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
+
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import logo from '@assets/bd-logo.svg';
@@ -10,7 +11,8 @@ import './style.less';
 
 const { Header } = Layout;
 
-const HeaderDisplay = ({ userName, logoutRequest, cleanState, collapsed, setCollapsed }) => {
+const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapsed }) => {
+  const { userName } = user;
   const handleLinkAction = (e, to) => {
     e.preventDefault();
     cleanState();
@@ -134,7 +136,7 @@ const HeaderDisplay = ({ userName, logoutRequest, cleanState, collapsed, setColl
 };
 
 HeaderDisplay.propTypes = {
-  userName: PropTypes.string,
+  user: PropTypes.object,
   logoutRequest: PropTypes.func,
   cleanState: PropTypes.func,
   collapsed: PropTypes.bool,

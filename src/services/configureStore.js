@@ -1,6 +1,9 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { saveTokens, saveUserData, renewCountryDataOnTokenRefresh, clearUserData } from '../middleware';
+
 import auth from '@ducks/auth/reducer';
 import me from '@ducks/me/reducer';
 import _global from '@ducks/_global';
@@ -16,7 +19,6 @@ import { adsSagas } from '@ducks/ads/ads';
 import { tradeSagas } from '@ducks/trades/trade';
 import { tradesSagas } from '@ducks/trades/trades';
 import { chatSagas } from '@ducks/chat';
-import { saveTokens, saveUserData, renewCountryDataOnTokenRefresh, logout } from '../middleware';
 
 export default function configureStore() {
   const reducer = combineReducers({ _global, auth, me, ads, trades, chat });
@@ -32,7 +34,13 @@ export default function configureStore() {
     ...chatSagas,
   };
   const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware, saveTokens, saveUserData, renewCountryDataOnTokenRefresh, logout];
+  const middlewares = [
+    sagaMiddleware,
+    saveTokens,
+    saveUserData,
+    renewCountryDataOnTokenRefresh,
+    clearUserData,
+  ];
   const enhancer = composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
   Object.values(sagas).forEach(saga => sagaMiddleware.run(saga));

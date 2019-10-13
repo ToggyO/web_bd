@@ -1,5 +1,6 @@
-import { pageSizeDashboard } from '@config/constants';
 import superaxios from './superaxios';
+
+import { pageSizeDashboard } from '@config/constants';
 
 export default {
   auth: {

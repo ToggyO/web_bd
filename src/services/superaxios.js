@@ -1,10 +1,13 @@
 // gist https://gist.github.com/mkjiau/650013a99c341c9f23ca00ccb213db1c
 
 import axios from 'axios';
-import Cookies from 'js-cookie';
-// import { API_URL } from '@config/constants';
-import { globalTypes } from '@ducks/_global';
+
 import { store } from '../store';
+
+import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL } from '@config/';
+import { globalTypes } from '@ducks/_global';
+
+import { getFromLocalState, writeToLocalState } from '@services/ls';
 
 let isAlreadyFetchingAccessToken = false;
 let subscribers = [];
@@ -18,11 +21,11 @@ function addSubscriber(callback) {
 }
 
 const superaxios = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: `${API_DOMAIN}/api/v${API_VERSION}`,
 });
 
 superaxios.interceptors.request.use(config => {
-  const accessToken = Cookies.get('bdtoken');
+  const accessToken = getFromLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
 
   const headers = {
     Accept: 'application/json',
@@ -50,15 +53,15 @@ superaxios.interceptors.response.use(
     if (status === 401) {
       if (!isAlreadyFetchingAccessToken) {
         isAlreadyFetchingAccessToken = true;
-        const oldRefreshToken = Cookies.get('bdrefreshtoken');
+        const oldRefreshToken = getFromLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
         store.dispatch({ type: globalTypes.REFRESHING_TOKEN_REQUEST });
         superaxios
-          .put('/token', { refreshToken: oldRefreshToken })
+          .put(API_URL.TOKEN, { refreshToken: oldRefreshToken })
           .then(response => {
             store.dispatch({ type: globalTypes.REFRESHING_TOKEN_SUCCESS });
             const { accessToken, refreshToken } = response.data.data;
-            Cookies.set('bdtoken', accessToken);
-            Cookies.set('bdrefreshtoken', refreshToken);
+            writeToLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+            writeToLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
             isAlreadyFetchingAccessToken = false;
             onAccessTokenFetched(accessToken);
           })
@@ -76,10 +79,6 @@ superaxios.interceptors.response.use(
       });
       return retryOriginalRequest;
     }
-
-    // if (status === 500) {
-    //   store.dispatch({ type: authTypes.LOGOUT });
-    // }
 
     return Promise.reject(error);
   }

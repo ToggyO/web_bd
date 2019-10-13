@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect';
 
+import { getFromLocalState } from '@services/ls';
+import { LOCAL_STORAGE_KEYS } from '@config';
+
 export const errorsSelector = createSelector(
   state => state.auth.errors,
   errors => errors
@@ -24,6 +27,8 @@ export const emailSelector = createSelector(
 );
 export const userNameSelector = () =>
   Object.prototype.hasOwnProperty.call(localStorage, 'userName') ? localStorage.getItem('userName') : null;
+
+export const userSelector = () => getFromLocalState(LOCAL_STORAGE_KEYS.USER);
 
 export const phoneNumberSelector = createSelector(
   state => state.auth.data.phoneNumber,

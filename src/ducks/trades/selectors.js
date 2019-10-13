@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { formatMoney } from '@utils';
 
 export const tradesSelector = createSelector(

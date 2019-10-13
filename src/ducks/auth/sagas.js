@@ -1,10 +1,13 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { message } from 'antd';
+
+import { meTypes } from '../me';
+
+import * as authTypes from './types';
+
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import api from '@services/api';
-import * as authTypes from './types';
-import { meTypes } from '../me';
 
 /*
 	function* workerSaga

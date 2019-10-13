@@ -2,18 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import PropTypes from 'prop-types';
+
+import { DrawerDisplay } from './components/Drawer';
+
+import { HeaderContainer } from './components/Header';
+
 import { checkTokens } from '@services/auth';
 import { Footer } from '@components/Footer';
-import { DrawerDisplay } from './components/Drawer';
-import { HeaderContainer } from './components/Header';
 
 const { Content } = Layout;
 
-const AppWrapperDisplay = ({ userID, userName, countryCode, getProfileRequest, children }) => {
+const AppWrapperDisplay = ({ user, countryCode, getProfileRequest, children }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
-    if ((!userID || !userName || !countryCode) && checkTokens()) getProfileRequest();
+    if ((!user || !countryCode) && checkTokens()) getProfileRequest();
   }, []);
 
   return (
@@ -27,8 +30,7 @@ const AppWrapperDisplay = ({ userID, userName, countryCode, getProfileRequest, c
 };
 
 AppWrapperDisplay.propTypes = {
-  userID: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
+  user: PropTypes.object,
   countryCode: PropTypes.string,
   getProfileRequest: PropTypes.func,
   children: PropTypes.element.isRequired,

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Select, Statistic } from 'antd';
+
 import * as validations from '@services/validations';
 import { notUndefinedObjectProps } from '@utils';
 import './style.less';
@@ -31,7 +32,10 @@ class TwoFactorForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const { userName, form } = this.props;
+    const {
+      user: { userName },
+      form,
+    } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
@@ -42,7 +46,11 @@ class TwoFactorForm extends React.Component {
   };
 
   handleGetCode = e => {
-    const { userName, form } = this.props;
+    const {
+      user: { userName },
+      form,
+    } = this.props;
+
     e.preventDefault();
     form.validateFields(['prefix', 'phone'], (err, values) => {
       if (!err) {

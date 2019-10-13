@@ -1,11 +1,16 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import api from '@services/api';
+
 import { message, Modal } from 'antd';
+
+import { tradesActions } from '../trades';
+
+import * as types from './types';
+
+import api from '@services/api';
+
 import history from '@services/history';
 import { ROUTES } from '@config/constants';
 import { catchFromPath } from '@utils/index';
-import * as types from './types';
-import { tradesActions } from '../trades';
 
 function* initiateTrade(action) {
   try {
