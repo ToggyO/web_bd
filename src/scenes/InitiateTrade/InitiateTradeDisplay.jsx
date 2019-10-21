@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import history from '@services/history';
 import { Row, Col, Skeleton } from 'antd';
+import { Link } from 'react-router-dom';
+
+import history from '@services/history';
+
 import { Spinner } from '@components/Spinner';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
+
 import { ROUTES } from '@config/constants';
-import './style.less';
+
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
+import './style.less';
 
 const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
   const adId = catchFromPath(history.location.pathname, 'ads');

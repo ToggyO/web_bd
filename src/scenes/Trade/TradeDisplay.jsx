@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ArrowLink } from '@components/ArrowLink';
@@ -12,9 +13,11 @@ import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Refresher } from '@components/Refresher';
 import { ROUTES, confirmData } from '@config/constants';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
+
 import { WalletAddressFormContainer } from './WalletAddressForm';
 import { TradeDetails } from './TradeDetails';
 import TalkJS from './Talk';
+
 import { catchFromPath } from '@utils';
 import './style.less';
 
@@ -249,7 +252,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  },
+                                  }
                                 )
                               }
                             >
@@ -306,7 +309,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  },
+                                  }
                                 )
                               }
                             >
@@ -368,7 +371,7 @@ const TradeDisplay = ({
                               specificTrade.id,
                               deleteNewTradeRequest,
                               { ...confirmData.requests.texts },
-                              { ...confirmData.requests.buttons },
+                              { ...confirmData.requests.buttons }
                             )
                           }
                         >
@@ -385,7 +388,7 @@ const TradeDisplay = ({
                               specificTrade.id,
                               cancelTradeRequest,
                               { ...confirmData.active.texts },
-                              { ...confirmData.active.buttons },
+                              { ...confirmData.active.buttons }
                             )
                           }
                         >

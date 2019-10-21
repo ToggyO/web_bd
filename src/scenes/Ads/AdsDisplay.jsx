@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import history from '@services/history';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
@@ -21,7 +22,7 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
 
   useEffect(() => {
     getAdsRequest(
-      `?pageSize=${pageSize}&type[]=${type}&currency[]=${countryData.currency}&location[]=${countryData.location}${searchQuery}`,
+      `?pageSize=${pageSize}&type[]=${type}&currency[]=${countryData.currency}&location[]=${countryData.location}${searchQuery}`
     );
   }, []);
 

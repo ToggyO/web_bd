@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+
+import DashboardDisplay from './DashboardDisplay';
+
 import { adsActions } from '@ducks/ads/ads';
 import { tradesActions } from '@ducks/trades/trades';
 import { tradeActions } from '@ducks/trades/trade';
 import { tradesSelectors } from '@ducks/trades';
-import DashboardDisplay from './DashboardDisplay';
 
 function mapStateToProps(state) {
   return {

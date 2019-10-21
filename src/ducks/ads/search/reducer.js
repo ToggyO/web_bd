@@ -1,6 +1,7 @@
 import * as types from './types';
 
 import history from '@services/history';
+
 import { parseQueryString } from '@utils';
 
 const initialState = parseQueryString(history.location.search);

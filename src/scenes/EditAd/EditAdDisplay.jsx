@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
+
 import { ROUTES } from '@config/constants';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
 import { AdFormContainer } from '../_components/AdForm';
+
 import { prettifyId } from '@utils/';
 import './style.less';
 

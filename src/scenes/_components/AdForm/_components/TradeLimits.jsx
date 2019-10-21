@@ -35,7 +35,7 @@ class TradeLimits extends React.Component {
   triggerChange = changedValue => {
     const { onChange } = this.props;
     if (onChange) {
-      onChange(Object.assign({}, this.state, changedValue));
+      onChange({ ...this.state, ...changedValue });
     }
   };
 

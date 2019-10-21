@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { meActions, meSelectors } from '@ducks/me';
+
 import SettingsDisplay from './SettingsDisplay';
+
+import { meActions, meSelectors } from '@ducks/me';
 
 function mapStateToProps(state) {
   return {

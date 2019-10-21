@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Statistic } from 'antd';
+
 import * as validations from '@services/validations';
+
 import { notUndefinedObjectProps } from '@utils';
 
 const { Countdown } = Statistic;
@@ -29,7 +31,10 @@ class WelcomeBackForm extends React.Component {
   };
 
   handleSubmit = (e, code) => {
-    const { userName, form } = this.props;
+    const {
+      user: { userName },
+      form,
+    } = this.props;
     e.preventDefault();
 
     if (code) {
@@ -46,7 +51,10 @@ class WelcomeBackForm extends React.Component {
   };
 
   handleGetCode = e => {
-    const { userName, phoneNumber } = this.props;
+    const {
+      user: { userName },
+      phoneNumber,
+    } = this.props;
     e.preventDefault();
     this.props.smsCodeRequest({ userName, phone: phoneNumber });
     this.codeInput.focus();

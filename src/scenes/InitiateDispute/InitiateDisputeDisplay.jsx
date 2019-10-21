@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { Form, Input, Row, Col, Button, Upload, Icon } from 'antd';
+
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import * as validations from '@services/validations';
 import { ROUTES } from '@config/constants';

@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Icon } from 'antd';
 import Talk from 'talkjs';
+
 import photoUrl from '@assets/photoUrl.png';
 
 const TalkJS = ({ _me, _other, _id, _order, isMobile }) => {

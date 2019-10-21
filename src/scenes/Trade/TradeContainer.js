@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
+
+import TradeDisplay from './TradeDisplay';
+
 import { tradeActions } from '@ducks/trades/trade';
 import { chatActions, chatSelectors } from '@ducks/chat';
 import { tradesSelectors } from '@ducks/trades';
-
-import TradeDisplay from './TradeDisplay';
 
 function mapStateToProps(state) {
   return {

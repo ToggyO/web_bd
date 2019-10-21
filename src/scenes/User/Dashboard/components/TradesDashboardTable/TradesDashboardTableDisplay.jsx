@@ -3,9 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import { Spinner } from '@components/Spinner';
+
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
+
+import { Spinner } from '@components/Spinner';
+
 import { formatDate, formatMoney, sortStrings, formatCapitals } from '@utils';
+
 import { ROUTES, confirmData } from '@config/constants';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
@@ -40,7 +44,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 record.key,
                                 onDecline,
                                 { ...confirmData.requests.texts },
-                                { ...confirmData.requests.buttons },
+                                { ...confirmData.requests.buttons }
                               )
                             }
                           >
@@ -61,7 +65,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 record.key,
                                 onCancel,
                                 { ...confirmData.active.texts },
-                                { ...confirmData.active.buttons },
+                                { ...confirmData.active.buttons }
                               )
                             }
                           >
@@ -111,7 +115,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                                 {
                                   okText: 'Yes',
                                   cancelText: 'No',
-                                },
+                                }
                               )
                             }
                           >
@@ -259,7 +263,7 @@ TradesDashboardTableDisplay.propTypes = {
       payment: PropTypes.string,
       btcPrice: PropTypes.number,
       terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    }),
+    })
   ),
   loading: PropTypes.bool,
 };

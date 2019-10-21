@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Row, Col, Button, Input } from 'antd';
+
 import * as validations from '@services/validations';
 
 const WalletAddressFormDisplay = ({ form, id, confirmTradeRequest, submitting }) => {

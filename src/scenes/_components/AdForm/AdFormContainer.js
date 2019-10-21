@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
+
+import AdFormDisplay from './AdFormDisplay';
+
 import { authSelectors } from '@ducks/auth';
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
 import { meSelectors } from '@ducks/me';
-import AdFormDisplay from './AdFormDisplay';
 
 function mapStateToProps(state, props) {
   return {
     specificAd: adsSelectors.adSelector(state, props),
-    isAuthorized: !!authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
     loading: state._global.submitting,
     onSubmit: props.onSubmit,
     isCurrency: !!state.ads.ad.data.currency,
@@ -26,5 +28,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(AdFormDisplay);

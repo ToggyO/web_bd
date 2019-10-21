@@ -1,9 +1,11 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
+import { RequestVerificationFormContainer } from './components/RequestVerificationForm';
+
 import { ROUTES } from '@config/constants';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { RequestVerificationFormContainer } from './components/RequestVerificationForm';
 
 const RequestVerificationDisplay = () => (
   <AppWrapperContainer>

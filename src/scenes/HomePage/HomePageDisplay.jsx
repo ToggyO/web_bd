@@ -1,11 +1,15 @@
 import React from 'react';
 import { Divider } from 'antd';
-import { checkTokens } from '@services/auth';
-import { Collapsed } from '@scenes/_components/Collapsed';
+
 import { AppWrapperContainer } from '../_components/AppWrapper';
+
 import { EasyWayDisplay } from './_components/EasyWay';
 import { QuickFiltersTabsDisplay } from './_components/QuickFiltersTabs';
 import { TenAdsContainer } from './_components/TenAds';
+
+import { Collapsed } from '@scenes/_components/Collapsed';
+
+import { checkTokens } from '@services/auth';
 import './style.less';
 
 const HomePageDisplay = () => (

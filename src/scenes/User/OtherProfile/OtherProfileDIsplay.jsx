@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import { AppWrapperContainer } from '../../_components/AppWrapper';
+
 import history from '@services/history';
 import { AdsTableContainer } from '@scenes/_components/AdsTable';
+
 import { catchFromPath } from '@utils/';
+
 import { pageSizeOtherProfile } from '@config/constants';
-import { AppWrapperContainer } from '../../_components/AppWrapper';
 import './style.less';
 
 const OtherProfileDisplay = ({ getCreatedAdsRequest }) => {

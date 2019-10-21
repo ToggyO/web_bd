@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import history from '@services/history';
 import { Tabs } from 'antd';
+
 import { Refresher } from '@components/Refresher';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ROUTES } from '@config/constants';
+
 import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
 import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
+
+import history from '@services/history';
+
 import { catchFromPath } from '@utils/';
 import './style.less';
 

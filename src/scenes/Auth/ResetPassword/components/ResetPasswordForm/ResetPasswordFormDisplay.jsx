@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button } from 'antd';
+
 import * as validations from '@services/validations';
+
 import { getQueries } from '@utils';
 import './style.less';
 

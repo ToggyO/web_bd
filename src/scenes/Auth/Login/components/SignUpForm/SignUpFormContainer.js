@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
+
 import SignUpFormDisplay from './SignUpFormDisplay';
+
+import { authActions, authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {

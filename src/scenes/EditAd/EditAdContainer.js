@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
+
+import EditAdDisplay from './EditAdDisplay';
+
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
-import EditAdDisplay from './EditAdDisplay';
 
 function mapStateToProps(state, props) {
   return {

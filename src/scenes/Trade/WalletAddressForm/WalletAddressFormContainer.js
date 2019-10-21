@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { tradeActions } from '@ducks/trades/trade';
 
 import WalletAddressFormDisplay from './WalletAddressFormDisplay';
+
+import { tradeActions } from '@ducks/trades/trade';
 
 function mapStateToProps(state) {
   return {

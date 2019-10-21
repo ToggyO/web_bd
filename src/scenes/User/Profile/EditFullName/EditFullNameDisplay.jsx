@@ -1,9 +1,11 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
+import { EditFullNameFormContainer } from './components/EditFullNameForm';
+
 import { ROUTES } from '@config/constants';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { EditFullNameFormContainer } from './components/EditFullNameForm';
 
 const EditFullName = () => (
   <AppWrapperContainer>

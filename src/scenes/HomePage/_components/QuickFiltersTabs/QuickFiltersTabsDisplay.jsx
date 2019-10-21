@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
+
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
 import './style.less';
 

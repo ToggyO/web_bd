@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
+
+import CreateAdDisplay from './CreateAdDisplay';
+
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
 import { authSelectors } from '@ducks/auth';
-import CreateAdDisplay from './CreateAdDisplay';
 
 function mapStateToProps(state, props) {
   return {
-    isAuthorized: !!authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
     specificAd: adsSelectors.adSelector(state, props),
   };
 }

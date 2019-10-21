@@ -1,10 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
+
+import SignWrapper from '../../_components/SignWrapper';
+
+import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
+
 import { ROUTES } from '@config/constants';
 import { AuthBox } from '@components/AuthBox';
 import history from '@services/history';
-import SignWrapper from '../../_components/SignWrapper';
-import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
 
 const WelcomeBackDisplay = ({ emailConfirmed, phoneNumberConfirmed }) => {
   useLayoutEffect(() => {

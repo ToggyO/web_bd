@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
+
 import ResetPasswordFormDisplay from './ResetPasswordFormDisplay';
+
+import { authActions, authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {

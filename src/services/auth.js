@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode';
 
 import { getFromLocalState, clearLocalState } from '@services/ls';
 import history from '@services/history';
+
 import { LOCAL_STORAGE_KEYS } from '@config';
 
 export const userLogout = () => {
@@ -10,6 +11,7 @@ export const userLogout = () => {
   clearLocalState(LOCAL_STORAGE_KEYS.USER);
   clearLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
   clearLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+  clearLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
 };
 
 export const checkTokens = () => {
@@ -20,9 +22,7 @@ export const checkTokens = () => {
     clearLocalState(LOCAL_STORAGE_KEYS.USER);
     clearLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
     clearLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userID');
-    localStorage.removeItem('countryCode');
+    clearLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
     return false;
   }
 

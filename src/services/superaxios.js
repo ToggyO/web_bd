@@ -5,6 +5,7 @@ import axios from 'axios';
 import { store } from '../store';
 
 import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL } from '@config/';
+
 import { globalTypes } from '@ducks/_global';
 
 import { getFromLocalState, writeToLocalState } from '@services/ls';

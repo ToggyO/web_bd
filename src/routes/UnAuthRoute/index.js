@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+
 import { ROUTES } from '@config/constants';
 import { checkTokens } from '@services/auth';
 import { authSelectors } from '@ducks/auth';

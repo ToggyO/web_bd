@@ -1,25 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
 import { AdFormContainer } from '../_components/AdForm';
+
+import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import './style.less';
 
-const CreateAdDisplay = ({ isAuthorized, createAdRequest, persistFormState }) => (
-  <AppWrapperContainer>
-    <div className="paper">
-      <div className="create-ad">
-        <h1>Create an ad</h1>
-        <AdFormContainer onSubmit={isAuthorized ? createAdRequest : persistFormState} type="ad" />
+const CreateAdDisplay = ({ user: { id }, createAdRequest, persistFormState }) => {
+  const isAuthorized = !!id;
+  return (
+    <AppWrapperContainer>
+      <div className="paper">
+        <div className="create-ad">
+          <h1>Create an ad</h1>
+          <AdFormContainer onSubmit={isAuthorized ? createAdRequest : persistFormState} type="ad" />
+        </div>
+        <p className="coindesk-powered">
+          Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+        </p>
       </div>
-      <p className="coindesk-powered">
-        Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
-      </p>
-    </div>
-  </AppWrapperContainer>
-);
+    </AppWrapperContainer>
+  );
+};
 
 CreateAdDisplay.propTypes = {
-  isAuthorized: PropTypes.bool,
+  user: PropTypes.shape({
+    id: PropTypes.string,
+  }),
   createAdRequest: PropTypes.func,
   persistFormState: PropTypes.func,
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Icon } from 'antd';
+
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
 import InnovationImg from '@assets/innovation.svg';
@@ -19,7 +20,7 @@ const EasyWay = () => (
       </Button>
     </div>
     <div className="easy-way__right">
-      <img src={InnovationImg} alt="Welcome to Bitcoins Direct" className="easy-way__img"/>
+      <img src={InnovationImg} alt="Welcome to Bitcoins Direct" className="easy-way__img" />
     </div>
   </div>
 );

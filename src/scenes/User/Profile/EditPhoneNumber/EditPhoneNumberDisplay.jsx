@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
+import { EditPhoneNumberFormContainer } from './components/EditPhoneNumberForm';
+
 import { ROUTES } from '@config/constants';
 
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { EditPhoneNumberFormContainer } from './components/EditPhoneNumberForm';
 
 const EditPhoneNumberDisplay = ({
   history: {

@@ -6,7 +6,9 @@ import { message } from 'antd';
 import { store } from './store';
 
 import history from '@services/history';
+
 import Routes from '@routes';
+
 import { ScrollToTop } from '@components/ScrollToTop';
 import './styles/index.less';
 

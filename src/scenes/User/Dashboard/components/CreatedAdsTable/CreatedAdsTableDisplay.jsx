@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Modal, Tag, Row, Col } from 'antd';
-import history from '@services/history';
-import { formatDate, sortStrings, catchNewLines } from '@utils';
+
 import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
+
+import history from '@services/history';
+
+import { formatDate, sortStrings, catchNewLines } from '@utils';
+
 import './style.less';
 import { Spinner } from '@components/Spinner/index';
 
@@ -158,16 +162,7 @@ const CreatedAdsTableDisplay = ({
           className="hideble-630"
         />
 
-        <Column
-          align="right"
-          title={() => (
-            <span>
-              Price / BTC
-            </span>
-          )}
-          dataIndex="btcPrice"
-          key="btcPrice"
-        />
+        <Column align="right" title={() => <span>Price / BTC</span>} dataIndex="btcPrice" key="btcPrice" />
 
         <Column
           title="Status"

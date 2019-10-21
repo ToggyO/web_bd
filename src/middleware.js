@@ -4,6 +4,7 @@ import { writeToLocalState } from '@services/ls';
 import { meTypes } from '@ducks/me';
 import { globalTypes } from '@ducks/_global';
 import { userLogout } from '@services/auth';
+
 import { LOCAL_STORAGE_KEYS } from '@config';
 
 export const saveTokens = store => next => action => {
@@ -17,8 +18,10 @@ export const saveTokens = store => next => action => {
 
 export const saveUserData = store => next => action => {
   if (action.type === authTypes.SIGNIN_SUCCESS || action.type === authTypes.SIGNUP_SUCCESS) {
-    const { data } = action.payload;
-    writeToLocalState(LOCAL_STORAGE_KEYS.USER, data);
+    const {
+      data: { id, userName, emailConfirmed, phoneNumberConfirmed },
+    } = action.payload;
+    writeToLocalState(LOCAL_STORAGE_KEYS.USER, { id, userName, emailConfirmed, phoneNumberConfirmed });
   }
   if (action.type === meTypes.GET_PROFILE_SUCCESS) {
     const { user } = action.payload.data;

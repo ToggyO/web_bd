@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Result, Button } from 'antd';
+
+import image from './image';
+
 import history from '@services/history';
 import superaxios from '@services/superaxios';
-import image from './image';
 import './style.less';
 
 export const NotFound = () => {

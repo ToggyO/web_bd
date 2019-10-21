@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Card, Button } from 'antd';
+
 import { ButtonLink } from '@components/ButtonLink';
 import history from '@services/history';
 import { ROUTES } from '@config/constants';

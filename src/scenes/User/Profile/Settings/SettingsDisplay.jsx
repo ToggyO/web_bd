@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
+
 import { ROUTES } from '@config/constants';
 import { Spinner } from '@components/Spinner';
+
 import { secretize } from '@utils';
+
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 
 import './style.less';

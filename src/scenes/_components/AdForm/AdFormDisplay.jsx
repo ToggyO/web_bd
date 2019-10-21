@@ -2,13 +2,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
+
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
+
 import TradeLimits from './_components/TradeLimits';
+
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import history from '@services/history';
 import * as validations from '@services/validations';
 import superaxios from '@services/superaxios';
+
 import { formatMoney } from '@utils';
 import './style.less';
 
@@ -50,7 +54,7 @@ class AdFormDisplay extends React.Component {
         100 - (this.state.btcPrice * 100) / this.props.specificAd.btcPrice,
         1,
         '.',
-        '',
+        ''
       );
       this.setState({ margin });
       this.props.form.setFieldsValue({
@@ -81,7 +85,15 @@ class AdFormDisplay extends React.Component {
   };
 
   handleSubmit = e => {
-    const { form, onSubmit, forEdit, isAuthorized, specificAd } = this.props;
+    const {
+      form,
+      onSubmit,
+      forEdit,
+      user: { id },
+      specificAd,
+    } = this.props;
+
+    const isAuthorized = !!id;
 
     e.preventDefault();
 
@@ -148,7 +160,15 @@ class AdFormDisplay extends React.Component {
 
   render() {
     const { location } = history;
-    const { form, isAuthorized, loading, forEdit, specificAd, countryData } = this.props;
+    const {
+      form,
+      user: { id },
+      loading,
+      forEdit,
+      specificAd,
+      countryData,
+    } = this.props;
+    const isAuthorized = !!id;
     const payment = form.getFieldValue('payment');
 
     return (
@@ -164,7 +184,7 @@ class AdFormDisplay extends React.Component {
               <Radio.Group disabled={history.location.pathname !== ROUTES.ADS.CREATE}>
                 <Radio value="Buy">I want to buy bitcoins</Radio>
                 <Radio value="Sell">I want to sell bitcoins</Radio>
-              </Radio.Group>,
+              </Radio.Group>
             )}
           </Form.Item>
         </div>
@@ -193,7 +213,7 @@ class AdFormDisplay extends React.Component {
                         {currency_.name}
                       </Option>
                     ))}
-                  </Select>,
+                  </Select>
                 )}
               </Form.Item>
             </Col>
@@ -216,7 +236,7 @@ class AdFormDisplay extends React.Component {
                         {location_.name}
                       </Option>
                     ))}
-                  </Select>,
+                  </Select>
                 )}
               </Form.Item>
             </Col>
@@ -242,7 +262,7 @@ class AdFormDisplay extends React.Component {
                         {payment_.name}
                       </Option>
                     ))}
-                  </Select>,
+                  </Select>
                 )}
               </Form.Item>
             </Col>
@@ -293,7 +313,7 @@ class AdFormDisplay extends React.Component {
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
-                    />,
+                    />
                   )}
                 </Form.Item>
               </Spin>
@@ -325,7 +345,7 @@ class AdFormDisplay extends React.Component {
                         min={-100}
                         max={100}
                         onChange={this.handleMarginChange}
-                      />,
+                      />
                     )}
                   </Form.Item>
                 </div>
@@ -377,7 +397,7 @@ class AdFormDisplay extends React.Component {
                     className=" ad-form__textarea"
                     placeholder="Any other information you wish to tell about your trade"
                     rows={5}
-                  />,
+                  />
                 )}
               </Form.Item>
             </Col>
@@ -413,7 +433,7 @@ class AdFormDisplay extends React.Component {
 AdFormDisplay.propTypes = {
   form: PropTypes.object,
   onSubmit: PropTypes.func,
-  isAuthorized: PropTypes.bool,
+  user: PropTypes.shape({ id: PropTypes.string }),
   loading: PropTypes.bool,
   forEdit: PropTypes.bool,
   cleanFormState: PropTypes.func,

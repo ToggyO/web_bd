@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ROUTES } from '@config/constants';
-import { AuthBox } from '@components/AuthBox';
-import { ArrowLink } from '@components/ArrowLink';
+
 import SignWrapper from '../../_components/SignWrapper';
 
 import { ResetPasswordFormContainer } from './components/ResetPasswordForm';
+
+import { ROUTES } from '@config/constants';
+import { AuthBox } from '@components/AuthBox';
+import { ArrowLink } from '@components/ArrowLink';
 
 const ResetPassword = ({ location: { search } }) => (
   <SignWrapper>

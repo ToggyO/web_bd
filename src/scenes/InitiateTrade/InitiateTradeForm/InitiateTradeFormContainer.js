@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
+
+import InitiateTradeFormDisplay from './InitiateTradeFormDisplay';
+
 import { tradeActions } from '@ducks/trades/trade';
 import { authSelectors } from '@ducks/auth';
-import InitiateTradeFormDisplay from './InitiateTradeFormDisplay';
 
 function mapStateToProps(state) {
   return {
     submitting: state._global.submitting,
-    isAuthorized: !!authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
   };
 }
 

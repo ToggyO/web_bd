@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
-import { AuthBox } from '@components/AuthBox';
+
 import SignWrapper from '../../_components/SignWrapper';
+
 import { SignInFormContainer } from './components/SignInForm';
 import { SignUpFormContainer } from './components/SignUpForm';
+
+import { AuthBox } from '@components/AuthBox';
 import './style.less';
 
 const { TabPane } = Tabs;

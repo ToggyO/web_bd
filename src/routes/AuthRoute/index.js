@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+
 import { ROUTES } from '@config/constants';
 import { checkTokens } from '@services/auth';
 

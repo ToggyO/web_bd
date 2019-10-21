@@ -1,9 +1,11 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
+
+import { EditEmailFormContainer } from './components/EditEmailForm';
+
 import { ROUTES } from '@config/constants';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { EditEmailFormContainer } from './components/EditEmailForm';
 
 const EditEmailDisplay = () => (
   <AppWrapperContainer>

@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import superaxios from '@services/superaxios';
 import { Upload, Form, Button, message } from 'antd';
+
+import superaxios from '@services/superaxios';
+
 import VerificationIcon from '@assets/verification-icon.svg';
 import { ROUTES } from '@config/constants';
+
 import { parseBase64 } from '@utils';
+
 import history from '@services/history';
 
 const { Dragger } = Upload;

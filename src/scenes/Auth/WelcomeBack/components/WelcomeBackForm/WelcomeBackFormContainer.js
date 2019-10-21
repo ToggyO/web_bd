@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
+
 import WelcomeBackFormDisplay from './WelcomeBackFormDisplay';
+
+import { authActions, authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
-    userName: authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
     phoneNumber: authSelectors.phoneNumberSelector(state),
     loading: authSelectors.loadingSelector(state),
     errors: authSelectors.errorsSelector(state),

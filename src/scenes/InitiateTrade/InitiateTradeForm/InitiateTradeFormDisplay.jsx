@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
+
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config/constants';
@@ -11,7 +12,7 @@ import superaxios from '@services/superaxios';
 const InitiateTradeFormDisplay = props => {
   const {
     submitting,
-    isAuthorized,
+    user: { id },
     form,
     adId,
     min,
@@ -26,6 +27,7 @@ const InitiateTradeFormDisplay = props => {
   } = props;
 
   const [escrowFee, setEscrowFee] = useState(0);
+  const isAuthorized = !!id;
 
   useEffect(() => {
     let isSubscribed = true;
@@ -102,7 +104,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter={currency}
                 onChange={handleFiatChange}
                 disabled={adOwnerID === cachedUserID}
-              />,
+              />
             )}
           </Form.Item>
         </Col>
@@ -122,7 +124,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter="BTC"
                 onChange={handleTradeAmountChange}
                 disabled={adOwnerID === cachedUserID}
-              />,
+              />
             )}
           </Form.Item>
         </Col>

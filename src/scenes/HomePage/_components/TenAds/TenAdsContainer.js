@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
+
+import TenAdsDisplay from './TenAdsDisplay';
+
 import { buyAdsActions } from '@ducks/ads/buy';
 import { sellAdsActions } from '@ducks/ads/sell';
 import { adsSelectors } from '@ducks/ads';
-import TenAdsDisplay from './TenAdsDisplay';
 
 function mapStateToProps(state, props) {
   return {
@@ -29,5 +31,5 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TenAdsDisplay);

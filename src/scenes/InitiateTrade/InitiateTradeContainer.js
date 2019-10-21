@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
+
+import InitiateTradeDisplay from './InitiateTradeDisplay';
+
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
-import InitiateTradeDisplay from './InitiateTradeDisplay';
 
 function mapStateToProps(state) {
   return {

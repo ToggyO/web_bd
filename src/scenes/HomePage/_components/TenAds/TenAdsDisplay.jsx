@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import { ROUTES } from '@config/constants';
 import { TenTradesSkeleton } from '@scenes/_components/TenTradesSkeleton';
 import { AdsTableContainer } from '@scenes/_components/AdsTable';

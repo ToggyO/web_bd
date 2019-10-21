@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Spinner } from '@components/Spinner';
-import { ROUTES } from '@config/constants';
-import { NotFound } from '@scenes/404';
+
 import { LoginContainer } from '../scenes/Auth/Login';
 import { ConfirmEmailContainer } from '../scenes/Auth/ConfirmEmail';
 import { SuccessDisplay } from '../scenes/Auth/Success';
@@ -29,8 +27,14 @@ import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { InitiateDisputeContainer } from '../scenes/InitiateDispute';
 import { OtherProfileContainer } from '../scenes/User/OtherProfile';
 import { TradeContainer } from '../scenes/Trade';
+
 import AuthRoute from './AuthRoute';
 import UnAuthRoute from './UnAuthRoute';
+
+import { NotFound } from '@scenes/404';
+
+import { ROUTES } from '@config/constants';
+import { Spinner } from '@components/Spinner';
 
 const Routes = ({ loading }) => (
   <Spin

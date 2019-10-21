@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Drawer, Menu } from 'antd';
+
 import { ROUTES } from '@config/constants';
 import logo from '@assets/bd-logo.svg';
 import './style.less';
