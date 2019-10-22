@@ -15,7 +15,8 @@ import { ROUTES } from '@config/constants';
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
 import './style.less';
 
-const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
+const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }) => {
+  const cachedUserID = user.id;
   const adId = catchFromPath(history.location.pathname, 'ads');
   useEffect(() => {
     getAdByIdRequest(adId);
@@ -149,11 +150,12 @@ InitiateTradeDisplay.propTypes = {
   getAdByIdRequest: PropTypes.func,
   specificTrade: PropTypes.object,
   loading: PropTypes.bool,
-  cachedUserID: PropTypes.string,
+  user: PropTypes.shape({
+    id: PropTypes.string,
+  }),
 };
 InitiateTradeDisplay.defaultProps = {
   loading: false,
-  cachedUserID: localStorage.getItem('userID'),
 };
 
 export default InitiateTradeDisplay;

@@ -4,12 +4,13 @@ import InitiateTradeDisplay from './InitiateTradeDisplay';
 
 import { adActions } from '@ducks/ads/ad';
 import { adsSelectors } from '@ducks/ads';
+import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
     specificTrade: adsSelectors.adSelector(state, { type: 'ad' }),
     loading: adsSelectors.adsLoadingSelector(state, { type: 'ad' }),
-    cachedUserID: localStorage.getItem('userID'),
+    user: authSelectors.userSelector(),
   };
 }
 
