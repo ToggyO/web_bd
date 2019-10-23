@@ -1,32 +1,15 @@
 const fs = require('fs');
 const path = require('path');
+
 const dotenv = require('dotenv');
 
 const env = (() => {
-  if (!process.env.NODE_ENV) {
-    const NODE_ENV = 'development';
-    const dotenvDir = path.join(__dirname, `../.env.${NODE_ENV}`);
-    return dotenv.parse(fs.readFileSync(dotenvDir));
-  }
+  const dotenvDir = path.join(__dirname, `../.env.${process.env.NODE_ENV}`);
+  const envVars = dotenv.parse(fs.readFileSync(dotenvDir));
 
-  const defaultEnvVariables = {
-    NODE_ENV: 'development',
-    HOST: '0.0.0.0',
-    PORT: 3005,
-    API_DOMAIN: '',
-    API_VERSION: '',
-  };
-
-  const filteredEnvVariables = Object.keys(process.env).reduce((accumulator, envName) => {
-    if (Object.keys(defaultEnvVariables).includes(envName)) {
-      accumulator[envName] = process.env[envName];
-    }
-    return accumulator;
-  }, {});
-
+  console.log(envVars);
   return {
-    ...defaultEnvVariables,
-    ...filteredEnvVariables,
+    ...envVars,
   };
 })();
 

@@ -13,7 +13,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common.webpackCommon, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   optimization: {
     minimizer: [
       new TerserJSPlugin({
