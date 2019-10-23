@@ -104,17 +104,12 @@ const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapse
 
         <div className="right-nav">
           {userName ? (
-            <>
-              <a href="#" className="nav__link right-nav__bell">
-                <Icon type="bell" />
-              </a>
-              <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
-                <Button className="user-button">
-                  <Avatar size="small" icon="user" className="user-avatar" />
-                  <span className="user-name">{userName}</span>
-                </Button>
-              </Dropdown>
-            </>
+            <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
+              <Button className="user-button">
+                <Avatar size="small" icon="user" className="user-avatar" />
+                <span className="user-name">{userName}</span>
+              </Button>
+            </Dropdown>
           ) : (
             <>
               <Link to={{ pathname: ROUTES.LOGIN, state: { toSignUp: true } }} className="nav__link">

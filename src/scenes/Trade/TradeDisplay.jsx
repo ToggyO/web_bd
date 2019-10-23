@@ -89,15 +89,14 @@ const TradeDisplay = ({
           {(() => {
             switch (specificTrade.status) {
               case 'New':
-                return <ArrowLink text="Back to trade requests" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />;
+                return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.REQUESTS} />;
               case 'Depositing':
               case 'InProgress':
               case 'FiatSent':
-                return <ArrowLink text="Back to active trades" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />;
+              case 'Disputed':
+                return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />;
               case 'Completed':
-                return (
-                  <ArrowLink text="Back to completed trades" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />
-                );
+                return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />;
               default:
                 return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />;
             }
@@ -379,7 +378,6 @@ const TradeDisplay = ({
                         </ButtonLink>
                       );
 
-                    case 'Depositing':
                     case 'InProgress':
                       return (
                         <ButtonLink
@@ -395,7 +393,7 @@ const TradeDisplay = ({
                           Cancel trade
                         </ButtonLink>
                       );
-
+                    case 'Depositing':
                     case 'FiatSent':
                       return <InitiateDisputeLinkWithModal id={specificTrade.id} />;
                     default:
@@ -404,7 +402,7 @@ const TradeDisplay = ({
                 })()}
                 {specificTrade.status !== 'Completed' ? (
                   <Refresher
-                    style={{ marginLeft: 5, position: 'relative', top: 1 }}
+                    style={{ position: 'relative', top: 1 }}
                     loading={loading}
                     cb={() => getTradeByIdRequest(id)}
                   />

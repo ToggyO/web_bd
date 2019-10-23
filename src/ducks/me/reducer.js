@@ -3,7 +3,7 @@ import * as types from './types';
 import { getFromLocalState } from '@services/ls';
 
 import { LOCAL_STORAGE_KEYS } from '@config';
-const { userName, id } = getFromLocalState(LOCAL_STORAGE_KEYS.USER);
+const { userName, id } = getFromLocalState(LOCAL_STORAGE_KEYS.USER) || {};
 const countryCode = getFromLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
 
 const initialState = {

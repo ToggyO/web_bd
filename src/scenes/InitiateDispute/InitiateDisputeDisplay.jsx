@@ -39,7 +39,7 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
     accept: 'image/bmp, image/jpeg, image/jpg, image/png, application/pdf',
   };
 
-  const handleUpload = e => {
+  const handleUpload = () => {
     form.validateFields((err, values) => {
       if (!err) {
         const { _message } = values;

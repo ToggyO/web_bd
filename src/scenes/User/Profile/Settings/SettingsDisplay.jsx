@@ -134,9 +134,6 @@ const SettingsDisplay = ({
                 </List.Item>
               </List>
             </TabPane>
-            <TabPane tab="Notifications" key="2">
-              Notifications
-            </TabPane>
           </Tabs>
         </div>
       </div>
