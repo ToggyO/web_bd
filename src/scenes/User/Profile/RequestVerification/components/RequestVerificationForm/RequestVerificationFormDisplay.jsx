@@ -2,14 +2,13 @@
 import React from 'react';
 import { Upload, Form, Button, message } from 'antd';
 
+import history from '@services/history';
 import superaxios from '@services/superaxios';
-
-import VerificationIcon from '@assets/verification-icon.svg';
 import { ROUTES } from '@config/constants';
 
 import { parseBase64 } from '@utils';
 
-import history from '@services/history';
+import VerificationIcon from '@assets/verification-icon.svg';
 
 const { Dragger } = Upload;
 
@@ -54,7 +53,7 @@ class RequestVerificationFormDisplay extends React.Component {
           this.setState({
             uploading: false,
           });
-          message.error('upload failed.');
+          message.error('Upload failed.');
         });
     };
   };
