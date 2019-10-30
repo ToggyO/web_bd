@@ -42,7 +42,7 @@ export const TradeDetails = ({ specificTrade }) => (
       </Col>
       <Col xs={12}>
         <span className="span-head">Payment method</span>
-        <p>{specificTrade.payment}</p>
+        <p>{formatCapitals(specificTrade.payment)}</p>
       </Col>
     </Row>
     <Row>

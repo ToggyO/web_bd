@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
-import history from '@services/history';
+import { WalletAddressFormContainer } from './WalletAddressForm';
+import { TradeDetails } from './TradeDetails';
+
+import TalkJS from './Talk';
+
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ArrowLink } from '@components/ArrowLink';
 import { Spinner } from '@components/Spinner';
@@ -13,10 +17,7 @@ import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Refresher } from '@components/Refresher';
 import { ROUTES, confirmData } from '@config/constants';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
-
-import { WalletAddressFormContainer } from './WalletAddressForm';
-import { TradeDetails } from './TradeDetails';
-import TalkJS from './Talk';
+import history from '@services/history';
 
 import { catchFromPath } from '@utils';
 import './style.less';
@@ -27,7 +28,6 @@ const TradeDisplay = ({
   fiatSentRequest,
   fiatReceivedRequest,
   deleteNewTradeRequest,
-  cancelTradeRequest,
   loading,
   specificTrade,
   chatLoading,
@@ -378,22 +378,23 @@ const TradeDisplay = ({
                         </ButtonLink>
                       );
 
-                    case 'InProgress':
-                      return (
-                        <ButtonLink
-                          onClick={() =>
-                            ShowConfirm(
-                              specificTrade.id,
-                              cancelTradeRequest,
-                              { ...confirmData.active.texts },
-                              { ...confirmData.active.buttons }
-                            )
-                          }
-                        >
-                          Cancel trade
-                        </ButtonLink>
-                      );
+                    // case 'InProgress':
+                    //   return (
+                    //     <ButtonLink
+                    //       onClick={() =>
+                    //         ShowConfirm(
+                    //           specificTrade.id,
+                    //           cancelTradeRequest,
+                    //           { ...confirmData.active.texts },
+                    //           { ...confirmData.active.buttons }
+                    //         )
+                    //       }
+                    //     >
+                    //       Cancel trade
+                    //     </ButtonLink>
+                    //   );
                     case 'Depositing':
+                    case 'InProgress':
                     case 'FiatSent':
                       return <InitiateDisputeLinkWithModal id={specificTrade.id} />;
                     default:
@@ -423,6 +424,8 @@ const TradeDisplay = ({
 TradeDisplay.propTypes = {
   loading: PropTypes.bool,
   specificTrade: PropTypes.shape({
+    id: PropTypes.string,
+    order: PropTypes.number,
     amount: PropTypes.number,
     fiat: PropTypes.number,
     tradePartner: PropTypes.string,
@@ -458,7 +461,6 @@ TradeDisplay.propTypes = {
   fiatSentRequest: PropTypes.func,
   fiatReceivedRequest: PropTypes.func,
   deleteNewTradeRequest: PropTypes.func,
-  cancelTradeRequest: PropTypes.func,
   submitting: PropTypes.bool,
 };
 

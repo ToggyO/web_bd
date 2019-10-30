@@ -37,7 +37,7 @@ class RequestVerificationFormDisplay extends React.Component {
 
       superaxios({
         method: 'post',
-        url: `${process.env.API_URL}/profile/resources`,
+        url: '/profile/resources',
         data,
         config: { headers: { 'Content-Type': 'text/plain' } },
       })
