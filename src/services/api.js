@@ -126,10 +126,6 @@ export default {
       const response = await superaxios.delete(`/trade/${id}`);
       return response.data;
     },
-    cancelTrade: async id => {
-      const response = await superaxios.post(`/trade/${id}/canceled`);
-      return response.data;
-    },
   },
   chat: {
     getChatById: async id => {

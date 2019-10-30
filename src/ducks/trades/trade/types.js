@@ -21,7 +21,3 @@ export const FIAT_RECEIVED_ERROR = 'bitcoins-direct/trades/trade/FIAT_RECEIVED_E
 export const DELETE_NEW_REQUEST = 'bitcoins-direct/trades/trade/DELETE_NEW_REQUEST';
 export const DELETE_NEW_SUCCESS = 'bitcoins-direct/trades/trade/DELETE_NEW_SUCCESS';
 export const DELETE_NEW_ERROR = 'bitcoins-direct/trades/trade/DELETE_NEW_ERROR';
-
-export const CANCEL_REQUEST = 'bitcoins-direct/trades/trade/CANCEL_REQUEST';
-export const CANCEL_SUCCESS = 'bitcoins-direct/trades/trade/CANCEL_SUCCESS';
-export const CANCEL_ERROR = 'bitcoins-direct/trades/trade/CANCEL_ERROR';

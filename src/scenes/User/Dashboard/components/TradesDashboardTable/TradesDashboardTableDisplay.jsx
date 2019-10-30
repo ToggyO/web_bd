@@ -34,54 +34,54 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                 switch (record.status) {
                   case 'New':
                     return (
-                        <>
-                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
+                      <>
+                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View request
-                          </Link>
-                          <ButtonLink
-                            onClick={() =>
-                              ShowConfirm(
-                                record.key,
-                                onDecline,
-                                { ...confirmData.requests.texts },
-                                { ...confirmData.requests.buttons }
-                              )
-                            }
-                          >
+                        </Link>
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              record.key,
+                              onDecline,
+                              { ...confirmData.requests.texts },
+                              { ...confirmData.requests.buttons }
+                            )
+                          }
+                        >
                             Decline request
-                          </ButtonLink>
-                        </>
+                        </ButtonLink>
+                      </>
                     );
                   case 'Depositing':
                   case 'InProgress':
                     return (
-                        <>
-                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
+                      <>
+                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
-                          </Link>
-                          <ButtonLink
-                            onClick={() =>
-                              ShowConfirm(
-                                record.key,
-                                onCancel,
-                                { ...confirmData.active.texts },
-                                { ...confirmData.active.buttons }
-                              )
-                            }
-                          >
+                        </Link>
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              record.key,
+                              onCancel,
+                              { ...confirmData.active.texts },
+                              { ...confirmData.active.buttons }
+                            )
+                          }
+                        >
                             Cancel trade
-                          </ButtonLink>
-                        </>
+                        </ButtonLink>
+                      </>
                     );
 
                   case 'FiatSent':
                     return (
-                        <>
-                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
+                      <>
+                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
-                          </Link>
-                          <InitiateDisputeLinkWithModal id={record.key} />
-                        </>
+                        </Link>
+                        <InitiateDisputeLinkWithModal id={record.key} />
+                      </>
                     );
 
                   case 'Disputed':
@@ -90,38 +90,38 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                   case 'Canceled':
                   case 'Resolved':
                     return (
-                        <>
-                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
+                      <>
+                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
-                          </Link>
-                        </>
+                        </Link>
+                      </>
                     );
 
                   default:
                     return (
-                        <>
-                          <Link className="extra-row__view" to={`/trades/${record.order}`}>
+                      <>
+                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
-                          </Link>
-                          <ButtonLink
-                            onClick={() =>
-                              ShowConfirm(
-                                record.key,
-                                onCancel,
-                                {
-                                  title: 'You\'re about to cancel this trade request',
-                                  content: 'Are you sure?',
-                                },
-                                {
-                                  okText: 'Yes',
-                                  cancelText: 'No',
-                                }
-                              )
-                            }
-                          >
+                        </Link>
+                        <ButtonLink
+                          onClick={() =>
+                            ShowConfirm(
+                              record.key,
+                              onCancel,
+                              {
+                                title: 'You\'re about to cancel this trade request',
+                                content: 'Are you sure?',
+                              },
+                              {
+                                okText: 'Yes',
+                                cancelText: 'No',
+                              }
+                            )
+                          }
+                        >
                             Cancel trade
-                          </ButtonLink>
-                        </>
+                        </ButtonLink>
+                      </>
                     );
                 }
               })()}
@@ -192,7 +192,11 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
     <Column
       key="key"
       title="ID"
-      render={(text, record) => <span data-id={record.key}>{record.order}</span>}
+      render={(text, record) => (
+        <Link to={`${ROUTES.TRADES.ROOT}/${record.order}`} data-id={record.key}>
+          {record.order}
+        </Link>
+      )}
       dataIndex="order"
       className="hideble-768"
     />

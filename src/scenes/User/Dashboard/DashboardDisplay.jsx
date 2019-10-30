@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
+import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
+import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
+
 import { Refresher } from '@components/Refresher';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ROUTES } from '@config/constants';
-
-import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
-import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
 
 import history from '@services/history';
 
@@ -23,7 +23,6 @@ const DashboardDisplay = ({
   getCompletedTradesRequest,
   getCanceledTradesRequest,
   deleteNewTradeRequest,
-  cancelTradeRequest,
   tradesLoading,
 }) => {
   useEffect(() => {
@@ -75,12 +74,7 @@ const DashboardDisplay = ({
               <h2 className="dashboard__header">
                 Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
               </h2>
-              <TradesDashboardTableContainer
-                withTerms
-                type="active"
-                onCancel={cancelTradeRequest}
-                onDispute={() => {}}
-              />
+              <TradesDashboardTableContainer withTerms type="active" onDispute={() => {}} />
             </TabPane>
             <TabPane
               tab={window.matchMedia('(max-width: 1024px)').matches ? 'Completed' : 'Completed trades'}
@@ -112,7 +106,6 @@ DashboardDisplay.propTypes = {
   getCompletedTradesRequest: PropTypes.func,
   getCanceledTradesRequest: PropTypes.func,
   deleteNewTradeRequest: PropTypes.func,
-  cancelTradeRequest: PropTypes.func,
   tradesLoading: PropTypes.bool,
 };
 export default DashboardDisplay;
