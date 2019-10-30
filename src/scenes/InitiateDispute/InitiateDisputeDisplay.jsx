@@ -39,34 +39,40 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
     accept: 'image/bmp, image/jpeg, image/jpg, image/png, application/pdf',
   };
 
+  const postData = values => {
+    setUploading(true);
+    superaxios({
+      method: 'post',
+      url: `/trade/${location.state.id}/disputed`,
+      data: values,
+      config: { headers: { 'Content-Type': 'text/plain' } },
+    })
+      .then(() => {
+        setFileList([]);
+        setUploading(false);
+
+        history.replace(ROUTES.DASHBOARD.ACTIVE);
+        message.success('Dispute has been initiated');
+      })
+      .catch(() => {
+        setUploading(false);
+        message.error('Upload has been failed.');
+      });
+  };
+
   const handleUpload = () => {
+    // eslint-disable-next-line consistent-return
     form.validateFields((err, values) => {
       if (!err) {
         const { _message } = values;
         const reader = new FileReader();
+
+        if (!fileList[0]) return postData({ message: _message, base64Image: '', contentType: '' });
+
         reader.readAsDataURL(fileList[0]);
         reader.onload = e => {
-          setUploading(true);
-
           const data = parseBase64(e.target.result);
-
-          superaxios({
-            method: 'post',
-            url: `/trade/${location.state.id}/disputed`,
-            data: { message: _message, ...data },
-            config: { headers: { 'Content-Type': 'text/plain' } },
-          })
-            .then(() => {
-              setFileList([]);
-              setUploading(false);
-
-              history.replace(ROUTES.SETTINGS.ROOT);
-              message.success('Dispute has been initiated');
-            })
-            .catch(() => {
-              setUploading(false);
-              message.error('Upload has been failed.');
-            });
+          postData({ message: _message, ...data });
         };
       }
     });
@@ -92,7 +98,7 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
                 </Form.Item>
                 <Form.Item label="Enter message">
                   {form.getFieldDecorator('_message', {
-                    initialValue: location.state ? location.state.text : '',
+                    initialValue: location.state && location.state.text,
                   })(<Input.TextArea rows={5} placeholder="Describe your problem here" />)}
                 </Form.Item>
                 <div style={{ marginBottom: 16 }}>
@@ -111,6 +117,7 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
                   <Col lg={7}>
                     <Button
                       loading={uploading}
+                      className="primary-btn"
                       type="primary"
                       htmlType="submit"
                       style={{ width: '100%', marginBottom: 12 }}
