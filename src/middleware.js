@@ -13,6 +13,7 @@ export const saveTokens = store => next => action => {
     writeToLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
     writeToLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
   }
+
   return next(action);
 };
 

@@ -1,6 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
+const WebpackBar = require('webpackbar');
 
 const { NODE_ENV, API_DOMAIN, API_VERSION, isPROD, isDEV, paths } = require('../bin');
 
@@ -28,6 +29,10 @@ const antColors = {
 exports.antColors = antColors;
 
 exports.webpackCommon = {
+  stats: {
+    children: false,
+    modules: false,
+  },
   entry: {
     app: paths.appIndexJs,
   },
@@ -46,6 +51,9 @@ exports.webpackCommon = {
         API_DOMAIN: JSON.stringify(API_DOMAIN),
         API_VERSION: JSON.stringify(API_VERSION),
       },
+    }),
+    new WebpackBar({
+      color: '#1fffa2',
     }),
   ],
   module: {
