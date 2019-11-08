@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import loadable from '@loadable/component';
 
-import { LoginContainer } from '../scenes/Auth/Login';
-import { ConfirmEmailContainer } from '../scenes/Auth/ConfirmEmail';
-import { SuccessDisplay } from '../scenes/Auth/Success';
-import { WelcomeBackContainer } from '../scenes/Auth/WelcomeBack';
-import { ForgotPassword } from '../scenes/Auth/ForgotPassword';
-import { ResetPassword } from '../scenes/Auth/ResetPassword';
-import { SetTwoFactorContainer } from '../scenes/Auth/SetTwoFactor';
+// import { LoginContainer } from '../scenes/Auth/Login';
+// import { SuccessDisplay } from '../scenes/Auth/Success';
+// import { ForgotPassword } from '../scenes/Auth/ForgotPassword';
+// import { ResetPassword } from '../scenes/Auth/ResetPassword';
+// import { ConfirmEmailContainer } from '../scenes/Auth/ConfirmEmail';
+// import { SetTwoFactorContainer } from '../scenes/Auth/SetTwoFactor';
+// import { WelcomeBackContainer } from '../scenes/Auth/WelcomeBack';
 import { SettingsContainer } from '../scenes/User/Profile/Settings';
 import { EditEmailDisplay } from '../scenes/User/Profile/EditEmail';
 import { EditFullNameDisplay } from '../scenes/User/Profile/EditFullName';
@@ -36,6 +37,14 @@ import { NotFound } from '@scenes/404';
 import { ROUTES } from '@config/constants';
 import { Spinner } from '@components/Spinner';
 
+const LoginContainer = loadable(() => import('../scenes/Auth/Login/LoginContainer'));
+const SuccessDisplay = loadable(() => import('../scenes/Auth/Success/SuccessDisplay'));
+const ForgotPassword = loadable(() => import('../scenes/Auth/ForgotPassword'));
+const ResetPassword = loadable(() => import('../scenes/Auth/ResetPassword'));
+const ConfirmEmailContainer = loadable(() => import('../scenes/Auth/ConfirmEmail/ConfirmEmailContainer'));
+const SetTwoFactorContainer = loadable(() => import('../scenes/Auth/SetTwoFactor/SetTwoFactorContainer'));
+const WelcomeBackContainer = loadable(() => import('../scenes/Auth/WelcomeBack/WelcomeBackContainer'));
+
 const Routes = ({ loading }) => (
   <Spin
     spinning={loading}
@@ -45,12 +54,12 @@ const Routes = ({ loading }) => (
   >
     <Switch>
       <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
-      <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
-      <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
-      <Route path={ROUTES.ADS.CREATE} exact component={props => <CreateAdContainer {...props} type="ad" />} />
       <Route path={ROUTES.CONFIRM_EMAIL} exact component={ConfirmEmailContainer} />
       <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
       <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
+      <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
+      <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
+      <Route path={ROUTES.ADS.CREATE} exact component={props => <CreateAdContainer {...props} type="ad" />} />
       <Route path={ROUTES.TRADES.INITIATE} exact component={props => <InitiateTradeContainer {...props} />} />
       <Route path={ROUTES.USERS.OTHER} exact component={OtherProfileContainer} />
 

@@ -4,7 +4,6 @@ import { Form, Input, Button, Select, Statistic } from 'antd';
 
 import * as validations from '@services/validations';
 import { notUndefinedObjectProps } from '@utils';
-import './style.less';
 
 const { Option } = Select;
 const { Countdown } = Statistic;
