@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button, Icon } from 'antd';
+import loadable from '@loadable/component';
 
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
-import InnovationImg from '@assets/innovation.svg';
 import './style.less';
+
+const InnovationImg = loadable(() => import('@assets/innovation.svg'));
 
 const handleSignUpClick = () => {
   history.push({ pathname: ROUTES.LOGIN, state: { toSignUp: true } });
