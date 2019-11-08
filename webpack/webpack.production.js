@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const { paths } = require('../bin');
 
@@ -54,6 +55,7 @@ module.exports = merge(common.webpackCommon, {
       contextRegExp: /moment$/,
     }),
     new CopyWebpackPlugin([{ from: paths.appAssets, to: paths.appBuildAssets }]),
+    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [
