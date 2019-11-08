@@ -58,10 +58,22 @@
     font-size: 14px;
     color: white;
     z-index: 10;
+    border-radius: 4px;
+    transition: all 1.4s;
+    background-size: 500% 100%;
     &:hover,
     &:focus,
     &:active {
-      background: lighten(@primary-color, 2%);
+      background-image: linear-gradient(
+        to right,
+        lighten(@primary-color, 2%),
+        lighten(@primary-color, 3%),
+        lighten(@primary-color, 5%),
+        lighten(@primary-color, 3%),
+        lighten(@primary-color, 2%),
+        lighten(@primary-color, 2%)
+      );
+      background-position: 100% 0;
       color: #fff;
     }
 
