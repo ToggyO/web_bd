@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { EditPhoneNumberFormContainer } from './components/EditPhoneNumberForm';
 
-import { ROUTES } from '@config/constants';
-
+import { ArrowLink } from '@components/ArrowLink';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
+import { ROUTES } from '@config/constants';
 
 const EditPhoneNumberDisplay = ({
   history: {
@@ -20,9 +19,8 @@ const EditPhoneNumberDisplay = ({
     <AppWrapperContainer>
       <div className="paper">
         <div className="change-setting">
-          <Link to={ROUTES.SETTINGS.ROOT} className="backtoprofile__link">
-            <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile settings
-          </Link>
+          <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />
+
           <h2 className="change-setting__header">Change Phone Number</h2>
           {email ? (
             <>

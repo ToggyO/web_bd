@@ -1,19 +1,16 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { RequestVerificationFormContainer } from './components/RequestVerificationForm';
 
-import { ROUTES } from '@config/constants';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+import { ArrowLink } from '@components/ArrowLink';
+import { ROUTES } from '@config/constants';
 
 const RequestVerificationDisplay = () => (
   <AppWrapperContainer>
     <div className="paper">
       <div className="change-setting">
-        <Link to={ROUTES.SETTINGS.ROOT} className="backtoprofile__link">
-          <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile settings
-        </Link>
+        <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />
         <h2 className="change-setting__header">Request Verification</h2>
 
         <p>

@@ -1,19 +1,18 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { EditEmailFormContainer } from './components/EditEmailForm';
 
-import { ROUTES } from '@config/constants';
+import { ArrowLink } from '@components/ArrowLink';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
+import { ROUTES } from '@config/constants';
 
 const EditEmailDisplay = () => (
   <AppWrapperContainer>
     <div className="paper">
       <div className="change-setting">
-        <Link to={ROUTES.SETTINGS.ROOT} className="backtoprofile__link">
-          <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile settings
-        </Link>
+        <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />
+
         <h2 className="change-setting__header">Change email</h2>
         <p>
           Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te odio

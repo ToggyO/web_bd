@@ -1,19 +1,18 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { EditFullNameFormContainer } from './components/EditFullNameForm';
 
-import { ROUTES } from '@config/constants';
+import { ArrowLink } from '@components/ArrowLink';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
+import { ROUTES } from '@config/constants';
 
 const EditFullName = () => (
   <AppWrapperContainer>
     <div className="paper">
       <div className="change-setting">
-        <Link to={ROUTES.SETTINGS.ROOT} className="backtoprofile__link">
-          <Icon type="arrow-left" className="backtoprofile__icon" /> Back to profile settings
-        </Link>
+        <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />
+
         <h2 className="change-setting__header">Edit real name</h2>
         <p>
           Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te odio
