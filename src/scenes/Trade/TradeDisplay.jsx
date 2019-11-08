@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin, Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import loadable from '@loadable/component';
 
 import { WalletAddressFormContainer } from './WalletAddressForm';
 import { TradeDetails } from './TradeDetails';
-
-import TalkJS from './Talk';
 
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ArrowLink } from '@components/ArrowLink';
@@ -21,6 +20,8 @@ import history from '@services/history';
 
 import { catchFromPath } from '@utils';
 import './style.less';
+
+const TalkJS = loadable(() => import('./Talk'));
 
 const TradeDisplay = ({
   getTradeByIdRequest,
@@ -96,6 +97,8 @@ const TradeDisplay = ({
               case 'Disputed':
                 return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ACTIVE} />;
               case 'Completed':
+              case 'ResolvedToBuyer':
+              case 'ResolvedToSeller':
                 return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />;
               default:
                 return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />;
