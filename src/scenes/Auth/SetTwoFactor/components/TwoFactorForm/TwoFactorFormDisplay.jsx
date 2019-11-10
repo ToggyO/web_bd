@@ -83,6 +83,7 @@ class TwoFactorForm extends React.Component {
             rules: validations.phone,
           })(
             <Input
+              pattern="\d*"
               addonBefore={prefixSelector}
               style={{ width: '100%' }}
               placeholder="Phone number"
@@ -97,6 +98,7 @@ class TwoFactorForm extends React.Component {
               rules: validations.smscode,
             })(
               <Input
+                pattern="\d*"
                 placeholder="Verification code"
                 ref={input => {
                   this.codeInput = input;

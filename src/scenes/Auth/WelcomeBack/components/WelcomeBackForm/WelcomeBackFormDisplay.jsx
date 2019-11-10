@@ -82,6 +82,7 @@ class WelcomeBackForm extends React.Component {
               rules: validations.smscode,
             })(
               <Input
+                pattern="\d*"
                 placeholder="Verification code"
                 ref={input => {
                   this.codeInput = input;
