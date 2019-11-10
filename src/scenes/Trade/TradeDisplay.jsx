@@ -111,9 +111,9 @@ const TradeDisplay = ({
             </h2>
           </Spin>
 
-          <Row gutter={34}>
+          <Row gutter={34} type="flex">
             {/* Left column with chat and payload for current trade status */}
-            <Col md={12}>
+            <Col md={{ span: 12, order: 1 }} xs={{ span: 24, order: 2 }}>
               <div className="chat">
                 {isMobile ? (
                   <TalkJS
@@ -355,7 +355,7 @@ const TradeDisplay = ({
             </Col>
 
             {/* Right column with buttons and Trade details */}
-            <Col md={12}>
+            <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
               <Spin spinning={loading} indicator={<Spinner />}>
                 <p>
                   You can close the trade window while waiting for a reply. You will receive an Email alert

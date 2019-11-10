@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Row, Col, Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 
+import { InitiateTradeFormContainer } from './InitiateTradeForm';
+
 import history from '@services/history';
 
 import { Spinner } from '@components/Spinner';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-
-import { InitiateTradeFormContainer } from './InitiateTradeForm';
 
 import { ROUTES } from '@config/constants';
 
@@ -69,8 +69,8 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
           ) : (
             <span className="initiate-trade__label">How much do you want to {action}?</span>
           )}
-          <Row gutter={{ sm: 12, lg: 48 }}>
-            <Col lg={11}>
+          <Row gutter={{ sm: 12, lg: 48 }} type="flex">
+            <Col md={{ span: 12, order: 1 }} xs={{ span: 24, order: 2 }}>
               {loading ? (
                 <Skeleton
                   paragraph={{
@@ -93,7 +93,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
                 />
               )}
             </Col>
-            <Col lg={13}>
+            <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
               <Spinner spinning={loading}>
                 {loading ? (
                   <Skeleton />
