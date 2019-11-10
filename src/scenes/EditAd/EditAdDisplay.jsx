@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 
-import { ROUTES } from '@config/constants';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-
 import { AdFormContainer } from '../_components/AdForm';
 
+import { ROUTES } from '@config/constants';
 import { prettifyId } from '@utils/';
 import './style.less';
 
@@ -17,26 +15,24 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
   }, []);
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
-        <div className="edit-ad">
-          <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
-            <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
-          </Link>
-          <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet
-            nihil neque fugiat expedita dolorem quam deserunt eligendi pariatur odit vitae tempore, tempora
-            assumenda debitis ipsam, minima fugit. Sapiente perspiciatis, adipisci praesentium, debitis ipsa
-            amet totam minus!
-          </p>
-          <AdFormContainer onSubmit={editAdRequest} type="ad" forEdit />
-        </div>
-        <p className="coindesk-powered">
-          Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+    <div className="paper">
+      <div className="edit-ad">
+        <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
+          <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
+        </Link>
+        <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet nihil
+          neque fugiat expedita dolorem quam deserunt eligendi pariatur odit vitae tempore, tempora assumenda
+          debitis ipsam, minima fugit. Sapiente perspiciatis, adipisci praesentium, debitis ipsa amet totam
+          minus!
         </p>
+        <AdFormContainer onSubmit={editAdRequest} type="ad" forEdit />
       </div>
-    </AppWrapperContainer>
+      <p className="coindesk-powered">
+        Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
+      </p>
+    </div>
   );
 };
 

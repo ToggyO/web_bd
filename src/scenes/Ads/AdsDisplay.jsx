@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import history from '@services/history';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
 import { AdsTableContainer } from '@scenes/_components/AdsTable';
 import { Collapsed } from '@scenes/_components/Collapsed';
@@ -33,22 +32,20 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
   }, [history.location.search]);
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
-        <div className="ads">
-          <h1>{Type} bitcoins</h1>
-          <Collapsed>
-            <QuickFilterFormContainer
-              type={type}
-              initialState={initialState}
-              defaultCurrency={countryData.currency}
-              defaultLocation={countryData.location}
-            />
-          </Collapsed>
-          <AdsTableContainer type={type} withTerms />
-        </div>
+    <div className="paper">
+      <div className="ads">
+        <h1>{Type} bitcoins</h1>
+        <Collapsed>
+          <QuickFilterFormContainer
+            type={type}
+            initialState={initialState}
+            defaultCurrency={countryData.currency}
+            defaultLocation={countryData.location}
+          />
+        </Collapsed>
+        <AdsTableContainer type={type} withTerms />
       </div>
-    </AppWrapperContainer>
+    </div>
   );
 };
 

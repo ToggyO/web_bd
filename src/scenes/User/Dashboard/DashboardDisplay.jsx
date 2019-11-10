@@ -6,11 +6,8 @@ import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
 import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
 
 import { Refresher } from '@components/Refresher';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import { ROUTES } from '@config/constants';
-
 import history from '@services/history';
-
 import { catchFromPath } from '@utils/';
 import './style.less';
 
@@ -39,63 +36,59 @@ const DashboardDisplay = ({
   };
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
-        <div className="dashboard custom-tabs">
-          <Tabs
-            defaultActiveKey={
-              catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED'
-            }
-            tabPosition={window.matchMedia('(max-width: 1024px)').matches ? 'top' : 'left'}
-            size="small"
-            onChange={handleChangeTab}
+    <div className="paper">
+      <div className="dashboard custom-tabs">
+        <Tabs
+          defaultActiveKey={catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED'}
+          tabPosition={window.matchMedia('(max-width: 1024px)').matches ? 'top' : 'left'}
+          size="small"
+          onChange={handleChangeTab}
+        >
+          <TabPane
+            tab={window.matchMedia('(max-width: 1024px)').matches ? 'Ads' : 'Created ads'}
+            key="CREATED"
           >
-            <TabPane
-              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Ads' : 'Created ads'}
-              key="CREATED"
-            >
-              <h2 className="dashboard__header">Created ads</h2>
+            <h2 className="dashboard__header">Created ads</h2>
 
-              <CreatedAdsTableContainer withTerms />
-            </TabPane>
-            <TabPane
-              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Requests' : 'Trade requests'}
-              key="REQUESTS"
-            >
-              <h2 className="dashboard__header">
-                Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
-              </h2>
-              <TradesDashboardTableContainer withTerms type="requests" onDecline={deleteNewTradeRequest} />
-            </TabPane>
-            <TabPane
-              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Active' : 'Active trades'}
-              key="ACTIVE"
-            >
-              <h2 className="dashboard__header">
-                Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
-              </h2>
-              <TradesDashboardTableContainer withTerms type="active" onDispute={() => {}} />
-            </TabPane>
-            <TabPane
-              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Completed' : 'Completed trades'}
-              key="COMPLETED"
-            >
-              <h2 className="dashboard__header">
-                Completed trades <Refresher loading={tradesLoading} cb={getCompletedTradesRequest} />
-              </h2>
-              <TradesDashboardTableContainer withTerms />
-            </TabPane>
-            <TabPane
-              tab={window.matchMedia('(max-width: 1024px)').matches ? 'Canceled' : 'Canceled trades'}
-              key="CANCELED"
-            >
-              <h2 className="dashboard__header">Canceled trades</h2>
-              <TradesDashboardTableContainer withTerms />
-            </TabPane>
-          </Tabs>
-        </div>
+            <CreatedAdsTableContainer withTerms />
+          </TabPane>
+          <TabPane
+            tab={window.matchMedia('(max-width: 1024px)').matches ? 'Requests' : 'Trade requests'}
+            key="REQUESTS"
+          >
+            <h2 className="dashboard__header">
+              Trade requests <Refresher loading={tradesLoading} cb={getNewTradesRequest} />
+            </h2>
+            <TradesDashboardTableContainer withTerms type="requests" onDecline={deleteNewTradeRequest} />
+          </TabPane>
+          <TabPane
+            tab={window.matchMedia('(max-width: 1024px)').matches ? 'Active' : 'Active trades'}
+            key="ACTIVE"
+          >
+            <h2 className="dashboard__header">
+              Active trades <Refresher loading={tradesLoading} cb={getActiveTradesRequest} />
+            </h2>
+            <TradesDashboardTableContainer withTerms type="active" onDispute={() => {}} />
+          </TabPane>
+          <TabPane
+            tab={window.matchMedia('(max-width: 1024px)').matches ? 'Completed' : 'Completed trades'}
+            key="COMPLETED"
+          >
+            <h2 className="dashboard__header">
+              Completed trades <Refresher loading={tradesLoading} cb={getCompletedTradesRequest} />
+            </h2>
+            <TradesDashboardTableContainer withTerms />
+          </TabPane>
+          <TabPane
+            tab={window.matchMedia('(max-width: 1024px)').matches ? 'Canceled' : 'Canceled trades'}
+            key="CANCELED"
+          >
+            <h2 className="dashboard__header">Canceled trades</h2>
+            <TradesDashboardTableContainer withTerms />
+          </TabPane>
+        </Tabs>
       </div>
-    </AppWrapperContainer>
+    </div>
   );
 };
 

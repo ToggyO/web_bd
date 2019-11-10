@@ -2,14 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Row, Col, Button, Upload, Icon, message } from 'antd';
 
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 import superaxios from '@services/superaxios';
 import * as validations from '@services/validations';
-import { ROUTES } from '@config/constants';
 import { getFromLocalState } from '@services/ls';
-
-import { LOCAL_STORAGE_KEYS } from '@config';
-
+import { ROUTES, LOCAL_STORAGE_KEYS } from '@config';
 import { parseBase64 } from '@utils';
 import './style.less';
 
@@ -83,59 +79,57 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
   }, []);
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
-        <div className="initiate-dispute">
-          <h1>Initiate a dispute</h1>
-          <Row>
-            <Col lg={12}>
-              <Form hideRequiredMark>
-                <Form.Item label="Email address">
-                  {form.getFieldDecorator('email', {
-                    initialValue: getFromLocalState(LOCAL_STORAGE_KEYS.USER).email,
-                    rules: validations.email,
-                  })(<Input type="email" placeholder="riley411@gmail.com" disabled />)}
-                </Form.Item>
-                <Form.Item label="Enter message">
-                  {form.getFieldDecorator('_message', {
-                    initialValue: location.state && location.state.text,
-                  })(<Input.TextArea rows={5} placeholder="Describe your problem here" />)}
-                </Form.Item>
-                <div style={{ marginBottom: 16 }}>
-                  <Upload {...props}>
-                    <Button style={{ height: 32 }}>
-                      <Icon type="upload" /> Upload
-                    </Button>
-                  </Upload>
-                  {fileList.length === 0 && (
-                    <p style={{ color: 'rgba(0,0,0,0.45)', margin: '8px 0 16px' }}>
-                      Max size 5 Mb, only .jpeg, .jpg, .png, .pdf
-                    </p>
-                  )}
-                </div>
-                <Row gutter={8}>
-                  <Col lg={7}>
-                    <Button
-                      loading={uploading}
-                      className="primary-btn"
-                      type="primary"
-                      htmlType="submit"
-                      style={{ width: '100%', marginBottom: 12 }}
-                      onClick={handleUpload}
-                    >
-                      Send apply
-                    </Button>
-                  </Col>
-                  <Col lg={5}>
-                    <Button style={{ width: '100%' }}>Cancel</Button>
-                  </Col>
-                </Row>
-              </Form>
-            </Col>
-          </Row>
-        </div>
+    <div className="paper">
+      <div className="initiate-dispute">
+        <h1>Initiate a dispute</h1>
+        <Row>
+          <Col lg={12}>
+            <Form hideRequiredMark>
+              <Form.Item label="Email address">
+                {form.getFieldDecorator('email', {
+                  initialValue: getFromLocalState(LOCAL_STORAGE_KEYS.USER).email,
+                  rules: validations.email,
+                })(<Input type="email" placeholder="riley411@gmail.com" disabled />)}
+              </Form.Item>
+              <Form.Item label="Enter message">
+                {form.getFieldDecorator('_message', {
+                  initialValue: location.state && location.state.text,
+                })(<Input.TextArea rows={5} placeholder="Describe your problem here" />)}
+              </Form.Item>
+              <div style={{ marginBottom: 16 }}>
+                <Upload {...props}>
+                  <Button style={{ height: 32 }}>
+                    <Icon type="upload" /> Upload
+                  </Button>
+                </Upload>
+                {fileList.length === 0 && (
+                  <p style={{ color: 'rgba(0,0,0,0.45)', margin: '8px 0 16px' }}>
+                    Max size 5 Mb, only .jpeg, .jpg, .png, .pdf
+                  </p>
+                )}
+              </div>
+              <Row gutter={8}>
+                <Col lg={7}>
+                  <Button
+                    loading={uploading}
+                    className="primary-btn"
+                    type="primary"
+                    htmlType="submit"
+                    style={{ width: '100%', marginBottom: 12 }}
+                    onClick={handleUpload}
+                  >
+                    Send apply
+                  </Button>
+                </Col>
+                <Col lg={5}>
+                  <Button style={{ width: '100%' }}>Cancel</Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       </div>
-    </AppWrapperContainer>
+    </div>
   );
 };
 

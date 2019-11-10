@@ -5,14 +5,12 @@ import { Link } from 'react-router-dom';
 
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
 
-import history from '@services/history';
-
 import { Spinner } from '@components/Spinner';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 
+import history from '@services/history';
 import { ROUTES } from '@config/constants';
-
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
+
 import './style.less';
 
 const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }) => {
@@ -60,89 +58,87 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
     }
   }
   return (
-    <AppWrapperContainer>
-      <div className="paper">
-        <div className="initiate-trade">
-          <h2 className="initiate-trade__header">{header}</h2>
-          {loading ? (
-            <Skeleton paragraph={false} title={{ width: ['30%'] }} />
-          ) : (
-            <span className="initiate-trade__label">How much do you want to {action}?</span>
-          )}
-          <Row gutter={{ sm: 12, lg: 48 }} type="flex">
-            <Col md={{ span: 12, order: 1 }} xs={{ span: 24, order: 2 }}>
+    <div className="paper">
+      <div className="initiate-trade">
+        <h2 className="initiate-trade__header">{header}</h2>
+        {loading ? (
+          <Skeleton paragraph={false} title={{ width: ['30%'] }} />
+        ) : (
+          <span className="initiate-trade__label">How much do you want to {action}?</span>
+        )}
+        <Row gutter={{ sm: 12, lg: 48 }} type="flex">
+          <Col md={{ span: 12, order: 1 }} xs={{ span: 24, order: 2 }}>
+            {loading ? (
+              <Skeleton
+                paragraph={{
+                  rows: 9,
+                  width: ['100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%'],
+                }}
+              />
+            ) : (
+              <InitiateTradeFormContainer
+                adId={id}
+                min={minTradeLimit}
+                max={maxTradeLimit}
+                currency={currency || ''}
+                userName={userName}
+                adOwnerID={adOwnerID}
+                cachedUserID={cachedUserID}
+                loading={loading}
+                message={message}
+                btcPrice={btcPrice}
+              />
+            )}
+          </Col>
+          <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
+            <Spinner spinning={loading}>
               {loading ? (
-                <Skeleton
-                  paragraph={{
-                    rows: 9,
-                    width: ['100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%', '100%'],
-                  }}
-                />
+                <Skeleton />
               ) : (
-                <InitiateTradeFormContainer
-                  adId={id}
-                  min={minTradeLimit}
-                  max={maxTradeLimit}
-                  currency={currency || ''}
-                  userName={userName}
-                  adOwnerID={adOwnerID}
-                  cachedUserID={cachedUserID}
-                  loading={loading}
-                  message={message}
-                  btcPrice={btcPrice}
-                />
+                <>
+                  <Row gutter={{ sm: 12, lg: 48 }}>
+                    <Col xs={12}>
+                      <span style={{ fontWeight: 500 }}>Price / BTC</span>
+                      <p>
+                        {btcPrice} {currency}
+                      </p>
+                    </Col>
+                    <Col xs={12}>
+                      <span style={{ fontWeight: 500 }}>Payment method</span>
+                      <p>{formatCapitals(payment)}</p>
+                    </Col>
+                  </Row>
+                  <Row gutter={{ sm: 12, lg: 48 }}>
+                    <Col xs={12}>
+                      <span style={{ fontWeight: 500 }}>{type}er</span>
+                      <p>
+                        <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
+                      </p>
+                    </Col>
+                    <Col xs={12}>
+                      <span style={{ fontWeight: 500 }}>Trade limits</span>
+                      <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
+                    </Col>
+                  </Row>
+                  <Row gutter={48}>
+                    <Col>
+                      <span style={{ fontWeight: 500 }}>Location</span>
+                      <p>{location}</p>
+                    </Col>
+                  </Row>
+                  <Row gutter={48}>
+                    <Col>
+                      <span style={{ fontWeight: 500 }}>Terms of trade</span>
+                      <p>{catchNewLines(terms)}</p>
+                    </Col>
+                  </Row>
+                </>
               )}
-            </Col>
-            <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
-              <Spinner spinning={loading}>
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  <>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Price / BTC</span>
-                        <p>
-                          {btcPrice} {currency}
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Payment method</span>
-                        <p>{formatCapitals(payment)}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>{type}er</span>
-                        <p>
-                          <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Trade limits</span>
-                        <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Location</span>
-                        <p>{location}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Terms of trade</span>
-                        <p>{catchNewLines(terms)}</p>
-                      </Col>
-                    </Row>
-                  </>
-                )}
-              </Spinner>
-            </Col>
-          </Row>
-        </div>
+            </Spinner>
+          </Col>
+        </Row>
       </div>
-    </AppWrapperContainer>
+    </div>
   );
 };
 
