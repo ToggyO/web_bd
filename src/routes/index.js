@@ -39,8 +39,8 @@ import { Spinner } from '@components/Spinner';
 
 const LoginContainer = loadable(() => import('../scenes/Auth/Login/LoginContainer'));
 const SuccessDisplay = loadable(() => import('../scenes/Auth/Success/SuccessDisplay'));
-const ForgotPassword = loadable(() => import('../scenes/Auth/ForgotPassword'));
-const ResetPassword = loadable(() => import('../scenes/Auth/ResetPassword'));
+const ForgotPassword = loadable(() => import('../scenes/Auth/ForgotPassword/ForgotPassword'));
+const ResetPassword = loadable(() => import('../scenes/Auth/ResetPassword/ResetPassword'));
 const ConfirmEmailContainer = loadable(() => import('../scenes/Auth/ConfirmEmail/ConfirmEmailContainer'));
 const SetTwoFactorContainer = loadable(() => import('../scenes/Auth/SetTwoFactor/SetTwoFactorContainer'));
 const WelcomeBackContainer = loadable(() => import('../scenes/Auth/WelcomeBack/WelcomeBackContainer'));
