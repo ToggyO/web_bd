@@ -59,19 +59,23 @@
     color: white;
     z-index: 10;
     border-radius: 4px;
-    transition: all 1.4s;
+    transition: all 0.8s;
     background-size: 500% 100%;
     &:hover,
-    &:focus,
-    &:active {
+    &:focus {
       background-image: linear-gradient(
         to right,
+        lighten(@primary-color, 1%),
         lighten(@primary-color, 2%),
         lighten(@primary-color, 3%),
+        lighten(@primary-color, 4%),
         lighten(@primary-color, 5%),
+        lighten(@primary-color, 6%),
+        lighten(@primary-color, 4%),
         lighten(@primary-color, 3%),
         lighten(@primary-color, 2%),
-        lighten(@primary-color, 2%)
+        lighten(@primary-color, 2%),
+        lighten(@primary-color, 1%)
       );
       background-position: 100% 0;
       color: #fff;
