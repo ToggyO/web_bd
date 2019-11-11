@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Layout } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -12,7 +12,8 @@ import { Footer } from '@components/Footer';
 
 const { Content } = Layout;
 
-const AppWrapperDisplay = ({ user, countryCode, getProfileRequest, children }) => {
+const AppWrapperDisplay = memo(({ user, countryCode, getProfileRequest, children }) => {
+  console.log('render');
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const AppWrapperDisplay = ({ user, countryCode, getProfileRequest, children }) =
       <Footer />
     </Layout>
   );
-};
+});
 
 AppWrapperDisplay.propTypes = {
   user: PropTypes.object,
