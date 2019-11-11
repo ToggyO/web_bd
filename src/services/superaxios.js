@@ -51,6 +51,10 @@ superaxios.interceptors.response.use(
     } = error;
     const originalRequest = config;
 
+    if (status === 403) {
+      store.dispatch({ type: globalTypes.PERMISSION_NOTIFICATION });
+    }
+
     if (status === 401) {
       if (!isAlreadyFetchingAccessToken) {
         isAlreadyFetchingAccessToken = true;

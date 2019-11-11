@@ -32,3 +32,4 @@ export { default as MessageOutline } from '@ant-design/icons/lib/outline/Message
 export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFoldOutline';
 export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
 export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/DoubleRightOutline';
+export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline';

@@ -3,6 +3,7 @@ import { Result, Button } from 'antd';
 
 import image from './image';
 
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import history from '@services/history';
 import superaxios from '@services/superaxios';
 import './style.less';
@@ -18,7 +19,7 @@ export const NotFound = () => {
   }, []);
 
   return (
-    <>
+    <HelmetWrapper title="404 - Bitcoins Direct" description="Page not found">
       <Result
         className="not-found"
         title="404"
@@ -34,6 +35,6 @@ export const NotFound = () => {
         <p style={{ marginBottom: 0, fontSize: 10 }}>Front-End c0.0.10</p>
         <p style={{ marginBottom: 0, fontSize: 10 }}>Back-End {version}</p>
       </div>
-    </>
+    </HelmetWrapper>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { AdsTableContainer } from '@scenes/_components/AdsTable';
 import { pageSizeOtherProfile } from '@config/constants';
 import history from '@services/history';
@@ -13,10 +14,12 @@ const OtherProfileDisplay = ({ getCreatedAdsRequest }) => {
     getCreatedAdsRequest(`?PageSize=${pageSizeOtherProfile}&username=${name}`);
   }, [history.location.search]);
   return (
-    <div className="paper other-profile">
-      <h2>View ads from {name}</h2>
-      <AdsTableContainer type="ads" withPagination />
-    </div>
+    <HelmetWrapper title={`${name}'s Ads - Bitcoins Direct`} description={`${name}'s Ads`}>
+      <div className="paper other-profile">
+        <h2>View ads from {name}</h2>
+        <AdsTableContainer type="ads" withPagination />
+      </div>
+    </HelmetWrapper>
   );
 };
 
