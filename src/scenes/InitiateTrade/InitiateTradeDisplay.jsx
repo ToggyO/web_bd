@@ -42,7 +42,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
     if (type.toLowerCase() === 'buy') {
       header = (
         <span>
-          Sell bitcoins to <Link to={`${ROUTES.USER}/${userName}`}>{userName}</Link>
+          Sell bitcoins to <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
         </span>
       );
       action = 'sell';
