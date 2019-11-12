@@ -46,6 +46,8 @@ const Routes = () => (
     <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
     <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
 
+    <Route path={ROUTES[404]} exact component={NotFound} />
+
     <AppWrapperContainer>
       <Switch>
         <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
@@ -95,9 +97,7 @@ const Routes = () => (
         ].map(path => (
           <AuthRoute key={path} path={path} exact component={() => <Redirect to={ROUTES.SETTINGS.ROOT} />} />
         ))}
-        {/* NOT FOUND PAGE */}
-        <Route path="*" component={NotFound} />
-        {/* /NOT FOUND PAGE */}
+        <Redirect to="/404" />
       </Switch>
     </AppWrapperContainer>
   </Switch>
