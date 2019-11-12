@@ -16,6 +16,15 @@ module.exports = merge(common.webpackCommon, {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
     minimizer: [
       new TerserJSPlugin({
         cache: true,
