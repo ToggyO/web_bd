@@ -20,7 +20,7 @@ const TalkJS = ({ _me, _other, _id, _order, isMobile }) => {
         });
       }
 
-      const other = new Talk.User({ ..._other, photoUrl });
+      const other = new Talk.User({ ..._other, photoUrl, role: 'bitcoins_direct_user' });
 
       // You control the ID of a conversation. oneOnOneId is a helper method that generates
       // a unique conversation ID for a given pair of users.
