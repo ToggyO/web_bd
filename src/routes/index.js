@@ -46,74 +46,60 @@ const Routes = () => (
     <Route path={ROUTES.SET_2FA} exact component={SetTwoFactorContainer} />
     <Route path={ROUTES.WELCOME_BACK} exact component={WelcomeBackContainer} />
 
-    <Route
-      path={ROUTES.HOME}
-      component={mainProps => (
-        <AppWrapperContainer {...mainProps}>
-          <Switch>
-            <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
-            <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
-            <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
-            <Route
-              path={ROUTES.ADS.CREATE}
-              exact
-              component={props => <CreateAdContainer {...props} type="ad" />}
-            />
-            <Route
-              path={ROUTES.TRADES.INITIATE}
-              exact
-              component={props => <InitiateTradeContainer {...props} />}
-            />
-            <Route path={ROUTES.USERS.OTHER} exact component={OtherProfileContainer} />
+    <AppWrapperContainer>
+      <Switch>
+        <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
+        <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
+        <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
+        <Route
+          path={ROUTES.ADS.CREATE}
+          exact
+          component={props => <CreateAdContainer {...props} type="ad" />}
+        />
+        <Route
+          path={ROUTES.TRADES.INITIATE}
+          exact
+          component={props => <InitiateTradeContainer {...props} />}
+        />
+        <Route path={ROUTES.USERS.OTHER} exact component={OtherProfileContainer} />
 
-            {[
-              ROUTES.DASHBOARD.ROOT,
-              ROUTES.DASHBOARD.CREATED,
-              ROUTES.DASHBOARD.REQUESTS,
-              ROUTES.DASHBOARD.ACTIVE,
-              ROUTES.DASHBOARD.COMPLETED,
-              ROUTES.DASHBOARD.CANCELED,
-            ].map(path => (
-              <AuthRoute key={path} path={path} exact component={DashboardContainer} />
-            ))}
-            <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />
-            <AuthRoute path={ROUTES.SETTINGS.EDIT_EMAIL} exact component={EditEmailDisplay} />
-            <AuthRoute path={ROUTES.SETTINGS.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
-            <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
-            <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
-            <AuthRoute
-              path={ROUTES.SETTINGS.REQUEST_VERIFICATION}
-              exact
-              component={RequestVerificationDisplay}
-            />
-            <AuthRoute
-              path={ROUTES.ADS.EDIT}
-              exact
-              component={props => <EditAdContainer {...props} type="ad" />}
-            />
-            <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
-            <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDisputeContainer} />
+        {[
+          ROUTES.DASHBOARD.ROOT,
+          ROUTES.DASHBOARD.CREATED,
+          ROUTES.DASHBOARD.REQUESTS,
+          ROUTES.DASHBOARD.ACTIVE,
+          ROUTES.DASHBOARD.COMPLETED,
+          ROUTES.DASHBOARD.CANCELED,
+        ].map(path => (
+          <AuthRoute key={path} path={path} exact component={DashboardContainer} />
+        ))}
+        <AuthRoute path={ROUTES.SETTINGS.ROOT} exact component={SettingsContainer} />
+        <AuthRoute path={ROUTES.SETTINGS.EDIT_EMAIL} exact component={EditEmailDisplay} />
+        <AuthRoute path={ROUTES.SETTINGS.EDIT_FULLNAME} exact component={EditFullNameDisplay} />
+        <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
+        <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
+        <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
+        <AuthRoute
+          path={ROUTES.ADS.EDIT}
+          exact
+          component={props => <EditAdContainer {...props} type="ad" />}
+        />
+        <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
+        <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDisputeContainer} />
 
-            {[
-              `${ROUTES.SETTINGS.ROOT}/name`,
-              `${ROUTES.SETTINGS.ROOT}/phone`,
-              `${ROUTES.SETTINGS.ROOT}/email`,
-              `${ROUTES.SETTINGS.ROOT}/password`,
-            ].map(path => (
-              <AuthRoute
-                key={path}
-                path={path}
-                exact
-                component={() => <Redirect to={ROUTES.SETTINGS.ROOT} />}
-              />
-            ))}
-            {/* NOT FOUND PAGE */}
-            <Route path="*" component={NotFound} />
-            {/* /NOT FOUND PAGE */}
-          </Switch>
-        </AppWrapperContainer>
-      )}
-    />
+        {[
+          `${ROUTES.SETTINGS.ROOT}/name`,
+          `${ROUTES.SETTINGS.ROOT}/phone`,
+          `${ROUTES.SETTINGS.ROOT}/email`,
+          `${ROUTES.SETTINGS.ROOT}/password`,
+        ].map(path => (
+          <AuthRoute key={path} path={path} exact component={() => <Redirect to={ROUTES.SETTINGS.ROOT} />} />
+        ))}
+        {/* NOT FOUND PAGE */}
+        <Route path="*" component={NotFound} />
+        {/* /NOT FOUND PAGE */}
+      </Switch>
+    </AppWrapperContainer>
   </Switch>
 );
 

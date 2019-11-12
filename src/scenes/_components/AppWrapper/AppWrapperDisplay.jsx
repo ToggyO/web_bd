@@ -13,7 +13,6 @@ import { Footer } from '@components/Footer';
 const { Content } = Layout;
 
 const AppWrapperDisplay = memo(({ user, countryCode, getProfileRequest, children }) => {
-  console.log('render');
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {

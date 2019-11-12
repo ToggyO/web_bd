@@ -10,6 +10,7 @@ import { pageSize } from '@config/constants';
 import './style.less';
 
 const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
+  console.log('render');
   let initialState;
   let Type;
   if (type === 'sell') Type = 'Buy';
@@ -43,6 +44,7 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
               initialState={initialState}
               defaultCurrency={countryData.currency}
               defaultLocation={countryData.location}
+              getAdsRequest={getAdsRequest}
             />
           </Collapsed>
           <AdsTableContainer type={type} withTerms />

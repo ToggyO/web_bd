@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, InputNumber, Button, Select, Row, Col } from 'antd';
 
-import { ROUTES, currencies, locations, payments } from '@config/constants';
+import { ROUTES, currencies, locations, payments, pageSize } from '@config/constants';
 import history from '@services/history';
 import * as validations from '@services/validations';
 
@@ -21,6 +21,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
     classNames,
     defaultCurrency,
     defaultLocation,
+    getAdsRequest,
   } = props;
   const { getFieldDecorator } = form;
 
@@ -28,9 +29,13 @@ const QuickFilterFormDisplay = Form.create()(props => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        filterDataSubmit(values);
-
         const queryString = makeQueryStringFromObject(purifyObject(values));
+
+        if (history.location.pathname !== ROUTES.HOME && !queryString) {
+          getAdsRequest(`?pageSize=${pageSize}&type[]=${type}`);
+        }
+
+        filterDataSubmit(values);
 
         if (type.toLowerCase() === 'buy') {
           history.push({
