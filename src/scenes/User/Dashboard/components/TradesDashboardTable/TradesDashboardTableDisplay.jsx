@@ -17,7 +17,7 @@ import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisput
 
 const { Column } = Table;
 
-const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCancel, loading }) => (
+const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading }) => (
   <Table
     dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
@@ -44,32 +44,11 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                               record.key,
                               onDecline,
                               { ...confirmData.requests.texts },
-                              { ...confirmData.requests.buttons }
+                              { ...confirmData.requests.buttons },
                             )
                           }
                         >
                             Decline request
-                        </ButtonLink>
-                      </>
-                    );
-                  case 'Depositing':
-                  case 'InProgress':
-                    return (
-                      <>
-                        <Link className="extra-row__view" to={`/trades/${record.order}`}>
-                            View trade
-                        </Link>
-                        <ButtonLink
-                          onClick={() =>
-                            ShowConfirm(
-                              record.key,
-                              onCancel,
-                              { ...confirmData.active.texts },
-                              { ...confirmData.active.buttons }
-                            )
-                          }
-                        >
-                            Cancel trade
                         </ButtonLink>
                       </>
                     );
@@ -103,24 +82,6 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
                         <Link className="extra-row__view" to={`/trades/${record.order}`}>
                             View trade
                         </Link>
-                        <ButtonLink
-                          onClick={() =>
-                            ShowConfirm(
-                              record.key,
-                              onCancel,
-                              {
-                                title: 'You\'re about to cancel this trade request',
-                                content: 'Are you sure?',
-                              },
-                              {
-                                okText: 'Yes',
-                                cancelText: 'No',
-                              }
-                            )
-                          }
-                        >
-                            Cancel trade
-                        </ButtonLink>
                       </>
                     );
                 }
@@ -252,7 +213,6 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, onCance
 TradesDashboardTableDisplay.propTypes = {
   withTerms: PropTypes.bool,
   onDecline: PropTypes.func,
-  onCancel: PropTypes.func,
   tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -267,7 +227,7 @@ TradesDashboardTableDisplay.propTypes = {
       payment: PropTypes.string,
       btcPrice: PropTypes.number,
       terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    })
+    }),
   ),
   loading: PropTypes.bool,
 };

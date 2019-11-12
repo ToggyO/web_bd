@@ -254,7 +254,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  }
+                                  },
                                 )
                               }
                             >
@@ -311,7 +311,7 @@ const TradeDisplay = ({
                                   {
                                     okText: 'Yes',
                                     cancelText: 'No',
-                                  }
+                                  },
                                 )
                               }
                             >
@@ -373,7 +373,7 @@ const TradeDisplay = ({
                               specificTrade.id,
                               deleteNewTradeRequest,
                               { ...confirmData.requests.texts },
-                              { ...confirmData.requests.buttons }
+                              { ...confirmData.requests.buttons },
                             )
                           }
                         >
@@ -381,21 +381,6 @@ const TradeDisplay = ({
                         </ButtonLink>
                       );
 
-                    // case 'InProgress':
-                    //   return (
-                    //     <ButtonLink
-                    //       onClick={() =>
-                    //         ShowConfirm(
-                    //           specificTrade.id,
-                    //           cancelTradeRequest,
-                    //           { ...confirmData.active.texts },
-                    //           { ...confirmData.active.buttons }
-                    //         )
-                    //       }
-                    //     >
-                    //       Cancel trade
-                    //     </ButtonLink>
-                    //   );
                     case 'Depositing':
                     case 'InProgress':
                     case 'FiatSent':
