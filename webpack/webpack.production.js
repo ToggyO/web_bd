@@ -14,14 +14,17 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common.webpackCommon, {
   mode: 'production',
-  devtool: 'cheap-module-source-map',
+  devtool: 'hidden-source-map',
   optimization: {
     splitChunks: {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all',
+          chunks(chunk) {
+            // exclude `talk-js`
+            return chunk.name !== 'talk-js';
+          },
         },
       },
     },
