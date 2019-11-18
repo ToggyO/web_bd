@@ -1,0 +1,37 @@
+.review {
+  &__dropdown {
+    width: 100%;
+    overflow: hidden;
+    .ant-select-selection__rendered {
+      margin-left: 0;
+    }
+  }
+  &__option {
+    display: flex;
+  }
+  &__label {
+    margin-bottom: 2px;
+  }
+
+  &__icon {
+    text-align: center;
+    width: 40px;
+    background: #dce6e366;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .anticon {
+      font-size: 18px;
+    }
+  }
+
+  &__text {
+    padding-left: 12px;
+  }
+}
+.ant-select-dropdown-menu-item {
+  padding: 0;
+  line-height: 36px;
+}

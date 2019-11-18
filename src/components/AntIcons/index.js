@@ -33,3 +33,5 @@ export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFo
 export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
 export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/DoubleRightOutline';
 export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline';
+export { default as LikeOutline } from '@ant-design/icons/lib/outline/LikeOutline';
+export { default as DislikeOutline } from '@ant-design/icons/lib/outline/DislikeOutline';

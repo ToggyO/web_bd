@@ -124,7 +124,9 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
                     </Button>
                   </Col>
                   <Col lg={5}>
-                    <Button style={{ width: '100%' }}>Cancel</Button>
+                    <Button style={{ width: '100%' }} onClick={() => history.push(ROUTES.DASHBOARD.ACTIVE)}>
+                      Cancel
+                    </Button>
                   </Col>
                 </Row>
               </Form>
