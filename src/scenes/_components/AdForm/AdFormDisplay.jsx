@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
 
+import TradeLimits from './_components/TradeLimits';
+
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
-
-import TradeLimits from './_components/TradeLimits';
 
 import { ROUTES, currencies, locations, payments } from '@config/constants';
 import history from '@services/history';
@@ -19,6 +19,10 @@ import './style.less';
 const { Option } = Select;
 
 class AdFormDisplay extends React.Component {
+  cancelFirst = undefined;
+
+  cancelSecond = undefined;
+
   state = {
     loading: false,
     margin: null,
@@ -74,15 +78,34 @@ class AdFormDisplay extends React.Component {
 
   fetchBTCPrice = async value => {
     this.setState({ loading: true });
-    const btcPriceResponse = superaxios.get(`/currency?currencies[]=${value}`);
-    const escrowFeeResponse = superaxios.get('/escrow');
-    const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
-    this.setState({
-      btcPrice: +btcPrice.data.data[0].rateBTC.toFixed(2),
-      loading: false,
-      escrowFee: escrowFee.data.data[0].fee,
-    });
+    try {
+      const btcPriceResponse = superaxios.get(`/currency?currencies[]=${value}`, {
+        cancelToken: new superaxios.CancelToken(c => {
+          this.cancelFirst = c;
+        }),
+      });
+      const escrowFeeResponse = superaxios.get('/escrow', {
+        cancelToken: new superaxios.CancelToken(c => {
+          this.cancelSecond = c;
+        }),
+      });
+
+      const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
+
+      this.setState({
+        btcPrice: +btcPrice.data.data[0].rateBTC.toFixed(2),
+        loading: false,
+        escrowFee: escrowFee.data.data[0].fee,
+      });
+    } catch (e) {
+      this.cancelFirst('Cancelled 1st');
+      this.cancelSecond('Cancelled 2nd');
+    }
   };
+
+  componentWillUnmount() {
+    this.cancelFirst();
+  }
 
   handleSubmit = e => {
     const {

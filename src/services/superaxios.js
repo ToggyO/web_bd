@@ -25,6 +25,8 @@ const superaxios = axios.create({
   baseURL: `${API_DOMAIN}/api/v${API_VERSION}`,
 });
 
+superaxios.CancelToken = axios.CancelToken;
+
 superaxios.interceptors.request.use(config => {
   const accessToken = getFromLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
 
@@ -86,7 +88,7 @@ superaxios.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default superaxios;

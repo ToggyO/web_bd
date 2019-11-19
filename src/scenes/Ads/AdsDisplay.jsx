@@ -10,7 +10,6 @@ import { pageSize } from '@config/constants';
 import './style.less';
 
 const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
-  console.log('render');
   let initialState;
   let Type;
   if (type === 'sell') Type = 'Buy';
@@ -23,7 +22,7 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
 
   useEffect(() => {
     getAdsRequest(
-      `?pageSize=${pageSize}&type[]=${type}&currency[]=${countryData.currency}&location[]=${countryData.location}${searchQuery}`
+      `?pageSize=${pageSize}&type[]=${type}&currency[]=${countryData.currency}&location[]=${countryData.location}${searchQuery}`,
     );
   }, []);
 

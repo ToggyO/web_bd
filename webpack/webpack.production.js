@@ -16,14 +16,21 @@ module.exports = merge(common.webpackCommon, {
   mode: 'production',
   devtool: 'hidden-source-map',
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 36000,
       cacheGroups: {
-        commons: {
+        vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks(chunk) {
-            // exclude `talk-js`
-            return chunk.name !== 'talk-js';
+          name(module) {
+            // get the name. E.g. node_modules/packageName/not/this/part.js
+            // or node_modules/packageName
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            return `npm.${packageName.replace('@', '')}`;
           },
         },
       },

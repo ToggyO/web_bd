@@ -4,7 +4,7 @@
       "@babel/preset-env",
       {
         "useBuiltIns": "usage",
-        "corejs": "2.6.10",
+        "corejs": "2.6.5",
         "targets": {
           "browsers": [">1%", "not ie 11", "not op_mini all"]
         }
@@ -23,8 +23,7 @@
     ],
     "add-module-exports",
     "@babel/proposal-class-properties",
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-transform-runtime"
+    "@babel/plugin-syntax-dynamic-import"
   ],
   "comments": false
 }
