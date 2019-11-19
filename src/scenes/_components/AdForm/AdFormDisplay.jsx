@@ -54,7 +54,7 @@ class AdFormDisplay extends React.Component {
         100 - (this.state.btcPrice * 100) / this.props.specificAd.btcPrice,
         1,
         '.',
-        ''
+        '',
       );
       this.setState({ margin });
       this.props.form.setFieldsValue({
@@ -172,7 +172,7 @@ class AdFormDisplay extends React.Component {
     const payment = form.getFieldValue('payment');
 
     return (
-      <Form onSubmit={this.handleSubmit} className="ad-form" hideRequiredMark>
+      <Form onSubmit={this.handleSubmit} className="ad-form" colon={false} hideRequiredMark>
         <div className="ad-form__block">
           <h3 className="ad-form__header">Trade type</h3>
           <Divider />
@@ -184,7 +184,7 @@ class AdFormDisplay extends React.Component {
               <Radio.Group disabled={history.location.pathname !== ROUTES.ADS.CREATE}>
                 <Radio value="Buy">I want to buy bitcoins</Radio>
                 <Radio value="Sell">I want to sell bitcoins</Radio>
-              </Radio.Group>
+              </Radio.Group>,
             )}
           </Form.Item>
         </div>
@@ -213,7 +213,7 @@ class AdFormDisplay extends React.Component {
                         {currency_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -236,7 +236,7 @@ class AdFormDisplay extends React.Component {
                         {location_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -262,7 +262,7 @@ class AdFormDisplay extends React.Component {
                         {payment_.name}
                       </Option>
                     ))}
-                  </Select>
+                  </Select>,
                 )}
               </Form.Item>
             </Col>
@@ -313,7 +313,7 @@ class AdFormDisplay extends React.Component {
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
-                    />
+                    />,
                   )}
                 </Form.Item>
               </Spin>
@@ -345,7 +345,7 @@ class AdFormDisplay extends React.Component {
                         min={-100}
                         max={100}
                         onChange={this.handleMarginChange}
-                      />
+                      />,
                     )}
                   </Form.Item>
                 </div>
@@ -394,10 +394,11 @@ class AdFormDisplay extends React.Component {
                   initialValue: specificAd.terms,
                 })(
                   <Input.TextArea
+                    allowClear
                     className=" ad-form__textarea"
                     placeholder="Any other information you wish to tell about your trade"
                     rows={5}
-                  />
+                  />,
                 )}
               </Form.Item>
             </Col>
