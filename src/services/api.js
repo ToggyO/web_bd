@@ -133,4 +133,14 @@ export default {
       return response.data;
     },
   },
+  reviews: {
+    getReviewByOrder: async tradeId => {
+      const response = await superaxios.get(`/rating/trade/${tradeId}`);
+      return response.data;
+    },
+    postReview: async data => {
+      const response = await superaxios.post('/rating', data);
+      return response.data;
+    },
+  },
 };

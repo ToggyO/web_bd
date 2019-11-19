@@ -4,3 +4,4 @@ export * from './constants';
 export * from './currencies';
 export * from './environment';
 export * from './messages';
+export * from './likes';

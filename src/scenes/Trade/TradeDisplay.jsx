@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Row, Col, Divider, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { BackLink } from './BackLink';
-import { TradeHeader } from './TradeHeader';
-import { Chat } from './Chat';
-import { TradingActions } from './TradingActions';
-import { Review } from './Review';
-import { MiniActions } from './MiniActions';
-import { TradeDetails } from './TradeDetails';
+import { BackLink } from './_components/BackLink';
+import { TradeHeader } from './_components/TradeHeader';
+import { Chat } from './_components/Chat';
+import { TradingActions } from './_components/TradingActions';
+import { ReviewContainer } from './_components/Review';
+import { MiniActions } from './_components/MiniActions';
+import { TradeDetails } from './_components/TradeDetails';
 import { determineUserInHeader, determineUserRoles, determineReviewable } from './_utils';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
@@ -75,7 +75,8 @@ const TradeDisplay = ({
                 fiatReceivedRequest={fiatReceivedRequest}
                 submitting={submitting}
               />
-              <Review isReviewable={isReviewable} user={user} />
+
+              {isReviewable && <ReviewContainer user={user} order={id} tradeId={specificTrade.id} />}
             </Col>
 
             {/* Right column with buttons and Trade details */}
