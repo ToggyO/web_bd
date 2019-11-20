@@ -35,3 +35,8 @@ export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/Dou
 export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline';
 export { default as LikeOutline } from '@ant-design/icons/lib/outline/LikeOutline';
 export { default as DislikeOutline } from '@ant-design/icons/lib/outline/DislikeOutline';
+export { default as ImportOutline } from '@ant-design/icons/lib/outline/ImportOutline';
+export { default as ExportOutline } from '@ant-design/icons/lib/outline/ExportOutline';
+export { default as PlusOutline } from '@ant-design/icons/lib/outline/PlusOutline';
+export { default as PlusCircleOutline } from '@ant-design/icons/lib/outline/PlusCircleOutline';
+export { default as FileProtectOutline } from '@ant-design/icons/lib/outline/FileProtectOutline';
