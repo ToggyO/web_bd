@@ -50,8 +50,8 @@ const ReviewFormDisplay = ({ form, user, tradeId, specificReview, postReviewRequ
           initialValue: specificReview ? specificReview.titleEnum : likesKeys[0],
         })(
           <Select
-            className="review-form__dropdown"
-            dropdownMenuStyle={{ padding: 0 }}
+            className="review-form__displayed"
+            dropdownClassName="review-form__dropdown"
             disabled={!!specificReview}
           >
             {renderOptions()}

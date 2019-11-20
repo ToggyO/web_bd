@@ -6,11 +6,17 @@
     margin-bottom: 0 !important;
   }
 
-  &__dropdown {
+  &__displayed {
     width: 100%;
     overflow: hidden;
     .ant-select-selection__rendered {
       margin-left: 0;
+    }
+  }
+  &__dropdown {
+    .ant-select-dropdown-menu-item {
+      padding: 0;
+      line-height: 36px;
     }
   }
   &__option {
@@ -37,8 +43,4 @@
   &__text {
     padding-left: 12px;
   }
-}
-.ant-select-dropdown-menu-item {
-  padding: 0;
-  line-height: 36px;
 }
