@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
+import { Collapsed } from '@scenes/_components/Collapsed';
 
 import { Spinner } from '@components/Spinner';
 import history from '@services/history';
@@ -92,51 +93,54 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
                 />
               )}
             </Col>
+
             <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
-              <Spinner spinning={loading}>
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  <>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Price / BTC</span>
-                        <p>
-                          {btcPrice} {currency}
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Payment method</span>
-                        <p>{formatCapitals(payment)}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>{type}er</span>
-                        <p>
-                          <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Trade limits</span>
-                        <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Location</span>
-                        <p>{location}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Terms of trade</span>
-                        <p>{catchNewLines(terms)}</p>
-                      </Col>
-                    </Row>
-                  </>
-                )}
-              </Spinner>
+              <Collapsed titleWord="trade details" titleFontSize={13}>
+                <Spinner spinning={loading}>
+                  {loading ? (
+                    <Skeleton />
+                  ) : (
+                    <>
+                      <Row gutter={{ sm: 12, lg: 48 }}>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Price / BTC</span>
+                          <p>
+                            {btcPrice} {currency}
+                          </p>
+                        </Col>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Payment method</span>
+                          <p>{formatCapitals(payment)}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={{ sm: 12, lg: 48 }}>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>{type}er</span>
+                          <p>
+                            <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
+                          </p>
+                        </Col>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Trade limits</span>
+                          <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={48}>
+                        <Col>
+                          <span style={{ fontWeight: 500 }}>Location</span>
+                          <p>{location}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={48}>
+                        <Col>
+                          <span style={{ fontWeight: 500 }}>Terms of trade</span>
+                          <p>{catchNewLines(terms)}</p>
+                        </Col>
+                      </Row>
+                    </>
+                  )}
+                </Spinner>
+              </Collapsed>
             </Col>
           </Row>
         </div>

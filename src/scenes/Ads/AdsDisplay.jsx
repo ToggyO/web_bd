@@ -37,7 +37,8 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
       <div className="paper">
         <div className="ads">
           <h1>{Type} bitcoins</h1>
-          <Collapsed>
+
+          <Collapsed titleWord="filters">
             <QuickFilterFormContainer
               type={type}
               initialState={initialState}
@@ -46,6 +47,7 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
               getAdsRequest={getAdsRequest}
             />
           </Collapsed>
+
           <AdsTableContainer type={type} withTerms />
         </div>
       </div>

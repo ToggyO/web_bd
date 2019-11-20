@@ -1,14 +1,16 @@
-.collapse {
-  margin-bottom: 36px;
+.collapse-menu {
+  margin-bottom: 16px;
   display: none;
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 767px) {
     display: block;
   }
   background: transparent;
   border: none;
+
   & .ant-collapse-header {
     padding-left: 16px !important;
   }
+
   & .ant-collapse-arrow {
     padding-top: 5px;
     color: @primary-color !important;
@@ -17,18 +19,20 @@
     left: 50% !important;
     transform: translateX(-50%) !important;
   }
+  & .ant-collapse-content-box {
+    padding: 24px 0 0 0;
+  }
   &__header {
     display: block;
     text-align: center;
-    font-size: 16px;
     color: @primary-color;
   }
 }
 
-.uncollapse {
+.without-collapse-menu {
   display: block;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 767px) {
     display: none;
   }
 }

@@ -22,7 +22,7 @@ const HomePageDisplay = () => (
           </HelmetWrapper>
         </>
       )}
-      <Collapsed>
+      <Collapsed titleWord="filters">
         <QuickFiltersTabsDisplay />
       </Collapsed>
       <Divider />

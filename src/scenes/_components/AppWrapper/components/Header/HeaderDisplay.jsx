@@ -46,7 +46,7 @@ const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapse
         {window.matchMedia('(max-width: 813px)').matches ? (
           <>
             <div className="logo">
-              <a href="#">
+              <a onClick={e => handleLinkAction(e, ROUTES.HOME)}>
                 <img src={miniLogo} aria-label="logo" alt="Bitcoins direct" />
               </a>
             </div>
@@ -58,7 +58,7 @@ const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapse
           </>
         ) : (
           <>
-            <a href="#" onClick={e => handleLinkAction(e, ROUTES.HOME)} className="large-logo">
+            <a onClick={e => handleLinkAction(e, ROUTES.HOME)} className="large-logo">
               <img src={logo} aria-label="logo" alt="Bitcoins direct" />
             </a>
             <nav className="nav">
