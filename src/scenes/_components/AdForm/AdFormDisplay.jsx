@@ -216,7 +216,7 @@ class AdFormDisplay extends React.Component {
           <h3 className="ad-form__header">Trade information</h3>
           <Divider />
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Currency">
                 {form.getFieldDecorator('currency', {
                   rules: [{ required: true, message: <div>Please select currency!</div> }],
@@ -240,7 +240,7 @@ class AdFormDisplay extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Location">
                 {form.getFieldDecorator('location', {
                   rules: [{ required: true, message: <div>Please select location!</div> }],
@@ -266,7 +266,7 @@ class AdFormDisplay extends React.Component {
           </Row>
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Payment method">
                 {form.getFieldDecorator('payment', {
                   rules: [{ required: true, message: <div>Please select payment method!</div> }],
@@ -290,7 +290,7 @@ class AdFormDisplay extends React.Component {
               </Form.Item>
             </Col>
             {(payment === payments[1].value || payment === payments[4].value) && (
-              <Col lg={11}>
+              <Col md={11}>
                 <Form.Item className="ad-form__item ad-form__bank-field" label="Bank name">
                   {form.getFieldDecorator('bankName', {
                     rules: validations.bank,
@@ -307,7 +307,7 @@ class AdFormDisplay extends React.Component {
           <Divider />
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Spin
                 spinning={this.state.loading}
                 tip={
@@ -342,7 +342,7 @@ class AdFormDisplay extends React.Component {
               </Spin>
             </Col>
 
-            <Col lg={11}>
+            <Col md={11}>
               <Tooltip placement="bottom" title={<span> Minimum: -100.00, maximum: 100.00</span>}>
                 <div>
                   <Form.Item className="ad-form__item" label="Margin">
@@ -389,7 +389,7 @@ class AdFormDisplay extends React.Component {
           </Row>
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col lg={11} md={22}>
               <Form.Item className="ad-form__item" label="Trade limits">
                 {form.getFieldDecorator('limits', {
                   initialValue: {
@@ -428,7 +428,7 @@ class AdFormDisplay extends React.Component {
           </Row>
         </div>
         <Row>
-          <Col lg={4}>
+          <Col md={4}>
             {isAuthorized ? (
               <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={loading}>
                 {forEdit ? 'Save' : 'Create'}
