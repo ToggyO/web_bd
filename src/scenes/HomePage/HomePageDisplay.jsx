@@ -13,7 +13,7 @@ import './style.less';
 
 const HomePageDisplay = () => (
   <HelmetWrapper title="Home - Bitcoins Direct" description="Home page">
-    <div className="paper home-page">
+    <div className="paper paper--white home-page">
       {!checkTokens() && (
         <>
           <HelmetWrapper title="Bitcoins Direct - Join us!" description="Home page">

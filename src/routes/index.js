@@ -3,20 +3,20 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 
-import { SettingsContainer } from '../scenes/User/Profile/Settings';
-import { EditEmailDisplay } from '../scenes/User/Profile/EditEmail';
-import { EditFullNameDisplay } from '../scenes/User/Profile/EditFullName';
-import { EditPhoneNumberDisplay } from '../scenes/User/Profile/EditPhoneNumber';
-import { EditPasswordDisplay } from '../scenes/User/Profile/EditPassword';
-import { RequestVerificationDisplay } from '../scenes/User/Profile/RequestVerification';
+import { SettingsContainer } from '../scenes/Me/Profile/Settings';
+import { EditEmailDisplay } from '../scenes/Me/Profile/EditEmail';
+import { EditFullNameDisplay } from '../scenes/Me/Profile/EditFullName';
+import { EditPhoneNumberDisplay } from '../scenes/Me/Profile/EditPhoneNumber';
+import { EditPasswordDisplay } from '../scenes/Me/Profile/EditPassword';
+import { RequestVerificationDisplay } from '../scenes/Me/Profile/RequestVerification';
 import { CreateAdContainer } from '../scenes/CreateAd';
-import { DashboardContainer } from '../scenes/User/Dashboard';
+import { DashboardContainer } from '../scenes/Me/Dashboard';
 import { HomePageDisplay } from '../scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
 import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { InitiateDisputeContainer } from '../scenes/InitiateDispute';
-import { OtherProfileContainer } from '../scenes/User/OtherProfile';
+import { UserContainer } from '../scenes/User';
 import { TradeContainer } from '../scenes/Trade';
 
 import AuthRoute from './AuthRoute';
@@ -63,7 +63,7 @@ const Routes = () => (
           exact
           component={props => <InitiateTradeContainer {...props} />}
         />
-        <Route path={ROUTES.USERS.OTHER} exact component={OtherProfileContainer} />
+        <Route path={ROUTES.USERS.OTHER} exact component={UserContainer} />
 
         {[
           ROUTES.DASHBOARD.ROOT,

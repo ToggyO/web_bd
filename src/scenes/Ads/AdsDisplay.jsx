@@ -34,7 +34,7 @@ const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
 
   return (
     <HelmetWrapper title={`${Type} Bitcoins - Bitcoins Direct`} description="Change password">
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="ads">
           <h1>{Type} bitcoins</h1>
 

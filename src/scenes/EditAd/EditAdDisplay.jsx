@@ -17,7 +17,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
 
   return (
     <HelmetWrapper title="Edit your ad - Bitcoins Direct" description="Edit your ad">
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="edit-ad">
           <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
             <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard

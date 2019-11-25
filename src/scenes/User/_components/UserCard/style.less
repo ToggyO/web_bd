@@ -1,0 +1,57 @@
+.user-card {
+  margin: 0 20px 0 0;
+  min-width: 300px;
+  border-radius: 6px;
+  box-shadow: @box-shadow-base;
+  background: @component-background;
+  &__avatar {
+    position: relative;
+    padding-top: 60px;
+    margin: 0 auto;
+    min-height: 162px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  & .ant-divider {
+    margin-top: 14px;
+  }
+  &__meta {
+    padding: 0px 40px 46px;
+  }
+  &__prop {
+    & p {
+      line-height: 20px;
+    }
+    & span {
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+  .avatar-spinner {
+    animation: spin 1s infinite linear;
+    position: absolute;
+    top: 56px;
+    width: 81px;
+    height: 81px;
+    border-top: 5px solid #2eac82;
+    border-radius: 50%;
+
+    &:after {
+      content: '';
+      width: 100%;
+      height: 70%;
+      background: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 20%,
+        rgba(255, 255, 255, 0) 90%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-5%, -5%);
+    }
+  }
+}

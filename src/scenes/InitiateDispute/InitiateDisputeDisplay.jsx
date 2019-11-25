@@ -81,7 +81,7 @@ const InitiateDisputeDisplay = ({ form, history, location }) => {
 
   return (
     <HelmetWrapper title="Initiate a Dispute - Bitcoins Direct" description="Home page">
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="initiate-dispute">
           <h1>Initiate a dispute</h1>
           <Row>

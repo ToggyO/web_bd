@@ -61,7 +61,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
   }
   return (
     <HelmetWrapper title="Request a Trade - Bitcoins Direct" description="Request a Trade">
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="initiate-trade">
           <h2 className="initiate-trade__header">{header}</h2>
           {loading ? (

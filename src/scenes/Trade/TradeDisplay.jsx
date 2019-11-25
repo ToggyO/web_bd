@@ -48,7 +48,7 @@ const TradeDisplay = ({
 
   return (
     <HelmetWrapper title={`Trade #${id} - Bitcoins Direct`} description={`Trade #${id} - Bitcoins Direct`}>
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="trade">
           <BackLink tradeStatus={specificTrade.status} />
 

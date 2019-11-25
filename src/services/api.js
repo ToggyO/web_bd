@@ -143,4 +143,10 @@ export default {
       return response.data;
     },
   },
+  user: {
+    getProfile: async userName => {
+      const response = await superaxios.get(`/profile/${userName}`);
+      return response.data;
+    },
+  },
 };

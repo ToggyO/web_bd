@@ -11,7 +11,7 @@ const CreateAdDisplay = ({ user: { id }, createAdRequest, persistFormState }) =>
 
   return (
     <HelmetWrapper title="Create an ad - Bitcoins Direct" description="Create an ad">
-      <div className="paper">
+      <div className="paper paper--white">
         <div className="create-ad">
           <h1>Create an ad</h1>
           <AdFormContainer onSubmit={isAuthorized ? createAdRequest : persistFormState} type="ad" />
