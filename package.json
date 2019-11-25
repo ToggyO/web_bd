@@ -1,6 +1,6 @@
 {
   "name": "bitcoins-direct",
-  "version": "1.0.0",
+  "version": "0.0.11",
   "description": "Bitcoins Direct",
   "main": "index.js",
   "scripts": {
@@ -69,12 +69,11 @@
     "core-js": "^2.6.5",
     "dotenv": "^8.1.0",
     "history": "^4.9.0",
-    "js-cookie": "^2.2.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-google-recaptcha": "^1.0.5",
     "react-helmet": "^5.2.1",
     "react-redux": "^7.1.1",
