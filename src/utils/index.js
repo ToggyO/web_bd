@@ -35,9 +35,6 @@ export const purifyObject = obj => {
   return cleanObject;
 };
 
-// nuff said
-export const secretize = str => `${str.substring(0, 2)}****${str.substring(6)}`;
-
 // spliting base64 on parts to submit image from Request Verification Form
 export const parseBase64 = base64 => {
   const [base64Type, base64Data] = base64.split(';base64,');

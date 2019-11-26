@@ -14,9 +14,8 @@ import chat from '@ducks/chat/reducer';
 import reviews from '@ducks/reviews';
 import user from '@ducks/user';
 
-import * as authSagas from '@ducks/auth/sagas';
-import * as meSagas from '@ducks/me/sagas';
-
+import { authSagas } from '@ducks/auth';
+import { meSagas } from '@ducks/me';
 import { globalSagas } from '@ducks/_global';
 import { buyAdsSagas } from '@ducks/ads/buy';
 import { sellAdsSagas } from '@ducks/ads/sell';
@@ -27,6 +26,7 @@ import { tradesSagas } from '@ducks/trades/trades';
 import { chatSagas } from '@ducks/chat';
 import { reviewSagas } from '@ducks/reviews/review';
 import { profileSagas } from '@ducks/user/profile';
+import { reviewsSagas } from '@ducks/user/reviews';
 
 export default function configureStore() {
   const reducer = combineReducers({ _global, auth, me, ads, trades, chat, reviews, user });
@@ -43,6 +43,7 @@ export default function configureStore() {
     ...chatSagas,
     ...reviewSagas,
     ...profileSagas,
+    ...reviewsSagas,
   };
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [

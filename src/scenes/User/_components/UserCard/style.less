@@ -1,9 +1,13 @@
 .user-card {
   margin: 0 20px 0 0;
-  min-width: 300px;
+  min-width: 264px;
   border-radius: 6px;
   box-shadow: @box-shadow-base;
   background: @component-background;
+  @media screen and (max-width: 1024px) {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
   &__avatar {
     position: relative;
     padding-top: 60px;
@@ -19,6 +23,9 @@
   }
   &__meta {
     padding: 0px 40px 46px;
+    @media screen and (max-width: 1024px) {
+      text-align: center;
+    }
   }
   &__prop {
     & p {

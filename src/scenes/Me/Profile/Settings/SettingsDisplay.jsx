@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ROUTES } from '@config/constants';
 import { Spinner } from '@components/Spinner';
-import { secretize } from '@utils';
 import './style.less';
 
 const { TabPane } = Tabs;
@@ -97,7 +96,7 @@ const SettingsDisplay = ({
                 >
                   <List.Item.Meta
                     title="Phone Number"
-                    description={loading ? <Spinner fontSize={15} /> : secretize(phoneNumber)}
+                    description={loading ? <Spinner fontSize={15} /> : phoneNumber}
                   />
                 </List.Item>
                 <List.Item
@@ -108,10 +107,7 @@ const SettingsDisplay = ({
                     </Link>,
                   ]}
                 >
-                  <List.Item.Meta
-                    title="Email"
-                    description={loading ? <Spinner fontSize={15} /> : secretize(email)}
-                  />
+                  <List.Item.Meta title="Email" description={loading ? <Spinner fontSize={15} /> : email} />
                 </List.Item>
                 <List.Item
                   className="user-settings__item"

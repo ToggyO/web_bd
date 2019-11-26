@@ -6,12 +6,16 @@ import UserHistoryDisplay from './UserHistoryDisplay';
 
 import { adsSelectors } from '@ducks/ads';
 import { adsActions } from '@ducks/ads/ads';
+import { reviewsSelectors, reviewsActions } from '@ducks/user/reviews';
 
 function mapStateToProps(state) {
   return {
     adsData: adsSelectors.adsSelector(state, { type: 'ads' }),
     adsLoading: adsSelectors.adsLoadingSelector(state, { type: 'ads' }),
     adsTotalQuantity: adsSelectors.adsTotalQuantitySelector(state, { type: 'ads' }),
+
+    reviewsTotalQuantity: reviewsSelectors.reviewsTotalQuantitySelector(state),
+    reviewsLoading: reviewsSelectors.reviewsLoadingSelector(state),
     // tradesQuantity: tradesSelectors.totalQuantitySelector(state),
     // tradesLoading: tradesSelectors.tradesLoadingSelector(state),
     // requestsQuantity: requestsSelectors.totalQuantitySelector(state),
@@ -26,6 +30,13 @@ function mapDispatchToProps(dispatch) {
     getCreatedAdsRequest(userName) {
       dispatch(adsActions.getCreatedAdsRequest(userName));
     },
+    getReviewsByUserNameRequest(userName) {
+      dispatch(reviewsActions.getReviewsByUserNameRequest(userName));
+    },
+    getLikesCountByUserNameRequest(userName) {
+      dispatch(reviewsActions.getLikesCountByUserNameRequest(userName));
+    },
+
     //   getTradesByUserNameRequest(userName) {
     //     dispatch(tradesActions.getTradesByUserNameRequest(userName));
     //   },

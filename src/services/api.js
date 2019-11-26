@@ -144,8 +144,16 @@ export default {
     },
   },
   user: {
-    getProfile: async userName => {
+    getUserProfile: async userName => {
       const response = await superaxios.get(`/profile/${userName}`);
+      return response.data;
+    },
+    getReviewsByUserName: async userName => {
+      const response = await superaxios.get(`/rating/${userName}`);
+      return response.data;
+    },
+    getLikesCountByUserName: async userName => {
+      const response = await superaxios.get(`/rating/count/${userName}`);
       return response.data;
     },
   },

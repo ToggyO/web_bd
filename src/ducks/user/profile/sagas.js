@@ -8,17 +8,17 @@ import api from '@services/api';
 import history from '@services/history';
 import { ROUTES } from '@config/constants';
 
-function* getProfile(action) {
+function* getUserProfile(action) {
   try {
-    const { data } = yield call(api.user.getProfile, action.payload);
+    const { data } = yield call(api.user.getUserProfile, action.payload);
     yield put({ type: types.GET_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     yield put({ type: types.GET_PROFILE_ERROR, payload: error });
-    yield call(history.push, ROUTES.USERS.ROOT);
+    yield call(history.push, ROUTES.HOME);
     yield call(message.error, 'No user found', 2);
   }
 }
 
-export function* getProfileSaga() {
-  yield takeLatest(types.GET_PROFILE_REQUEST, getProfile);
+export function* getUserProfileSaga() {
+  yield takeLatest(types.GET_PROFILE_REQUEST, getUserProfile);
 }

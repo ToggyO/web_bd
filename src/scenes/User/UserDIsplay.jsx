@@ -11,11 +11,12 @@ import { catchFromPath } from '@utils/';
 
 import './style.less';
 
-const UserDisplay = ({ getProfileRequest, getCreatedAdsRequest }) => {
+const UserDisplay = ({ getProfileRequest, getCreatedAdsRequest, getReviewsByUserNameRequest }) => {
   const userName = catchFromPath(history.location.pathname, 'users');
   useEffect(() => {
     getProfileRequest(userName);
     getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
+    getReviewsByUserNameRequest(userName);
   }, [history.location.search]);
   return (
     <HelmetWrapper title={`${userName}'s Ads - Bitcoins Direct`} description={`${userName}'s Ads`}>

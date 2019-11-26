@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import UserDisplay from './UserDisplay';
 
 import { adsActions } from '@ducks/ads/ads';
-import { profileActions } from '@ducks/user/profile';
+import { profileActions, reviewsActions } from '@ducks/user';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -13,6 +13,9 @@ function mapDispatchToProps(dispatch) {
     },
     getCreatedAdsRequest(userName) {
       dispatch(adsActions.getCreatedAdsRequest(userName));
+    },
+    getReviewsByUserNameRequest(userName) {
+      dispatch(reviewsActions.getReviewsByUserNameRequest(userName));
     },
   };
 }

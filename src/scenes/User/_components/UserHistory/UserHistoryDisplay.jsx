@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Tabs } from 'antd';
 
+import { UserReviewsContainer } from './_components/UserReviews';
+
 import { AdsTableContainer } from '@scenes/_components/AdsTable';
+
 import history from '@services/history';
 import { pageSizeUser } from '@config/constants';
 import { catchFromPath } from '@utils';
@@ -14,16 +17,19 @@ const UserHistoryDisplay = ({
   adsLoading,
   adsTotalQuantity,
   getCreatedAdsRequest,
-  tradesQuantity,
-  tradesLoading,
-  getTradesByUserNameRequest,
-  requestsQuantity,
-  requestsLoading,
-  getRequestsByUserNameRequest,
-  adsQuantity,
-  getAdsByUserNameRequest,
+  reviewsLoading,
+  reviewsTotalQuantity,
+  getReviewsByUserNameRequest,
+  getLikesCountByUserNameRequest,
+  // tradesQuantity,
+  // tradesLoading,
+  // getTradesByUserNameRequest,
+  // requestsQuantity,
+  // requestsLoading,
+  // getRequestsByUserNameRequest,
+  // adsQuantity,
+  // getAdsByUserNameRequest,
 }) => {
-  console.log(adsTotalQuantity);
   const [initialAdsLoading, setInitialAdsLoading] = useState(false);
 
   useEffect(() => {
@@ -39,11 +45,15 @@ const UserHistoryDisplay = ({
       <Tabs
         defaultActiveKey="1"
         onChange={tabKey => {
-          console.log(tabKey);
           const userName = catchFromPath(history.location.pathname, 'users');
           switch (tabKey) {
             case '1':
               return getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
+            case '2': {
+              getReviewsByUserNameRequest(userName);
+              getLikesCountByUserNameRequest(userName);
+              return void 0;
+            }
             default:
               return getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
           }
@@ -68,50 +78,48 @@ const UserHistoryDisplay = ({
           tab={
             <span>
               Reviews{' '}
-              {/* {(() => {
-                switch (requestsLoading) {
+              {(() => {
+                switch (reviewsLoading) {
                   case false: {
-                    if (!requestsQuantity) {
+                    if (!reviewsTotalQuantity) {
                       return null;
                     }
-                    if (requestsQuantity) {
-                      return <span>({requestsQuantity})</span>;
+                    if (reviewsTotalQuantity) {
+                      return <span>({reviewsTotalQuantity})</span>;
                     }
                     break;
                   }
                   case true: {
-                    if (!requestsQuantity) {
+                    if (!reviewsTotalQuantity) {
                       return <Icon type="loading" style={{ marginRight: 0, marginLeft: 6 }} />;
                     }
-                    if (requestsQuantity) {
-                      return <span>({requestsQuantity})</span>;
+                    if (reviewsTotalQuantity) {
+                      return <span>({reviewsTotalQuantity})</span>;
                     }
                     break;
                   }
                   default:
                     return null;
                 }
-              })()} */}
+              })()}
             </span>
           }
           key="2"
         >
-          {/* <RequestsTableContainer /> */}
+          <UserReviewsContainer />
         </TabPane>
       </Tabs>
     </div>
   );
 };
 UserHistoryDisplay.propTypes = {
-  tradesQuantity: PropTypes.number,
-  tradesLoading: PropTypes.bool,
-  getTradesByUserNameRequest: PropTypes.func,
-  requestsQuantity: PropTypes.number,
-  requestsLoading: PropTypes.bool,
-  getRequestsByUserNameRequest: PropTypes.func,
-  adsQuantity: PropTypes.number,
   adsLoading: PropTypes.bool,
-  getAdsByUserNameRequest: PropTypes.func,
+  adsTotalQuantity: PropTypes.number,
+  getCreatedAdsRequest: PropTypes.func,
+  reviewsLoading: PropTypes.bool,
+  reviewsTotalQuantity: PropTypes.number,
+  getReviewsByUserNameRequest: PropTypes.func,
+  getLikesCountByUserNameRequest: PropTypes.func,
 };
 
 export default UserHistoryDisplay;
