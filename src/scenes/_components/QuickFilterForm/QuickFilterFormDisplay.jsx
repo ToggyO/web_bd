@@ -5,7 +5,7 @@ import { ROUTES, currencies, locations, payments, pageSize } from '@config/const
 import history from '@services/history';
 import * as validations from '@services/validations';
 
-import { purifyObject, makeQueryStringFromObject } from '@utils';
+import { purifyObject, makeQueryStringFromObject, parseQueryString } from '@utils';
 
 const { Option } = Select;
 
@@ -16,14 +16,14 @@ const QuickFilterFormDisplay = Form.create()(props => {
     filterDataSubmit,
     amount,
     payment,
-    location,
-    currency,
     classNames,
     defaultCurrency,
     defaultLocation,
     getAdsRequest,
   } = props;
   const { getFieldDecorator } = form;
+
+  const { currency: c, location: l } = parseQueryString(history.location.search);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -67,7 +67,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                 min={0}
                 step={10}
                 parser={string => (parseInt(string, 10) ? string : '')}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -83,7 +83,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {payment_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>
@@ -91,7 +91,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
           <Form.Item>
             {getFieldDecorator('location', {
               rules: [{ required: false, message: 'Please select country!' }],
-              initialValue: defaultLocation || location,
+              initialValue: l || defaultLocation,
             })(
               <Select placeholder="All countries" allowClear>
                 {locations.map(location_ => (
@@ -99,7 +99,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {location_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>
@@ -107,7 +107,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
           <Form.Item>
             {getFieldDecorator('currency', {
               rules: [{ required: false, message: 'Please select currency!' }],
-              initialValue: currency || defaultCurrency,
+              initialValue: c || defaultCurrency,
             })(
               <Select placeholder="All currencies" allowClear>
                 {currencies.map(currency_ => (
@@ -115,7 +115,7 @@ const QuickFilterFormDisplay = Form.create()(props => {
                     {currency_.name}
                   </Option>
                 ))}
-              </Select>
+              </Select>,
             )}
           </Form.Item>
         </Col>
@@ -135,12 +135,5 @@ const QuickFilterFormDisplay = Form.create()(props => {
     </Form>
   );
 });
-
-// QuickFilterFormDisplay.defaultProps = {
-//   amount: null,
-//   payment: initialProps.payment,
-//   location: initialProps.location,
-//   currency: initialProps.currency,
-// };
 
 export default QuickFilterFormDisplay;

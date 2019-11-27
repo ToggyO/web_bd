@@ -8,8 +8,6 @@ function mapStateToProps(state) {
   return {
     amount: searchSelectors.amountSelector(state),
     payment: searchSelectors.paymentSelector(state),
-    location: searchSelectors.locationSelector(state),
-    currency: searchSelectors.currencySelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
