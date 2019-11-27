@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import CreateAdDisplay from './CreateAdDisplay';
 
-import { adActions } from '@ducks/ads/ad';
-import { adsSelectors } from '@ducks/ads';
+import { adActions, adsSelectors } from '@ducks/ads';
+
 import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state, props) {
@@ -24,7 +24,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateAdDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdDisplay);

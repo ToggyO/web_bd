@@ -1,11 +1,8 @@
 import { connect } from 'react-redux';
 
-// import { tradesActions, tradesSelectors } from '@ducks/users/user/trades';
-// import { requestsActions, requestsSelectors } from '@ducks/users/user/requests';
 import UserHistoryDisplay from './UserHistoryDisplay';
 
-import { adsSelectors } from '@ducks/ads';
-import { adsActions } from '@ducks/ads/ads';
+import { adsSelectors, adsActions } from '@ducks/ads';
 import { reviewsSelectors, reviewsActions } from '@ducks/user/reviews';
 
 function mapStateToProps(state) {
@@ -13,15 +10,8 @@ function mapStateToProps(state) {
     adsData: adsSelectors.adsSelector(state, { type: 'ads' }),
     adsLoading: adsSelectors.adsLoadingSelector(state, { type: 'ads' }),
     adsTotalQuantity: adsSelectors.adsTotalQuantitySelector(state, { type: 'ads' }),
-
     reviewsTotalQuantity: reviewsSelectors.reviewsTotalQuantitySelector(state),
     reviewsLoading: reviewsSelectors.reviewsLoadingSelector(state),
-    // tradesQuantity: tradesSelectors.totalQuantitySelector(state),
-    // tradesLoading: tradesSelectors.tradesLoadingSelector(state),
-    // requestsQuantity: requestsSelectors.totalQuantitySelector(state),
-    // requestsLoading: requestsSelectors.requestsLoadingSelector(state),
-    // adsQuantity: adsSelectors.totalQuantitySelector(state),
-    // adsLoading: adsSelectors.adsLoadingSelector(state),
   };
 }
 
@@ -36,16 +26,6 @@ function mapDispatchToProps(dispatch) {
     getLikesCountByUserNameRequest(userName) {
       dispatch(reviewsActions.getLikesCountByUserNameRequest(userName));
     },
-
-    //   getTradesByUserNameRequest(userName) {
-    //     dispatch(tradesActions.getTradesByUserNameRequest(userName));
-    //   },
-    //   getRequestsByUserNameRequest(userName) {
-    //     dispatch(requestsActions.getRequestsByUserNameRequest(userName));
-    //   },
-    //   getAdsByUserNameRequest(userName) {
-    //     dispatch(adsActions.getAdsByUserNameRequest(userName));
-    //   },
   };
 }
 

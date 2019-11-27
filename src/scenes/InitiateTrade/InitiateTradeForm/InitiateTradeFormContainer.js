@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import InitiateTradeFormDisplay from './InitiateTradeFormDisplay';
 
-import { tradeActions } from '@ducks/trades/trade';
+import { tradeActions } from '@ducks/trades';
 import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
@@ -19,7 +19,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InitiateTradeFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(InitiateTradeFormDisplay);

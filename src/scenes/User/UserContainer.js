@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-unresolved
 import UserDisplay from './UserDisplay';
 
-import { adsActions } from '@ducks/ads/ads';
+import { adsActions } from '@ducks/ads';
 import { profileActions, reviewsActions } from '@ducks/user';
 
 function mapDispatchToProps(dispatch) {

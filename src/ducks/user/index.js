@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import ads, { adsTypes, adsActions, adsSelectors, adsSagas } from './ads';
-import profile, { profileTypes, profileActions, profileSelectors, profileSagas } from './profile';
-import reviews, { reviewsTypes, reviewsActions, reviewsSelectors, reviewsSagas } from './reviews';
+import ads from './ads';
+import profile from './profile';
+import reviews from './reviews';
 
-export { adsTypes, adsActions, adsSagas, adsSelectors };
-export { profileTypes, profileActions, profileSagas, profileSelectors };
-export { reviewsTypes, reviewsActions, reviewsSagas, reviewsSelectors };
+export { adsTypes, adsActions, adsSelectors, adsSagas } from './ads';
+export { profileTypes, profileActions, profileSelectors, profileSagas } from './profile';
+export { reviewsTypes, reviewsActions, reviewsSelectors, reviewsSagas } from './reviews';
 
 export default combineReducers({ ads, profile, reviews });

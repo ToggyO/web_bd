@@ -24,12 +24,12 @@ export const tradesSelector = createSelector(
       terms: el.trade.ad.terms,
       status: el.trade.status,
       direction: el.direction,
-    }))
+    })),
 );
 
 export const tradesLoadingSelector = createSelector(
   state => state.trades.trades.loading,
-  loading => loading
+  loading => loading,
 );
 
 export const tradeSelector = createSelector(
@@ -41,7 +41,6 @@ export const tradeSelector = createSelector(
     fiat: trade.fiat,
     tradePartner: trade.tradePartner,
     adOwner: trade.ad.userName,
-    // adOwnerID: trade.ad.userID,
     btcPrice: trade.ad.btcPrice,
     payment: trade.ad.payment,
     status: trade.status,
@@ -55,10 +54,10 @@ export const tradeSelector = createSelector(
     buyerWallet: trade.multisigWallet.buyerReceivingWalletAddress,
     sellerWallet: trade.multisigWallet.sellerReceivingWalletAddress,
     multisigWalletAddress: trade.multisigWallet.multisigWalletAddress,
-  })
+  }),
 );
 
 export const tradeLoadingSelector = createSelector(
   state => state.trades.trade.loading,
-  loading => loading
+  loading => loading,
 );

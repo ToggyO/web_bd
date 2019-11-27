@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import HeaderDisplay from './HeaderDisplay';
 
 import { authActions, authSelectors } from '@ducks/auth';
-import { searchActions } from '@ducks/ads/search';
+import { searchActions } from '@ducks/ads';
 
 function mapStateToProps(state) {
   return {
@@ -22,7 +22,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderDisplay);

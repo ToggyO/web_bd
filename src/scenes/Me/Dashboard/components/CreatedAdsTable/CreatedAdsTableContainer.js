@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 
 import CreatedAdsTableDisplay from './CreatedAdsTableDisplay';
 
-import { adsSelectors } from '@ducks/ads';
-import { adActions } from '@ducks/ads/ad';
+import { adsSelectors, adActions } from '@ducks/ads';
 
 function mapStateToProps(state) {
   return {
@@ -24,7 +23,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreatedAdsTableDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatedAdsTableDisplay);

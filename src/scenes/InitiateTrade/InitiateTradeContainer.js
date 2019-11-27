@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 
 import InitiateTradeDisplay from './InitiateTradeDisplay';
 
-import { adActions } from '@ducks/ads/ad';
-import { adsSelectors } from '@ducks/ads';
+import { adActions, adsSelectors } from '@ducks/ads';
 import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
@@ -22,7 +21,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InitiateTradeDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(InitiateTradeDisplay);

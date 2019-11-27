@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import WalletAddressFormDisplay from './WalletAddressFormDisplay';
 
-import { tradeActions } from '@ducks/trades/trade';
+import { tradeActions } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
@@ -16,7 +16,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WalletAddressFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletAddressFormDisplay);

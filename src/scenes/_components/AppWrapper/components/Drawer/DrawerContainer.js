@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import DrawerDisplay from './DrawerDisplay';
 
-import { searchActions } from '@ducks/ads/search';
+import { searchActions } from '@ducks/ads';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -12,7 +12,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(DrawerDisplay);
+export default connect(null, mapDispatchToProps)(DrawerDisplay);

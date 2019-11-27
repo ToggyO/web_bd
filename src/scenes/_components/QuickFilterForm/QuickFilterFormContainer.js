@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import QuickFilterFormDisplay from './QuickFilterFormDisplay';
 
-import { searchActions, searchSelectors } from '@ducks/ads/search';
+import { searchActions, searchSelectors } from '@ducks/ads';
 
 function mapStateToProps(state) {
   return {
@@ -19,7 +19,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(QuickFilterFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(QuickFilterFormDisplay);

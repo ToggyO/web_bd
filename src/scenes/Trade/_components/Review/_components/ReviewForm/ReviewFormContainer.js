@@ -2,12 +2,11 @@ import { connect } from 'react-redux';
 
 import ReviewFormDisplay from './ReviewFormDisplay';
 
-import { reviewActions } from '@ducks/reviews/review';
-import { specificReviewSelector } from '@ducks/reviews/selectors';
+import { reviewActions, reviewSelectors } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
-    specificReview: specificReviewSelector(state),
+    specificReview: reviewSelectors.specificReviewSelector(state),
   };
 }
 
@@ -19,7 +18,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ReviewFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewFormDisplay);

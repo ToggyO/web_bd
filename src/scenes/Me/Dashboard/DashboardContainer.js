@@ -2,10 +2,8 @@ import { connect } from 'react-redux';
 
 import DashboardDisplay from './DashboardDisplay';
 
-import { adsActions } from '@ducks/ads/ads';
-import { tradesActions } from '@ducks/trades/trades';
-import { tradeActions } from '@ducks/trades/trade';
-import { tradesSelectors } from '@ducks/trades';
+import { adsActions } from '@ducks/ads';
+import { tradeActions, tradesActions, tradesSelectors } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
@@ -36,7 +34,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardDisplay);

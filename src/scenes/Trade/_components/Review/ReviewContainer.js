@@ -2,12 +2,11 @@ import { connect } from 'react-redux';
 
 import ReviewDisplay from './ReviewDisplay';
 
-import { reviewActions } from '@ducks/reviews/review';
-import { reviewLoadingSelector } from '@ducks/reviews/selectors';
+import { reviewSelectors, reviewActions } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
-    reviewLoading: reviewLoadingSelector(state),
+    reviewLoading: reviewSelectors.reviewLoadingSelector(state),
   };
 }
 
@@ -19,7 +18,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ReviewDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewDisplay);

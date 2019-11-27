@@ -6,41 +6,34 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { saveTokens, saveUserData, renewCountryDataOnTokenRefresh, clearUserData } from '../middleware';
 
 import _global from '@ducks/_global';
-import auth from '@ducks/auth/reducer';
-import me from '@ducks/me/reducer';
 import ads from '@ducks/ads';
+import auth from '@ducks/auth';
+import chat from '@ducks/chat';
+import me from '@ducks/me';
 import trades from '@ducks/trades';
-import chat from '@ducks/chat/reducer';
-import reviews from '@ducks/reviews';
 import user from '@ducks/user';
 
+import { _globalSagas } from '@ducks/_global';
+import { adSagas, adsSagas, buyAdsSagas, sellAdsSagas } from '@ducks/ads';
 import { authSagas } from '@ducks/auth';
-import { meSagas } from '@ducks/me';
-import { globalSagas } from '@ducks/_global';
-import { buyAdsSagas } from '@ducks/ads/buy';
-import { sellAdsSagas } from '@ducks/ads/sell';
-import { adSagas } from '@ducks/ads/ad';
-import { adsSagas } from '@ducks/ads/ads';
-import { tradeSagas } from '@ducks/trades/trade';
-import { tradesSagas } from '@ducks/trades/trades';
 import { chatSagas } from '@ducks/chat';
-import { reviewSagas } from '@ducks/reviews/review';
-import { profileSagas } from '@ducks/user/profile';
-import { reviewsSagas } from '@ducks/user/reviews';
+import { meSagas } from '@ducks/me';
+import { tradeSagas, tradesSagas, reviewSagas } from '@ducks/trades';
+import { profileSagas, reviewsSagas } from '@ducks/user';
 
 export default function configureStore() {
-  const reducer = combineReducers({ _global, auth, me, ads, trades, chat, reviews, user });
+  const reducer = combineReducers({ _global, ads, auth, chat, me, trades, user });
   const sagas = {
-    ...globalSagas,
-    ...authSagas,
-    ...meSagas,
-    ...buyAdsSagas,
-    ...sellAdsSagas,
+    ..._globalSagas,
     ...adSagas,
     ...adsSagas,
+    ...buyAdsSagas,
+    ...sellAdsSagas,
+    ...authSagas,
+    ...chatSagas,
+    ...meSagas,
     ...tradeSagas,
     ...tradesSagas,
-    ...chatSagas,
     ...reviewSagas,
     ...profileSagas,
     ...reviewsSagas,

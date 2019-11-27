@@ -29,7 +29,7 @@ function* signUp(action) {
 }
 
 export function* signUpSaga() {
-  yield takeLatest('bitcoins-direct/auth/SIGNUP_REQUEST', signUp);
+  yield takeLatest('auth/SIGNUP_REQUEST', signUp);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -48,7 +48,7 @@ function* signIn(action) {
 }
 
 export function* signInSaga() {
-  yield takeLatest('bitcoins-direct/auth/SIGNIN_REQUEST', signIn);
+  yield takeLatest('auth/SIGNIN_REQUEST', signIn);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -68,7 +68,7 @@ function* smsCodeRequest(action) {
 }
 
 export function* smsCodeRequestSaga() {
-  yield takeLatest('bitcoins-direct/auth/SMS_CODE_REQUEST', smsCodeRequest);
+  yield takeLatest('auth/SMS_CODE_REQUEST', smsCodeRequest);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -95,7 +95,7 @@ function* twoFactorAuth(action) {
 }
 
 export function* twoFactorAuthSaga() {
-  yield takeLatest('bitcoins-direct/auth/TWO_FACTOR_AUTH_REQUEST', twoFactorAuth);
+  yield takeLatest('auth/TWO_FACTOR_AUTH_REQUEST', twoFactorAuth);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -120,7 +120,7 @@ function* forgotPassword(action) {
 }
 
 export function* forgotPasswordSaga() {
-  yield takeLatest('bitcoins-direct/auth/FORGOT_PASSWORD_REQUEST', forgotPassword);
+  yield takeLatest('auth/FORGOT_PASSWORD_REQUEST', forgotPassword);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -142,7 +142,7 @@ function* resetPassword(action) {
 }
 
 export function* resetPasswordSaga() {
-  yield takeLatest('bitcoins-direct/auth/RESET_PASSWORD_REQUEST', resetPassword);
+  yield takeLatest('auth/RESET_PASSWORD_REQUEST', resetPassword);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -152,5 +152,5 @@ function* logout() {
 }
 
 export function* logoutSaga() {
-  yield takeLatest('bitcoins-direct/auth/LOGOUT_REQUEST', logout);
+  yield takeLatest('auth/LOGOUT_REQUEST', logout);
 }

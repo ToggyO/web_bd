@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 
 import TradeDisplay from './TradeDisplay';
 
-import { tradeActions } from '@ducks/trades/trade';
+import { tradeActions, tradesSelectors } from '@ducks/trades';
 import { chatActions, chatSelectors } from '@ducks/chat';
-import { tradesSelectors } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
@@ -39,7 +38,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TradeDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(TradeDisplay);
