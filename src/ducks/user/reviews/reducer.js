@@ -4,6 +4,7 @@ const initialState = {
   data: {
     items: [],
     likesCount: {
+      totalTrades: 0,
       liked: 0,
       disliked: 0,
     },

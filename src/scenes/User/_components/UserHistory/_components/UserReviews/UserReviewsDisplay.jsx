@@ -35,9 +35,11 @@ const UserReviewsDisplay = ({
         {reviewsData.length ? (
           <>
             <div className="review-summary">
-              Thumbs-up: <span className="review-summary__likes">{likesCount.liked}</span>
+              Completed trades: <span>{likesCount.totalTrades}</span>
               <Divider type="vertical" />
-              Thumbs-down: <span className="review-summary__dislikes">{likesCount.disliked}</span>
+              Thumb-up: <span>{likesCount.liked}</span>
+              <Divider type="vertical" />
+              Thumb-down: <span>{likesCount.disliked}</span>
             </div>
             {reviewsData.map(review => (
               <div className="review-item" key={review.id}>
@@ -72,6 +74,7 @@ UserReviewsDisplay.propTypes = {
     }),
   ),
   likesCount: PropTypes.shape({
+    totalTrades: PropTypes.number,
     liked: PropTypes.number,
     disliked: PropTypes.number,
   }),
