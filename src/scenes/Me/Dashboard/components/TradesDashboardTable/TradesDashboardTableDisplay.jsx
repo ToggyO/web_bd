@@ -22,9 +22,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
     dataSource={tradesData}
     loading={{ spinning: loading, indicator: <Spinner /> }}
     locale={{ emptyText: <NoData /> }}
-    pagination={
-      !(tradesData.length < 11) ? { size: window.matchMedia('(max-width: 575px)').matches && 'small' } : false
-    }
+    pagination={!(tradesData.length < 11)}
     expandedRowRender={
       withTerms
         ? record => (
@@ -179,7 +177,10 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
       title="Type"
       columnWidth={80}
       onFilter={(value, record) => record.type.indexOf(value) === 0}
-      filters={[{ text: 'Buy', value: 'Buy' }, { text: 'Sell', value: 'Sell' }]}
+      filters={[
+        { text: 'Buy', value: 'Buy' },
+        { text: 'Sell', value: 'Sell' },
+      ]}
       filterMultiple={false}
       className="hideble-420"
     />
@@ -204,7 +205,10 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
       dataIndex="direction"
       render={(text, record) => record.direction}
       onFilter={(value, record) => record.direction.indexOf(value) === 0}
-      filters={[{ text: 'Outgoing', value: 'Outgoing' }, { text: 'Incoming', value: 'Incoming' }]}
+      filters={[
+        { text: 'Outgoing', value: 'Outgoing' },
+        { text: 'Incoming', value: 'Incoming' },
+      ]}
       filterMultiple={false}
     />
   </Table>

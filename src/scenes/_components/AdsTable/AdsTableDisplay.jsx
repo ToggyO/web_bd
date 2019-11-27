@@ -50,7 +50,6 @@ const AdsTableDisplay = ({
             current: page || 1,
             pageSize,
             total: totalPages,
-            size: window.matchMedia('(max-width: 575px)').matches && 'small',
           }
           : false
       }
