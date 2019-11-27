@@ -8,10 +8,9 @@ import history from '@services/history';
 import logo from '@assets/bd-logo.svg';
 import './style.less';
 
-const DrawerDisplay = ({ collapsed, setCollapsed, cleanState }) => {
+export const MyDrawer = ({ collapsed, setCollapsed }) => {
   const handleLinkAction = (e, to) => {
     e.preventDefault();
-    cleanState();
     setCollapsed(true);
     history.push(to);
   };
@@ -71,9 +70,7 @@ const DrawerDisplay = ({ collapsed, setCollapsed, cleanState }) => {
   );
 };
 
-DrawerDisplay.propTypes = {
+MyDrawer.propTypes = {
   collapsed: PropTypes.bool,
   setCollapsed: PropTypes.func,
-  cleanState: PropTypes.func,
 };
-export default DrawerDisplay;

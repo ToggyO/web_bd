@@ -11,11 +11,10 @@ import './style.less';
 
 const { Header } = Layout;
 
-const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapsed }) => {
+const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
   const { userName } = user;
   const handleLinkAction = (e, to) => {
     e.preventDefault();
-    cleanState();
     history.push(to);
   };
   const menu = (
@@ -133,7 +132,6 @@ const HeaderDisplay = ({ user, logoutRequest, cleanState, collapsed, setCollapse
 HeaderDisplay.propTypes = {
   user: PropTypes.object,
   logoutRequest: PropTypes.func,
-  cleanState: PropTypes.func,
   collapsed: PropTypes.bool,
   setCollapsed: PropTypes.func,
 };

@@ -3,7 +3,7 @@ import React, { useState, useEffect, memo } from 'react';
 import { Layout } from 'antd';
 import PropTypes from 'prop-types';
 
-import { DrawerContainer } from './components/Drawer';
+import { MyDrawer } from './components/MyDrawer';
 
 import { HeaderContainer } from './components/Header';
 
@@ -21,7 +21,7 @@ const AppWrapperDisplay = memo(({ user, countryCode, getProfileRequest, children
 
   return (
     <Layout>
-      <DrawerContainer collapsed={collapsed} setCollapsed={setCollapsed} />
+      <MyDrawer collapsed={collapsed} setCollapsed={setCollapsed} />
       <HeaderContainer collapsed={collapsed} setCollapsed={setCollapsed} />
       <Content>{children}</Content>
       <Footer />

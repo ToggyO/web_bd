@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
+import { NoData } from './_components/NoData';
+
 import history from '@services/history';
 import { ROUTES, pageSize } from '@config/constants';
 import { Spinner } from '@components/Spinner';
-
-import { NoData } from './_components/NoData';
 
 import { catchNewLines } from '@utils';
 
@@ -28,11 +28,13 @@ const AdsTableDisplay = ({
   field,
   order,
   page,
+  cleanState,
 }) => {
   useEffect(() => {
     if (queryString) {
       history.push({ search: queryString });
     }
+    return () => cleanState();
   });
 
   return (
@@ -174,7 +176,7 @@ AdsTableDisplay.propTypes = {
       location: PropTypes.string,
       btcPrice: PropTypes.string,
       type: PropTypes.string,
-    })
+    }),
   ),
   loading: PropTypes.bool,
   withTerms: PropTypes.bool,
@@ -186,6 +188,7 @@ AdsTableDisplay.propTypes = {
   field: PropTypes.string,
   order: PropTypes.string,
   page: PropTypes.number,
+  cleanState: PropTypes.func,
 };
 
 AdsTableDisplay.defaultProps = {

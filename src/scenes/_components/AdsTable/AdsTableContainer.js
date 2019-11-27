@@ -26,6 +26,9 @@ function mapDispatchToProps(dispatch) {
     tableSort(fieldAndDirection) {
       dispatch(searchActions.tableSort(fieldAndDirection));
     },
+    cleanState() {
+      dispatch(searchActions.cleanState());
+    },
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdsTableDisplay);
