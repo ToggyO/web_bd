@@ -50,6 +50,7 @@ const AdsTableDisplay = ({
             current: page || 1,
             pageSize,
             total: totalPages,
+            showLessItems: true,
           }
           : false
       }
