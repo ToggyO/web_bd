@@ -27,7 +27,7 @@ const UserReviewsDisplay = ({
 
   const handleChange = page => {
     setLoading(true);
-    getReviewsByUserNameRequest(`${userName}?pageSize=1&page=${page}`);
+    getReviewsByUserNameRequest(`${userName}?pageSize=5&page=${page}`);
   };
   return (
     <div>

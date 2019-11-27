@@ -16,7 +16,7 @@ const UserDisplay = ({ getProfileRequest, getCreatedAdsRequest, getReviewsByUser
   useEffect(() => {
     getProfileRequest(userName);
     getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
-    getReviewsByUserNameRequest(userName);
+    getReviewsByUserNameRequest(`${userName}?pageSize=5`);
   }, [history.location.search]);
   return (
     <HelmetWrapper title={`${userName}'s Ads - Bitcoins Direct`} description={`${userName}'s Ads`}>

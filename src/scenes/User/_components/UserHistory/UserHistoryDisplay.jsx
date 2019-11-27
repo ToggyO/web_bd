@@ -21,14 +21,6 @@ const UserHistoryDisplay = ({
   reviewsTotalQuantity,
   getReviewsByUserNameRequest,
   getLikesCountByUserNameRequest,
-  // tradesQuantity,
-  // tradesLoading,
-  // getTradesByUserNameRequest,
-  // requestsQuantity,
-  // requestsLoading,
-  // getRequestsByUserNameRequest,
-  // adsQuantity,
-  // getAdsByUserNameRequest,
 }) => {
   const [initialAdsLoading, setInitialAdsLoading] = useState(false);
 
@@ -48,14 +40,14 @@ const UserHistoryDisplay = ({
           const userName = catchFromPath(history.location.pathname, 'users');
           switch (tabKey) {
             case '1':
-              return getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
+              return getCreatedAdsRequest(`?pageSize=${pageSizeUser}&username=${userName}`);
             case '2': {
-              getReviewsByUserNameRequest(userName);
+              getReviewsByUserNameRequest(`${userName}?pageSize=5`);
               getLikesCountByUserNameRequest(userName);
               return void 0;
             }
             default:
-              return getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
+              return getCreatedAdsRequest(`?pageSize=${pageSizeUser}&username=${userName}`);
           }
         }}
       >

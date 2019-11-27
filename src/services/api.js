@@ -148,8 +148,8 @@ export default {
       const response = await superaxios.get(`/profile/${userName}`);
       return response.data;
     },
-    getReviewsByUserName: async userName => {
-      const response = await superaxios.get(`/rating/${userName}`);
+    getReviewsByUserName: async params => {
+      const response = await superaxios.get(`/rating/${params}`);
       return response.data;
     },
     getLikesCountByUserName: async userName => {
