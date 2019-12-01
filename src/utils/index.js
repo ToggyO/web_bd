@@ -74,6 +74,21 @@ export const formatCapitals = stringWithCapitalLetters => {
   return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
 };
 
+export const formatParamsForParakhnevich = params => {
+  const newParams = {};
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (key === 'type' || key === 'location' || key === 'payment' || key === 'currency') {
+      newParams[`${key}[]`] = value;
+    } else if (key === 'current') {
+      newParams.page = value;
+    } else {
+      newParams[key] = value;
+    }
+  });
+  return newParams;
+};
+
 // creates search string based on form values for GET request
 export const makeQueryStringFromObject = obj => {
   let queryString = '?';

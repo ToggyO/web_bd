@@ -8,6 +8,66 @@
   }
 }
 
+.easy-way {
+  padding: 0px 80px 20px 104px;
+  display: flex;
+
+  @media screen and (max-width: 900px) {
+    padding: 0px 50px 20px 50px;
+  }
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    padding: 0px 30px 20px 30px;
+  }
+
+  &__left {
+    margin-right: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media screen and (max-width: 800px) {
+      margin-right: 70px;
+    }
+    @media screen and (max-width: 700px) {
+      margin-right: 0;
+      margin-top: 40px;
+      order: 2;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    &__img {
+      width: 100%;
+    }
+  }
+
+  &__heading {
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 67px;
+    @media screen and (max-width: 800px) {
+      font-size: 40px;
+      line-height: 47px;
+    }
+    @media screen and (max-width: 700px) {
+      text-align: center;
+    }
+    @media screen and (max-width: 500px) {
+      font-size: 26px;
+    }
+  }
+
+  &__btn {
+    align-self: flex-start;
+    width: 170px;
+    @media screen and (max-width: 700px) {
+      align-self: center;
+    }
+  }
+}
+
 .quick-buy-sell {
   padding: 0px 80px;
   @media screen and (max-width: 1024px) {
@@ -30,5 +90,29 @@
       text-align: center;
       font-size: 26px;
     }
+  }
+}
+
+.quick-filters {
+  padding: 0px 80px;
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 40px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0 24px;
+  }
+  @media screen and (max-width: 420px) {
+    padding: 0 8px;
+  }
+  &__tabs {
+    .ant-tabs-tab {
+      font-size: 16px;
+      font-weight: 500 !important;
+      padding-bottom: 13px;
+    }
+  }
+  .ant-tabs-bar {
+    margin-bottom: 30px;
   }
 }

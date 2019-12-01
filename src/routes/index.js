@@ -11,7 +11,7 @@ import { EditPasswordDisplay } from '../scenes/Me/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/Me/Profile/RequestVerification';
 import { CreateAdContainer } from '../scenes/CreateAd';
 import { DashboardContainer } from '../scenes/Me/Dashboard';
-import { HomePageDisplay } from '../scenes/HomePage';
+import { HomePage } from '../scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
 import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
@@ -50,7 +50,7 @@ const Routes = () => (
 
     <AppWrapperContainer>
       <Switch>
-        <Route path={ROUTES.HOME} exact component={HomePageDisplay} />
+        <Route path={ROUTES.HOME} exact component={HomePage} />
         <Route path={ROUTES.ADS.BUY} exact component={props => <AdsContainer {...props} type="sell" />} />
         <Route path={ROUTES.ADS.SELL} exact component={props => <AdsContainer {...props} type="buy" />} />
         <Route

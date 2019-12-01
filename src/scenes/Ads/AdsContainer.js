@@ -2,34 +2,22 @@ import { connect } from 'react-redux';
 
 import AdsDisplay from './AdsDisplay';
 
-import { buyAdsActions, sellAdsActions, adsSelectors } from '@ducks/ads';
-
 import { meSelectors } from '@ducks/me';
+import { addsActions, addsSelectors } from '@ducks/adds';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    adsData: adsSelectors.adsSelector(state, props),
-    loading: adsSelectors.adsLoadingSelector(state, props),
-    totalPages: adsSelectors.totalPagesQuantitySelector(state, props),
+    data: addsSelectors.dataSelector(state),
+    loading: addsSelectors.loadingSelector(state),
     countryData: meSelectors.countryDataSelector(state),
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  if (ownProps.type.toLowerCase() === 'buy') {
-    return {
-      getAdsRequest(query) {
-        dispatch(buyAdsActions.getBuyAdsRequest(query));
-      },
-    };
-  }
-  if (ownProps.type.toLowerCase() === 'sell') {
-    return {
-      getAdsRequest(query) {
-        dispatch(sellAdsActions.getSellAdsRequest(query));
-      },
-    };
-  }
-  return undefined;
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllAdsRequest(params) {
+      dispatch(addsActions.getAllRequest(params));
+    },
+  };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdsDisplay);

@@ -21,6 +21,12 @@ export const adsSelector = createSelector([adsItemsSelector], items =>
   })),
 );
 
+export const adsPaginationSelector = createSelector([adsByTypeSelector], ads => ({
+  total: ads.data.total,
+  current: ads.data.page,
+  pageSize: ads.data.pageSize,
+}));
+
 export const adsTotalQuantitySelector = createSelector([adsByTypeSelector], ads => ads.data.total);
 
 export const adsLoadingSelector = createSelector([adsByTypeSelector], adsByType => adsByType.loading);

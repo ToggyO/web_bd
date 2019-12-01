@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Modal, Tag, Row, Col } from 'antd';
 
-import { NoData } from '@scenes/_components/AdsTable/_components/NoData';
+import { NoData } from '@components/NoData';
 
 import history from '@services/history';
 

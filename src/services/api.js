@@ -68,8 +68,8 @@ export default {
   },
 
   ads: {
-    getAds: async params => {
-      const response = await superaxios.get(`/ad${params}`);
+    getAllAds: async params => {
+      const response = await superaxios({ url: '/ad', params });
       return response.data;
     },
     getMyAds: async () => {
