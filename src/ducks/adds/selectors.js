@@ -24,3 +24,4 @@ export const dataSelector = createSelector(
 );
 
 export const loadingSelector = state => state.adds.loading;
+export const totalSelector = state => state.adds.data.pagination.total;

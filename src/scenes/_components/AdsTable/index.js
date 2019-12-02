@@ -87,7 +87,7 @@ export const AdsTable = ({
         className="hideble-630"
       />
       <Column
-        title={type === 'ads' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
+        title={type === 'all' ? 'User' : `${type.charAt(0).toUpperCase()}${type.slice(1)}er`}
         dataIndex="userName"
         key="userName"
         render={(text, record) => (

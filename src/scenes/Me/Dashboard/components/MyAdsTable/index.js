@@ -15,14 +15,15 @@ import { Spinner } from '@components/Spinner';
 
 const { Column } = Table;
 
-const CreatedAdsTableDisplay = ({
-  withTerms,
-  deleteAdRequest,
-  adsData,
+export const MyAdsTable = ({
+  data: { items, pagination },
   loading,
-  submitting,
-  statusLoading,
+  deleteAdRequest,
   toggleAdStatusRequest,
+  adStatusLoading,
+  submitting,
+  onChange,
+  withTerms,
 }) => {
   useEffect(() => {
     if (history.location.state) {
@@ -68,10 +69,11 @@ const CreatedAdsTableDisplay = ({
   return (
     <div>
       <Table
-        dataSource={adsData}
+        dataSource={items}
         loading={{ spinning: loading, indicator: <Spinner /> }}
         locale={{ emptyText: <NoData /> }}
-        pagination={!(adsData.length < 11)}
+        pagination={pagination}
+        onChange={onChange}
         expandedRowRender={
           withTerms
             ? record => (
@@ -171,7 +173,7 @@ const CreatedAdsTableDisplay = ({
             <Spinner
               fontSize={16}
               margin="-7px 0 0 40px"
-              spinning={statusLoading && idToToggle === record.key}
+              spinning={adStatusLoading && idToToggle === record.key}
             >
               <Tag
                 color={record.shown ? 'green' : ''}
@@ -188,31 +190,3 @@ const CreatedAdsTableDisplay = ({
     </div>
   );
 };
-
-CreatedAdsTableDisplay.propTypes = {
-  withTerms: PropTypes.bool.isRequired,
-  adsData: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      createdAt: PropTypes.number,
-      type: PropTypes.string,
-      payment: PropTypes.string,
-      priceBtc: PropTypes.string,
-      status: PropTypes.string,
-      transactionLimit: PropTypes.string,
-      location: PropTypes.string,
-      terms: PropTypes.string,
-    }),
-  ),
-  deleteAdRequest: PropTypes.func,
-  loading: PropTypes.bool,
-  submitting: PropTypes.bool,
-  statusLoading: PropTypes.bool,
-  toggleAdStatusRequest: PropTypes.func,
-};
-
-CreatedAdsTableDisplay.defaultProps = {
-  loading: true,
-};
-
-export default CreatedAdsTableDisplay;

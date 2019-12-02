@@ -15,7 +15,7 @@ import { HomePage } from '../scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
 import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
-import { InitiateDisputeContainer } from '../scenes/InitiateDispute';
+import { InitiateDispute } from '../scenes/InitiateDispute';
 import { UserContainer } from '../scenes/User';
 import { TradeContainer } from '../scenes/Trade';
 
@@ -87,7 +87,7 @@ const Routes = () => (
           component={props => <EditAdContainer {...props} type="ad" />}
         />
         <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
-        <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDisputeContainer} />
+        <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDispute} />
 
         {[
           `${ROUTES.SETTINGS.ROOT}/name`,

@@ -1,39 +1,67 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
-import { CreatedAdsTableContainer } from './components/CreatedAdsTable';
+import { MyAdsTable } from './components/MyAdsTable';
 import { TradesDashboardTableContainer } from './components/TradesDashboardTable';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { Refresher } from '@components/Refresher';
 import { ROUTES } from '@config/constants';
 import history from '@services/history';
-import { catchFromPath } from '@utils/';
+import { catchFromPath, formatParamsForParakhnevich } from '@utils/';
 import './style.less';
 
 const { TabPane } = Tabs;
 
 const DashboardDisplay = ({
-  getMyCreatedAdsRequest,
+  getMyAdsRequest,
   getNewTradesRequest,
   getActiveTradesRequest,
   getCompletedTradesRequest,
   getCanceledTradesRequest,
   deleteNewTradeRequest,
+
+  adsData,
+  loadingAds,
+  adStatusLoading,
+  submitting,
+  deleteAdRequest,
+  toggleAdStatusRequest,
   tradesLoading,
 }) => {
+  const [activeTab, setActiveTab] = useState(
+    catchFromPath(history.location.pathname, 'dashboard').toUpperCase() || 'CREATED',
+  );
+
   useEffect(() => {
-    const path = catchFromPath(history.location.pathname, 'dashboard');
-    if (path === '' || path === 'created') getMyCreatedAdsRequest();
-    if (path === 'requests') getNewTradesRequest();
-    if (path === 'active') getActiveTradesRequest();
-    if (path === 'completed') getCompletedTradesRequest();
-    if (path === 'canceled') getCanceledTradesRequest();
-  }, [history.location.pathname]);
+    if (activeTab === 'CREATED') getMyAdsRequest(formatParamsForParakhnevich({ pageSize: 10 }));
+    if (activeTab === 'REQUESTS') getNewTradesRequest();
+    if (activeTab === 'ACTIVE') getActiveTradesRequest();
+    if (activeTab === 'COMPLETED') getCompletedTradesRequest();
+    if (activeTab === 'CANCELED') getCanceledTradesRequest();
+  }, [activeTab]);
+
+  // useEffect(() => {
+  //   const path = catchFromPath(history.location.pathname, 'dashboard');
+  //   if (path === '' || path === 'created') getMyAdsRequest(formatParamsForParakhnevich({ pageSize: 10 }));
+  //   if (path === 'requests') getNewTradesRequest();
+  //   if (path === 'active') getActiveTradesRequest();
+  //   if (path === 'completed') getCompletedTradesRequest();
+  //   if (path === 'canceled') getCanceledTradesRequest();
+  // }, [history.location.pathname]);
+
+  const onTableChange = (pagination, filters, sorter) => {
+    if (activeTab === 'CREATED') getMyAdsRequest(formatParamsForParakhnevich({ ...pagination, ...sorter }));
+    if (activeTab === 'REQUESTS') getNewTradesRequest();
+    if (activeTab === 'ACTIVE') getActiveTradesRequest();
+    if (activeTab === 'COMPLETED') getCompletedTradesRequest();
+    if (activeTab === 'CANCELED') getCanceledTradesRequest();
+  };
 
   const handleChangeTab = tab => {
     history.push(ROUTES.DASHBOARD[tab]);
+    setActiveTab(tab);
   };
 
   return (
@@ -54,7 +82,16 @@ const DashboardDisplay = ({
             >
               <h2 className="dashboard__header">Created ads</h2>
 
-              <CreatedAdsTableContainer withTerms />
+              <MyAdsTable
+                data={adsData}
+                loading={loadingAds}
+                adStatusLoading={adStatusLoading}
+                submitting={submitting}
+                onChange={onTableChange}
+                deleteAdRequest={deleteAdRequest}
+                toggleAdStatusRequest={toggleAdStatusRequest}
+                withTerms
+              />
             </TabPane>
             <TabPane
               tab={window.matchMedia('(max-width: 1024px)').matches ? 'Requests' : 'Trade requests'}

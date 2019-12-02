@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { store } from '../store';
 
-import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL } from '@config/';
+import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL, errorCodes } from '@config';
 
 import { globalTypes } from '@ducks/_global';
 
@@ -49,12 +49,15 @@ superaxios.interceptors.response.use(
   error => {
     const {
       config,
-      response: { status },
+      response: {
+        status,
+        data: { errors },
+      },
     } = error;
     const originalRequest = config;
 
-    if (status === 403) {
-      store.dispatch({ type: globalTypes.PERMISSION_NOTIFICATION });
+    if (status === 403 && errors[0].code) {
+      store.dispatch({ type: globalTypes.PERMISSION_NOTIFICATION, payload: errorCodes[errors[0].code] });
     }
 
     if (status === 401) {

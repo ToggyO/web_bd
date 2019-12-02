@@ -3,12 +3,10 @@ import { notification } from 'antd';
 
 import * as globalTypes from './types';
 
-import * as messages from '@config';
-
-function* permissionNotification() {
+function* permissionNotification(action) {
   yield call(notification.error, {
     message: '403 Error',
-    description: messages.message403,
+    description: action.payload,
     duration: 10,
   });
 }

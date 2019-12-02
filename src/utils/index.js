@@ -89,6 +89,17 @@ export const formatParamsForParakhnevich = params => {
   return newParams;
 };
 
+export const smartPagination = ({ total, current, pageSize }) => {
+  if (total % pageSize === 0) {
+    return {
+      total,
+      pageSize,
+      current: current - 1,
+    };
+  }
+  return { total, current, pageSize };
+};
+
 // creates search string based on form values for GET request
 export const makeQueryStringFromObject = obj => {
   let queryString = '?';

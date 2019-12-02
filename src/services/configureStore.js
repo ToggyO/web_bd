@@ -16,7 +16,7 @@ import user from '@ducks/user';
 import adds from '@ducks/adds';
 
 import { _globalSagas } from '@ducks/_global';
-import { adSagas, adsSagas, buyAdsSagas, sellAdsSagas } from '@ducks/ads';
+import { adSagas, adsSagas } from '@ducks/ads';
 import { authSagas } from '@ducks/auth';
 import { chatSagas } from '@ducks/chat';
 import { meSagas } from '@ducks/me';
@@ -31,8 +31,6 @@ export default function configureStore() {
     ..._globalSagas,
     ...adSagas,
     ...adsSagas,
-    ...buyAdsSagas,
-    ...sellAdsSagas,
     ...authSagas,
     ...chatSagas,
     ...meSagas,

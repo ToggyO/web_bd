@@ -69,11 +69,12 @@ export default {
 
   ads: {
     getAllAds: async params => {
-      const response = await superaxios({ url: '/ad', params });
+      const response = await superaxios.get('/ad', { params });
       return response.data;
     },
-    getMyAds: async () => {
-      const response = await superaxios.get(`/ad/currentuser?pageSize=${pageSizeDashboard}`);
+    getMyAds: async params => {
+      console.log(params);
+      const response = await superaxios.get('/ad/currentuser', { params });
       return response.data;
     },
     toggleAdStatus: async idWithStatus => {
@@ -148,8 +149,8 @@ export default {
       const response = await superaxios.get(`/profile/${userName}`);
       return response.data;
     },
-    getReviewsByUserName: async params => {
-      const response = await superaxios.get(`/rating/${params}`);
+    getReviewsByUserName: async ({ userName, params }) => {
+      const response = await superaxios.get(`/rating/${userName}`, { params });
       return response.data;
     },
     getLikesCountByUserName: async userName => {

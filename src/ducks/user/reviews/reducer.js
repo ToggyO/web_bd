@@ -3,14 +3,12 @@ import * as types from './types';
 const initialState = {
   data: {
     items: [],
+    pagination: {},
     likesCount: {
       totalTrades: 0,
       liked: 0,
       disliked: 0,
     },
-    page: 0,
-    pageSize: 0,
-    total: 0,
   },
   errors: {},
   loading: false,
@@ -23,16 +21,15 @@ export default function reviews(state = initialState, action) {
       return { ...state, loading: true };
 
     case types.GET_REVIEWS_BY_USERNAME_SUCCESS: {
-      const data = action.payload;
-
       return {
         ...state,
         data: {
-          ...state.data,
-          items: data.items,
-          page: data.page,
-          pageSize: data.pageSize,
-          total: data.total,
+          items: action.payload.items,
+          pagination: {
+            total: action.payload.total,
+            current: action.payload.page,
+            pageSize: action.payload.pageSize,
+          },
         },
         loading: false,
       };

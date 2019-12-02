@@ -1,29 +1,82 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 
-import { UserCardContainer } from './_components/UserCard';
-import { UserHistoryContainer } from './_components/UserHistory';
+import { UserHistory } from './UserHistory';
 
+import { UserCard } from '@scenes/_components/UserCard';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { pageSizeUser } from '@config/constants';
+
 import history from '@services/history';
-import { catchFromPath } from '@utils/';
+import { catchFromPath, formatParamsForParakhnevich } from '@utils/';
 
 import './style.less';
 
-const UserDisplay = ({ getProfileRequest, getCreatedAdsRequest, getReviewsByUserNameRequest }) => {
+const UserDisplay = ({
+  profile,
+  loadingProfile,
+  getProfileRequest,
+  addsData,
+  addsTotal,
+  loadingAdds,
+  getAllAdsRequest,
+  reviewsData,
+  reviewsTotal,
+  loadingReviews,
+  getReviewsByUserNameRequest,
+  getLikesCountByUserNameRequest,
+}) => {
   const userName = catchFromPath(history.location.pathname, 'users');
   useEffect(() => {
     getProfileRequest(userName);
-    getCreatedAdsRequest(`?PageSize=${pageSizeUser}&username=${userName}`);
-    getReviewsByUserNameRequest(`${userName}?pageSize=5`);
+    getAllAdsRequest({ pageSize: 10, userName });
+    getReviewsByUserNameRequest(userName, { pageSize: 5 });
   }, [history.location.search]);
+
+  const onTabChange = tabKey => {
+    switch (tabKey) {
+      case 'ads':
+        return getAllAdsRequest({ pageSize: 10, userName });
+      case 'reviews': {
+        getReviewsByUserNameRequest(userName, { pageSize: 5 });
+        getLikesCountByUserNameRequest(userName);
+        return void 0;
+      }
+      default:
+        return getAllAdsRequest({ pageSize: 10, userName });
+    }
+  };
+
+  const onTableChange = (pagination, filters, sorter) => {
+    const sorterParams = {};
+    if (sorter.field) {
+      sorterParams.field = sorter.field;
+      sorterParams.order = sorter.order;
+    }
+
+    const params = { ...pagination, ...sorterParams, userName };
+    getAllAdsRequest(formatParamsForParakhnevich(params));
+  };
+
+  const onReviewPageChange = (page, pageSize) => {
+    getReviewsByUserNameRequest(userName, formatParamsForParakhnevich({ page, pageSize }));
+  };
+
   return (
     <HelmetWrapper title={`${userName}'s Ads - Bitcoins Direct`} description={`${userName}'s Ads`}>
       <div className="paper">
         <div className="user">
-          <UserCardContainer />
-          <UserHistoryContainer />
+          <UserCard profile={profile} loading={loadingProfile} />
+          <UserHistory
+            onTabChange={onTabChange}
+            addsData={addsData}
+            addsTotal={addsTotal}
+            loadingAdds={loadingAdds}
+            onTableChange={onTableChange}
+            reviewsData={reviewsData}
+            reviewsTotal={reviewsTotal}
+            loadingReviews={loadingReviews}
+            onReviewPageChange={onReviewPageChange}
+          />
         </div>
       </div>
     </HelmetWrapper>

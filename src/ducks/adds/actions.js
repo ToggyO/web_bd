@@ -5,6 +5,7 @@ export const getAllRequest = params => ({
   payload: params,
 });
 
-export const getMyRequest = () => ({
+export const getMyRequest = params => ({
   type: types.GET_MY_REQUEST,
+  payload: params,
 });

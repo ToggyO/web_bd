@@ -1,8 +1,8 @@
 import * as types from './types';
 
-export const getReviewsByUserNameRequest = userName => ({
+export const getReviewsByUserNameRequest = (userName, params) => ({
   type: types.GET_REVIEWS_BY_USERNAME_REQUEST,
-  payload: userName,
+  payload: { userName, params },
 });
 
 export const getLikesCountByUserNameRequest = userName => ({

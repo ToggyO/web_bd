@@ -15,7 +15,4 @@ export const profileSelector = createSelector(
   },
 );
 
-export const loadingProfileSelector = createSelector(
-  state => state.user.profile.loading,
-  loading => loading,
-);
+export const loadingProfileSelector = state => state.user.profile.loading;
