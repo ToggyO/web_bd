@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Modal, Tag, Row, Col } from 'antd';
 
 import { NoData } from '@components/NoData';
 
 import history from '@services/history';
-
 import { formatDate, sortStrings, catchNewLines } from '@utils';
 
 import './style.less';

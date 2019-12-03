@@ -74,6 +74,7 @@ export const formatCapitals = stringWithCapitalLetters => {
   return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
 };
 
+// format values to backend
 export const formatParamsForParakhnevich = params => {
   const newParams = {};
 
@@ -89,6 +90,7 @@ export const formatParamsForParakhnevich = params => {
   return newParams;
 };
 
+// pagination for corner-case
 export const smartPagination = ({ total, current, pageSize }) => {
   if (total % pageSize === 0) {
     return {
@@ -98,22 +100,6 @@ export const smartPagination = ({ total, current, pageSize }) => {
     };
   }
   return { total, current, pageSize };
-};
-
-// creates search string based on form values for GET request
-export const makeQueryStringFromObject = obj => {
-  let queryString = '?';
-  Object.entries(obj).forEach(([key, value]) => {
-    let modifiedKey = `${key}[]`;
-
-    if (key === 'amount' || key === 'page' || key === 'field' || key === 'order') {
-      modifiedKey = key;
-    }
-
-    queryString += `${modifiedKey}=${value}&`;
-  });
-  queryString = queryString.slice(0, -1);
-  return queryString;
 };
 
 export const parseQueryString = queryString => {

@@ -73,7 +73,6 @@ export default {
       return response.data;
     },
     getMyAds: async params => {
-      console.log(params);
       const response = await superaxios.get('/ad/currentuser', { params });
       return response.data;
     },

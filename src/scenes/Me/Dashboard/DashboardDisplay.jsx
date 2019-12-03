@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 
 import { MyAdsTable } from './components/MyAdsTable';
@@ -41,15 +41,6 @@ const DashboardDisplay = ({
     if (activeTab === 'COMPLETED') getCompletedTradesRequest();
     if (activeTab === 'CANCELED') getCanceledTradesRequest();
   }, [activeTab]);
-
-  // useEffect(() => {
-  //   const path = catchFromPath(history.location.pathname, 'dashboard');
-  //   if (path === '' || path === 'created') getMyAdsRequest(formatParamsForParakhnevich({ pageSize: 10 }));
-  //   if (path === 'requests') getNewTradesRequest();
-  //   if (path === 'active') getActiveTradesRequest();
-  //   if (path === 'completed') getCompletedTradesRequest();
-  //   if (path === 'canceled') getCanceledTradesRequest();
-  // }, [history.location.pathname]);
 
   const onTableChange = (pagination, filters, sorter) => {
     if (activeTab === 'CREATED') getMyAdsRequest(formatParamsForParakhnevich({ ...pagination, ...sorter }));
@@ -132,15 +123,5 @@ const DashboardDisplay = ({
       </div>
     </HelmetWrapper>
   );
-};
-
-DashboardDisplay.propTypes = {
-  getMyCreatedAdsRequest: PropTypes.func,
-  getNewTradesRequest: PropTypes.func,
-  getActiveTradesRequest: PropTypes.func,
-  getCompletedTradesRequest: PropTypes.func,
-  getCanceledTradesRequest: PropTypes.func,
-  deleteNewTradeRequest: PropTypes.func,
-  tradesLoading: PropTypes.bool,
 };
 export default DashboardDisplay;

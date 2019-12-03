@@ -7,6 +7,7 @@ import { store } from '../store';
 import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL, errorCodes } from '@config';
 
 import { globalTypes } from '@ducks/_global';
+import { authTypes } from '@ducks/auth';
 
 import { getFromLocalState, writeToLocalState } from '@services/ls';
 
@@ -77,7 +78,7 @@ superaxios.interceptors.response.use(
           })
           .catch(() => {
             store.dispatch({ type: globalTypes.REFRESHING_TOKEN_ERROR });
-            // store.dispatch({ type: authTypes.LOGOUT });
+            store.dispatch({ type: authTypes.LOGOUT_REQUEST });
           });
       }
 
