@@ -72,7 +72,7 @@ class RequestVerificationFormDisplay extends React.Component {
         });
       },
       beforeUpload: file => {
-        const isLt5M = file.size / 1024 / 1024 < 4;
+        const isLt5M = file.size / 1024 / 1024 < 5;
         if (!isLt5M) {
           message.error('File should be smaller than 5Mb');
           return false;
