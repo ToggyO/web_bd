@@ -18,7 +18,7 @@ function* createAd(action) {
       pathname: ROUTES.DASHBOARD.CREATED,
       state: { id: data.id },
     });
-    yield call(message.success, 'Success! Ad has been created');
+    yield call(message.success, 'Success! Ad has been created', 2);
   } catch (error) {
     yield put({ type: adTypes.CREATE_ERROR, payload: error });
   }
@@ -50,7 +50,7 @@ function* editAd(action) {
       pathname: ROUTES.DASHBOARD.CREATED,
       state: { id: data.id },
     });
-    yield call(message.success, 'Success! Ad has been changed');
+    yield call(message.success, 'Success! Ad has been changed', 2);
   } catch (error) {
     yield put({ type: adTypes.EDIT_ERROR, payload: error });
   }

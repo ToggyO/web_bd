@@ -96,7 +96,7 @@ export const smartPagination = ({ total, current, pageSize }) => {
     return {
       total,
       pageSize,
-      current: current - 1,
+      current: current - 1 === 0 ? 1 : current - 1,
     };
   }
   return { total, current, pageSize };
