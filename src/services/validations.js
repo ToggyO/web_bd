@@ -51,7 +51,7 @@ export const realname = [
   { required: true, message: <div>Please input your real name!</div> },
   { max: 70, message: <div>Real name can not exceed 70 characters limit!</div> },
   {
-    pattern: /^[a-zA-Z0-9-' ]+$/,
+    pattern: /^[^ ][a-zA-Z0-9-' ]+$/,
     message: <div>Please input your real name!</div>,
   },
 ];

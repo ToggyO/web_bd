@@ -14,9 +14,9 @@ const EditEmailDisplay = () => (
 
         <h2 className="change-setting__header">Change email</h2>
         <p>
-          Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te odio
-          zril facilisi, quo singulis torquatos in, sea in duis bonorum adipisci. Elit iudico iuvaret vis te.
-          Eligendi scripserit duo ne, has eros veniam epicurei eu, quidam mentitum adipisci eos ne.
+          Please use the form below to change your email. Kindly note that to bind your new email to your user
+          profile, we will send you a text message to the phone number you have connected with your Bitcoins
+          Direct account.
         </p>
         <EditEmailFormContainer />
       </div>

@@ -14,9 +14,9 @@ const EditFullName = () => (
 
         <h2 className="change-setting__header">Edit real name</h2>
         <p>
-          Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te odio
-          zril facilisi, quo singulis torquatos in, sea in duis bonorum adipisci. Elit iudico iuvaret vis te.
-          Eligendi scripserit duo ne, has eros veniam epicurei eu, quidam mentitum adipisci eos ne.
+          If you are applying for an identity check on Bitcoins Direct and your current name doesn’t match the
+          one that appears on your lawful presence document(s), you must change the Real Name specified on our
+          platform prior to applying for Verification.
         </p>
         <EditFullNameFormContainer />
       </div>

@@ -132,8 +132,8 @@ class AdFormDisplay extends React.Component {
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const { limits, ...rest } = values;
-        const valuesToSubmit = { ...rest, ...limits };
+        const { btcPrice, limits, ...rest } = values;
+        const valuesToSubmit = { ...rest, btcPrice: parseFloat(btcPrice), ...limits };
         if (forEdit) {
           onSubmit({ ...valuesToSubmit, id: specificAd.id });
           return;
@@ -325,17 +325,24 @@ class AdFormDisplay extends React.Component {
                     ],
                     initialValue: specificAd.btcPrice,
                     normalize: (value, prevValue) => {
-                      if (value.length > 10) return '';
+                      if (value.length > 10) return prevValue;
                       let strValue = value.toString();
                       const index = strValue.indexOf('.');
                       if (index > -1) strValue = strValue.slice(0, index + 3);
-                      return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
+
+                      return strValue.match(/^\d*[.]?\d{0,2}$/) ? strValue : prevValue;
                     },
                   })(
                     <Input
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
+                      onBlur={e => {
+                        const { value } = e.target;
+                        if (value.charAt(value.length - 1) === '.') {
+                          form.setFieldsValue({ btcPrice: value.slice(0, -1) });
+                        }
+                      }}
                     />,
                   )}
                 </Form.Item>
@@ -417,10 +424,9 @@ class AdFormDisplay extends React.Component {
                   initialValue: specificAd.terms,
                 })(
                   <Input.TextArea
-                    allowClear
                     className=" ad-form__textarea"
                     placeholder="Any other information you wish to tell about your trade"
-                    rows={5}
+                    autoSize={{ minRows: 5, maxRows: 15 }}
                   />,
                 )}
               </Form.Item>

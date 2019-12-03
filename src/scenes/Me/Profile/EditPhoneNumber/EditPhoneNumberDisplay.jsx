@@ -30,20 +30,13 @@ const EditPhoneNumberDisplay = ({
                 Please check your email <span className="primary-color">{email}</span> to proceed with the
                 website.
               </p>
-              <p>
-                Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te
-                odio zril facilisi, quo singulis torquatos in, sea in duis bonorum adipisci. Elit iudico
-                iuvaret vis te. Eligendi scripserit duo ne, has eros veniam epicurei eu, quidam mentitum
-                adipisci eos ne.
-              </p>
             </>
           ) : (
             <>
               <p>
-                Lorem ipsum dolor sit amet, suas omnis oportere mei no, cum in diam viris interesset. Eum te
-                odio zril facilisi, quo singulis torquatos in, sea in duis bonorum adipisci. Elit iudico
-                iuvaret vis te. Eligendi scripserit duo ne, has eros veniam epicurei eu, quidam mentitum
-                adipisci eos ne.
+                Please use the form below to change your phone number. Kindly note that to bind your new phone
+                number to your user profile, we will send you an email to the address you have connected with
+                your Bitcoins Direct account.
               </p>
               <EditPhoneNumberFormContainer />
             </>
