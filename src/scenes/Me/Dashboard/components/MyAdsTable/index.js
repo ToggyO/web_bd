@@ -7,7 +7,7 @@ import { Table, Modal, Tag, Row, Col } from 'antd';
 import { NoData } from '@components/NoData';
 
 import history from '@services/history';
-import { formatDate, sortStrings, catchNewLines } from '@utils';
+import { formatDate, catchNewLines } from '@utils';
 
 import './style.less';
 import { Spinner } from '@components/Spinner';
@@ -136,9 +136,9 @@ export const MyAdsTable = ({
         <Column
           key="createdAt"
           title="Date"
+          dataIndex="createdAt"
           render={(text, record) => formatDate(record.createdAt, 'lol')}
-          sorter={(a, b) => a.createdAt - b.createdAt}
-          defaultSortOrder="descend"
+          sorter
           className="hideble-768"
         />
 
@@ -148,7 +148,7 @@ export const MyAdsTable = ({
           title="Type"
           columnWidth={80}
           render={(text, record) => record.type}
-          sorter={(a, b) => sortStrings(a.type, b.type)}
+          sorter
         />
 
         <Column
@@ -159,7 +159,7 @@ export const MyAdsTable = ({
             </span>
           )}
           dataIndex="payment"
-          sorter={(a, b) => sortStrings(a.payment, b.payment)}
+          sorter
           className="hideble-630"
         />
 
@@ -167,6 +167,7 @@ export const MyAdsTable = ({
 
         <Column
           title="Status"
+          dataIndex="shown"
           align="center"
           render={(text, record) => (
             <Spinner
@@ -183,7 +184,7 @@ export const MyAdsTable = ({
             </Spinner>
           )}
           key="dispayStatus"
-          sorter={(a, b) => sortStrings(a.shown, b.shown)}
+          sorter
         />
       </Table>
     </div>

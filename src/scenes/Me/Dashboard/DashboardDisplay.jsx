@@ -43,7 +43,14 @@ const DashboardDisplay = ({
   }, [activeTab]);
 
   const onTableChange = (pagination, filters, sorter) => {
-    if (activeTab === 'CREATED') getMyAdsRequest(formatParamsForParakhnevich({ ...pagination, ...sorter }));
+    const sorterParams = {};
+    if (sorter.field) {
+      sorterParams.field = sorter.field;
+      sorterParams.order = sorter.order;
+    }
+
+    if (activeTab === 'CREATED')
+      getMyAdsRequest(formatParamsForParakhnevich({ ...pagination, ...sorterParams }));
     if (activeTab === 'REQUESTS') getNewTradesRequest();
     if (activeTab === 'ACTIVE') getActiveTradesRequest();
     if (activeTab === 'COMPLETED') getCompletedTradesRequest();
