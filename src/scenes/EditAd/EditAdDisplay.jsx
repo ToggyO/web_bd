@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
 
 import { AdFormContainer } from '../_components/AdForm';
 
+import { ArrowLink } from '@components/ArrowLink';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ROUTES } from '@config/constants';
 import { prettifyId } from '@utils/';
@@ -19,9 +18,8 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
     <HelmetWrapper title="Edit your ad - Bitcoins Direct" description="Edit your ad">
       <div className="paper paper--white">
         <div className="edit-ad">
-          <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
-            <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
-          </Link>
+          <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />
+
           <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet

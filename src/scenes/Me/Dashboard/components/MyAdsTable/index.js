@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Modal, Tag, Row, Col } from 'antd';
+import moment from 'moment';
 
 import { NoData } from '@components/NoData';
 
 import history from '@services/history';
-import { formatDate, catchNewLines } from '@utils';
-
+import { catchNewLines } from '@utils';
 import './style.less';
 import { Spinner } from '@components/Spinner';
 
@@ -94,7 +94,7 @@ export const MyAdsTable = ({
                       <Col xs={12} sm={6}>
                         <div className="extra-row__currency">
                           <span>Date</span>
-                          <p>{formatDate(record.createdAt, 'lol')}</p>
+                          <p>{moment(record.createDate).format('MM.DD.YY')}</p>
                         </div>
                       </Col>
                     )}
@@ -134,10 +134,21 @@ export const MyAdsTable = ({
         }
       >
         <Column
-          key="createdAt"
+          key="createDate"
           title="Date"
-          dataIndex="createdAt"
-          render={(text, record) => formatDate(record.createdAt, 'lol')}
+          dataIndex="createDate"
+          render={(text, record) => (
+            <div className="drum">
+              <div className="drum-first">
+                <a href="#">{moment(record.createDate).format('MM.DD.YY')}</a>
+              </div>
+              <div className="drum-second">
+                <Link to={`/ads/${record.order}`} data-id={record.key}>
+                  View
+                </Link>
+              </div>
+            </div>
+          )}
           sorter
           className="hideble-768"
         />

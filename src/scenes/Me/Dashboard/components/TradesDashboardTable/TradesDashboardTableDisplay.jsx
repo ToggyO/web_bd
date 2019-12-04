@@ -3,12 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { NoData } from '@components/NoData';
 
 import { Spinner } from '@components/Spinner';
 
-import { formatDate, formatMoney, sortStrings, formatCapitals } from '@utils';
+import { formatMoney, sortStrings, formatCapitals } from '@utils';
 
 import { ROUTES, confirmData } from '@config/constants';
 import { ButtonLink } from '@components/ButtonLink';
@@ -105,7 +106,7 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
                 <Col xs={12} sm={6}>
                   <div className="extra-row__currency">
                     <span>Date</span>
-                    <p>{formatDate(record.createdAt, 'lol')}</p>
+                    <p>{moment(record.createDate).format('MM.DD.YY')}</p>
                   </div>
                 </Col>
                 <Col xs={12} sm={6}>
@@ -152,9 +153,18 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
       key="key"
       title="ID"
       render={(text, record) => (
-        <Link to={`${ROUTES.TRADES.ROOT}/${record.order}`} data-id={record.key}>
-          {record.order}
-        </Link>
+        <div className="drum">
+          <div className="drum-first">
+            <Link to={`${ROUTES.TRADES.ROOT}/${record.order}`} data-id={record.key}>
+              {record.order}
+            </Link>
+          </div>
+          <div className="drum-second">
+            <Link to={`${ROUTES.TRADES.ROOT}/${record.order}`} data-id={record.key}>
+              View
+            </Link>
+          </div>
+        </div>
       )}
       dataIndex="order"
       className="hideble-768"
@@ -220,7 +230,7 @@ TradesDashboardTableDisplay.propTypes = {
   tradesData: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
-      createdAt: PropTypes.number,
+      createDate: PropTypes.number,
       transactionLimit: PropTypes.string,
       tradePartner: PropTypes.string,
       type: PropTypes.string,
