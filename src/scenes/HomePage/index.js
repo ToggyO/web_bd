@@ -30,16 +30,21 @@ export const HomePage = () => {
       const buyAdsResponse = superaxios({ url: '/ad', params: { 'type[]': 'buy', pageSize: 10, page: 1 } });
       const sellAdsResponse = superaxios({ url: '/ad', params: { 'type[]': 'sell', pageSize: 10, page: 1 } });
 
-      const [buyAdsData, sellAdsData] = await Promise.all([buyAdsResponse, sellAdsResponse]);
+      const [buyAdsData = { data: {} }, sellAdsData = { data: {} }] = await Promise.all([
+        buyAdsResponse,
+        sellAdsResponse,
+      ]);
 
       setBuyAds(
         adsSelectors.dataSelector({
-          ads: { data: buyAdsData.data.data },
+          ads: {
+            ads: { data: buyAdsData.data.data },
+          },
         }),
       );
       setSellAds(
         adsSelectors.dataSelector({
-          ads: { data: sellAdsData.data.data },
+          ads: { ads: { data: sellAdsData.data.data } },
         }),
       );
       setLoading(false);
