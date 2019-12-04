@@ -4,7 +4,7 @@ import { Form, Row, Col, Input, Button } from 'antd';
 
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import * as validations from '@services/validations';
 import history from '@services/history';
 import superaxios from '@services/superaxios';

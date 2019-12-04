@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button } from 'antd';
 // import ReCAPTCHA from 'react-google-recaptcha';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import './style.less';
 
 // class Recaptcha extends React.Component {

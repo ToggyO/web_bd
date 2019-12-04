@@ -15,8 +15,8 @@ const UserDisplay = ({
   profile,
   loadingProfile,
   getProfileRequest,
-  addsData,
-  addsTotal,
+  adsData,
+  adsTotal,
   loadingAdds,
   getAllAdsRequest,
   reviewsData,
@@ -69,8 +69,8 @@ const UserDisplay = ({
           <UserCard profile={profile} loading={loadingProfile} />
           <UserHistory
             onTabChange={onTabChange}
-            addsData={addsData}
-            addsTotal={addsTotal}
+            adsData={adsData}
+            adsTotal={adsTotal}
             loadingAdds={loadingAdds}
             onTableChange={onTableChange}
             reviewsData={reviewsData}

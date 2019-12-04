@@ -6,7 +6,7 @@ import { ShowConfirm } from '@components/ShowConfirm';
 import { Refresher } from '@components/Refresher';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';
 
-import { confirmData } from '@config/constants';
+import { confirmData } from '@config';
 
 export const MiniActions = ({ specificTrade, loading, deleteNewTradeRequest, getTradeByIdRequest }) => (
   <div>

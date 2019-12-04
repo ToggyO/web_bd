@@ -5,7 +5,7 @@ import { meTypes } from '../me';
 
 import * as authTypes from './types';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import api from '@services/api';
 

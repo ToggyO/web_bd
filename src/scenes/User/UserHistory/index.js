@@ -9,8 +9,8 @@ const { TabPane } = Tabs;
 
 export const UserHistory = ({
   onTabChange,
-  addsData,
-  addsTotal,
+  adsData,
+  adsTotal,
   loadingAdds,
   onTableChange,
   reviewsData,
@@ -26,8 +26,8 @@ export const UserHistory = ({
   }, []);
 
   useEffect(() => {
-    if (addsTotal) setInitialAdsLoading(() => false);
-  }, [addsTotal]);
+    if (adsTotal) setInitialAdsLoading(() => false);
+  }, [adsTotal]);
 
   const renderAdsTabHead = () => (
     <span>
@@ -35,7 +35,7 @@ export const UserHistory = ({
       {loadingAdds && initialAdsLoading ? (
         <Icon type="loading" style={{ marginRight: 0, marginLeft: 6 }} />
       ) : (
-        <span>({addsTotal})</span>
+        <span>({adsTotal})</span>
       )}
     </span>
   );
@@ -75,7 +75,7 @@ export const UserHistory = ({
     <div className="paper paper--white user__main">
       <Tabs defaultActiveKey="ads" onChange={onTabChange}>
         <TabPane tab={renderAdsTabHead()} key="ads">
-          <AdsTable data={addsData} loading={loadingAdds} onChange={onTableChange} type="all" />
+          <AdsTable data={adsData} loading={loadingAdds} onChange={onTableChange} type="all" />
         </TabPane>
         <TabPane tab={renderReviewsTabHead()} key="reviews">
           <Reviews

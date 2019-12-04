@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import AdFormDisplay from './AdFormDisplay';
 
 import { authSelectors } from '@ducks/auth';
-import { adActions, adsSelectors } from '@ducks/ads';
+import { adActions, adSelectors } from '@ducks/ads';
 import { meSelectors } from '@ducks/me';
 
 function mapStateToProps(state, props) {
   return {
-    specificAd: adsSelectors.adSelector(state, props),
+    specificAd: adSelectors.dataSelector(state),
     user: authSelectors.userSelector(state),
     loading: state._global.submitting,
     onSubmit: props.onSubmit,

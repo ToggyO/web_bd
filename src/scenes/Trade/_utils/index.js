@@ -1,4 +1,10 @@
-import { currency } from '@config';
+import { currencies } from '@config';
+
+const currency = currencies.reduce((acc, val) => {
+  acc[val.name] = val.value;
+
+  return acc;
+}, {});
 
 export const determineUserInHeader = (td, tp, ao) => (td === 'Incoming' ? tp : ao);
 

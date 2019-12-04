@@ -11,7 +11,7 @@ import { Spinner } from '@components/Spinner';
 
 import { formatMoney, sortStrings, formatCapitals } from '@utils';
 
-import { ROUTES, confirmData } from '@config/constants';
+import { ROUTES, confirmData } from '@config';
 import { ButtonLink } from '@components/ButtonLink';
 import { ShowConfirm } from '@components/ShowConfirm';
 import { InitiateDisputeLinkWithModal } from '@scenes/_components/InitiateDisputeLinkWithModal';

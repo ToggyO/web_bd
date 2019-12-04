@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Drawer, Menu, Icon } from 'antd';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import logo from '@assets/bd-logo.svg';
 import './style.less';

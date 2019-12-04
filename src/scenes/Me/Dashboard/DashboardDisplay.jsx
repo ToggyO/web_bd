@@ -7,7 +7,7 @@ import { TradesDashboardTableContainer } from './components/TradesDashboardTable
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { Refresher } from '@components/Refresher';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import { catchFromPath, formatParamsForParakhnevich } from '@utils/';
 import './style.less';

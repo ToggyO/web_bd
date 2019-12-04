@@ -3,9 +3,9 @@ import { message } from 'antd';
 
 import * as adTypes from './types';
 
-import { addsActions, addsSelectors } from '@ducks/adds';
+import { adsActions, adsSelectors } from '@ducks/ads';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import api from '@services/api';
 import { formatParamsForParakhnevich } from '@utils/';
@@ -65,9 +65,9 @@ function* deleteAd(aciton) {
     const { data } = yield call(api.ads.deleteAd, aciton.payload);
     yield put({ type: adTypes.DELETE_SUCCESS, payload: data });
 
-    const { pagination } = yield select(addsSelectors.dataSelector);
+    const { pagination } = yield select(adsSelectors.dataSelector);
 
-    yield put(addsActions.getMyRequest(formatParamsForParakhnevich(pagination)));
+    yield put(adsActions.getMyRequest(formatParamsForParakhnevich(pagination)));
 
     yield call(message.success, 'Deleted!', 2);
   } catch (error) {

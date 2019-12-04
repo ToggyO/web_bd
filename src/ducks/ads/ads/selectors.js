@@ -3,8 +3,8 @@ import { createSelector } from 'reselect';
 import { formatMoney, formatCapitals } from '@utils';
 
 export const dataSelector = createSelector(
-  state => state.adds.data.items,
-  state => state.adds.data.pagination,
+  state => state.ads.ads.data.items,
+  state => state.ads.ads.data.pagination,
   (items, pagination) => ({
     items: items.map(({ ad }) => ({
       key: ad.id,
@@ -23,5 +23,5 @@ export const dataSelector = createSelector(
   }),
 );
 
-export const loadingSelector = state => state.adds.loading;
-export const totalSelector = state => state.adds.data.pagination.total;
+export const loadingSelector = state => state.ads.ads.loading;
+export const totalSelector = state => state.ads.ads.data.pagination.total;

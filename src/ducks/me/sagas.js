@@ -3,7 +3,7 @@ import { message } from 'antd';
 
 import * as types from './types';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import api from '@services/api';
 

@@ -4,7 +4,7 @@ import { Upload, Form, Button, message } from 'antd';
 
 import history from '@services/history';
 import superaxios from '@services/superaxios';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 import { parseBase64 } from '@utils';
 

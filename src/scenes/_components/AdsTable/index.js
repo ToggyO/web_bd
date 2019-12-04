@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { NoData } from '@components/NoData';
 import { Spinner } from '@components/Spinner';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { catchNewLines } from '@utils';
 
 const { Column } = Table;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';

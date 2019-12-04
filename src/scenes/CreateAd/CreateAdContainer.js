@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 
 import CreateAdDisplay from './CreateAdDisplay';
 
-import { adActions, adsSelectors } from '@ducks/ads';
+import { adActions, adSelectors } from '@ducks/ads';
 
 import { authSelectors } from '@ducks/auth';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     user: authSelectors.userSelector(state),
-    specificAd: adsSelectors.adSelector(state, props),
+    specificAd: adSelectors.dataSelector(state),
   };
 }
 

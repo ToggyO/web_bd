@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 
 import DashboardDisplay from './DashboardDisplay';
 
-import { addsActions, addsSelectors } from '@ducks/adds';
-import { adActions } from '@ducks/ads';
+import { adActions, adsActions, adsSelectors } from '@ducks/ads';
+
 import { tradeActions, tradesActions, tradesSelectors } from '@ducks/trades';
 
 function mapStateToProps(state) {
   return {
-    adsData: addsSelectors.dataSelector(state),
-    loadingAds: addsSelectors.loadingSelector(state),
+    adsData: adsSelectors.dataSelector(state),
+    loadingAds: adsSelectors.loadingSelector(state),
     adStatusLoading: state.ads.ad.loading,
     submitting: state._global.submitting,
     tradesLoading: tradesSelectors.tradesLoadingSelector(state),
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getMyAdsRequest(params) {
-      dispatch(addsActions.getMyRequest(params));
+      dispatch(adsActions.getMyRequest(params));
     },
     deleteAdRequest(id) {
       dispatch(adActions.deleteAdRequest(id));

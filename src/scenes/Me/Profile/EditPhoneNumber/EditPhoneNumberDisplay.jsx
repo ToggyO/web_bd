@@ -5,7 +5,7 @@ import { EditPhoneNumberFormContainer } from './components/EditPhoneNumberForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ArrowLink } from '@components/ArrowLink';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 const EditPhoneNumberDisplay = ({
   history: {

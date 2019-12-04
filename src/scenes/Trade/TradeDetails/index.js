@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 import { formatMoney, formatCapitals } from '@utils';
 

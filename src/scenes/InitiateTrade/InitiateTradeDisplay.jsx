@@ -10,7 +10,7 @@ import { Collapsed } from '@scenes/_components/Collapsed';
 
 import { Spinner } from '@components/Spinner';
 import history from '@services/history';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
 
 import './style.less';

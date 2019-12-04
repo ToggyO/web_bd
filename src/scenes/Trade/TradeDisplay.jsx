@@ -15,7 +15,7 @@ import { determineUserInHeader, determineUserRoles, determineReviewable } from '
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { Spinner } from '@components/Spinner';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import { catchFromPath } from '@utils';
 

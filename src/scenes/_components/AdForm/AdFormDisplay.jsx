@@ -8,7 +8,7 @@ import TradeLimits from './_components/TradeLimits';
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
 
-import { ROUTES, currencies, locations, payments } from '@config/constants';
+import { ROUTES, currencies, locations, payments } from '@config';
 import history from '@services/history';
 import * as validations from '@services/validations';
 import superaxios from '@services/superaxios';
@@ -19,9 +19,9 @@ import './style.less';
 const { Option } = Select;
 
 class AdFormDisplay extends React.Component {
-  cancelFirst = undefined;
+  cancelFirst = () => {};
 
-  cancelSecond = undefined;
+  cancelSecond = () => {};
 
   state = {
     loading: false,

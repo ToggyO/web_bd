@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Icon, Layout, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import logo from '@assets/bd-logo.svg';
 import miniLogo from '@assets/bd-mini-logo.svg';

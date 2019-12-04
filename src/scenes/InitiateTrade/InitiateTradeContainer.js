@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 
 import InitiateTradeDisplay from './InitiateTradeDisplay';
 
-import { adActions, adsSelectors } from '@ducks/ads';
+import { adActions, adSelectors } from '@ducks/ads';
 import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
-    specificTrade: adsSelectors.adSelector(state, { type: 'ad' }),
-    loading: adsSelectors.adsLoadingSelector(state, { type: 'ad' }),
+    specificTrade: adSelectors.dataSelector(state),
+    loading: adSelectors.loadingSelector(state),
     user: authSelectors.userSelector(),
   };
 }

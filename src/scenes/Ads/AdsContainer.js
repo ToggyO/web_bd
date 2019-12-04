@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import AdsDisplay from './AdsDisplay';
 
 import { meSelectors } from '@ducks/me';
-import { addsActions, addsSelectors } from '@ducks/adds';
+import { adsActions, adsSelectors } from '@ducks/ads';
 
 function mapStateToProps(state) {
   return {
-    data: addsSelectors.dataSelector(state),
-    loading: addsSelectors.loadingSelector(state),
+    data: adsSelectors.dataSelector(state),
+    loading: adsSelectors.loadingSelector(state),
     countryData: meSelectors.countryDataSelector(state),
   };
 }
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getAllAdsRequest(params) {
-      dispatch(addsActions.getAllRequest(params));
+      dispatch(adsActions.getAllRequest(params));
     },
   };
 }

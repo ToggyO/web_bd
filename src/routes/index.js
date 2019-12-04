@@ -25,7 +25,7 @@ import UnAuthRoute from './UnAuthRoute';
 import { NotFound } from '@scenes/404';
 import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
 
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 const LoginContainer = loadable(() => import('../scenes/Auth/Login/LoginContainer'));
 const SuccessDisplay = loadable(() => import('../scenes/Auth/Success/SuccessDisplay'));

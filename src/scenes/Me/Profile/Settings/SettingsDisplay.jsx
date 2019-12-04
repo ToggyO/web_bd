@@ -4,7 +4,7 @@ import { Tabs, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { Spinner } from '@components/Spinner';
 import './style.less';
 

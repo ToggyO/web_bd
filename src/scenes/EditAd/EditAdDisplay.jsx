@@ -5,8 +5,7 @@ import { AdFormContainer } from '../_components/AdForm';
 
 import { ArrowLink } from '@components/ArrowLink';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config/constants';
-import { prettifyId } from '@utils/';
+import { ROUTES } from '@config';
 import './style.less';
 
 const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
@@ -20,7 +19,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
         <div className="edit-ad">
           <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />
 
-          <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
+          <h2 className="edit-ad__header">Edit an ad #{match.params.id}</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet
             nihil neque fugiat expedita dolorem quam deserunt eligendi pariatur odit vitae tempore, tempora

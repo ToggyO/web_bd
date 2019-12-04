@@ -4,7 +4,7 @@ import { EditEmailFormContainer } from './components/EditEmailForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ArrowLink } from '@components/ArrowLink';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 const EditEmailDisplay = () => (
   <HelmetWrapper title="Change Email - Profile Settings - Bitcoins Direct" description="Change email">

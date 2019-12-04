@@ -4,28 +4,28 @@ import * as adsTypes from './types';
 
 import api from '@services/api';
 
-function* getCreatedAds(action) {
+function* getAll(action) {
   try {
-    const { data } = yield call(api.ads.getAds, action.payload);
-    yield put({ type: adsTypes.GET_CREATED_SUCCESS, payload: data });
+    const { data } = yield call(api.ads.getAllAds, action.payload);
+    yield put({ type: adsTypes.GET_ALL_SUCCESS, payload: data });
   } catch (error) {
-    yield put({ type: adsTypes.GET_CREATED_ERROR, payload: error });
+    yield put({ type: adsTypes.GET_ALL_ERROR, payload: error });
   }
 }
 
-export function* getCreatedAdsSaga() {
-  yield takeLatest(adsTypes.GET_CREATED_REQUEST, getCreatedAds);
+export function* getAllSaga() {
+  yield takeLatest(adsTypes.GET_ALL_REQUEST, getAll);
 }
 
-function* getMyCreatedAds(action) {
+function* getMy(action) {
   try {
     const { data } = yield call(api.ads.getMyAds, action.payload);
-    yield put({ type: adsTypes.GET_MY_CREATED_SUCCESS, payload: data });
+    yield put({ type: adsTypes.GET_MY_SUCCESS, payload: data });
   } catch (error) {
-    yield put({ type: adsTypes.GET_MY_CREATED_ERROR, payload: error });
+    yield put({ type: adsTypes.GET_MY_ERROR, payload: error });
   }
 }
 
-export function* getMyCreatedAdsSaga() {
-  yield takeLatest(adsTypes.GET_MY_CREATED_REQUEST, getMyCreatedAds);
+export function* getMySaga() {
+  yield takeLatest(adsTypes.GET_MY_REQUEST, getMy);
 }

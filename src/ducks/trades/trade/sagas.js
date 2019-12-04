@@ -9,7 +9,7 @@ import * as types from './types';
 import api from '@services/api';
 
 import history from '@services/history';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { catchFromPath } from '@utils/index';
 
 function* initiateTrade(action) {

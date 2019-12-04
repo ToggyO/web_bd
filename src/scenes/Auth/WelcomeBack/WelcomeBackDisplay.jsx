@@ -5,7 +5,7 @@ import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import history from '@services/history';
 

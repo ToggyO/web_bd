@@ -5,7 +5,6 @@ import { Select, Input, Button, Form } from 'antd';
 
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { ROUTES, likes } from '@config';
-import { purifyObject } from '@utils';
 import './style.less';
 
 const { Option } = Select;
@@ -31,7 +30,7 @@ const ReviewFormDisplay = ({ form, user, tradeId, specificReview, postReviewRequ
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        postReviewRequest({ ...purifyObject(values), tradeId });
+        postReviewRequest({ ...values, tradeId });
       }
     });
   };

@@ -5,7 +5,7 @@ import { ForgotPasswordFormContainer } from './components/ForgotPasswordForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import SignWrapper from '@scenes/_components/SignWrapper';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
 

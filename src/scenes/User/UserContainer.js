@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-unresolved
 import UserDisplay from './UserDisplay';
 
-import { addsActions, addsSelectors } from '@ducks/adds';
+import { adsActions, adsSelectors } from '@ducks/ads';
 import { profileActions, profileSelectors, reviewsActions, reviewsSelectors } from '@ducks/user';
 
 function mapStateToProps(state) {
   return {
     profile: profileSelectors.profileSelector(state),
     loadingProfile: profileSelectors.loadingProfileSelector(state),
-    addsData: addsSelectors.dataSelector(state),
-    addsTotal: addsSelectors.totalSelector(state),
-    loadingAdds: addsSelectors.loadingSelector(state),
+    adsData: adsSelectors.dataSelector(state),
+    adsTotal: adsSelectors.totalSelector(state),
+    loadingAdds: adsSelectors.loadingSelector(state),
     reviewsData: reviewsSelectors.dataSelector(state),
     reviewsTotal: reviewsSelectors.totalSelector(state),
     loadingReviews: reviewsSelectors.loadingSelector(state),
@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(profileActions.getProfileRequest(userName));
     },
     getAllAdsRequest(params) {
-      dispatch(addsActions.getAllRequest(params));
+      dispatch(adsActions.getAllRequest(params));
     },
     getReviewsByUserNameRequest(userName, params) {
       dispatch(reviewsActions.getReviewsByUserNameRequest(userName, params));

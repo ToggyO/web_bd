@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, InputNumber, Button, Select, Row, Col } from 'antd';
 
-import { currencies, locations, payments } from '@config/constants';
+import { currencies, locations, payments } from '@config';
 
 import * as validations from '@services/validations';
 

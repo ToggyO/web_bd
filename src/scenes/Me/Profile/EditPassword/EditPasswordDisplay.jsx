@@ -4,7 +4,7 @@ import { EditPasswordFormContainer } from './components/EditPasswordForm';
 
 import { ArrowLink } from '@components/ArrowLink';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 
 const EditPhoneNumberDisplay = () => (
   <HelmetWrapper title="Change Password - Profile Settings - Bitcoins Direct" description="Change password">

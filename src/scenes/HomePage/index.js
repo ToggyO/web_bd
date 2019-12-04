@@ -7,11 +7,11 @@ import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { QuickFilterForm } from '@scenes/_components/QuickFilterForm';
 import { TenTradesSkeleton } from '@scenes/_components/TenTradesSkeleton';
 import { Collapsed } from '@scenes/_components/Collapsed';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import history from '@services/history';
 import { checkTokens } from '@services/auth';
 
-import { addsSelectors } from '@ducks/adds';
+import { adsSelectors } from '@ducks/ads';
 import InnovationImg from '@assets/innovation.svg';
 import './style.less';
 import superaxios from '@services/superaxios';
@@ -33,13 +33,13 @@ export const HomePage = () => {
       const [buyAdsData, sellAdsData] = await Promise.all([buyAdsResponse, sellAdsResponse]);
 
       setBuyAds(
-        addsSelectors.dataSelector({
-          adds: { data: buyAdsData.data.data },
+        adsSelectors.dataSelector({
+          ads: { data: buyAdsData.data.data },
         }),
       );
       setSellAds(
-        addsSelectors.dataSelector({
-          adds: { data: sellAdsData.data.data },
+        adsSelectors.dataSelector({
+          ads: { data: sellAdsData.data.data },
         }),
       );
       setLoading(false);
