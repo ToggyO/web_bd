@@ -24,6 +24,7 @@ export default function reviews(state = initialState, action) {
       return {
         ...state,
         data: {
+          ...state.data,
           items: action.payload.items,
           pagination: {
             total: action.payload.total,

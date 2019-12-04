@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Table, Row, Col } from 'antd';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { NoData } from '@components/NoData';
@@ -125,4 +125,30 @@ export const AdsTable = ({
       />
     </Table>
   );
+};
+
+AdsTable.propTypes = {
+  data: PropTypes.shape({
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        order: PropTypes.number,
+        createDate: PropTypes.number,
+        tradeLimit: PropTypes.string,
+        payment: PropTypes.string,
+        userName: PropTypes.string,
+        location: PropTypes.string,
+        btcPrice: PropTypes.string,
+        terms: PropTypes.string,
+        shown: PropTypes.bool,
+        type: PropTypes.string,
+      }),
+    ),
+    pagination: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  }),
+  withTerms: PropTypes.bool,
+  type: PropTypes.string,
+  classNames: PropTypes.string,
+  loading: PropTypes.bool,
+  onChange: PropTypes.func,
 };

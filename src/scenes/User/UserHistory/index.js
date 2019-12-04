@@ -16,6 +16,7 @@ export const UserHistory = ({
   reviewsData,
   reviewsTotal,
   loadingReviews,
+  likesCount,
   onReviewPageChange,
 }) => {
   const [initialAdsLoading, setInitialAdsLoading] = useState(false);
@@ -77,7 +78,12 @@ export const UserHistory = ({
           <AdsTable data={addsData} loading={loadingAdds} onChange={onTableChange} type="all" />
         </TabPane>
         <TabPane tab={renderReviewsTabHead()} key="reviews">
-          <Reviews data={reviewsData} loading={loadingReviews} onChange={onReviewPageChange} />
+          <Reviews
+            data={reviewsData}
+            loading={loadingReviews}
+            likesCount={likesCount}
+            onChange={onReviewPageChange}
+          />
         </TabPane>
       </Tabs>
     </div>

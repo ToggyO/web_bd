@@ -22,6 +22,7 @@ const UserDisplay = ({
   reviewsData,
   reviewsTotal,
   loadingReviews,
+  likesCount,
   getReviewsByUserNameRequest,
   getLikesCountByUserNameRequest,
 }) => {
@@ -75,6 +76,7 @@ const UserDisplay = ({
             reviewsData={reviewsData}
             reviewsTotal={reviewsTotal}
             loadingReviews={loadingReviews}
+            likesCount={likesCount}
             onReviewPageChange={onReviewPageChange}
           />
         </div>

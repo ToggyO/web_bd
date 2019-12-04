@@ -16,6 +16,7 @@ function mapStateToProps(state) {
     reviewsData: reviewsSelectors.dataSelector(state),
     reviewsTotal: reviewsSelectors.totalSelector(state),
     loadingReviews: reviewsSelectors.loadingSelector(state),
+    likesCount: reviewsSelectors.likesCountSelector(state),
   };
 }
 
