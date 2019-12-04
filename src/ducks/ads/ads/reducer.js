@@ -1,7 +1,5 @@
 import * as types from './types';
 
-import { adTypes } from '@ducks/ads';
-
 import { smartPagination } from '@utils';
 
 const initialState = {
@@ -36,7 +34,7 @@ export default function ads(state = initialState, action) {
     case types.GET_MY_ERROR:
       return { ...state, errors: action.payload, loading: false };
 
-    case adTypes.TOGGLE_STATUS_SUCCESS:
+    case 'ads/ad/TOGGLE_STATUS_SUCCESS':
       return {
         ...state,
         data: {
@@ -46,7 +44,7 @@ export default function ads(state = initialState, action) {
           ),
         },
       };
-    case adTypes.DELETE_SUCCESS:
+    case 'ads/ad/DELETE_SUCCESS':
       return {
         ...state,
         data: {
