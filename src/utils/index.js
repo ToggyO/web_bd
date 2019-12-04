@@ -114,26 +114,6 @@ export const parseQueryString = queryString => {
   return obj;
 };
 
-export const formatDate = (timestamp, locale) => {
-  const date = new Date(timestamp);
-
-  let day;
-  day = date.getDate().toString();
-  if (day.length < 2) day = `0${day}`;
-
-  let month;
-  month = (date.getMonth() + 1).toString();
-  if (month.length < 2) month = `0${month}`;
-
-  const year = date
-    .getFullYear()
-    .toString()
-    .slice(2);
-
-  if (locale) return `${month}.${day}.${year}`;
-  return `${day}.${month}.${year}`;
-};
-
 export const sortStrings = (a, b) => {
   if (a < b) {
     return -1;

@@ -8,7 +8,7 @@ export const tradesSelector = createSelector(
     trades.map(el => ({
       key: el.trade.id,
       order: el.trade.order,
-      createdAt: new Date(el.trade.createDate).getTime(),
+      createDate: new Date(el.trade.createDate).getTime(),
       tradeLimit: `${formatMoney(el.trade.ad.minTradeLimit)} - ${formatMoney(el.trade.ad.maxTradeLimit)} ${
         el.trade.ad.currency
       }`,
