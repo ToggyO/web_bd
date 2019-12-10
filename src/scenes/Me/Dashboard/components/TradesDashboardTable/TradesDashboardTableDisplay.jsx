@@ -172,12 +172,9 @@ const TradesDashboardTableDisplay = ({ withTerms, tradesData, onDecline, loading
     <Column
       key="tradePartner"
       title="Trade partner"
-      render={(text, record) => {
-        let user;
-        if (record.direction === 'Outgoing') user = record.adOwner;
-        if (record.direction === 'Incoming') user = record.tradePartner;
-        return <Link to={`${ROUTES.USERS.ROOT}/${user}`}>{user}</Link>;
-      }}
+      render={(text, record) => (
+        <Link to={`${ROUTES.USERS.ROOT}/${record.tradePartner}`}>{record.tradePartner}</Link>
+      )}
       sorter={(a, b) => sortStrings(a.tradePartner, b.tradePartner)}
     />
 

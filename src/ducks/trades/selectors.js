@@ -5,26 +5,32 @@ import { formatMoney } from '@utils';
 export const tradesSelector = createSelector(
   state => state.trades.trades.data.items,
   trades =>
-    trades.map(el => ({
-      key: el.trade.id,
-      order: el.trade.order,
-      createDate: new Date(el.trade.createDate).getTime(),
-      tradeLimit: `${formatMoney(el.trade.ad.minTradeLimit)} - ${formatMoney(el.trade.ad.maxTradeLimit)} ${
-        el.trade.ad.currency
-      }`,
-      adOwner: el.trade.ad.userName,
-      tradePartner: el.trade.tradePartner,
-      type: el.trade.ad.type,
-      amount: el.trade.amount,
-      currency: el.trade.ad.currency,
-      fiat: el.trade.fiat,
-      location: el.trade.ad.location,
-      payment: el.trade.ad.payment,
-      btcPrice: el.trade.ad.btcPrice,
-      terms: el.trade.ad.terms,
-      status: el.trade.status,
-      direction: el.direction,
-    })),
+    trades.map(el => {
+      let user;
+      if (el.direction === 'Outgoing') user = el.trade.ad.userName;
+      if (el.direction === 'Incoming') user = el.trade.tradePartner;
+
+      return {
+        key: el.trade.id,
+        order: el.trade.order,
+        createDate: new Date(el.trade.createDate).getTime(),
+        tradeLimit: `${formatMoney(el.trade.ad.minTradeLimit)} - ${formatMoney(el.trade.ad.maxTradeLimit)} ${
+          el.trade.ad.currency
+        }`,
+        adOwner: el.trade.ad.userName,
+        tradePartner: user,
+        type: el.trade.ad.type,
+        amount: el.trade.amount,
+        currency: el.trade.ad.currency,
+        fiat: el.trade.fiat,
+        location: el.trade.ad.location,
+        payment: el.trade.ad.payment,
+        btcPrice: el.trade.ad.btcPrice,
+        terms: el.trade.ad.terms,
+        status: el.trade.status,
+        direction: el.direction,
+      };
+    }),
 );
 
 export const tradesLoadingSelector = createSelector(

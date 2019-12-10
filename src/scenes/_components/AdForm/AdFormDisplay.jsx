@@ -192,7 +192,6 @@ class AdFormDisplay extends React.Component {
       countryData,
     } = this.props;
     const isAuthorized = !!id;
-    const payment = form.getFieldValue('payment');
 
     return (
       <Form onSubmit={this.handleSubmit} className="ad-form" colon={false} hideRequiredMark>
@@ -289,16 +288,6 @@ class AdFormDisplay extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            {(payment === payments[1].value || payment === payments[4].value) && (
-              <Col md={11}>
-                <Form.Item className="ad-form__item ad-form__bank-field" label="Bank name">
-                  {form.getFieldDecorator('bankName', {
-                    rules: validations.bank,
-                    initialValue: specificAd.bankName || null,
-                  })(<Input placeholder="Sberbank" />)}
-                </Form.Item>
-              </Col>
-            )}
           </Row>
         </div>
 
