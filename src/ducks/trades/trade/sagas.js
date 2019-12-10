@@ -18,7 +18,6 @@ function* initiateTrade(action) {
     yield put({ type: types.INITIATE_SUCCESS, payload: data });
     history.push(`${ROUTES.TRADES.ROOT}/${data.order}`);
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.INITIATE_ERROR, payload: error });
   }
 }
