@@ -388,8 +388,7 @@ class AdFormDisplay extends React.Component {
               <div className="initiate-trade__note">
                 <ExclamationMessage>
                   Please note that the Escrow fee and blockchain fee are charged to the buyer. The current
-                  Escrow fee is {this.state.escrowFee}% of the amount of bitcoin being traded. The current
-                  blockchain fee is 0.00033239 BTC.
+                  Escrow fee is {this.state.escrowFee}% of the amount of bitcoin being traded.
                 </ExclamationMessage>
               </div>
             </Col>

@@ -104,7 +104,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter={currency}
                 onChange={handleFiatChange}
                 disabled={adOwnerID === cachedUserID}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -124,7 +124,7 @@ const InitiateTradeFormDisplay = props => {
                 addonAfter="BTC"
                 onChange={handleTradeAmountChange}
                 disabled={adOwnerID === cachedUserID}
-              />
+              />,
             )}
           </Form.Item>
         </Col>
@@ -133,14 +133,12 @@ const InitiateTradeFormDisplay = props => {
       <div className="initiate-trade__note">
         <ExclamationMessage>
           Please note that the Escrow fee and blockchain fee are charged to the buyer. The current Escrow fee
-          is {escrowFee}% of the amount of bitcoin being traded. The current blockchain fee is 0.00033239 BTC.
+          is {escrowFee}% of the amount of bitcoin being traded.
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">
         <span className="initiate-trade__label">Contact message</span>
-        <div className="initiate-trade__fake-message">{`${message[0]} ${amount} BTC ${
-          message[1]
-        } ${fiat} ${currency}`}</div>
+        <div className="initiate-trade__fake-message">{`${message[0]} ${amount} BTC ${message[1]} ${fiat} ${currency}`}</div>
       </div>
       <Spinner spinning={loading}>
         {adOwnerID === cachedUserID ? (
