@@ -5,13 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { saveTokens, saveUserData, renewCountryDataOnTokenRefresh, clearUserData } from '../middleware';
 
-import _global from '@ducks/_global';
-import ads from '@ducks/ads';
-import auth from '@ducks/auth';
-import chat from '@ducks/chat';
-import me from '@ducks/me';
-import trades from '@ducks/trades';
-import user from '@ducks/user';
+import _global from '@ducks/_global/reducer';
+import ads from '@ducks/ads/reducer';
+import auth from '@ducks/auth/reducer';
+import chat from '@ducks/chat/reducer';
+import me from '@ducks/me/reducer';
+import trades from '@ducks/trades/reducer';
+import user from '@ducks/user/reducer';
 
 import { _globalSagas } from '@ducks/_global';
 import { adSagas, adsSagas } from '@ducks/ads';

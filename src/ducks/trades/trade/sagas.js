@@ -35,7 +35,7 @@ function* getTradeById(action) {
     } = data;
     yield put({ type: types.GET_BY_ID_SUCCESS, payload: { trade: rest, direction } });
   } catch (error) {
-    yield call(history.push, ROUTES[404]);
+    yield call(history.push, ROUTES.DASHBOARD.ROOT);
     yield put({ type: types.GET_BY_ID_ERROR, payload: error });
   }
 }
