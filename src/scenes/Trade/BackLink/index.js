@@ -18,6 +18,8 @@ export const BackLink = ({ tradeStatus }) => {
     case 'ResolvedToBuyer':
     case 'ResolvedToSeller':
       return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.COMPLETED} />;
+    case 'Canceled':
+      return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.CANCELED} />;
     default:
       return <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />;
   }
