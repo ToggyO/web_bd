@@ -60,12 +60,18 @@ const ReviewFormDisplay = ({ form, user, tradeId, specificReview, postReviewRequ
 
       <Form.Item label="You can add a comment">
         {form.getFieldDecorator('message', {
-          rules: [{ max: 300, message: <div>Max. 1 500 characters</div> }],
+          rules: [{ max: 350, message: <div>Max. 500 characters</div> }],
           initialValue: specificReview ? specificReview.message : undefined,
-        })(<Input.TextArea allowClear rows={4} placeholder="No comments..." disabled={!!specificReview} />)}
+        })(<Input.TextArea rows={4} placeholder="No comments..." disabled={!!specificReview} />)}
       </Form.Item>
       {!specificReview ? (
-        <Button className="primary-btn" type="primary" htmlType="submit" disabled={!!specificReview}>
+        <Button
+          className="primary-btn"
+          type="primary"
+          htmlType="submit"
+          disabled={!!specificReview}
+          style={{ marginTop: 16 }}
+        >
           Submit
         </Button>
       ) : (
