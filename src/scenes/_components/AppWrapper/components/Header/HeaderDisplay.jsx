@@ -4,7 +4,6 @@ import { Icon, Layout, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '@config';
-import history from '@services/history';
 import logo from '@assets/bd-logo.svg';
 import miniLogo from '@assets/bd-mini-logo.svg';
 import './style.less';
@@ -13,10 +12,7 @@ const { Header } = Layout;
 
 const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
   const { userName } = user;
-  const handleLinkAction = (e, to) => {
-    e.preventDefault();
-    history.push(to);
-  };
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -45,9 +41,9 @@ const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
         {window.matchMedia('(max-width: 813px)').matches ? (
           <>
             <div className="logo">
-              <a onClick={e => handleLinkAction(e, ROUTES.HOME)}>
+              <Link to={ROUTES.HOME}>
                 <img src={miniLogo} aria-label="logo" alt="Bitcoins direct" />
-              </a>
+              </Link>
             </div>
             <Icon
               className="bd-header__trigger"
@@ -57,36 +53,25 @@ const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
           </>
         ) : (
           <>
-            <a onClick={e => handleLinkAction(e, ROUTES.HOME)} className="large-logo">
+            <Link to={ROUTES.HOME} className="large-logo">
               <img src={logo} aria-label="logo" alt="Bitcoins direct" />
-            </a>
+            </Link>
+
             <nav className="nav">
               <div className="nav__bubble" />
               {!window.matchMedia('(max-width: 813px)').matches && (
                 <>
-                  <a
-                    href={ROUTES.ADS.BUY}
-                    onClick={e => handleLinkAction(e, ROUTES.ADS.BUY)}
-                    className="nav__link"
-                  >
+                  <Link to={ROUTES.ADS.BUY} className="nav__link">
                     Buy bitcoins
-                  </a>
+                  </Link>
 
-                  <a
-                    href={ROUTES.ADS.SELL}
-                    onClick={e => handleLinkAction(e, ROUTES.ADS.SELL)}
-                    className="nav__link"
-                  >
+                  <Link to={ROUTES.ADS.SELL} className="nav__link">
                     Sell bitcoins
-                  </a>
+                  </Link>
 
-                  <a
-                    href={ROUTES.ADS.CREATE}
-                    onClick={e => handleLinkAction(e, ROUTES.ADS.CREATE)}
-                    className="nav__link"
-                  >
+                  <Link to={ROUTES.ADS.CREATE} className="nav__link">
                     Create an ad
-                  </a>
+                  </Link>
 
                   <a
                     className="nav__link"
