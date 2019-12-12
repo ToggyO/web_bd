@@ -53,11 +53,14 @@ export const determineReviewable = (ts, tc, tf) => {
   if (conditions.includes(ts))
     switch (tc) {
       case currency.USD:
-        return tf > 500;
+        // return tf > 500;
+        return tf > 5;
       case currency.RUB:
-        return tf > 30000;
+        // return tf > 30000;
+        return tf > 30;
       case currency.VES:
-        return tf > 10000000;
+        // return tf > 10000000;
+        return tf > 100;
       default:
         return false;
     }

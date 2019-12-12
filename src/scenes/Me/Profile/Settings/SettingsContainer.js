@@ -23,7 +23,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsDisplay);

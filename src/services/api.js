@@ -129,7 +129,7 @@ export default {
   },
   chat: {
     getChatById: async id => {
-      const response = await superaxios.get(`/trade/${id}`);
+      const response = await superaxios.get(`/chat/trade/${id}`);
       return response.data;
     },
   },

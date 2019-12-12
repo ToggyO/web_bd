@@ -37,8 +37,13 @@ const TradeDisplay = ({
 
   useEffect(() => {
     getTradeByIdRequest(id);
-    getChatByIdRequest(id);
   }, []);
+
+  useEffect(() => {
+    if (specificTrade.id) {
+      getChatByIdRequest(specificTrade.id);
+    }
+  }, [specificTrade.id]);
 
   const { direction, tradePartner, adOwner, adType, status, currency, fiat } = specificTrade;
 

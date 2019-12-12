@@ -16,4 +16,5 @@ export const errorCodes = {
       if you feel this is a mistake.
     </p>
   ),
+  'per.incorrect_trade_member': <p>This trade doesn't belong to you.</p>,
 };
