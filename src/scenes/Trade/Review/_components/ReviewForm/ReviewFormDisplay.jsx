@@ -60,7 +60,7 @@ const ReviewFormDisplay = ({ form, user, tradeId, specificReview, postReviewRequ
 
       <Form.Item label="You can add a comment">
         {form.getFieldDecorator('message', {
-          rules: [{ max: 350, message: <div>Max. 500 characters</div> }],
+          rules: [{ max: 300, message: <div>Max. 300 characters</div> }],
           initialValue: specificReview ? specificReview.message : undefined,
         })(<Input.TextArea rows={4} placeholder="No comments..." disabled={!!specificReview} />)}
       </Form.Item>
