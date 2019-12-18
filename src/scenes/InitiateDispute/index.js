@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Row, Col, Button, Upload, Icon, message } from 'antd';
+import { Form, Input, Row, Col, Button, Upload, Icon, message, notification } from 'antd';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import superaxios from '@services/superaxios';
@@ -25,7 +25,7 @@ export const InitiateDispute = Form.create()(({ form, history, location }) => {
     beforeUpload: file => {
       const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
-        message.error('File should be smaller than 5Mb');
+        notification.error('File should be smaller than 5Mb');
         return false;
       }
       setFileList([file]);
@@ -53,7 +53,7 @@ export const InitiateDispute = Form.create()(({ form, history, location }) => {
       })
       .catch(() => {
         setUploading(false);
-        message.error('Upload has been failed.');
+        notification.error('Upload has been failed.');
       });
   };
 

@@ -29,9 +29,14 @@ const UserDisplay = ({
   const userName = catchFromPath(history.location.pathname, 'users');
   useEffect(() => {
     getProfileRequest(userName);
-    getAllAdsRequest({ pageSize: 10, userName });
-    getReviewsByUserNameRequest(userName, { pageSize: 5 });
   }, [history.location.search]);
+
+  useEffect(() => {
+    if (profile.userName) {
+      getAllAdsRequest({ pageSize: 10, userName });
+      getReviewsByUserNameRequest(userName, { pageSize: 5 });
+    }
+  }, [profile.userName]);
 
   const onTabChange = tabKey => {
     switch (tabKey) {

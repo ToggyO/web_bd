@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, Statistic, message } from 'antd';
+import { Form, Input, Button, Statistic } from 'antd';
 
 import * as validations from '@services/validations';
 
@@ -15,18 +15,13 @@ class EditEmailFormDisplay extends React.Component {
     isGetCodeDisabled: false,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { submitDisabled } = this.state;
-    const { form, errors } = this.props;
+    const { form } = this.props;
 
     if (submitDisabled) {
       const values = form.getFieldsValue();
       if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
-    }
-
-    if (errors !== prevProps.errors) {
-      if (errors.DuplicateEmail) message.error(errors.DuplicateEmail, 8);
-      if (Array.isArray(errors)) message.error('Verification code is not valid', 8);
     }
   }
 
@@ -72,7 +67,7 @@ class EditEmailFormDisplay extends React.Component {
                 ref={input => {
                   this.codeInput = input;
                 }}
-              />
+              />,
             )}
 
             <Button onClick={this.handleGetCode} disabled={isGetCodeDisabled} className="timer-btn">

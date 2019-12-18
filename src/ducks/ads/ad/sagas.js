@@ -71,7 +71,6 @@ function* deleteAd(aciton) {
 
     yield call(message.success, 'Deleted!', 2);
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message);
     yield put({ type: adTypes.DELETE_ERROR, payload: error });
   }
 }
@@ -86,7 +85,6 @@ function* toggleAdStatus(action) {
     yield put({ type: adTypes.TOGGLE_STATUS_SUCCESS, payload: data.id });
   } catch (error) {
     yield put({ type: adTypes.TOGGLE_STATUS_ERROR, payload: error });
-    yield call(message.error, 'Something went wrong');
   }
 }
 

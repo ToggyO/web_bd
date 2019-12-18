@@ -54,7 +54,7 @@ export const determineReviewable = (ts, tc, tf) => {
     switch (tc) {
       case currency.USD:
         // return tf > 500;
-        return tf > 5;
+        return tf > 1;
       case currency.RUB:
         // return tf > 30000;
         return tf > 30;

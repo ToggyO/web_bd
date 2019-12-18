@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 import * as validations from '@services/validations';
 
@@ -12,18 +12,13 @@ class SignUpFormDisplay extends React.Component {
     submitDisabled: true,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { submitDisabled } = this.state;
-    const { errors, form } = this.props;
+    const { form } = this.props;
 
     if (submitDisabled) {
       const values = form.getFieldsValue();
       if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
-    }
-
-    if (errors !== prevProps.errors) {
-      if (errors.DuplicateEmail) message.error(errors.DuplicateEmail, 8);
-      if (errors.DuplicateUserName) message.error(errors.DuplicateUserName, 8);
     }
   }
 

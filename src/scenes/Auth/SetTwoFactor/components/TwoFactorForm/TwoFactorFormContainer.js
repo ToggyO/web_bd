@@ -8,7 +8,6 @@ function mapStateToProps(state) {
   return {
     user: authSelectors.userSelector(state),
     loading: authSelectors.loadingSelector(state),
-    errors: authSelectors.errorsSelector(state),
   };
 }
 
@@ -23,7 +22,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TwoFactorFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(TwoFactorFormDisplay);

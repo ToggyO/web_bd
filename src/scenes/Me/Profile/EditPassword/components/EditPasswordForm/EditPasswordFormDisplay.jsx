@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 import * as validations from '@services/validations';
 
@@ -11,18 +11,13 @@ class EditPasswordFormDisplay extends React.Component {
     submitDisabled: true,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const { submitDisabled } = this.state;
-    const { form, errors } = this.props;
+    const { form } = this.props;
 
     if (submitDisabled) {
       const values = form.getFieldsValue();
       if (notUndefinedObjectProps(values)) this.setState({ submitDisabled: false });
-    }
-
-    if (errors !== prevProps.errors) {
-      // if (errors.PasswordMismatch) message.error(errors.PasswordMismatch, 8);
-      if (errors.PasswordMismatch) message.error('Incorrect old password', 8);
     }
   }
 
@@ -60,7 +55,7 @@ class EditPasswordFormDisplay extends React.Component {
               placeholder="Old password"
               visibilityToggle={false}
               style={{ maxWidth: 368 }}
-            />
+            />,
           )}
         </Form.Item>
 
@@ -73,7 +68,7 @@ class EditPasswordFormDisplay extends React.Component {
               placeholder="New password"
               visibilityToggle={false}
               style={{ maxWidth: 368 }}
-            />
+            />,
           )}
         </Form.Item>
 
@@ -94,7 +89,7 @@ class EditPasswordFormDisplay extends React.Component {
               placeholder="Confirm password"
               visibilityToggle={false}
               style={{ maxWidth: 368 }}
-            />
+            />,
           )}
         </Form.Item>
 

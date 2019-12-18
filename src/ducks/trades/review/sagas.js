@@ -26,7 +26,6 @@ function* postReview(action) {
     yield call(message.success, 'Your review has been successfully submitted');
   } catch (error) {
     yield put({ type: types.POST_REVIEW_ERROR, payload: error });
-    yield call(message.error, 'Couldn’t submit your review at this time. Please try again later');
   }
 }
 

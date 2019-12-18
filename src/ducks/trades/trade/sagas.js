@@ -53,7 +53,6 @@ function* confirmTrade(action) {
       payload: catchFromPath(history.location.pathname, 'trades'),
     });
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.CONFIRM_ERROR, payload: error });
   }
 }
@@ -68,7 +67,6 @@ function* fiatSent(action) {
     yield put({ type: types.FIAT_SENT_SUCCESS, payload: data });
     yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.FIAT_SENT_ERROR, payload: error });
   }
 }
@@ -83,7 +81,6 @@ function* fiatReceived(action) {
     yield put({ type: types.FIAT_RECEIVED_SUCCESS, payload: data });
     yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.FIAT_RECEIVED_ERROR, payload: error });
   }
 }
@@ -103,7 +100,6 @@ function* deleteNewTradeRequest(action) {
 
     yield call(message.success, 'Deleted!', 2);
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.DELETE_NEW_ERROR, payload: error });
   }
 }

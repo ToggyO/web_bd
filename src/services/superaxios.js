@@ -1,14 +1,11 @@
 // gist https://gist.github.com/mkjiau/650013a99c341c9f23ca00ccb213db1c
-
 import axios from 'axios';
 
 import { store } from '../store';
 
-import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL, errorCodes } from '@config';
-
+import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL, errorTitle, errorMessage } from '@config';
 import { globalTypes } from '@ducks/_global';
 import { authTypes } from '@ducks/auth';
-
 import { getFromLocalState, writeToLocalState } from '@services/ls';
 
 let isAlreadyFetchingAccessToken = false;
@@ -52,16 +49,22 @@ superaxios.interceptors.response.use(
       config,
       response: {
         status,
-        data: { errors },
+        data: { message, errors },
       },
     } = error;
     const originalRequest = config;
 
-    if (status === 403 && errors[0].code) {
-      store.dispatch({ type: globalTypes.PERMISSION_NOTIFICATION, payload: errorCodes[errors[0].code] });
+    if (status !== 401 || (status === 401 && message)) {
+      store.dispatch({
+        type: globalTypes.ERROR_NOTIFICATION,
+        payload: {
+          title: message || errorTitle[status],
+          message: errorMessage[errors[0].code] || 'Please, try again later',
+        },
+      });
     }
 
-    if (status === 401) {
+    if (status === 401 && !message) {
       if (!isAlreadyFetchingAccessToken) {
         isAlreadyFetchingAccessToken = true;
         const oldRefreshToken = getFromLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);

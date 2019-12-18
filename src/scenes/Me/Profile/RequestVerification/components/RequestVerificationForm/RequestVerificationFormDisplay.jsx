@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Upload, Form, Button, message } from 'antd';
+import { Upload, Form, Button, message, notification } from 'antd';
 
 import history from '@services/history';
 import superaxios from '@services/superaxios';
@@ -53,7 +53,7 @@ class RequestVerificationFormDisplay extends React.Component {
           this.setState({
             uploading: false,
           });
-          message.error('Upload failed.');
+          notification.error({ message: 'Upload failed.', description: 'Check your Internet connection.' });
         });
     };
   };
@@ -74,7 +74,7 @@ class RequestVerificationFormDisplay extends React.Component {
       beforeUpload: file => {
         const isLt5M = file.size / 1024 / 1024 < 5;
         if (!isLt5M) {
-          message.error('File should be smaller than 5Mb');
+          notification.error({ message: 'Upload failed', description: 'File should be smaller than 5Mb' });
           return false;
         }
         this.setState({ fileList: [file] });

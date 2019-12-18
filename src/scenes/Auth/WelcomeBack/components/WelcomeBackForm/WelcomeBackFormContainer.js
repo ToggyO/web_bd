@@ -9,7 +9,6 @@ function mapStateToProps(state) {
     user: authSelectors.userSelector(state),
     phoneNumber: authSelectors.phoneNumberSelector(state),
     loading: authSelectors.loadingSelector(state),
-    errors: authSelectors.errorsSelector(state),
   };
 }
 
@@ -24,7 +23,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WelcomeBackFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeBackFormDisplay);

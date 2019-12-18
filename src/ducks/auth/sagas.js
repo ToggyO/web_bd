@@ -43,7 +43,6 @@ function* signIn(action) {
   } catch (error) {
     const { errors } = error.response.data;
     yield put({ type: authTypes.SIGNIN_ERROR, payload: errors });
-    yield call(message.error, 'Incorrect username or password');
   }
 }
 
@@ -90,7 +89,6 @@ function* twoFactorAuth(action) {
       type: authTypes.TWO_FACTOR_AUTH_ERROR,
       payload: error.response.data.errors,
     });
-    yield call(message.error, 'Security code is not valid');
   }
 }
 
@@ -115,7 +113,6 @@ function* forgotPassword(action) {
       type: authTypes.FORGOT_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
-    yield call(message.error, 'No user registered with this email address');
   }
 }
 
@@ -137,7 +134,6 @@ function* resetPassword(action) {
       type: authTypes.RESET_PASSWORD_ERROR,
       payload: error.response.data.errors,
     });
-    yield call(message.error, 'Looks like the link you have followed has expired');
   }
 }
 

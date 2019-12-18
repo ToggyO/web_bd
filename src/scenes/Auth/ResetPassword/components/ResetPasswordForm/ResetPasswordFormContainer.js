@@ -7,7 +7,6 @@ import { authActions, authSelectors } from '@ducks/auth';
 function mapStateToProps(state) {
   return {
     loading: authSelectors.loadingSelector(state),
-    errors: authSelectors.errorsSelector(state),
   };
 }
 
@@ -19,7 +18,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ResetPasswordFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordFormDisplay);
