@@ -62,9 +62,7 @@ export const InitiateDispute = Form.create()(({ form, history, location }) => {
       if (!err) {
         const { _message } = values;
         const reader = new FileReader();
-
         if (!fileList[0]) return postData({ message: _message, base64Image: '', contentType: '' });
-
         reader.readAsDataURL(fileList[0]);
         reader.onload = e => {
           const data = parseBase64(e.target.result);
@@ -96,6 +94,7 @@ export const InitiateDispute = Form.create()(({ form, history, location }) => {
                 <Form.Item label="Enter message">
                   {form.getFieldDecorator('_message', {
                     initialValue: location.state && location.state.text,
+                    rules: [{ required: true, message: <div>Please describe your situation</div> }],
                   })(<Input.TextArea rows={5} placeholder="Describe your problem here" />)}
                 </Form.Item>
                 <div style={{ marginBottom: 16 }}>
