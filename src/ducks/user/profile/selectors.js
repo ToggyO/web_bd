@@ -9,7 +9,6 @@ export const profileSelector = createSelector(
     return {
       userName: profile.user.userName,
       registrationDate: profile.createDate,
-      processingDate: profile.processingDate,
       availabilityStatus,
     };
   },

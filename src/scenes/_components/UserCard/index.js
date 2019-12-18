@@ -10,7 +10,7 @@ import './style.less';
 
 export const UserCard = ({ profile, loading }) => {
   const userName = catchFromPath(history.location.pathname, 'users');
-  const { registrationDate, processingDate, availabilityStatus = true } = profile;
+  const { registrationDate, availabilityStatus = true } = profile;
 
   return (
     <div className="user-card">
@@ -26,11 +26,6 @@ export const UserCard = ({ profile, loading }) => {
             <span>Registration date</span>
 
             <p>{moment(registrationDate).format('MM.DD.YY')}</p>
-          </div>
-          <div className="user-card__prop">
-            <span>Verification date</span>
-
-            <p>{processingDate ? moment(processingDate).format('MM.DD.YY') : '-'}</p>
           </div>
           <div />
           <div className="user-card__prop">
@@ -49,7 +44,6 @@ UserCard.propTypes = {
     fullName: PropTypes.string,
     email: PropTypes.string,
     registrationDate: PropTypes.string,
-    processingDate: PropTypes.string,
     availabilityStatus: PropTypes.bool,
   }),
   loading: PropTypes.bool,
