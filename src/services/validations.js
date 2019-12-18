@@ -22,6 +22,11 @@ export const phone = [
     pattern: /^[0-9]+$/,
     message: <div>Phone number should include only digits!</div>,
   },
+  {
+    min: 5,
+    max: 13,
+    message: <div>Please enter valid phone number!</div>,
+  },
 ];
 
 export const amount = [

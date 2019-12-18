@@ -3,6 +3,7 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 
 import * as validations from '@services/validations';
+import normalizers from '@services/normalizers';
 
 import { notUndefinedObjectProps } from '@utils';
 
@@ -44,7 +45,7 @@ class EditPhoneNumberFormDisplay extends React.Component {
       <Select style={{ width: 86 }} className="prefix-select">
         <Option value="1">1</Option>
         <Option value="7">7</Option>
-      </Select>
+      </Select>,
     );
 
     return (
@@ -52,7 +53,15 @@ class EditPhoneNumberFormDisplay extends React.Component {
         <Form.Item>
           {getFieldDecorator('phone', {
             rules: validations.phone,
-          })(<Input addonBefore={prefixSelector} style={{ maxWidth: 368 }} placeholder="Phone number" />)}
+            normalize: normalizers.phone,
+          })(
+            <Input
+              pattern="\d*"
+              addonBefore={prefixSelector}
+              style={{ maxWidth: 368 }}
+              placeholder="Phone number"
+            />,
+          )}
         </Form.Item>
 
         <Form.Item>
