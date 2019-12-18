@@ -122,9 +122,6 @@ const SettingsDisplay = ({
                     description={loading ? <Spinner fontSize={15} /> : '********'}
                   />
                 </List.Item>
-                <List.Item className="user-settings__item">
-                  <List.Item.Meta title="Confirmed by other users" description="0" />
-                </List.Item>
               </List>
             </TabPane>
           </Tabs>
