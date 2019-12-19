@@ -13,7 +13,7 @@ import { ScrollToTop } from '@components/ScrollToTop';
 import './styles/index.less';
 
 message.config({
-  top: 68,
+  top: 48,
   duration: 4,
 });
 
