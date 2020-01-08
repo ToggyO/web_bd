@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 
 import { ExclamationMessage } from '@components/ExclamationMessage';
@@ -7,7 +7,6 @@ import { Spinner } from '@components/Spinner';
 import { ROUTES } from '@config';
 import * as validations from '@services/validations';
 import history from '@services/history';
-import superaxios from '@services/superaxios';
 
 const InitiateTradeFormDisplay = props => {
   const {
@@ -24,16 +23,15 @@ const InitiateTradeFormDisplay = props => {
     adOwnerID,
     cachedUserID,
     btcPrice,
+    escrowFee,
   } = props;
 
-  const [escrowFee, setEscrowFee] = useState(0);
   const isAuthorized = !!id;
 
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
       if (min) {
-        fetchEscrowFee();
         form.setFieldsValue({ fiat: min, amount: min / btcPrice });
       }
     }
@@ -42,11 +40,6 @@ const InitiateTradeFormDisplay = props => {
       isSubscribed = false;
     };
   }, [btcPrice]);
-
-  const fetchEscrowFee = async () => {
-    const escrowFeeResponse = await superaxios.get('/escrow');
-    setEscrowFee(() => escrowFeeResponse.data.data[0].fee);
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -137,8 +130,8 @@ const InitiateTradeFormDisplay = props => {
 
       <div className="initiate-trade__note">
         <ExclamationMessage>
-          Please note that the Escrow fee and blockchain fee are charged to the buyer. The current Escrow fee
-          is {escrowFee}% of the amount of bitcoin being traded.
+          <b>Please note that the Escrow fee and blockchain fee are charged to the buyer.</b> The current
+          Escrow fee is {escrowFee}% of the amount of bitcoin being traded.
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">

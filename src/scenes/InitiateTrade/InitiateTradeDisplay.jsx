@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Skeleton } from 'antd';
@@ -34,6 +35,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
     maxTradeLimit,
     userName,
     adOwnerID,
+    escrowFee,
   } = specificTrade;
   let header;
   let action;
@@ -47,7 +49,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
         </span>
       );
       action = 'sell';
-      message = ['Hi, I\'d like to sell you my', 'for your'];
+      message = ["Hi, I'd like to sell you my", 'for your'];
     }
     if (type.toLowerCase() === 'sell') {
       header = (
@@ -56,7 +58,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
         </span>
       );
       action = 'buy';
-      message = ['Hi, I\'d like to buy your', 'for my'];
+      message = ["Hi, I'd like to buy your", 'for my'];
     }
   }
   return (
@@ -90,6 +92,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
                   loading={loading}
                   message={message}
                   btcPrice={btcPrice}
+                  escrowFee={escrowFee}
                 />
               )}
             </Col>

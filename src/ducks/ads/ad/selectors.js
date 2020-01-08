@@ -19,5 +19,6 @@ export const dataSelector = createSelector(
     terms: data.terms,
     userName: data.userName,
     adOwnerID: data.userId,
+    escrowFee: data.escrowFee,
   }),
 );
