@@ -24,14 +24,12 @@ const AdsDisplay = ({ data, loading, getAllAdsRequest, countryData }) => {
   const [formValues, setFormValues] = useState(backpack);
 
   useEffect(() => {
-    const params = { type, ...countryData };
-
     // if we came from the HomePage with some search data
     if (backpack) {
-      return getAllAdsRequest(formatParamsForParakhnevich(backpack));
+      return getAllAdsRequest(formatParamsForParakhnevich({ type, ...backpack }));
     }
     // if not
-    return getAllAdsRequest(formatParamsForParakhnevich(params));
+    return getAllAdsRequest(formatParamsForParakhnevich({ type, ...countryData }));
   }, []);
 
   const handleTableChange = (pagination, filters, sorter) => {

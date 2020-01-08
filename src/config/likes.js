@@ -9,12 +9,12 @@ export const likes = {
   },
   Good: {
     isLike: true,
-    title: 'It\'s not a bad deal',
+    title: 'It is not a bad deal',
     icon: <Icon type="like" className="green-status" />,
   },
   Bad: {
     isLike: false,
-    title: 'I didn\'t like it',
+    title: 'I did not like it',
     icon: <Icon type="dislike" className="red-status" />,
   },
   Worst: {
