@@ -5,14 +5,18 @@ import history from '@services/history';
 
 import { LOCAL_STORAGE_KEYS } from '@config';
 
-export const userLogout = () => {
-  history.replace('/');
+export function userLogout() {
+  if (arguments.length) {
+    history.replace('/login');
+  } else {
+    history.replace('/');
+  }
   window.location.reload();
   clearLocalState(LOCAL_STORAGE_KEYS.USER);
   clearLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
   clearLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
   clearLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
-};
+}
 
 export const checkTokens = () => {
   const accessToken = getFromLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);

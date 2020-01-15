@@ -81,7 +81,6 @@ superaxios.interceptors.response.use(
           })
           .catch(() => {
             store.dispatch({ type: globalTypes.REFRESHING_TOKEN_ERROR });
-            store.dispatch({ type: authTypes.LOGOUT_REQUEST });
           });
       }
 

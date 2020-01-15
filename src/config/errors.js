@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { userLogout } from '@services/auth';
+
 export const errorTitle = {
   400: 'The server was unable to process the request.',
   401: 'The user does not have permission.',
@@ -16,6 +18,11 @@ export const errorTitle = {
 
 export const errorMessage = {
   internal_error: <p>Please try again later</p>,
+  'sec.refresh_token_invalid': (
+    <div>
+      <p>You need to relogin to your account</p> <a onClick={() => userLogout('login')}>Logout</a>
+    </div>
+  ),
   'sec.invalid_auth_data': <p>Incorrect username or password</p>,
   user_not_found: <p>User not found</p>,
   user_duplicate: <p>User already exists</p>,
