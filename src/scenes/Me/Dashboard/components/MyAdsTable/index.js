@@ -55,7 +55,7 @@ export const MyAdsTable = ({
       cancelButtonProps: {
         style: { width: 74, height: 28 },
       },
-      onCancel() {},
+      onCancel() { },
       maskClosable: true,
     });
   };
@@ -79,13 +79,10 @@ export const MyAdsTable = ({
               <div className="extra-row">
                 <div className="extra-row__head">
                   <Link className="extra-row__view" to={`/ads/${record.order}`}>
-                      View
-                  </Link>
-                  <Link className="extra-row__edit" to={`/ads/${record.order}/edit`}>
-                      Edit
+                    View
                   </Link>
                   <a className="extra-row__delete" onClick={() => showConfirm(record.key)}>
-                      Delete
+                    Delete
                   </a>
                 </div>
                 <div className="extra-row extra-row__left">

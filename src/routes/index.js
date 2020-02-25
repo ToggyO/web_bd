@@ -13,7 +13,7 @@ import { CreateAdContainer } from '../scenes/CreateAd';
 import { DashboardContainer } from '../scenes/Me/Dashboard';
 import { HomePage } from '../scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
-import { EditAdContainer } from '../scenes/EditAd';
+// import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
 import { InitiateDispute } from '../scenes/InitiateDispute';
 import { UserContainer } from '../scenes/User';
@@ -81,11 +81,11 @@ const Routes = () => (
         <AuthRoute path={ROUTES.SETTINGS.EDIT_PHONENUMBER} exact component={EditPhoneNumberDisplay} />
         <AuthRoute path={ROUTES.SETTINGS.EDIT_PASSWORD} exact component={EditPasswordDisplay} />
         <AuthRoute path={ROUTES.SETTINGS.REQUEST_VERIFICATION} exact component={RequestVerificationDisplay} />
-        <AuthRoute
+        {/* <AuthRoute
           path={ROUTES.ADS.EDIT}
           exact
           component={props => <EditAdContainer {...props} type="ad" />}
-        />
+        /> */}
         <AuthRoute path={ROUTES.TRADES.TRADE} exact component={props => <TradeContainer {...props} />} />
         <AuthRoute path={ROUTES.DISPUTES.CREATE} exact component={InitiateDispute} />
 
