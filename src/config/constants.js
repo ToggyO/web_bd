@@ -11,7 +11,6 @@ export const locations = [
 export const payments = [
   { name: 'PayPal', value: 'PayPal' },
   { name: 'Counter deposit', value: 'CounterDeposit' },
-  { name: 'Cash by mail', value: 'CashByMail' },
   { name: 'Domestic wire transfer', value: 'DomesticWireTransfer' },
   { name: 'Transfer with specific bank', value: 'TransferWithSpecificBank' },
   { name: 'International wire transfer', value: 'InternationalWireTransfer' },
