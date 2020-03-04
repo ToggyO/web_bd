@@ -5,7 +5,6 @@ import { store } from '../store';
 
 import { API_DOMAIN, API_VERSION, LOCAL_STORAGE_KEYS, API_URL, errorTitle, errorMessage } from '@config';
 import { globalTypes } from '@ducks/_global';
-import { authTypes } from '@ducks/auth';
 import { getFromLocalState, writeToLocalState } from '@services/ls';
 
 let isAlreadyFetchingAccessToken = false;

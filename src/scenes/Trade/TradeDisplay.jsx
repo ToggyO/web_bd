@@ -89,7 +89,7 @@ const TradeDisplay = ({
               <Spin spinning={loading} indicator={<Spinner />}>
                 <p>
                   You can close the trade window while waiting for a reply. You will receive an Email alert
-                  and notification when the seller reply. You can open the window of this trade from you
+                  when the seller reply. You can open the window of this trade from you
                   <Link to={ROUTES.DASHBOARD.ROOT}> dashboard</Link>.
                 </p>
 
