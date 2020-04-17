@@ -4,6 +4,7 @@
 
 ## Run locally
 `npm install`
+
 `npm run dev`
 
 ## Build for deploy
@@ -57,7 +58,7 @@ There are two ways to deploy:
 
 ## [Talk.js](https://talkjs.com) integration
 Make sure your have an account. The previous config was:
+
 - App ID: **tL9PLRIs**
-- Roles (bitcoins_direct_user, admin) should have been configured from
-   talk.js admin-panel (PM manager credentials, maybe
-   kopanenko@magora-systems.com)
+  
+- Roles (bitcoins_direct_user, admin) should have been configured from talk.js admin-panel (PM manager credentials, maybe kopanenko@magora-systems.com)
