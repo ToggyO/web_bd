@@ -24,6 +24,8 @@ const InitiateTradeFormDisplay = props => {
     cachedUserID,
     btcPrice,
     escrowFee,
+    type = '',
+    action = '',
   } = props;
 
   const isAuthorized = !!id;
@@ -131,7 +133,8 @@ const InitiateTradeFormDisplay = props => {
       <div className="initiate-trade__note">
         <ExclamationMessage>
           <b>Please note that the Escrow fee and blockchain fee are charged to the buyer.</b> The current
-          Escrow fee is {escrowFee}% of the amount of bitcoin being traded.
+          Escrow fee is {escrowFee}% of the amount of bitcoin being traded.{' '}
+          {type === 'sell' && action === 'buy' && `You will receive ${amount} BTC`}
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">

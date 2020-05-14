@@ -25,7 +25,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
 
   const {
     id,
-    type,
+    type='',
     btcPrice,
     currency,
     payment,
@@ -93,6 +93,8 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
                   message={message}
                   btcPrice={btcPrice}
                   escrowFee={escrowFee}
+                  type={type.toLowerCase()}
+                  action={action}
                 />
               )}
             </Col>
