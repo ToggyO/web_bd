@@ -1,8 +1,8 @@
 version: '3.3'
 services:
   nginx:
-    container_name: semicon-frontend
-    hostname: semicon-frontend
+    container_name: ides-trading-frontend
+    hostname: ides-trading-frontend
     build: .
     restart: always
     ports:
