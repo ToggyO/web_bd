@@ -11,11 +11,11 @@ import { EditPasswordDisplay } from '../scenes/Me/Profile/EditPassword';
 import { RequestVerificationDisplay } from '../scenes/Me/Profile/RequestVerification';
 import { CreateAdContainer } from '../scenes/CreateAd';
 import { DashboardContainer } from '../scenes/Me/Dashboard';
-import { HomePage } from '../scenes/HomePage';
+import { HomePage } from '@scenes/HomePage';
 import { AdsContainer } from '../scenes/Ads';
 // import { EditAdContainer } from '../scenes/EditAd';
 import { InitiateTradeContainer } from '../scenes/InitiateTrade';
-import { InitiateDispute } from '../scenes/InitiateDispute';
+import { InitiateDispute } from '@scenes/InitiateDispute';
 import { UserContainer } from '../scenes/User';
 import { TradeContainer } from '../scenes/Trade';
 

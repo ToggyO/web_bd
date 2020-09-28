@@ -1,5 +1,5 @@
 
-# Bitcoins direct (client app)
+# Ides Trading (client app)
 
 
 ## Run locally
@@ -10,7 +10,10 @@
 ## Build for deploy
  `npm run build`
 
-## Deploy
+##Deploy
+
+
+## Deploy (LEGACY 28.09.220)
 
 There are two ways to deploy:
 

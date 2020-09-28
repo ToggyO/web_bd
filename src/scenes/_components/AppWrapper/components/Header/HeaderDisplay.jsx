@@ -4,7 +4,7 @@ import { Icon, Layout, Menu, Dropdown, Button, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '@config';
-import logo from '@assets/bd-logo.svg';
+import logo from '@assets/it-logo.svg';
 import miniLogo from '@assets/bd-mini-logo.svg';
 import './style.less';
 
@@ -42,7 +42,7 @@ const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
           <>
             <div className="logo">
               <Link to={ROUTES.HOME}>
-                <img src={miniLogo} aria-label="logo" alt="Bitcoins direct" />
+                <img src={miniLogo} aria-label="logo" alt="Ides Trading" />
               </Link>
             </div>
             <Icon
@@ -54,7 +54,7 @@ const HeaderDisplay = ({ user, logoutRequest, collapsed, setCollapsed }) => {
         ) : (
           <>
             <Link to={ROUTES.HOME} className="large-logo">
-              <img src={logo} aria-label="logo" alt="Bitcoins direct" />
+              <img src={logo} aria-label="logo" alt="Ides Trading" />
             </Link>
 
             <nav className="nav">

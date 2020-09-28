@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  nginx:
+    container_name: semicon-frontend
+    hostname: semicon-frontend
+    build: .
+    restart: always
+    ports:
+      - '3010:80'

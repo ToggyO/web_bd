@@ -5,7 +5,7 @@ import { Drawer, Menu, Icon } from 'antd';
 
 import { ROUTES } from '@config';
 import history from '@services/history';
-import logo from '@assets/bd-logo.svg';
+import logo from '@assets/it-logo.svg';
 import './style.less';
 
 export const MyDrawer = ({ collapsed, setCollapsed }) => {
@@ -25,7 +25,7 @@ export const MyDrawer = ({ collapsed, setCollapsed }) => {
       title={
         <div className="logo">
           <a onClick={e => handleLinkAction(e, ROUTES.HOME)}>
-            <img src={logo} aria-label="logo" alt="Bitcoins direct" />
+            <img src={logo} aria-label="logo" alt="Ides Trading" />
           </a>
         </div>
       }
