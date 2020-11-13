@@ -17,9 +17,9 @@ Connect to remote server via SSH:
 2. Enter the directory, which contains .pem file and run `chmod 400 {private_key_file_name}.pem`;
 
 3. Connect to your instance using its Public DNS or Public IPv4 address:
-- Public DNS: `ec2-18-192-176-199.eu-central-1.compute.amazonaws.com`;
-- Public IPv4 address: `18.192.176.199`.
-  *Example `ssh -i "{private_key_file_name}.pem" ubuntu@ec2-18-192-176-199.eu-central-1.compute.amazonaws.com`
+- Public DNS: `ec2-18-193-89-65.eu-central-1.compute.amazonaws.com`;
+- Public IPv4 address: `18.193.89.65`.
+  *Example `ssh -i "{private_key_file_name}.pem" ubuntu@ec2-18-193-89-65.eu-central-1.compute.amazonaws.com`
 
 4. Run `cd web_bd` or clone project from [repository](https://bitbucket.org/mgrsys/web_bd/src/master/);
 
@@ -27,7 +27,7 @@ Connect to remote server via SSH:
 
 6. Run `docker-compose up -d --build`;
 
-7. Check your app in browser on `ec2-18-192-176-199.eu-central-1.compute.amazonaws.com` or `18.192.176.199`.
+7. Check your app in browser on `ec2-18-193-89-65.eu-central-1.compute.amazonaws.com` or `18.193.89.65`.
 
 ## Deploy (LEGACY 28.09.220)
 
