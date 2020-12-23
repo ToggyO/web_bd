@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { tradeActions } from '@ducks/trades/trade';
-import { chatActions, chatSelectors } from '@ducks/chat';
-import { tradesSelectors } from '@ducks/trades';
 
 import TradeDisplay from './TradeDisplay';
+
+import { tradeActions, tradesSelectors } from '@ducks/trades';
+import { chatActions, chatSelectors } from '@ducks/chat';
 
 function mapStateToProps(state) {
   return {
@@ -32,16 +32,10 @@ function mapDispatchToProps(dispatch) {
     deleteNewTradeRequest(id) {
       dispatch(tradeActions.deleteNewTradeRequest(id));
     },
-    cancelTradeRequest(id) {
-      dispatch(tradeActions.cancelTradeRequest(id));
-    },
     disputeTradeRequest(id) {
       dispatch(tradeActions.disputeTradeRequest(id));
     },
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TradeDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(TradeDisplay);

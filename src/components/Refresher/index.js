@@ -5,9 +5,8 @@ import './style.less';
 
 export const Refresher = ({ style, loading, cb }) => {
   const [spin, setSpin] = useState(false);
-
   const goSpin = () => {
-    setSpin(() => true);
+    setSpin(true);
     cb();
   };
 
@@ -15,7 +14,7 @@ export const Refresher = ({ style, loading, cb }) => {
     if (loading === false) {
       setSpin(() => false);
     }
-  });
+  }, [loading]);
 
   return (
     <Icon

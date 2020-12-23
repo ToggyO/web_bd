@@ -1,10 +1,11 @@
 import * as types from './types';
 
-export const getCreatedAdsRequest = values => ({
-  type: types.GET_CREATED_REQUEST,
-  payload: values,
+export const getAllRequest = params => ({
+  type: types.GET_ALL_REQUEST,
+  payload: params,
 });
 
-export const getMyCreatedAdsRequest = () => ({
-  type: types.GET_MY_CREATED_REQUEST,
+export const getMyRequest = params => ({
+  type: types.GET_MY_REQUEST,
+  payload: params,
 });

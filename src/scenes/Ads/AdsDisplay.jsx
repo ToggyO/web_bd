@@ -1,62 +1,76 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import history from '@services/history';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
-import { QuickFilterFormContainer } from '@scenes/_components/QuickFilterForm';
-import { AdsTableContainer } from '@scenes/_components/AdsTable';
+import { QuickFilterForm } from '@scenes/_components/QuickFilterForm';
+import { AdsTable } from '@scenes/_components/AdsTable';
 import { Collapsed } from '@scenes/_components/Collapsed';
-import { pageSize } from '@config/constants';
+
+import { formatParamsForParakhnevich } from '@utils';
+import { APP_NAME } from '@config';
 import './style.less';
 
-const AdsDisplay = ({ getAdsRequest, type, countryData }) => {
-  let initialState;
-  let Type;
-  if (type === 'sell') Type = 'Buy';
-  if (type === 'buy') Type = 'Sell';
-  const searchQuery = history.location.search.replace('?', '&');
+const AdsDisplay = ({ data, loading, getAllAdsRequest, countryData }) => {
+  const pathname = history.location.pathname.slice(1);
+  const Type = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+  let backpack;
+  if (history.location.state) backpack = history.location.state.backpack;
 
-  if (history.location.state) {
-    initialState = history.location.state;
-  }
+  // determine "buy" or "sell" ads we should fetch
+  let type;
+  if (pathname === 'sell') type = 'buy';
+  if (pathname === 'buy') type = 'sell';
+
+  const [formValues, setFormValues] = useState(backpack);
 
   useEffect(() => {
-    getAdsRequest(
-      `?pageSize=${pageSize}&type[]=${type}&currency[]=${countryData.currency}&location[]=${countryData.location}${searchQuery}`,
-    );
+    // if we came from the HomePage with some search data
+    if (backpack) {
+      return getAllAdsRequest(formatParamsForParakhnevich({ type, ...backpack }));
+    }
+    // if not
+    return getAllAdsRequest(formatParamsForParakhnevich({ type, ...countryData }));
   }, []);
 
-  useEffect(() => {
-    if (history.location.search) {
-      getAdsRequest(`?pageSize=${pageSize}&type[]=${type}${searchQuery}`);
+  const handleTableChange = (pagination, filters, sorter) => {
+    const sorterParams = {};
+    if (sorter.field) {
+      sorterParams.field = sorter.field;
+      sorterParams.order = sorter.order;
     }
-  }, [history.location.search]);
+
+    const params = { type, ...pagination, ...sorterParams, ...formValues };
+    getAllAdsRequest(formatParamsForParakhnevich(params));
+  };
+
+  const handleSearch = values => {
+    history.push({ state: { backpack: values } });
+    setFormValues(values);
+    const params = { type, ...values };
+    getAllAdsRequest(formatParamsForParakhnevich(params));
+  };
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
+    <HelmetWrapper title={`${Type} Bitcoins - ${APP_NAME}`} description="">
+      <div className="paper paper--white">
         <div className="ads">
           <h1>{Type} bitcoins</h1>
-          <Collapsed>
-            <QuickFilterFormContainer
-              type={type}
-              initialState={initialState}
+
+          <Collapsed titleWord="filters">
+            <QuickFilterForm
               defaultCurrency={countryData.currency}
               defaultLocation={countryData.location}
+              onSearch={handleSearch}
+              backpack={backpack}
             />
           </Collapsed>
-          <AdsTableContainer type={type} withTerms />
+
+          <AdsTable data={data} loading={loading} onChange={handleTableChange} withTerms type={type} />
         </div>
       </div>
-    </AppWrapperContainer>
+    </HelmetWrapper>
   );
 };
 
-AdsDisplay.propTypes = {
-  getAdsRequest: PropTypes.func,
-  type: PropTypes.string.isRequired,
-  countryData: PropTypes.shape({
-    currency: PropTypes.string,
-    location: PropTypes.string,
-  }),
-};
 export default AdsDisplay;

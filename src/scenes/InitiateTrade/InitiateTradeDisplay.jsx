@@ -1,16 +1,23 @@
+/* eslint-disable quotes */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import history from '@services/history';
 import { Row, Col, Skeleton } from 'antd';
-import { Spinner } from '@components/Spinner';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+import { Link } from 'react-router-dom';
+
 import { InitiateTradeFormContainer } from './InitiateTradeForm';
-import { ROUTES } from '@config/constants';
-import './style.less';
+
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
+import { Collapsed } from '@scenes/_components/Collapsed';
+
+import { Spinner } from '@components/Spinner';
+import history from '@services/history';
+import { ROUTES, APP_NAME } from '@config';
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
 
-const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cachedUserID }) => {
+import './style.less';
+
+const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }) => {
+  const cachedUserID = user.id;
   const adId = catchFromPath(history.location.pathname, 'ads');
   useEffect(() => {
     getAdByIdRequest(adId);
@@ -18,7 +25,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
 
   const {
     id,
-    type,
+    type='',
     btcPrice,
     currency,
     payment,
@@ -28,6 +35,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
     maxTradeLimit,
     userName,
     adOwnerID,
+    escrowFee,
   } = specificTrade;
   let header;
   let action;
@@ -37,11 +45,11 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
     if (type.toLowerCase() === 'buy') {
       header = (
         <span>
-          Sell bitcoins to <Link to={`${ROUTES.USER}/${userName}`}>{userName}</Link>
+          Sell bitcoins to <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
         </span>
       );
       action = 'sell';
-      message = ['Hi, I\'d like to sell you my', 'for your'];
+      message = ["Hi, I'd like to sell you my", 'for your'];
     }
     if (type.toLowerCase() === 'sell') {
       header = (
@@ -50,12 +58,12 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
         </span>
       );
       action = 'buy';
-      message = ['Hi, I\'d like to buy your', 'for my'];
+      message = ["Hi, I'd like to buy your", 'for my'];
     }
   }
   return (
-    <AppWrapperContainer>
-      <div className="paper">
+    <HelmetWrapper title={`Request a Trade - ${APP_NAME}`} description="Request a Trade">
+      <div className="paper paper--white">
         <div className="initiate-trade">
           <h2 className="initiate-trade__header">{header}</h2>
           {loading ? (
@@ -63,8 +71,8 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
           ) : (
             <span className="initiate-trade__label">How much do you want to {action}?</span>
           )}
-          <Row gutter={{ sm: 12, lg: 48 }}>
-            <Col lg={11}>
+          <Row gutter={{ sm: 12, lg: 48 }} type="flex">
+            <Col md={{ span: 12, order: 1 }} xs={{ span: 24, order: 2 }}>
               {loading ? (
                 <Skeleton
                   paragraph={{
@@ -84,59 +92,65 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, cached
                   loading={loading}
                   message={message}
                   btcPrice={btcPrice}
+                  escrowFee={escrowFee}
+                  type={type.toLowerCase()}
+                  action={action}
                 />
               )}
             </Col>
-            <Col lg={13}>
-              <Spinner spinning={loading}>
-                {loading ? (
-                  <Skeleton />
-                ) : (
-                  <>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Price / BTC</span>
-                        <p>
-                          {btcPrice} {currency}
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Payment method</span>
-                        <p>{formatCapitals(payment)}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={{ sm: 12, lg: 48 }}>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>{type}er</span>
-                        <p>
-                          <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
-                        </p>
-                      </Col>
-                      <Col xs={12}>
-                        <span style={{ fontWeight: 500 }}>Trade limits</span>
-                        <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Location</span>
-                        <p>{location}</p>
-                      </Col>
-                    </Row>
-                    <Row gutter={48}>
-                      <Col>
-                        <span style={{ fontWeight: 500 }}>Terms of trade</span>
-                        <p>{catchNewLines(terms)}</p>
-                      </Col>
-                    </Row>
-                  </>
-                )}
-              </Spinner>
+
+            <Col md={{ span: 12, order: 2 }} xs={{ span: 24, order: 1 }}>
+              <Collapsed titleWord="trade details" titleFontSize={13}>
+                <Spinner spinning={loading}>
+                  {loading ? (
+                    <Skeleton />
+                  ) : (
+                    <>
+                      <Row gutter={{ sm: 12, lg: 48 }}>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Price / BTC</span>
+                          <p>
+                            {btcPrice} {currency}
+                          </p>
+                        </Col>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Payment method</span>
+                          <p>{formatCapitals(payment)}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={{ sm: 12, lg: 48 }}>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>{type}er</span>
+                          <p>
+                            <Link to={`${ROUTES.USERS.ROOT}/${userName}`}>{userName}</Link>
+                          </p>
+                        </Col>
+                        <Col xs={12}>
+                          <span style={{ fontWeight: 500 }}>Trade limits</span>
+                          <p>{`${minTradeLimit} - ${maxTradeLimit} ${currency}`}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={48}>
+                        <Col>
+                          <span style={{ fontWeight: 500 }}>Location</span>
+                          <p>{location}</p>
+                        </Col>
+                      </Row>
+                      <Row gutter={48}>
+                        <Col>
+                          <span style={{ fontWeight: 500 }}>Terms of trade</span>
+                          <p>{catchNewLines(terms)}</p>
+                        </Col>
+                      </Row>
+                    </>
+                  )}
+                </Spinner>
+              </Collapsed>
             </Col>
           </Row>
         </div>
       </div>
-    </AppWrapperContainer>
+    </HelmetWrapper>
   );
 };
 
@@ -144,11 +158,12 @@ InitiateTradeDisplay.propTypes = {
   getAdByIdRequest: PropTypes.func,
   specificTrade: PropTypes.object,
   loading: PropTypes.bool,
-  cachedUserID: PropTypes.string,
+  user: PropTypes.shape({
+    id: PropTypes.string,
+  }),
 };
 InitiateTradeDisplay.defaultProps = {
   loading: false,
-  cachedUserID: localStorage.getItem('userID'),
 };
 
 export default InitiateTradeDisplay;

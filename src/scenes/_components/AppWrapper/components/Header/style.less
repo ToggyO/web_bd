@@ -9,7 +9,7 @@
     padding: 0 15px;
     display: flex;
     height: inherit;
-    @media screen and (max-width: 1202px) {
+    @media screen and (max-width: 1200px) {
       padding: 0;
     }
     @media screen and (max-width: 1024px) {
@@ -41,6 +41,7 @@
 .large-logo {
   line-height: 62px;
   margin-right: 18px;
+  padding-left: 4px;
   z-index: 10;
   @media screen and (max-width: 1200px) {
     padding-left: 28px;
@@ -58,10 +59,25 @@
     font-size: 14px;
     color: white;
     z-index: 10;
+    border-radius: 4px;
+    transition: all 1s;
+    background-size: 500% 100%;
     &:hover,
-    &:focus,
-    &:active {
-      background: lighten(@primary-color, 2%);
+    &:focus {
+      background-image: linear-gradient(
+        to right,
+        lighten(@primary-color, 1%),
+        lighten(@primary-color, 2%),
+        lighten(@primary-color, 3%),
+        lighten(@primary-color, 4%),
+        lighten(@primary-color, 5%),
+        lighten(@primary-color, 6%),
+        lighten(@primary-color, 4%),
+        lighten(@primary-color, 3%),
+        lighten(@primary-color, 2%),
+        lighten(@primary-color, 2%)
+      );
+      background-position: 100% 0;
       color: #fff;
     }
 

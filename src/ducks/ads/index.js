@@ -1,12 +1,11 @@
-import { combineReducers } from 'redux';
-import buy from './buy/reducer';
-import sell from './sell/reducer';
-import search from './search/reducer';
-import ad from './ad/reducer';
-import ads from './ads/reducer';
+export { adActions } from './ad';
+export { adsActions } from './ads';
 
-import * as adsSelectors from './selectors';
+export { adTypes } from './ad';
+export { adsTypes } from './ads';
 
-export { adsSelectors };
+export { adSagas } from './ad';
+export { adsSagas } from './ads';
 
-export default combineReducers({ buy, sell, search, ad, ads });
+export { adSelectors } from './ad';
+export { adsSelectors } from './ads';

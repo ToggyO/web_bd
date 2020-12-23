@@ -1,5 +1,7 @@
-import history from '@services/history';
 import * as types from './types';
+
+import history from '@services/history';
+
 import { parseQueryString } from '@utils/';
 
 export const signUpRequest = credentials => ({

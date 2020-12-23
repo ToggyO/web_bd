@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Result, Button } from 'antd';
+
+import image from './image';
+
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import history from '@services/history';
 import superaxios from '@services/superaxios';
-import image from './image';
+import { APP_NAME } from '@config';
 import './style.less';
 
 export const NotFound = () => {
@@ -16,7 +20,7 @@ export const NotFound = () => {
   }, []);
 
   return (
-    <>
+    <HelmetWrapper title={`404 - ${APP_NAME}`} description="Page not found">
       <Result
         className="not-found"
         title="404"
@@ -29,9 +33,9 @@ export const NotFound = () => {
         }
       />
       <div style={{ textAlign: 'center', position: 'relative' }}>
-        <p style={{ marginBottom: 0, fontSize: 10 }}>Front-End c0.0.9</p>
-        <p style={{ marginBottom: 0, fontSize: 10 }}>Back-End {version}</p>
+        <p style={{ marginBottom: 0, fontSize: 9, color: '#ccc' }}>F 0.1.8</p>
+        <p style={{ marginBottom: 0, fontSize: 9, color: '#ccc' }}>B {version}</p>
       </div>
-    </>
+    </HelmetWrapper>
   );
 };

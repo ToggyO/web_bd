@@ -1,5 +1,6 @@
-import { pageSizeDashboard } from '@config/constants';
 import superaxios from './superaxios';
+
+import { pageSizeDashboard } from '@config';
 
 export default {
   auth: {
@@ -67,12 +68,12 @@ export default {
   },
 
   ads: {
-    getAds: async params => {
-      const response = await superaxios.get(`/ad${params}`);
+    getAllAds: async params => {
+      const response = await superaxios.get('/ad', { params });
       return response.data;
     },
-    getMyAds: async () => {
-      const response = await superaxios.get(`/ad/currentuser?pageSize=${pageSizeDashboard}`);
+    getMyAds: async params => {
+      const response = await superaxios.get('/ad/currentuser', { params });
       return response.data;
     },
     toggleAdStatus: async idWithStatus => {
@@ -125,14 +126,34 @@ export default {
       const response = await superaxios.delete(`/trade/${id}`);
       return response.data;
     },
-    cancelTrade: async id => {
-      const response = await superaxios.post(`/trade/${id}/canceled`);
-      return response.data;
-    },
   },
   chat: {
     getChatById: async id => {
-      const response = await superaxios.get(`/trade/${id}`);
+      const response = await superaxios.get(`/chat/trade/${id}`);
+      return response.data;
+    },
+  },
+  reviews: {
+    getReviewByOrder: async tradeId => {
+      const response = await superaxios.get(`/rating/trade/${tradeId}`);
+      return response.data;
+    },
+    postReview: async data => {
+      const response = await superaxios.post('/rating', data);
+      return response.data;
+    },
+  },
+  user: {
+    getUserProfile: async userName => {
+      const response = await superaxios.get(`/profile/${userName}`);
+      return response.data;
+    },
+    getReviewsByUserName: async ({ userName, params }) => {
+      const response = await superaxios.get(`/rating/${userName}`, { params });
+      return response.data;
+    },
+    getLikesCountByUserName: async userName => {
+      const response = await superaxios.get(`/rating/count/${userName}`);
       return response.data;
     },
   },

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Form, Input, Button, Select, Statistic } from 'antd';
+
 import * as validations from '@services/validations';
 import { notUndefinedObjectProps } from '@utils';
-import './style.less';
+import normalizers from '@services/normalizers';
 
 const { Option } = Select;
 const { Countdown } = Statistic;
@@ -31,7 +32,10 @@ class TwoFactorForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const { userName, form } = this.props;
+    const {
+      user: { userName },
+      form,
+    } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
@@ -42,7 +46,11 @@ class TwoFactorForm extends React.Component {
   };
 
   handleGetCode = e => {
-    const { userName, form } = this.props;
+    const {
+      user: { userName },
+      form,
+    } = this.props;
+
     e.preventDefault();
     form.validateFields(['prefix', 'phone'], (err, values) => {
       if (!err) {
@@ -66,7 +74,7 @@ class TwoFactorForm extends React.Component {
       <Select style={{ width: 86 }} className="prefix-select">
         <Option value="1">1</Option>
         <Option value="7">7</Option>
-      </Select>
+      </Select>,
     );
 
     return (
@@ -74,14 +82,16 @@ class TwoFactorForm extends React.Component {
         <Form.Item>
           {getFieldDecorator('phone', {
             rules: validations.phone,
+            normalize: normalizers.phone,
           })(
             <Input
+              pattern="\d*"
               addonBefore={prefixSelector}
               style={{ width: '100%' }}
               placeholder="Phone number"
               disabled={isGetCodeDisabled}
               autoFocus
-            />
+            />,
           )}
         </Form.Item>
         <Form.Item>
@@ -90,11 +100,12 @@ class TwoFactorForm extends React.Component {
               rules: validations.smscode,
             })(
               <Input
+                pattern="\d*"
                 placeholder="Verification code"
                 ref={input => {
                   this.codeInput = input;
                 }}
-              />
+              />,
             )}
 
             <Button onClick={this.handleGetCode} disabled={isGetCodeDisabled} className="timer-btn">

@@ -22,6 +22,11 @@ export const phone = [
     pattern: /^[0-9]+$/,
     message: <div>Phone number should include only digits!</div>,
   },
+  {
+    min: 5,
+    max: 13,
+    message: <div>Please enter valid phone number!</div>,
+  },
 ];
 
 export const amount = [
@@ -51,7 +56,7 @@ export const realname = [
   { required: true, message: <div>Please input your real name!</div> },
   { max: 70, message: <div>Real name can not exceed 70 characters limit!</div> },
   {
-    pattern: /^[a-zA-Z0-9-' ]+$/,
+    pattern: /^[^ ][a-zA-Z0-9-' ]+$/,
     message: <div>Please input your real name!</div>,
   },
 ];

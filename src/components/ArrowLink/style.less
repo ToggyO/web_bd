@@ -2,7 +2,12 @@
   display: inline-block;
   color: inherit;
   margin-top: 12px;
+  line-height: 28px;
+  &:hover .arrow-icon {
+    transform: translateX(-4px);
+  }
 }
 .arrow-icon {
+  transition: all 0.2s ease-out;
   color: @primary-color;
 }

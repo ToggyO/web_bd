@@ -5,7 +5,7 @@ import './style.less';
 
 const { Panel } = Collapse;
 
-export const Collapsed = ({ children }) => {
+export const Collapsed = ({ children, titleWord = '', titleFontSize = 15 }) => {
   const [collapsed, setCollapsed] = useState(true);
   const handleChange = () => {
     setCollapsed(prevValue => !prevValue);
@@ -15,16 +15,26 @@ export const Collapsed = ({ children }) => {
     <>
       <Collapse
         onChange={handleChange}
-        className="collapse"
-        expandIcon={({ isActive }) => <Icon type="down" rotate={isActive ? -180 : 0} />}
+        className="collapse-menu"
+        expandIcon={({ isActive }) => (
+          <Icon
+            type="down"
+            rotate={isActive ? -180 : 0}
+            style={{ fontSize: `${titleFontSize} !important` }}
+          />
+        )}
       >
         <Panel
-          header={<span className="collapse__header">{collapsed ? 'Show filters' : 'Hide filters'}</span>}
+          header={
+            <span className="collapse-menu__header" style={{ fontSize: titleFontSize }}>
+              {collapsed ? `Show ${titleWord}` : `Hide ${titleWord}`}
+            </span>
+          }
         >
           {children}
         </Panel>
       </Collapse>
-      {React.cloneElement(children, { classNames: 'uncollapse' })}
+      <div className="without-collapse-menu">{React.cloneElement(children)}</div>
     </>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
-import { ROUTES } from '@config/constants';
-import { AppWrapperContainer } from '@scenes/_components/AppWrapper';
+
 import { AdFormContainer } from '../_components/AdForm';
-import { prettifyId } from '@utils/';
+
+import { ArrowLink } from '@components/ArrowLink';
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
+import { ROUTES, APP_NAME } from '@config';
 import './style.less';
 
 const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
@@ -14,13 +14,12 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
   }, []);
 
   return (
-    <AppWrapperContainer>
-      <div className="paper">
+    <HelmetWrapper title={`Edit your ad - ${APP_NAME}`} description="Edit your ad">
+      <div className="paper paper--white">
         <div className="edit-ad">
-          <Link to={ROUTES.DASHBOARD.ROOT} className="back-to-dashboard__link">
-            <Icon type="arrow-left" className="backtoprofile__icon" /> Back to dashboard
-          </Link>
-          <h2 className="edit-ad__header">Edit an ad #{prettifyId(match.params.id)}</h2>
+          <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />
+
+          <h2 className="edit-ad__header">Edit an ad #{match.params.id}</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur molestias ex, atque amet
             nihil neque fugiat expedita dolorem quam deserunt eligendi pariatur odit vitae tempore, tempora
@@ -33,7 +32,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
           Powered by <a href="https://www.coindesk.com/price/bitcoin">Coindesk</a>
         </p>
       </div>
-    </AppWrapperContainer>
+    </HelmetWrapper>
   );
 };
 

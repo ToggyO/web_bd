@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
+
 import SignInFormDisplay from './SignInFormDisplay';
+
+import { authActions, authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
     loading: authSelectors.loadingSelector(state),
-    errors: authSelectors.errorsSelector(state),
   };
 }
 
@@ -17,7 +18,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignInFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInFormDisplay);

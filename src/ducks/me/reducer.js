@@ -1,17 +1,17 @@
 import * as types from './types';
 
+import { getFromLocalState } from '@services/ls';
+
+import { LOCAL_STORAGE_KEYS } from '@config';
+const { userName, id } = getFromLocalState(LOCAL_STORAGE_KEYS.USER) || {};
+const countryCode = getFromLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
+
 const initialState = {
   data: {
-    countryCode: Object.prototype.hasOwnProperty.call(localStorage, 'countryCode')
-      ? localStorage.getItem('countryCode')
-      : null,
+    countryCode,
     user: {
-      userName: Object.prototype.hasOwnProperty.call(localStorage, 'userName')
-        ? localStorage.getItem('userName')
-        : null,
-      id: Object.prototype.hasOwnProperty.call(localStorage, 'userID')
-        ? localStorage.getItem('userID')
-        : null,
+      userName,
+      id,
     },
   },
   loading: false,

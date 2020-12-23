@@ -2,7 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
-import { ROUTES } from '@config/constants';
+
+import { ROUTES } from '@config';
+
 import { formatMoney, formatCapitals } from '@utils';
 
 export const TradeDetails = ({ specificTrade }) => (
@@ -40,7 +42,7 @@ export const TradeDetails = ({ specificTrade }) => (
       </Col>
       <Col xs={12}>
         <span className="span-head">Payment method</span>
-        <p>{specificTrade.payment}</p>
+        <p>{formatCapitals(specificTrade.payment)}</p>
       </Col>
     </Row>
     <Row>

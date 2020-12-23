@@ -1,11 +1,16 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import api from '@services/api';
+
 import { message, Modal } from 'antd';
-import history from '@services/history';
-import { ROUTES } from '@config/constants';
-import { catchFromPath } from '@utils/index';
-import * as types from './types';
+
 import { tradesActions } from '../trades';
+
+import * as types from './types';
+
+import api from '@services/api';
+
+import history from '@services/history';
+import { ROUTES } from '@config';
+import { catchFromPath } from '@utils/index';
 
 function* initiateTrade(action) {
   try {
@@ -13,7 +18,6 @@ function* initiateTrade(action) {
     yield put({ type: types.INITIATE_SUCCESS, payload: data });
     history.push(`${ROUTES.TRADES.ROOT}/${data.order}`);
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.INITIATE_ERROR, payload: error });
   }
 }
@@ -31,7 +35,7 @@ function* getTradeById(action) {
     } = data;
     yield put({ type: types.GET_BY_ID_SUCCESS, payload: { trade: rest, direction } });
   } catch (error) {
-    yield call(history.push, ROUTES[404]);
+    yield call(history.push, ROUTES.DASHBOARD.ROOT);
     yield put({ type: types.GET_BY_ID_ERROR, payload: error });
   }
 }
@@ -49,7 +53,6 @@ function* confirmTrade(action) {
       payload: catchFromPath(history.location.pathname, 'trades'),
     });
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message, 3);
     yield put({ type: types.CONFIRM_ERROR, payload: error });
   }
 }
@@ -103,27 +106,4 @@ function* deleteNewTradeRequest(action) {
 
 export function* deleteNewTradeRequestSaga() {
   yield takeLatest(types.DELETE_NEW_REQUEST, deleteNewTradeRequest);
-}
-
-function* cancelTradeRequest(action) {
-  try {
-    const { data } = yield call(api.trades.cancelTrade, action.payload);
-    yield put({ type: types.CANCEL_SUCCESS, payload: data });
-
-    yield call(Modal.destroyAll);
-
-    if (history.location.pathname === ROUTES.DASHBOARD.ACTIVE) {
-      yield put(tradesActions.getActiveTradesRequest());
-    } else {
-      yield put({ type: types.GET_BY_ID_REQUEST, payload: data.trade.id });
-    }
-
-    yield call(message.success, 'Canceled!', 2);
-  } catch (error) {
-    yield put({ type: types.CANCEL_ERROR, payload: error });
-  }
-}
-
-export function* cancelTradeRequestSaga() {
-  yield takeLatest(types.CANCEL_REQUEST, cancelTradeRequest);
 }

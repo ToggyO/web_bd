@@ -2,19 +2,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Row, Col, Form, Radio, Select, Button, Input, Divider, InputNumber, Tooltip } from 'antd';
+
+import TradeLimits from './_components/TradeLimits';
+
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
-import TradeLimits from './_components/TradeLimits';
-import { ROUTES, currencies, locations, payments } from '@config/constants';
+
+import { ROUTES, currencies, locations, payments } from '@config';
 import history from '@services/history';
 import * as validations from '@services/validations';
 import superaxios from '@services/superaxios';
+
 import { formatMoney } from '@utils';
 import './style.less';
 
 const { Option } = Select;
 
 class AdFormDisplay extends React.Component {
+  cancelFirst = () => {};
+
+  cancelSecond = () => {};
+
   state = {
     loading: false,
     margin: null,
@@ -70,18 +78,45 @@ class AdFormDisplay extends React.Component {
 
   fetchBTCPrice = async value => {
     this.setState({ loading: true });
-    const btcPriceResponse = superaxios.get(`/currency?currencies[]=${value}`);
-    const escrowFeeResponse = superaxios.get('/escrow');
-    const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
-    this.setState({
-      btcPrice: +btcPrice.data.data[0].rateBTC.toFixed(2),
-      loading: false,
-      escrowFee: escrowFee.data.data[0].fee,
-    });
+    try {
+      const btcPriceResponse = superaxios.get(`/currency?currencies[]=${value}`, {
+        cancelToken: new superaxios.CancelToken(c => {
+          this.cancelFirst = c;
+        }),
+      });
+      const escrowFeeResponse = superaxios.get('/escrow', {
+        cancelToken: new superaxios.CancelToken(c => {
+          this.cancelSecond = c;
+        }),
+      });
+
+      const [btcPrice, escrowFee] = await Promise.all([btcPriceResponse, escrowFeeResponse]);
+
+      this.setState({
+        btcPrice: +btcPrice.data.data[0].rateBTC.toFixed(2),
+        loading: false,
+        escrowFee: escrowFee.data.data[0].fee,
+      });
+    } catch (e) {
+      this.cancelFirst('Cancelled 1st');
+      this.cancelSecond('Cancelled 2nd');
+    }
   };
 
+  componentWillUnmount() {
+    this.cancelFirst();
+  }
+
   handleSubmit = e => {
-    const { form, onSubmit, forEdit, isAuthorized, specificAd } = this.props;
+    const {
+      form,
+      onSubmit,
+      forEdit,
+      user: { id },
+      specificAd,
+    } = this.props;
+
+    const isAuthorized = !!id;
 
     e.preventDefault();
 
@@ -97,8 +132,8 @@ class AdFormDisplay extends React.Component {
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const { limits, ...rest } = values;
-        const valuesToSubmit = { ...rest, ...limits };
+        const { btcPrice, limits, ...rest } = values;
+        const valuesToSubmit = { ...rest, btcPrice: parseFloat(btcPrice), ...limits };
         if (forEdit) {
           onSubmit({ ...valuesToSubmit, id: specificAd.id });
           return;
@@ -148,11 +183,18 @@ class AdFormDisplay extends React.Component {
 
   render() {
     const { location } = history;
-    const { form, isAuthorized, loading, forEdit, specificAd, countryData } = this.props;
-    const payment = form.getFieldValue('payment');
+    const {
+      form,
+      user: { id },
+      loading,
+      forEdit,
+      specificAd,
+      countryData,
+    } = this.props;
+    const isAuthorized = !!id;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="ad-form" hideRequiredMark>
+      <Form onSubmit={this.handleSubmit} className="ad-form" colon={false} hideRequiredMark>
         <div className="ad-form__block">
           <h3 className="ad-form__header">Trade type</h3>
           <Divider />
@@ -173,7 +215,7 @@ class AdFormDisplay extends React.Component {
           <h3 className="ad-form__header">Trade information</h3>
           <Divider />
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Currency">
                 {form.getFieldDecorator('currency', {
                   rules: [{ required: true, message: <div>Please select currency!</div> }],
@@ -197,7 +239,7 @@ class AdFormDisplay extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Location">
                 {form.getFieldDecorator('location', {
                   rules: [{ required: true, message: <div>Please select location!</div> }],
@@ -223,7 +265,7 @@ class AdFormDisplay extends React.Component {
           </Row>
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Form.Item className="ad-form__item" label="Payment method">
                 {form.getFieldDecorator('payment', {
                   rules: [{ required: true, message: <div>Please select payment method!</div> }],
@@ -246,16 +288,6 @@ class AdFormDisplay extends React.Component {
                 )}
               </Form.Item>
             </Col>
-            {(payment === payments[1].value || payment === payments[4].value) && (
-              <Col lg={11}>
-                <Form.Item className="ad-form__item ad-form__bank-field" label="Bank name">
-                  {form.getFieldDecorator('bankName', {
-                    rules: validations.bank,
-                    initialValue: specificAd.bankName || null,
-                  })(<Input placeholder="Sberbank" />)}
-                </Form.Item>
-              </Col>
-            )}
           </Row>
         </div>
 
@@ -264,7 +296,7 @@ class AdFormDisplay extends React.Component {
           <Divider />
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col md={11}>
               <Spin
                 spinning={this.state.loading}
                 tip={
@@ -282,24 +314,31 @@ class AdFormDisplay extends React.Component {
                     ],
                     initialValue: specificAd.btcPrice,
                     normalize: (value, prevValue) => {
-                      if (value.length > 10) return '';
+                      if (value.length > 10) return prevValue;
                       let strValue = value.toString();
                       const index = strValue.indexOf('.');
                       if (index > -1) strValue = strValue.slice(0, index + 3);
-                      return strValue.match(/^-?\d*[.]?\d{0,2}$/) ? Math.abs(strValue) : prevValue;
+
+                      return strValue.match(/^\d*[.]?\d{0,2}$/) ? strValue : prevValue;
                     },
                   })(
                     <Input
                       placeholder="0"
                       addonAfter={`${form.getFieldsValue(['currency']).currency}/BTC`}
                       onChange={this.handleBtcPriceChange}
+                      onBlur={e => {
+                        const { value } = e.target;
+                        if (value.charAt(value.length - 1) === '.') {
+                          form.setFieldsValue({ btcPrice: value.slice(0, -1) });
+                        }
+                      }}
                     />,
                   )}
                 </Form.Item>
               </Spin>
             </Col>
 
-            <Col lg={11}>
+            <Col md={11}>
               <Tooltip placement="bottom" title={<span> Minimum: -100.00, maximum: 100.00</span>}>
                 <div>
                   <Form.Item className="ad-form__item" label="Margin">
@@ -338,15 +377,15 @@ class AdFormDisplay extends React.Component {
               <div className="initiate-trade__note">
                 <ExclamationMessage>
                   Please note that the Escrow fee and blockchain fee are charged to the buyer. The current
-                  Escrow fee is {this.state.escrowFee}% of the amount of bitcoin being traded. The current
-                  blockchain fee is 0.00033239 BTC.
+                  Escrow fee is {forEdit ? specificAd.escrowFee : this.state.escrowFee}% of the amount of
+                  bitcoin being traded.
                 </ExclamationMessage>
               </div>
             </Col>
           </Row>
 
           <Row gutter={48}>
-            <Col lg={11}>
+            <Col lg={11} md={22}>
               <Form.Item className="ad-form__item" label="Trade limits">
                 {form.getFieldDecorator('limits', {
                   initialValue: {
@@ -376,7 +415,7 @@ class AdFormDisplay extends React.Component {
                   <Input.TextArea
                     className=" ad-form__textarea"
                     placeholder="Any other information you wish to tell about your trade"
-                    rows={5}
+                    autoSize={{ minRows: 5, maxRows: 15 }}
                   />,
                 )}
               </Form.Item>
@@ -384,7 +423,7 @@ class AdFormDisplay extends React.Component {
           </Row>
         </div>
         <Row>
-          <Col lg={4}>
+          <Col md={4}>
             {isAuthorized ? (
               <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={loading}>
                 {forEdit ? 'Save' : 'Create'}
@@ -413,7 +452,7 @@ class AdFormDisplay extends React.Component {
 AdFormDisplay.propTypes = {
   form: PropTypes.object,
   onSubmit: PropTypes.func,
-  isAuthorized: PropTypes.bool,
+  user: PropTypes.shape({ id: PropTypes.string }),
   loading: PropTypes.bool,
   forEdit: PropTypes.bool,
   cleanFormState: PropTypes.func,
@@ -429,6 +468,7 @@ AdFormDisplay.propTypes = {
     minTradeLimit: PropTypes.number,
     maxTradeLimit: PropTypes.number,
     terms: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    escrowFee: PropTypes.number,
   }),
   countryData: PropTypes.shape({
     currency: PropTypes.string,

@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { adActions } from '@ducks/ads/ad';
-import { adsSelectors } from '@ducks/ads';
+
 import EditAdDisplay from './EditAdDisplay';
 
-function mapStateToProps(state, props) {
+import { adActions, adSelectors } from '@ducks/ads';
+
+function mapStateToProps(state) {
   return {
-    specificAd: adsSelectors.adSelector(state, props),
+    specificAd: adSelectors.dataSelector(state),
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -18,7 +19,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditAdDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(EditAdDisplay);

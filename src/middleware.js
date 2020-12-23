@@ -1,34 +1,34 @@
 /* eslint-disable no-unused-vars */
-import Cookies from 'js-cookie';
 import { authTypes } from '@ducks/auth';
+import { writeToLocalState } from '@services/ls';
 import { meTypes } from '@ducks/me';
 import { globalTypes } from '@ducks/_global';
 import { userLogout } from '@services/auth';
 
+import { LOCAL_STORAGE_KEYS } from '@config';
+
 export const saveTokens = store => next => action => {
   if (action.type === authTypes.TWO_FACTOR_AUTH_SUCCESS) {
     const { accessToken, refreshToken } = action.payload.data;
-
-    Cookies.set('bdtoken', accessToken);
-    Cookies.set('bdrefreshtoken', refreshToken);
+    writeToLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+    writeToLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
   }
+
   return next(action);
 };
 
 export const saveUserData = store => next => action => {
   if (action.type === authTypes.SIGNIN_SUCCESS || action.type === authTypes.SIGNUP_SUCCESS) {
-    const { userName, id } = action.payload.data;
-
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('userID', id);
+    const {
+      data: { id, userName, emailConfirmed, phoneNumberConfirmed },
+    } = action.payload;
+    writeToLocalState(LOCAL_STORAGE_KEYS.USER, { id, userName, emailConfirmed, phoneNumberConfirmed });
   }
   if (action.type === meTypes.GET_PROFILE_SUCCESS) {
-    const { userName, id } = action.payload.data.user;
+    const { user } = action.payload.data;
     const { countryCode } = action.payload.data;
-
-    localStorage.setItem('userName', userName);
-    localStorage.setItem('userID', id);
-    localStorage.setItem('countryCode', countryCode);
+    writeToLocalState(LOCAL_STORAGE_KEYS.USER, user);
+    writeToLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE, countryCode);
   }
   return next(action);
 };
@@ -41,7 +41,7 @@ export const renewCountryDataOnTokenRefresh = store => next => action => {
   return next(action);
 };
 
-export const logout = store => next => action => {
+export const clearUserData = store => next => action => {
   if (action.type === authTypes.LOGOUT_REQUEST) {
     userLogout();
   }

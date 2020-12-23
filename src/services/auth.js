@@ -1,47 +1,32 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+
+import { getFromLocalState, clearLocalState } from '@services/ls';
 import history from '@services/history';
 
-// export default {
-//   setHeaders: token => {
-//     if (token) {
-//       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//     } else delete axios.defaults.headers.common.Authorization;
-//   },
+import { LOCAL_STORAGE_KEYS } from '@config';
 
-//   checkTokens: () => {
-//     const accessToken = Cookies.get('bdtoken');
-//     const refreshToken = Cookies.get('bdrefreshtoken');
-
-//     if (!accessToken || !refreshToken) return false;
-
-//     try {
-//       const { exp } = jwtDecode(accessToken);
-//       if (exp < Date.now() / 1000) return false;
-//     } catch (e) {
-//       return false;
-//     }
-
-//     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-//     return true;
-//   },
-// };
-
-export const setHeaders = token => {
-  if (token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  } else delete axios.defaults.headers.common.Authorization;
-};
+export function userLogout() {
+  if (arguments.length) {
+    history.replace('/login');
+  } else {
+    history.replace('/');
+  }
+  window.location.reload();
+  clearLocalState(LOCAL_STORAGE_KEYS.USER);
+  clearLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+  clearLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+  clearLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
+}
 
 export const checkTokens = () => {
-  const accessToken = Cookies.get('bdtoken');
-  const refreshToken = Cookies.get('bdrefreshtoken');
+  const accessToken = getFromLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+  const refreshToken = getFromLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
 
   if (!accessToken || !refreshToken) {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userID');
-    localStorage.removeItem('countryCode');
+    clearLocalState(LOCAL_STORAGE_KEYS.USER);
+    clearLocalState(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+    clearLocalState(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+    clearLocalState(LOCAL_STORAGE_KEYS.COUNTRYCODE);
     return false;
   }
 
@@ -56,19 +41,5 @@ export const checkTokens = () => {
     return false;
   }
 
-  // axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   return true;
-};
-
-export const clearCookies = () => {
-  Cookies.remove('bdtoken');
-  Cookies.remove('bdrefreshtoken');
-};
-
-export const userLogout = () => {
-  history.replace('/');
-  clearCookies();
-  window.location.reload();
-  localStorage.removeItem('userName');
-  localStorage.removeItem('userID');
 };

@@ -1,10 +1,14 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { message, Modal } from 'antd';
-import { ROUTES } from '@config/constants';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
+import { message } from 'antd';
+
+import * as adTypes from './types';
+
+import { adsActions, adsSelectors } from '@ducks/ads';
+
+import { ROUTES } from '@config';
 import history from '@services/history';
 import api from '@services/api';
-import * as adTypes from './types';
-import { adsTypes } from '../ads';
+import { formatParamsForParakhnevich } from '@utils/';
 
 function* createAd(action) {
   try {
@@ -14,7 +18,7 @@ function* createAd(action) {
       pathname: ROUTES.DASHBOARD.CREATED,
       state: { id: data.id },
     });
-    yield call(message.success, 'Success! Ad has been created');
+    yield call(message.success, 'Success! Ad has been created', 2);
   } catch (error) {
     yield put({ type: adTypes.CREATE_ERROR, payload: error });
   }
@@ -46,7 +50,7 @@ function* editAd(action) {
       pathname: ROUTES.DASHBOARD.CREATED,
       state: { id: data.id },
     });
-    yield call(message.success, 'Success! Ad has been changed');
+    yield call(message.success, 'Success! Ad has been changed', 2);
   } catch (error) {
     yield put({ type: adTypes.EDIT_ERROR, payload: error });
   }
@@ -61,14 +65,12 @@ function* deleteAd(aciton) {
     const { data } = yield call(api.ads.deleteAd, aciton.payload);
     yield put({ type: adTypes.DELETE_SUCCESS, payload: data });
 
-    yield call(Modal.destroyAll);
-    yield put({
-      type: adsTypes.GET_MY_CREATED_REQUEST,
-      payload: 'created',
-    });
+    const { pagination } = yield select(adsSelectors.dataSelector);
+
+    yield put(adsActions.getMyRequest(formatParamsForParakhnevich(pagination)));
+
     yield call(message.success, 'Deleted!', 2);
   } catch (error) {
-    yield call(message.error, error.response.data.errors[0].message);
     yield put({ type: adTypes.DELETE_ERROR, payload: error });
   }
 }
@@ -77,15 +79,10 @@ export function* deleteAdSaga() {
   yield takeLatest(adTypes.DELETE_REQUEST, deleteAd);
 }
 
-function* toggleAdStatus(aciton) {
+function* toggleAdStatus(action) {
   try {
-    const { data } = yield call(api.ads.toggleAdStatus, aciton.payload);
-    yield put({ type: adTypes.TOGGLE_STATUS_SUCCESS, payload: data });
-
-    yield put({
-      type: adsTypes.GET_MY_CREATED_REQUEST,
-      payload: 'created',
-    });
+    const { data } = yield call(api.ads.toggleAdStatus, action.payload);
+    yield put({ type: adTypes.TOGGLE_STATUS_SUCCESS, payload: data.id });
   } catch (error) {
     yield put({ type: adTypes.TOGGLE_STATUS_ERROR, payload: error });
   }

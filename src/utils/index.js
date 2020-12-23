@@ -1,7 +1,11 @@
 /* eslint-disable no-restricted-globals */
-// parsing url callback from backend...
 import React from 'react';
 
+/**
+ * Gets userId and code from URL
+ * @param {string} url URL string
+ * @returns {{userId: string, code: string}}
+ */
 export const getQueries = url => {
   const startIndex = url.indexOf('userId');
   const [userId, code] = url.slice(startIndex).split('&');
@@ -11,6 +15,12 @@ export const getQueries = url => {
   };
 };
 
+/**
+ * Catches part of pathname between separators (if provided Array) or after separator (if provided string)
+ * @param {string} path history.location.pathname
+ * @param {string[] | string} separators Array of strings or string
+ * @returns {string}
+ */
 export const catchFromPath = (path, separators) => {
   if (Array.isArray(separators)) {
     const match = path.match(`${separators[0]}/(.*)/${separators[1]}`);
@@ -21,30 +31,32 @@ export const catchFromPath = (path, separators) => {
   return '';
 };
 
-// simple check for values from form
+/**
+ * Returns true if there are no undefined values in object keys
+ * @param {{}} obj Any object
+ * @returns {boolean}
+ */
 export const notUndefinedObjectProps = obj => !Object.values(obj).includes(undefined);
 
-// cleans object from falsies
-export const purifyObject = obj => {
-  const cleanObject = {};
-  Object.keys(obj).forEach(property => {
-    if (obj[property]) {
-      cleanObject[property] = obj[property];
-    }
-  });
-  return cleanObject;
-};
-
-// nuff said
-export const secretize = str => `${str.substring(0, 2)}****${str.substring(6)}`;
-
-// spliting base64 on parts to submit image from Request Verification Form
+/**
+ * Splits Base64-like string to parts
+ * @param {string} base64 Base64 string
+ * @returns {{base64Image: string, contentType: string}}
+ */
 export const parseBase64 = base64 => {
   const [base64Type, base64Data] = base64.split(';base64,');
   return { base64Image: base64Data, contentType: base64Type.slice(5) };
 };
 
-// casual money-formatting function
+/**
+ * Formats money the way you want to
+ * @param {number} amount Amount of money
+ * @param {number} [decimalCount = 2] Quantity of decimals
+ * @param {string} [decimal = '.'] Decimal separator
+ * @param {string} [thousands = '.'] Thousands separator
+ * @example
+ *  formatMoney(6666.101, 2)
+ */
 export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands = ',') => {
   let newDecimalCount;
   let newAmount;
@@ -69,7 +81,13 @@ export const formatMoney = (amount, decimalCount = 2, decimal = '.', thousands =
   );
 };
 
-// inserts space
+/**
+ * Insert spaces between capital letters in string
+ * @param {string} stringWithCapitalLetters String with capital letters
+ * @returns {string}
+ * @example
+ *  formatCapitals('StringLikeThis')
+ */
 export const formatCapitals = stringWithCapitalLetters => {
   if (!stringWithCapitalLetters) return '';
   if (stringWithCapitalLetters.toLowerCase() === 'paypal') return stringWithCapitalLetters;
@@ -77,22 +95,47 @@ export const formatCapitals = stringWithCapitalLetters => {
   return stringWithCapitalLetters.match(/[A-Z][a-z]+/g).join(' ');
 };
 
-// creates search string based on form values for GET request
-export const makeQueryStringFromObject = obj => {
-  let queryString = '?';
-  Object.entries(obj).forEach(([key, value]) => {
-    let modifiedKey = `${key}[]`;
+/**
+ * Injects array-ish notation for keys: type, location, payment, currency. Alse replaces 'current' key with 'page' key
+ * @param {{}} params Object with keys
+ */
+export const formatParamsForParakhnevich = params => {
+  const newParams = {};
 
-    if (key === 'amount' || key === 'page' || key === 'field' || key === 'order') {
-      modifiedKey = key;
+  Object.entries(params).forEach(([key, value]) => {
+    if (key === 'type' || key === 'location' || key === 'payment' || key === 'currency') {
+      newParams[`${key}[]`] = value;
+    } else if (key === 'current') {
+      newParams.page = value;
+    } else {
+      newParams[key] = value;
     }
-
-    queryString += `${modifiedKey}=${value}&`;
   });
-  queryString = queryString.slice(0, -1);
-  return queryString;
+  return newParams;
 };
 
+/**
+ * Reduces current page for 1 if total === pageSize (when you deleting last item on the page)
+ * @param {{total: number, current: number, pageSize: number}} paginationObj pagination props
+ * @example
+ *  smartPagination({total: 20, current: 3, pageSize: 10})
+ */
+export const smartPagination = ({ total, current, pageSize }) => {
+  if (total % pageSize === 0) {
+    return {
+      total,
+      pageSize,
+      current: current - 1 === 0 ? 1 : current - 1,
+    };
+  }
+  return { total, current, pageSize };
+};
+
+/**
+ * Parses URL and returns object with key - value pairs
+ * @param {string} queryString URL with queries
+ * @example parseQueryString('ad?key=value&otherKey=otherValue')
+ */
 export const parseQueryString = queryString => {
   let str;
   const obj = {};
@@ -105,26 +148,11 @@ export const parseQueryString = queryString => {
   return obj;
 };
 
-export const formatDate = (timestamp, locale) => {
-  const date = new Date(timestamp);
-
-  let day;
-  day = date.getDate().toString();
-  if (day.length < 2) day = `0${day}`;
-
-  let month;
-  month = (date.getMonth() + 1).toString();
-  if (month.length < 2) month = `0${month}`;
-
-  const year = date
-    .getFullYear()
-    .toString()
-    .slice(2);
-
-  if (locale) return `${month}.${day}.${year}`;
-  return `${day}.${month}.${year}`;
-};
-
+/**
+ * Basic string sorter
+ * @param {string} a First string
+ * @param {string} b Second string
+ */
 export const sortStrings = (a, b) => {
   if (a < b) {
     return -1;
@@ -135,8 +163,11 @@ export const sortStrings = (a, b) => {
   return 0;
 };
 
-export const prettifyId = id => id.split('-')[0];
-
+/**
+ * Catches /n symbols in text
+ * @param {string} text
+ * @returns {string} formatted text
+ */
 export const catchNewLines = (text = '') => {
   if (text === '') return '';
   return text.split('\n').map((item, key) => (

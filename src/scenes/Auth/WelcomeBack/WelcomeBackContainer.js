@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { authSelectors } from '@ducks/auth';
+
 import WelcomeBackDisplay from './WelcomeBackDisplay';
+
+import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {

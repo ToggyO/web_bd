@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
-import { AuthBox } from '@components/AuthBox';
-import SignWrapper from '../../_components/SignWrapper';
+
 import { SignInFormContainer } from './components/SignInForm';
 import { SignUpFormContainer } from './components/SignUpForm';
+
+import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
+
+import SignWrapper from '@scenes/_components/SignWrapper';
+
+import { AuthBox } from '@components/AuthBox';
+import { APP_NAME } from '@config';
+
 import './style.less';
 
 const { TabPane } = Tabs;
@@ -18,18 +25,20 @@ const LoginDisplay = props => {
   }
 
   return (
-    <SignWrapper>
-      <AuthBox header="Sign in to Bitcoins Direct">
-        <Tabs defaultActiveKey={defaultActiveKey} className="bd-tabs">
-          <TabPane tab="Sign In" key="1">
-            <SignInFormContainer />
-          </TabPane>
-          <TabPane tab="Sign Up" key="2">
-            <SignUpFormContainer />
-          </TabPane>
-        </Tabs>
-      </AuthBox>
-    </SignWrapper>
+    <HelmetWrapper title={`Login - ${APP_NAME}`} description="Login page">
+      <SignWrapper>
+        <AuthBox header="Sign in to Ides Trading">
+          <Tabs defaultActiveKey={defaultActiveKey} className="bd-tabs">
+            <TabPane tab="Sign In" key="1">
+              <SignInFormContainer />
+            </TabPane>
+            <TabPane tab="Sign Up" key="2">
+              <SignUpFormContainer />
+            </TabPane>
+          </Tabs>
+        </AuthBox>
+      </SignWrapper>
+    </HelmetWrapper>
   );
 };
 

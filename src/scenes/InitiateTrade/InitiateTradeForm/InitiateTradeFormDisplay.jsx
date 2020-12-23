@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
+
 import { ExclamationMessage } from '@components/ExclamationMessage';
 import { Spinner } from '@components/Spinner';
-import { ROUTES } from '@config/constants';
+import { ROUTES } from '@config';
 import * as validations from '@services/validations';
 import history from '@services/history';
-import superaxios from '@services/superaxios';
 
 const InitiateTradeFormDisplay = props => {
   const {
     submitting,
-    isAuthorized,
+    user: { id },
     form,
     adId,
     min,
@@ -23,15 +23,17 @@ const InitiateTradeFormDisplay = props => {
     adOwnerID,
     cachedUserID,
     btcPrice,
+    escrowFee,
+    type = '',
+    action = '',
   } = props;
 
-  const [escrowFee, setEscrowFee] = useState(0);
+  const isAuthorized = !!id;
 
   useEffect(() => {
     let isSubscribed = true;
     if (isSubscribed) {
       if (min) {
-        fetchEscrowFee();
         form.setFieldsValue({ fiat: min, amount: min / btcPrice });
       }
     }
@@ -40,11 +42,6 @@ const InitiateTradeFormDisplay = props => {
       isSubscribed = false;
     };
   }, [btcPrice]);
-
-  const fetchEscrowFee = async () => {
-    const escrowFeeResponse = await superaxios.get('/escrow');
-    setEscrowFee(() => escrowFeeResponse.data.data[0].fee);
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -76,8 +73,13 @@ const InitiateTradeFormDisplay = props => {
       callback('Please input trade amount');
       return;
     }
-
-    callback('Min. trade limit should not exceed Max. trade limit');
+    if (value > max) {
+      callback(`The biggest trade amount for this ad is ${max} ${currency}`);
+      return;
+    }
+    if (value < min) {
+      callback(`The smallest trade amount for this ad is ${min} ${currency}`);
+    }
   };
 
   const { fiat, amount } = form.getFieldsValue(['fiat', 'amount']);
@@ -130,15 +132,14 @@ const InitiateTradeFormDisplay = props => {
 
       <div className="initiate-trade__note">
         <ExclamationMessage>
-          Please note that the Escrow fee and blockchain fee are charged to the buyer. The current Escrow fee
-          is {escrowFee}% of the amount of bitcoin being traded. The current blockchain fee is 0.00033239 BTC.
+          <b>Please note that the Escrow fee and blockchain fee are charged to the buyer.</b> The current
+          Escrow fee is {escrowFee}% of the amount of bitcoin being traded.{' '}
+          {type === 'sell' && action === 'buy' && `You will receive ${amount} BTC`}
         </ExclamationMessage>
       </div>
       <div className="initiate-trade__message">
         <span className="initiate-trade__label">Contact message</span>
-        <div className="initiate-trade__fake-message">{`${message[0]} ${amount} BTC ${
-          message[1]
-        } ${fiat} ${currency}`}</div>
+        <div className="initiate-trade__fake-message">{`${message[0]} ${amount} BTC ${message[1]} ${fiat} ${currency}`}</div>
       </div>
       <Spinner spinning={loading}>
         {adOwnerID === cachedUserID ? (

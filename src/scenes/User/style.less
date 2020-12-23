@@ -1,0 +1,20 @@
+.user {
+  display: flex;
+  min-height: 80vh;
+  @media screen and (max-width: 1024px) {
+    display: block;
+  }
+
+  &__main {
+    .ant-tabs-bar {
+      width: auto;
+      text-align: left;
+    }
+    margin-top: 0 !important;
+    padding: 20px 30px 30px;
+    @media screen and (min-width: 1025px) {
+      margin-left: 0 !important;
+    }
+    flex: 7;
+  }
+}

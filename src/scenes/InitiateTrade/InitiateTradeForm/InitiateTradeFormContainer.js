@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
-import { tradeActions } from '@ducks/trades/trade';
-import { authSelectors } from '@ducks/auth';
+
 import InitiateTradeFormDisplay from './InitiateTradeFormDisplay';
+
+import { tradeActions } from '@ducks/trades';
+import { authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
     submitting: state._global.submitting,
-    isAuthorized: !!authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
   };
 }
 
@@ -17,7 +19,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InitiateTradeFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(InitiateTradeFormDisplay);

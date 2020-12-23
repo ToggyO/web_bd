@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { authActions, authSelectors } from '@ducks/auth';
+
 import TwoFactorFormDisplay from './TwoFactorFormDisplay';
+
+import { authActions, authSelectors } from '@ducks/auth';
 
 function mapStateToProps(state) {
   return {
-    userName: authSelectors.userNameSelector(state),
+    user: authSelectors.userSelector(state),
     loading: authSelectors.loadingSelector(state),
-    errors: authSelectors.errorsSelector(state),
   };
 }
 
@@ -21,7 +22,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TwoFactorFormDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(TwoFactorFormDisplay);

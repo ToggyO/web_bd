@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import { adActions } from '@ducks/ads/ad';
-import { adsSelectors } from '@ducks/ads';
-import { authSelectors } from '@ducks/auth';
+
 import CreateAdDisplay from './CreateAdDisplay';
 
-function mapStateToProps(state, props) {
+import { adActions, adSelectors } from '@ducks/ads';
+
+import { authSelectors } from '@ducks/auth';
+
+function mapStateToProps(state) {
   return {
-    isAuthorized: !!authSelectors.userNameSelector(state),
-    specificAd: adsSelectors.adSelector(state, props),
+    user: authSelectors.userSelector(state),
+    specificAd: adSelectors.dataSelector(state),
   };
 }
 
@@ -22,7 +24,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateAdDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAdDisplay);
