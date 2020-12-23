@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { userLogout } from '@services/auth';
+import { APP_NAME } from '@config';
 
 export const errorTitle = {
   400: 'The server was unable to process the request.',
@@ -38,7 +39,7 @@ export const errorMessage = {
   ),
   'sec.user_blocked': (
     <p>
-      Your account has been suspended as it was identified to be violating Bitcoins Direct terms of use.
+      Your account has been suspended as it was identified to be violating {APP_NAME} terms of use.
       Please contact{' '}
       <a href="https://bitcoinsdirect.freshdesk.com/support/home" target="_blank">
         support

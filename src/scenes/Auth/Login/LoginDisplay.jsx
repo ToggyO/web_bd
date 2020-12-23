@@ -10,6 +10,8 @@ import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import SignWrapper from '@scenes/_components/SignWrapper';
 
 import { AuthBox } from '@components/AuthBox';
+import { APP_NAME } from '@config';
+
 import './style.less';
 
 const { TabPane } = Tabs;
@@ -23,9 +25,9 @@ const LoginDisplay = props => {
   }
 
   return (
-    <HelmetWrapper title="Login - Bitcoins Direct" description="Login page">
+    <HelmetWrapper title={`Login - ${APP_NAME}`} description="Login page">
       <SignWrapper>
-        <AuthBox header="Sign in to Bitcoins Direct">
+        <AuthBox header="Sign in to Ides Trading">
           <Tabs defaultActiveKey={defaultActiveKey} className="bd-tabs">
             <TabPane tab="Sign In" key="1">
               <SignInFormContainer />

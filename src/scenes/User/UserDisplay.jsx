@@ -8,6 +8,7 @@ import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 
 import history from '@services/history';
 import { catchFromPath, formatParamsForParakhnevich } from '@utils/';
+import { APP_NAME } from '@config';
 
 import './style.less';
 
@@ -68,7 +69,7 @@ const UserDisplay = ({
   };
 
   return (
-    <HelmetWrapper title={`${userName}'s Ads - Bitcoins Direct`} description={`${userName}'s Ads`}>
+    <HelmetWrapper title={`${userName}'s Ads - ${APP_NAME}`} description={`${userName}'s Ads`}>
       <div className="paper">
         <div className="user">
           <UserCard profile={profile} loading={loadingProfile} />

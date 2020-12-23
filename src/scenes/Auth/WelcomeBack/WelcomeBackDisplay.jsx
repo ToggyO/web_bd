@@ -5,7 +5,7 @@ import { WelcomeBackFormContainer } from './components/WelcomeBackForm';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import history from '@services/history';
 
@@ -17,7 +17,7 @@ const WelcomeBackDisplay = ({ emailConfirmed, phoneNumberConfirmed }) => {
   });
 
   return (
-    <HelmetWrapper title="Welcome Back! - Bitcoins Direct" description="Welcome back page">
+    <HelmetWrapper title={`Welcome Back! - ${APP_NAME}`} description="Welcome back page">
       <SignWrapper>
         <AuthBox header="Welcome back!">
           <p>

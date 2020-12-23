@@ -5,7 +5,7 @@ import { AdFormContainer } from '../_components/AdForm';
 
 import { ArrowLink } from '@components/ArrowLink';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import './style.less';
 
 const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
@@ -14,7 +14,7 @@ const EditAdDisplay = ({ match, getAdByIdRequest, editAdRequest }) => {
   }, []);
 
   return (
-    <HelmetWrapper title="Edit your ad - Bitcoins Direct" description="Edit your ad">
+    <HelmetWrapper title={`Edit your ad - ${APP_NAME}`} description="Edit your ad">
       <div className="paper paper--white">
         <div className="edit-ad">
           <ArrowLink text="Back to dashboard" leftArrow goTo={ROUTES.DASHBOARD.ROOT} />

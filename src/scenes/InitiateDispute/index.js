@@ -6,7 +6,7 @@ import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import superaxios from '@services/superaxios';
 import * as validations from '@services/validations';
 import { getFromLocalState } from '@services/ls';
-import { ROUTES, LOCAL_STORAGE_KEYS } from '@config';
+import { ROUTES, LOCAL_STORAGE_KEYS, APP_NAME } from '@config';
 import { parseBase64 } from '@utils';
 import './style.less';
 
@@ -78,7 +78,7 @@ export const InitiateDispute = Form.create()(({ form, history, location }) => {
   }, []);
 
   return (
-    <HelmetWrapper title="Initiate a Dispute - Bitcoins Direct" description="Home page">
+    <HelmetWrapper title={`Initiate a Dispute - ${APP_NAME}`} description="Home page">
       <div className="paper paper--white">
         <div className="initiate-dispute">
           <h1>Initiate a dispute</h1>

@@ -5,12 +5,12 @@ import { ForgotPasswordFormContainer } from './components/ForgotPasswordForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import SignWrapper from '@scenes/_components/SignWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
 
 const ForgotPassword = ({ history: { location } }) => (
-  <HelmetWrapper title="Forgot Password - Bitcoins Direct" description="Forgot password page">
+  <HelmetWrapper title={`Forgot Password - ${APP_NAME}`} description="Forgot password page">
     <SignWrapper>
       <AuthBox header="Forgot password">
         {location.state ? (

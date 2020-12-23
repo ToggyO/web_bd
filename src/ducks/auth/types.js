@@ -1,4 +1,4 @@
-/* Sign up to Bitcoins Direct */
+/* Sign up to Ides Trading */
 export const SIGNUP_REQUEST = 'auth/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'auth/SIGNUP_ERROR';

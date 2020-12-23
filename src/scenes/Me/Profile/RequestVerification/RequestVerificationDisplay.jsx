@@ -5,11 +5,11 @@ import { RequestVerificationFormContainer } from './components/RequestVerificati
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 
 import { ArrowLink } from '@components/ArrowLink';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 
 const RequestVerificationDisplay = () => (
   <HelmetWrapper
-    title="Request Verification - Profile Settings - Bitcoins Direct"
+    title={`Request Verification - Profile Settings - ${APP_NAME}`}
     description="Request verification"
   >
     <div className="paper paper--white">

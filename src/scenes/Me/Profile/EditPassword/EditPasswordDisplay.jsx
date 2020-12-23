@@ -4,10 +4,10 @@ import { EditPasswordFormContainer } from './components/EditPasswordForm';
 
 import { ArrowLink } from '@components/ArrowLink';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 
 const EditPhoneNumberDisplay = () => (
-  <HelmetWrapper title="Change Password - Profile Settings - Bitcoins Direct" description="Change password">
+  <HelmetWrapper title={`Change Password - Profile Settings - ${APP_NAME}`} description="Change password">
     <div className="paper paper--white">
       <div className="change-setting">
         <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />

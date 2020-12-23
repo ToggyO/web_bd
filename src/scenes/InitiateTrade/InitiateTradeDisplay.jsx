@@ -11,7 +11,7 @@ import { Collapsed } from '@scenes/_components/Collapsed';
 
 import { Spinner } from '@components/Spinner';
 import history from '@services/history';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { catchFromPath, formatCapitals, catchNewLines } from '@utils';
 
 import './style.less';
@@ -62,7 +62,7 @@ const InitiateTradeDisplay = ({ getAdByIdRequest, specificTrade, loading, user }
     }
   }
   return (
-    <HelmetWrapper title="Request a Trade - Bitcoins Direct" description="Request a Trade">
+    <HelmetWrapper title={`Request a Trade - ${APP_NAME}`} description="Request a Trade">
       <div className="paper paper--white">
         <div className="initiate-trade">
           <h2 className="initiate-trade__header">{header}</h2>

@@ -1,7 +1,7 @@
 {
   "name": "bitcoins-direct",
   "version": "0.1.0",
-  "description": "Bitcoins Direct",
+  "description": "Ides Trading",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server  --config webpack/webpack.development.js --open --port 3005  --host 0.0.0.0 --allowed-hosts myDevServerMachine",

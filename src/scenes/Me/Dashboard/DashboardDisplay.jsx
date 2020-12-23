@@ -7,7 +7,7 @@ import { TradesDashboardTableContainer } from './components/TradesDashboardTable
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { Refresher } from '@components/Refresher';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import history from '@services/history';
 import { catchFromPath, formatParamsForParakhnevich } from '@utils/';
 import './style.less';
@@ -63,7 +63,7 @@ const DashboardDisplay = ({
   };
 
   return (
-    <HelmetWrapper title="Dashboard - Bitcoins Direct" description="Dashboard">
+    <HelmetWrapper title={`Dashboard - ${APP_NAME}`} description="Dashboard">
       <div className="paper paper--white">
         <div className="dashboard custom-tabs">
           <Tabs

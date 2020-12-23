@@ -15,7 +15,7 @@ import { determineUserInHeader, determineUserRoles, determineReviewable } from '
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { Spinner } from '@components/Spinner';
 
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import history from '@services/history';
 import { catchFromPath } from '@utils';
 
@@ -52,7 +52,7 @@ const TradeDisplay = ({
   const isReviewable = determineReviewable(status, currency, fiat);
 
   return (
-    <HelmetWrapper title={`Trade #${id} - Bitcoins Direct`} description={`Trade #${id} - Bitcoins Direct`}>
+    <HelmetWrapper title={`Trade #${id} - ${APP_NAME}`} description={`Trade #${id} - ${APP_NAME}`}>
       <div className="paper paper--white">
         <div className="trade">
           <BackLink tradeStatus={specificTrade.status} />

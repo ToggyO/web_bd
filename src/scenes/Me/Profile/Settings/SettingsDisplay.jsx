@@ -4,7 +4,7 @@ import { Tabs, List, Tag } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { Spinner } from '@components/Spinner';
 import './style.less';
 
@@ -24,7 +24,7 @@ const SettingsDisplay = ({
     getProfileRequest();
   }, []);
   return (
-    <HelmetWrapper title="Profile Settings - Bitcoins Direct" description="Profile settings">
+    <HelmetWrapper title={`Profile Settings - ${APP_NAME}`} description="Profile settings">
       <div className="paper paper--white">
         <div className="user-settings custom-tabs">
           <Tabs

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import history from '@services/history';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
@@ -14,7 +14,7 @@ const ConfirmEmailDisplay = ({ email, emailConfirmed }) => {
   });
 
   return (
-    <HelmetWrapper title="Confirm Email - Bitcoins Direct" description="Confirm email page">
+    <HelmetWrapper title={`Confirm Email - ${APP_NAME}`} description="Confirm email page">
       <SignWrapper>
         <AuthBox header="Account Created">
           <p>

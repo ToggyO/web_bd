@@ -22,3 +22,4 @@ export const payments = [
 export const pageSize = 25;
 export const pageSizeDashboard = 1000;
 export const pageSizeUser = 1000;
+export const APP_NAME = 'Ides Trading';

@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { AdFormContainer } from '../_components/AdForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
+import { APP_NAME } from '@config';
 import './style.less';
 
 const CreateAdDisplay = ({ user: { id }, createAdRequest, persistFormState }) => {
   const isAuthorized = !!id;
 
   return (
-    <HelmetWrapper title="Create an ad - Bitcoins Direct" description="Create an ad">
+    <HelmetWrapper title={`Create an ad - ${APP_NAME}`} description="Create an ad">
       <div className="paper paper--white">
         <div className="create-ad">
           <h1>Create an ad</h1>

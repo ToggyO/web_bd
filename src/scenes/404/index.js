@@ -6,6 +6,7 @@ import image from './image';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import history from '@services/history';
 import superaxios from '@services/superaxios';
+import { APP_NAME } from '@config';
 import './style.less';
 
 export const NotFound = () => {
@@ -19,7 +20,7 @@ export const NotFound = () => {
   }, []);
 
   return (
-    <HelmetWrapper title="404 - Bitcoins Direct" description="Page not found">
+    <HelmetWrapper title={`404 - ${APP_NAME}`} description="Page not found">
       <Result
         className="not-found"
         title="404"

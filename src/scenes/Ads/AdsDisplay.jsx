@@ -8,6 +8,7 @@ import { AdsTable } from '@scenes/_components/AdsTable';
 import { Collapsed } from '@scenes/_components/Collapsed';
 
 import { formatParamsForParakhnevich } from '@utils';
+import { APP_NAME } from '@config';
 import './style.less';
 
 const AdsDisplay = ({ data, loading, getAllAdsRequest, countryData }) => {
@@ -51,7 +52,7 @@ const AdsDisplay = ({ data, loading, getAllAdsRequest, countryData }) => {
   };
 
   return (
-    <HelmetWrapper title={`${Type} Bitcoins - Bitcoins Direct`} description="">
+    <HelmetWrapper title={`${Type} Bitcoins - ${APP_NAME}`} description="">
       <div className="paper paper--white">
         <div className="ads">
           <h1>{Type} bitcoins</h1>

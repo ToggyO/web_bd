@@ -5,7 +5,7 @@ import { TwoFactorFormContainer } from './components/TwoFactorForm';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import history from '@services/history';
 import { AuthBox } from '@components/AuthBox';
 
@@ -15,9 +15,9 @@ const SetTwoFactorDisplay = ({ emailConfirmed }) => {
   });
 
   return (
-    <HelmetWrapper title="Set 2FA - Bitcoins Direct" description="Set 2FA page">
+    <HelmetWrapper title={`Set 2FA - ${APP_NAME}`} description="Set 2FA page">
       <SignWrapper>
-        <AuthBox header="Welcome to Bitcoins Direct!">
+        <AuthBox header={`Welcome to ${APP_NAME}!`}>
           <p>
             We care about your account's security and want your funds to be safe. That's why we allow
             transactions only with 2 factor authentication enabled.

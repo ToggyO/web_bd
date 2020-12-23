@@ -4,10 +4,10 @@ import { EditEmailFormContainer } from './components/EditEmailForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ArrowLink } from '@components/ArrowLink';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 
 const EditEmailDisplay = () => (
-  <HelmetWrapper title="Change Email - Profile Settings - Bitcoins Direct" description="Change email">
+  <HelmetWrapper title={`Change Email - Profile Settings - ${APP_NAME}`} description="Change email">
     <div className="paper paper--white">
       <div className="change-setting">
         <ArrowLink text="Back to profile settings" leftArrow goTo={ROUTES.SETTINGS.ROOT} />

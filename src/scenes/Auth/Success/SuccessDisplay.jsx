@@ -3,12 +3,12 @@ import React from 'react';
 import SignWrapper from '@scenes/_components/SignWrapper';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
 
 const SuccessDisplay = () => (
-  <HelmetWrapper title="Success! - Bitcoins Direct" description="Success page">
+  <HelmetWrapper title={`Success! - ${APP_NAME}`} description="Success page">
     <SignWrapper>
       <AuthBox header="Congratulations">
         <p>You have successfully signed up.</p>

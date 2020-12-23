@@ -5,12 +5,12 @@ import { ResetPasswordFormContainer } from './components/ResetPasswordForm';
 
 import SignWrapper from '@scenes/_components/SignWrapper';
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import { AuthBox } from '@components/AuthBox';
 import { ArrowLink } from '@components/ArrowLink';
 
 const ResetPassword = ({ location: { search } }) => (
-  <HelmetWrapper title="Reset Password - Bitcoins Direct" description="Reset password page">
+  <HelmetWrapper title={`Reset Password - ${APP_NAME}`} description="Reset password page">
     <SignWrapper>
       <AuthBox header="Reset password">
         <p>

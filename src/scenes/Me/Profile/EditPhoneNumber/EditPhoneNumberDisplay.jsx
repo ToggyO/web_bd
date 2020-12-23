@@ -5,7 +5,7 @@ import { EditPhoneNumberFormContainer } from './components/EditPhoneNumberForm';
 
 import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { ArrowLink } from '@components/ArrowLink';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 
 const EditPhoneNumberDisplay = ({
   history: {
@@ -16,7 +16,7 @@ const EditPhoneNumberDisplay = ({
 
   return (
     <HelmetWrapper
-      title="Change Phone - Profile Settings - Bitcoins Direct"
+      title={`Change Phone - Profile Settings - ${APP_NAME}`}
       description="Change phone number"
     >
       <div className="paper paper--white">
@@ -36,7 +36,7 @@ const EditPhoneNumberDisplay = ({
               <p>
                 Please use the form below to change your phone number. Kindly note that to bind your new phone
                 number to your user profile, we will send you an email to the address you have connected with
-                your Bitcoins Direct account.
+                your {APP_NAME} account.
               </p>
               <EditPhoneNumberFormContainer />
             </>

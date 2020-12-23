@@ -7,7 +7,7 @@ import { HelmetWrapper } from '@scenes/_components/HelmetWrapper';
 import { QuickFilterForm } from '@scenes/_components/QuickFilterForm';
 import { TenTradesSkeleton } from '@scenes/_components/TenTradesSkeleton';
 import { Collapsed } from '@scenes/_components/Collapsed';
-import { ROUTES } from '@config';
+import { ROUTES, APP_NAME } from '@config';
 import history from '@services/history';
 import { checkTokens } from '@services/auth';
 
@@ -61,11 +61,11 @@ export const HomePage = () => {
   };
 
   return (
-    <HelmetWrapper title="Home - Bitcoins Direct" description="Home page">
+    <HelmetWrapper title={`Home - ${APP_NAME}`} description="Home page">
       <div className="paper paper--white home-page">
         {!checkTokens() && (
           <>
-            <HelmetWrapper title="Bitcoins Direct - Join us!" description="Home page">
+            <HelmetWrapper title={`${APP_NAME} - Join us!`} description="Home page">
               <div className="easy-way">
                 <div className="easy-way__left">
                   <h1 className="easy-way__heading">Easy way to trade bitcoin</h1>
@@ -79,7 +79,7 @@ export const HomePage = () => {
                   </Button>
                 </div>
                 <div className="easy-way__right">
-                  <img src={InnovationImg} alt="Welcome to Bitcoins Direct" className="easy-way__img" />
+                  <img src={InnovationImg} alt={`Welcome to ${APP_NAME}`} className="easy-way__img" />
                 </div>
               </div>
 
